@@ -1,7 +1,7 @@
-# Quarto Website Template
+# Website Info
 
-This is the code that creates the Quarto Website Template.
-The Quarto Website Template is located here: **https://isaactpetersen.github.io/ldaWorkshop-CSSI2026**
+This is the codebase that creates the website for the 2026 University of Iowa Center for Social Science Innovation (CSSI) Workshop on Longitudinal Data Analysis led by Isaac T. Petersen.
+The website is located here: **https://isaactpetersen.github.io/ldaWorkshop-CSSI2026**
 
 # License
 
