@@ -2,6 +2,9 @@
 title: "Website"
 ---
 
-This is a Quarto website.
+This is the website for the 2026 Center for Social Science Innovation (CSSI) Workshop on Longitudinal Data Analysis led by [Isaac T. Petersen](https://psychology.uiowa.edu/people/isaac-petersen).
+Isaac is an Associate Professor in the Department of Psychological and Brain Sciences at the University of Iowa.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+This workshop provides an applied overview of principles and methods for longitudinal data analysis, with hands-on examples in [`R`](https://cran.r-project.org).
+Topics include types of longitudinal data, data manipulation and visualization, statistical methods for longitudinal analysis (including mixed-effects models and structural equation models), longitudinal measurement invariance, handling missing data, and separating within-person and between-person effects.
+Participants are encouraged to bring a laptop with [`R`](https://cran.r-project.org) and [`RStudio`](https://posit.co/download/rstudio-desktop/) installed for interactive exercises.

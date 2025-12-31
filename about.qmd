@@ -2,12 +2,12 @@
 title: "About This Website"
 ---
 
-This website was generated with [Quarto](https://quarto.org).
+This website for the 2026 Center for Social Science Innovation (CSSI) Workshop on Longitudinal Data Analysis was generated with [Quarto](https://quarto.org).
 The codebase that was used to generate this website is located [here](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026).
 
 # Contact
 
-If you have questions about the lab and are not sure who to contact, please contact [devpsy-lab@uiowa.edu](mailto:devpsy-lab@uiowa.edu).
+For questions about the Developmental Psychopathology Lab, please contact [devpsy-lab@uiowa.edu](mailto:devpsy-lab@uiowa.edu).
 
 # License
 
