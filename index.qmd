@@ -1,5 +1,5 @@
 ---
-title: "Website"
+title: "2026 CSSI Workshop on Longitudinal Data Analysis"
 ---
 
 This is the website for the 2026 Center for Social Science Innovation (CSSI) Workshop on Longitudinal Data Analysis led by [Isaac T. Petersen](https://psychology.uiowa.edu/people/isaac-petersen).
