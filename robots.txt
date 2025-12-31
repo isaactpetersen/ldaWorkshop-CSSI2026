@@ -1,1 +1,1 @@
-Sitemap: https://DevPsyLab.github.io/QuartoWebsite/sitemap.xml
+Sitemap: https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/sitemap.xml
