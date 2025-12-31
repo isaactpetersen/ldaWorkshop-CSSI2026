@@ -5,7 +5,7 @@ website:
   title: "2026 CSSI Workshop on Longitudinal Data Analysis"
   repo-url: https://github.com/isaactpetersen/ldaWorkshop-CSSI2026
   repo-actions: [edit, source, issue]
-  google-analytics: GT-EG2ZSZZ7EP
+  google-analytics: G-EG2ZSZZ7EP
   navbar:
     logo: images/labLogo.png
     search: true
