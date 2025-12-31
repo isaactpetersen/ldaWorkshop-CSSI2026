@@ -25,21 +25,21 @@
     "href": "data-manipulation.html",
     "title": "Data Manipulation of Longitudinal Data",
     "section": "",
-    "text": "Codelibrary(\"tidyverse\")\n\nError in `library()`:\n! there is no package called 'tidyverse'\n\n\n\nFirst, let’s generate some example data.\n\nCodeset.seed(52242) # for a reproducible result\n\nexampleData_long &lt;- expand.grid(\n  ID = 1001:1003,\n  timepoint = 1:4\n)\n\nexampleData_long$score &lt;- sample(\n  x = 50:100,\n  size = nrow(exampleData_long),\n  replace = TRUE\n)\n\n\nThe data are in long form—each participant (identified by ID) has multiple rows (i.e., each row is uniquely identified by the combination of ID and timepoint; thus, we would say the data are in ID-timepoint form):\n\nCodeexampleData_long"
+    "text": "Codelibrary(\"tidyverse\")\n\n\n\nFirst, let’s generate some example data.\n\nCodeset.seed(52242) # for a reproducible result\n\nexampleData_long &lt;- expand.grid(\n  ID = 1001:1003,\n  timepoint = 1:4\n)\n\nexampleData_long$score &lt;- sample(\n  x = 50:100,\n  size = nrow(exampleData_long),\n  replace = TRUE\n)\n\n\nThe data are in long form—each participant (identified by ID) has multiple rows (i.e., each row is uniquely identified by the combination of ID and timepoint; thus, we would say the data are in ID–timepoint form):\n\nCodeexampleData_long"
   },
   {
     "objectID": "data-manipulation.html#load-libraries",
     "href": "data-manipulation.html#load-libraries",
     "title": "Data Manipulation of Longitudinal Data",
     "section": "",
-    "text": "Codelibrary(\"tidyverse\")\n\nError in `library()`:\n! there is no package called 'tidyverse'"
+    "text": "Codelibrary(\"tidyverse\")"
   },
   {
     "objectID": "data-manipulation.html#simulate-data",
     "href": "data-manipulation.html#simulate-data",
     "title": "Data Manipulation of Longitudinal Data",
     "section": "",
-    "text": "First, let’s generate some example data.\n\nCodeset.seed(52242) # for a reproducible result\n\nexampleData_long &lt;- expand.grid(\n  ID = 1001:1003,\n  timepoint = 1:4\n)\n\nexampleData_long$score &lt;- sample(\n  x = 50:100,\n  size = nrow(exampleData_long),\n  replace = TRUE\n)\n\n\nThe data are in long form—each participant (identified by ID) has multiple rows (i.e., each row is uniquely identified by the combination of ID and timepoint; thus, we would say the data are in ID-timepoint form):\n\nCodeexampleData_long"
+    "text": "First, let’s generate some example data.\n\nCodeset.seed(52242) # for a reproducible result\n\nexampleData_long &lt;- expand.grid(\n  ID = 1001:1003,\n  timepoint = 1:4\n)\n\nexampleData_long$score &lt;- sample(\n  x = 50:100,\n  size = nrow(exampleData_long),\n  replace = TRUE\n)\n\n\nThe data are in long form—each participant (identified by ID) has multiple rows (i.e., each row is uniquely identified by the combination of ID and timepoint; thus, we would say the data are in ID–timepoint form):\n\nCodeexampleData_long"
   },
   {
     "objectID": "index.html",
