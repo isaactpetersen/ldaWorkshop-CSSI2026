@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/structural-equation-models.html</loc>
+    <lastmod>2025-12-31T20:25:53.203Z</lastmod>
+  </url>
+  <url>
     <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/about.html</loc>
-    <lastmod>2025-12-31T20:17:37.057Z</lastmod>
+    <lastmod>2025-12-31T20:25:53.186Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/mixed-effects-models.html</loc>
+    <lastmod>2025-12-31T20:25:53.203Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/data-manipulation.html</loc>
+    <lastmod>2025-12-31T20:25:53.186Z</lastmod>
   </url>
   <url>
     <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/index.html</loc>
-    <lastmod>2025-12-31T20:17:37.070Z</lastmod>
+    <lastmod>2025-12-31T20:25:53.203Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/data-visualization.html</loc>
+    <lastmod>2025-12-31T20:25:53.186Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/missing-data.html</loc>
+    <lastmod>2025-12-31T20:25:53.203Z</lastmod>
   </url>
 </urlset>
