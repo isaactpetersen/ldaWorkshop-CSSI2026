@@ -4,4 +4,4 @@ title: "Mixed-Effects Models"
 
 For an overview of mixed modeling, see my chapter on "[Mixed Modeling](https://isaactpetersen.github.io/Fantasy-Football-Analytics-Textbook/mixed-models.html)" in the following textbook:
 
-Petersen, I. T. (2025). *Fantasy football analytics: Statistics, prediction, and empiricism using R*. University of Iowa Libraries. https://github.com/isaactpetersen/Fantasy-Football-Analytics-Textbook
+Petersen, I. T. (2025). *Fantasy football analytics: Statistics, prediction, and empiricism using R*. University of Iowa Libraries. <https://github.com/isaactpetersen/Fantasy-Football-Analytics-Textbook>

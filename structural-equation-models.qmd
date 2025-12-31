@@ -4,4 +4,4 @@ title: "Structural Equation Models"
 
 For an overview of structural equation modeling, see my chapter on "[Structural Equation Modeling](https://isaactpetersen.github.io/Principles-Psychological-Assessment/structural-equation-modeling.html)" in the following textbook:
 
-Petersen, I. T. (2025). *Principles of psychological assessment: With applied examples in R*. University of Iowa Libraries. https://isaactpetersen.github.io/Principles-Psychological-Assessment. https://doi.org/10.25820/work.007199
+Petersen, I. T. (2025). *Principles of psychological assessment: With applied examples in R*. University of Iowa Libraries. <https://isaactpetersen.github.io/Principles-Psychological-Assessment>. <https://doi.org/10.25820/work.007199>
