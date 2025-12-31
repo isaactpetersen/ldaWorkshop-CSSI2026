@@ -29,7 +29,7 @@ exampleData_long$score <- sample(
 )
 ```
 
-The data are in long form—each participant (identified by `ID`) has multiple rows (i.e., each row is uniquely identified by the combination of `ID` and `timepoint`; thus, we would say the data are in `ID`-`timepoint` form):
+The data are in long form—each participant (identified by `ID`) has multiple rows (i.e., each row is uniquely identified by the combination of `ID` and `timepoint`; thus, we would say the data are in `ID`–`timepoint` form):
 
 ```{r}
 exampleData_long
@@ -66,7 +66,7 @@ exampleData_long2 <- exampleData_wide |>
   )
 ```
 
-Now the data are back in wide form—each participant (identified by `ID`) has multiple rows (i.e., each row is uniquely identified by the combination of `ID` and `timepoint`; thus, we would say the data are in `ID`-`timepoint` form):
+Now the data are back in wide form—each participant (identified by `ID`) has multiple rows (i.e., each row is uniquely identified by the combination of `ID` and `timepoint`; thus, we would say the data are in `ID`–`timepoint` form):
 
 ```{r}
 exampleData_long2
