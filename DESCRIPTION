@@ -1,0 +1,13 @@
+Package: placeholder
+Title: QuartoWebsite
+Version: 1.0.0
+Imports:
+  quarto,
+  rmarkdown,
+  blogdown,
+  downlit,
+  xml2,
+  remotes,
+  petersenlab
+Remotes:
+  DevPsyLab/petersenlab
