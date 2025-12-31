@@ -3,7 +3,7 @@ title: "About This Website"
 ---
 
 This website was generated with [Quarto](https://quarto.org).
-The codebase that was used to generate this website is located [here](https://github.com/DevPsyLab/QuartoWebsite).
+The codebase that was used to generate this website is located [here](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026).
 
 # Contact
 

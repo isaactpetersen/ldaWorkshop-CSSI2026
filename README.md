@@ -1,7 +1,7 @@
 # Quarto Website Template
 
 This is the code that creates the Quarto Website Template.
-The Quarto Website Template is located here: **https://devpsylab.github.io/QuartoWebsite**
+The Quarto Website Template is located here: **https://isaactpetersen.github.io/ldaWorkshop-CSSI2026**
 
 # License
 

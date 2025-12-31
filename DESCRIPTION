@@ -1,5 +1,5 @@
 Package: placeholder
-Title: QuartoWebsite
+Title: ldaWorkshop-CSSI2026
 Version: 1.0.0
 Imports:
   quarto,
