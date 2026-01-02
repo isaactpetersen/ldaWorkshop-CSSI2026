@@ -2,3 +2,126 @@
 title: "Visualization of Longitudinal Data"
 ---
 
+# Preamble
+
+## Load Libraries
+
+```{r}
+library("tidyverse")
+```
+
+## Load Data
+
+```{r}
+mydata_long <- read.csv("./data/mydata_long.csv")
+```
+
+# Pre-Figure Processing
+
+```{r}
+mydata_long_summary <- mydata_long |>
+  group_by(age, sexFactor) |>
+  summarise(
+    ses = mean(ses, na.rm = TRUE),
+    sleep = mean(sleep, na.rm = TRUE),
+    depression = mean(depression, na.rm = TRUE),
+    anxiety = mean(anxiety, na.rm = TRUE),
+    .groups = "drop"
+  )
+```
+
+# Plot Observed Growth Curves
+
+## Observed Growth Curves
+
+```{r}
+ggplot(
+  data = mydata_long,
+  mapping = aes(
+    x = age,
+    y = depression,
+    group = ID)) +
+  geom_line(
+    alpha = 0.25
+  ) +
+  labs(
+    x = "Age (Years)",
+    y = "Depression Symptoms"
+  ) +
+  theme_classic()
+```
+
+```{r}
+ggplot(
+  data = mydata_long,
+  mapping = aes(
+    x = age,
+    y = anxiety,
+    group = ID)) +
+  geom_line(
+    alpha = 0.25
+  ) +
+  labs(
+    x = "Age (Years)",
+    y = "Anxiety Symptoms"
+  ) +
+  theme_classic()
+```
+
+## Overlaid with Means by Sex
+
+```{r}
+ggplot(
+  data = mydata_long,
+  mapping = aes(
+    x = age,
+    y = depression,
+    group = ID)) +
+  geom_line(
+    alpha = 0.25
+  ) +
+  geom_line(
+    mapping = aes(
+      x = age,
+      y = depression,
+      color = sexFactor,
+      group = sexFactor,
+    ),
+    data = mydata_long_summary,
+    linewidth = 2
+  ) +
+  labs(
+    x = "Age (Years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
+```{r}
+ggplot(
+  data = mydata_long,
+  mapping = aes(
+    x = age,
+    y = anxiety,
+    group = ID)) +
+  geom_line(
+    alpha = 0.25
+  ) +
+  geom_line(
+    mapping = aes(
+      x = age,
+      y = anxiety,
+      color = sexFactor,
+      group = sexFactor,
+    ),
+    data = mydata_long_summary,
+    linewidth = 2
+  ) +
+  labs(
+    x = "Age (Years)",
+    y = "Anxiety Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```

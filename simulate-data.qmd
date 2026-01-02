@@ -210,5 +210,6 @@ ggplot(df_summary, aes(x=age, y=mean_anx, color=sexFactor)) +
 
 write.csv(
   x = df,
-  file = "./data/mydata_long.csv")
+  file = "./data/mydata_long.csv",
+  row.names = FALSE)
 ```
