@@ -125,3 +125,66 @@ ggplot(
   ) +
   theme_classic()
 ```
+
+## Faceted Plots of a Random Sample
+
+```{r}
+set.seed(52242) # for reproducibility
+
+random_n <- 12
+
+ids_subset <- sample(
+  x = mydata_long$ID,
+  size = random_n,
+  replace = FALSE
+)
+
+mydata_long %>%
+  filter(ID %in% ids_subset) %>%
+  ggplot(
+    aes(
+      x = age,
+      y = depression,
+      group = ID
+    )
+  ) +
+  geom_point() +
+  geom_smooth(
+    method = "lm"
+  ) +
+  coord_cartesian(
+    ylim = c(0, max(mydata_long$depression, na.rm = TRUE))) +
+  facet_wrap(
+    ~ ID) +
+  labs(
+    x = "Age (Years)",
+    y = "Depression Symptoms"
+  ) +
+  theme_classic()
+```
+
+```{r}
+mydata_long %>%
+  filter(ID %in% ids_subset) %>%
+  ggplot(
+    aes(
+      x = age,
+      y = anxiety,
+      group = ID
+    )
+  ) +
+  geom_point() +
+  geom_smooth(
+    method = "lm"
+  ) +
+  coord_cartesian(
+    ylim = c(0, max(mydata_long$anxiety, na.rm = TRUE))) +
+  facet_wrap(
+    ~ ID
+  ) +
+  labs(
+    x = "Age (Years)",
+    y = "Anxiety Symptoms"
+  ) +
+  theme_classic()
+```
