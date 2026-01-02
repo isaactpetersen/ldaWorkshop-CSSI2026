@@ -10,6 +10,8 @@ title: "Simulate Data"
 library("MASS")
 library("psych")
 library("tidyverse")
+library("lme4")
+library("lmerTest")
 ```
 
 # Simulate Data
@@ -94,22 +96,88 @@ df$sleep_cont <- df$u_sleep + df$e_sleep
 df$sleep <- pmin(pmax(8 + df$sleep_cont, 5), 10)
 
 # -----------------------------
-# 7. Compute latent depression & anxiety
+# 7. Latent depression & anxiety with cross-lagged structure
 # -----------------------------
-df$depression_latent <- df$u_dep + (beta_age_dep + beta_age_sex_dep*df$sex)*(df$age-14) +
-                        beta_sex_dep*df$sex + beta_ses_dep*df$ses + beta_sleep_dep*df$sleep +
-                        df$e_dep
 
-df$anxiety_latent <- df$u_anx + (beta_age_anx + beta_age_sex_anx*df$sex)*(df$age-14) +
-                     beta_sex_anx*df$sex + beta_ses_anx*df$ses + beta_sleep_anx*df$sleep +
-                     df$e_anx
+# Sort correctly
+df <- df %>% arrange(ID, age)
+
+# Parameters for temporal dynamics
+phi_dep <- 0.50   # autoregressive depression
+phi_anx <- 0.50   # autoregressive anxiety
+
+cl_anx_to_dep <- 0.35  # anxiety -> later depression (stronger)
+cl_dep_to_anx <- 0.10  # depression -> later anxiety (weaker)
+
+# Initialize latent variables
+df$depression_latent <- NA
+df$anxiety_latent    <- NA
+
+for (i in unique(df$ID)) {
+
+  idx <- which(df$ID == i)
+
+  for (t in seq_along(idx)) {
+
+    row <- idx[t]
+
+    # Baseline (age 14)
+    if (t == 1) {
+
+      df$depression_latent[row] <-
+        df$u_dep[row] +
+        beta_sex_dep * df$sex[row] +
+        beta_ses_dep * df$ses[row] +
+        beta_sleep_dep * df$sleep[row] +
+        df$e_dep[row]
+
+      df$anxiety_latent[row] <-
+        df$u_anx[row] +
+        beta_sex_anx * df$sex[row] +
+        beta_ses_anx * df$ses[row] +
+        beta_sleep_anx * df$sleep[row] +
+        df$e_anx[row]
+
+    } else {
+
+      prev <- idx[t - 1]
+
+      df$depression_latent[row] <-
+        df$u_dep[row] +
+        phi_dep * df$depression_latent[prev] +
+        cl_anx_to_dep * df$anxiety_latent[prev] +
+        (beta_age_dep + beta_age_sex_dep * df$sex[row]) * (df$age[row] - 14) +
+        beta_sex_dep * df$sex[row] +
+        beta_ses_dep * df$ses[row] +
+        beta_sleep_dep * df$sleep[row] +
+        df$e_dep[row]
+
+      df$anxiety_latent[row] <-
+        df$u_anx[row] +
+        phi_anx * df$anxiety_latent[prev] +
+        cl_dep_to_anx * df$depression_latent[prev] +
+        (beta_age_anx + beta_age_sex_anx * df$sex[row]) * (df$age[row] - 14) +
+        beta_sex_anx * df$sex[row] +
+        beta_ses_anx * df$ses[row] +
+        beta_sleep_anx * df$sleep[row] +
+        df$e_anx[row]
+    }
+  }
+}
 
 # -----------------------------
-# 8. Transform to skewed counts (preserve correlations)
+# 8. Transform to skewed counts (preserve ordering & skew)
 # -----------------------------
-# Rank transform latent variables
-df$depression <- round(pmin(qgamma(rank(df$depression_latent)/length(df$depression_latent), shape=2, scale=5), 30))
-df$anxiety    <- round(pmin(qgamma(rank(df$anxiety_latent)/length(df$anxiety_latent), shape=2, scale=5), 30))
+
+df <- df %>%
+  mutate(
+    dep_rank = rank(depression_latent, ties.method = "average") / (n() + 1),
+    anx_rank = rank(anxiety_latent,    ties.method = "average") / (n() + 1),
+
+    depression = round(pmin(qgamma(dep_rank, shape = 2, scale = 5), 30)),
+    anxiety    = round(pmin(qgamma(anx_rank, shape = 2, scale = 5), 30))
+  ) %>%
+  select(-dep_rank, -anx_rank)
 
 # -----------------------------
 # 9. Introduce attrition
@@ -149,6 +217,14 @@ cor(
   use = "pairwise.complete.obs")
 
 head(df)
+
+summary(lmer(
+  depression ~ lag(anxiety) + lag(depression) + age + sex + (1|ID),
+  data = df))
+
+summary(lmer(
+  anxiety ~ lag(depression) + lag(anxiety) + age + sex + (1|ID),
+  data = df))
 ```
 
 ```{r}
@@ -182,7 +258,7 @@ df_summary <- df %>%
 
 # --- Plot Depression by Age and Sex ---
 ggplot(df_summary, aes(x=age, y=mean_dep, color=sexFactor)) +
-  geom_line(size=1.2) +
+  geom_line(linewidth=1.2) +
   geom_point(size=2) +
   geom_ribbon(aes(ymin=mean_dep-sd_dep, ymax=mean_dep+sd_dep, fill=sexFactor), alpha=0.2, color=NA) +
   labs(title="Depression Symptoms by Age and Sex",
@@ -193,7 +269,7 @@ ggplot(df_summary, aes(x=age, y=mean_dep, color=sexFactor)) +
 
 # --- Plot Anxiety by Age and Sex ---
 ggplot(df_summary, aes(x=age, y=mean_anx, color=sexFactor)) +
-  geom_line(size=1.2) +
+  geom_line(linewidth=1.2) +
   geom_point(size=2) +
   geom_ribbon(aes(ymin=mean_anx-sd_anx, ymax=mean_anx+sd_anx, fill=sexFactor), alpha=0.2, color=NA) +
   labs(title="Anxiety Symptoms by Age and Sex",
