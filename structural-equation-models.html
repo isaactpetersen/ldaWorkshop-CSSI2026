@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.26">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Isaac T. Petersen">
 <meta name="dcterms.date" content="today">
-
 <title>Structural Equation Models – 2026 CSSI Workshop on Longitudinal Data Analysis</title>
 <style>
 code{white-space: pre-wrap;}
@@ -59,7 +56,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -77,8 +73,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9278de052701f0b3f1191ef96b26c196.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-9278de052701f0b3f1191ef96b26c196.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -104,34 +99,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EG2ZSZZ7EP"></script>
-
-<script type="text/javascript">
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EG2ZSZZ7EP"></script><script type="text/javascript">
 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
-</script>
-
-
-<link rel="stylesheet" href="styles.css">
+</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="includes/custom.css">
 <link rel="stylesheet" href="font/css/roboto.css">
 </head>
-
 <body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/labLogo.png" alt="" class="navbar-logo light-content">
-    <img src="./images/labLogo.png" alt="" class="navbar-logo dark-content">
-    </a>
+    <img src="./images/labLogo.png" alt="" class="navbar-logo light-content"><img src="./images/labLogo.png" alt="" class="navbar-logo dark-content"></a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">2026 CSSI Workshop on Longitudinal Data Analysis</span>
     </a>
@@ -142,7 +127,7 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
@@ -150,8 +135,8 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-links" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Links</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-links">    
-        <li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-links">
+<li>
     <a class="dropdown-item" href="./data-manipulation.html">
  <span class="dropdown-text">Data Manipulation of Longitudinal Data</span></a>
   </li>  
@@ -172,14 +157,14 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
  <span class="dropdown-text">Missing Data</span></a>
   </li>  
     </ul>
-  </li>
+</li>
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About This Website</span></a>
   </li>  
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
     <a class="nav-link" href="https://devpsylab.github.io/LabWiki"> 
 <span class="menu-text">Lab Wiki</span></a>
   </li>  
@@ -188,12 +173,12 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 <span class="menu-text">Lab Website</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
+</div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
     <div class="dropdown">
       <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
+<li>
             <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026">
             Source Code
             </a>
@@ -204,42 +189,90 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
             </a>
           </li>
       </ul>
-    </div>
+</div>
     <a href="https://twitter.com/devpsylab" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-twitter"></i></a>
     <a href="https://www.facebook.com/DevPsyLab" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-facebook"></i></a>
     <a href="https://www.instagram.com/devpsylab" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-instagram"></i></a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble"><span class="header-section-number">1</span> Preamble</a>
+<li>
+<a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble"><span class="header-section-number">1</span> Preamble</a>
   <ul>
-  <li><a href="#load-libraries" id="toc-load-libraries" class="nav-link" data-scroll-target="#load-libraries"><span class="header-section-number">1.1</span> Load Libraries</a></li>
+<li><a href="#load-libraries" id="toc-load-libraries" class="nav-link" data-scroll-target="#load-libraries"><span class="header-section-number">1.1</span> Load Libraries</a></li>
   <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data"><span class="header-section-number">1.2</span> Load Data</a></li>
-  </ul></li>
-  <li><a href="#latent-growth-curve-model" id="toc-latent-growth-curve-model" class="nav-link" data-scroll-target="#latent-growth-curve-model"><span class="header-section-number">2</span> Latent Growth Curve Model</a></li>
-  <li><a href="#latent-change-score-model" id="toc-latent-change-score-model" class="nav-link" data-scroll-target="#latent-change-score-model"><span class="header-section-number">3</span> Latent Change Score Model</a></li>
-  <li><a href="#cross-lagged-panel-model" id="toc-cross-lagged-panel-model" class="nav-link" data-scroll-target="#cross-lagged-panel-model"><span class="header-section-number">4</span> Cross-Lagged Panel Model</a></li>
-  <li><a href="#random-intercepts-cross-lagged-panel-model" id="toc-random-intercepts-cross-lagged-panel-model" class="nav-link" data-scroll-target="#random-intercepts-cross-lagged-panel-model"><span class="header-section-number">5</span> Random-Intercepts Cross-Lagged Panel Model</a></li>
-  <li><a href="#longitudinal-measurement-invariance" id="toc-longitudinal-measurement-invariance" class="nav-link" data-scroll-target="#longitudinal-measurement-invariance"><span class="header-section-number">6</span> Longitudinal Measurement Invariance</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/edit/main/structural-equation-models.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/blob/main/structural-equation-models.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</li>
+  <li><a href="#pre-model-computation" id="toc-pre-model-computation" class="nav-link" data-scroll-target="#pre-model-computation"><span class="header-section-number">2</span> Pre-Model Computation</a></li>
+  <li>
+<a href="#latent-growth-curve-model" id="toc-latent-growth-curve-model" class="nav-link" data-scroll-target="#latent-growth-curve-model"><span class="header-section-number">3</span> Latent Growth Curve Model</a>
+  <ul>
+<li>
+<a href="#linear-growth-curve-model" id="toc-linear-growth-curve-model" class="nav-link" data-scroll-target="#linear-growth-curve-model"><span class="header-section-number">3.1</span> Linear Growth Curve Model</a>
+  <ul>
+<li><a href="#model-syntax" id="toc-model-syntax" class="nav-link" data-scroll-target="#model-syntax"><span class="header-section-number">3.1.1</span> Model Syntax</a></li>
+  <li><a href="#fit-model" id="toc-fit-model" class="nav-link" data-scroll-target="#fit-model"><span class="header-section-number">3.1.2</span> Fit Model</a></li>
+  <li><a href="#model-summary" id="toc-model-summary" class="nav-link" data-scroll-target="#model-summary"><span class="header-section-number">3.1.3</span> Model Summary</a></li>
+  <li><a href="#modification-indices" id="toc-modification-indices" class="nav-link" data-scroll-target="#modification-indices"><span class="header-section-number">3.1.4</span> Modification Indices</a></li>
+  <li>
+<a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots"><span class="header-section-number">3.1.5</span> Plots</a>
+  <ul class="collapse">
+<li><a href="#path-diagram" id="toc-path-diagram" class="nav-link" data-scroll-target="#path-diagram"><span class="header-section-number">3.1.5.1</span> Path Diagram</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  <li>
+<a href="#quadratic-growth-curve-model" id="toc-quadratic-growth-curve-model" class="nav-link" data-scroll-target="#quadratic-growth-curve-model"><span class="header-section-number">3.2</span> Quadratic Growth Curve Model</a>
+  <ul>
+<li><a href="#model-syntax-1" id="toc-model-syntax-1" class="nav-link" data-scroll-target="#model-syntax-1"><span class="header-section-number">3.2.1</span> Model Syntax</a></li>
+  <li><a href="#fit-model-1" id="toc-fit-model-1" class="nav-link" data-scroll-target="#fit-model-1"><span class="header-section-number">3.2.2</span> Fit Model</a></li>
+  <li><a href="#model-summary-1" id="toc-model-summary-1" class="nav-link" data-scroll-target="#model-summary-1"><span class="header-section-number">3.2.3</span> Model Summary</a></li>
+  <li><a href="#modification-indices-1" id="toc-modification-indices-1" class="nav-link" data-scroll-target="#modification-indices-1"><span class="header-section-number">3.2.4</span> Modification Indices</a></li>
+  <li>
+<a href="#plots-1" id="toc-plots-1" class="nav-link" data-scroll-target="#plots-1"><span class="header-section-number">3.2.5</span> Plots</a>
+  <ul class="collapse">
+<li><a href="#path-diagram-1" id="toc-path-diagram-1" class="nav-link" data-scroll-target="#path-diagram-1"><span class="header-section-number">3.2.5.1</span> Path Diagram</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  </ul>
+</li>
+  <li><a href="#compare-models" id="toc-compare-models" class="nav-link" data-scroll-target="#compare-models"><span class="header-section-number">4</span> Compare Models</a></li>
+  <li>
+<a href="#latent-change-score-model" id="toc-latent-change-score-model" class="nav-link" data-scroll-target="#latent-change-score-model"><span class="header-section-number">5</span> Latent Change Score Model</a>
+  <ul>
+<li><a href="#model-syntax-2" id="toc-model-syntax-2" class="nav-link" data-scroll-target="#model-syntax-2"><span class="header-section-number">5.1</span> Model Syntax</a></li>
+  <li>
+<a href="#fit-model-2" id="toc-fit-model-2" class="nav-link" data-scroll-target="#fit-model-2"><span class="header-section-number">5.2</span> Fit Model</a>
+  <ul>
+<li><a href="#model-summary-2" id="toc-model-summary-2" class="nav-link" data-scroll-target="#model-summary-2"><span class="header-section-number">5.2.1</span> Model Summary</a></li>
+  <li><a href="#modification-indices-2" id="toc-modification-indices-2" class="nav-link" data-scroll-target="#modification-indices-2"><span class="header-section-number">5.2.2</span> Modification Indices</a></li>
+  <li>
+<a href="#plots-2" id="toc-plots-2" class="nav-link" data-scroll-target="#plots-2"><span class="header-section-number">5.2.3</span> Plots</a>
+  <ul class="collapse">
+<li><a href="#path-diagram-2" id="toc-path-diagram-2" class="nav-link" data-scroll-target="#path-diagram-2"><span class="header-section-number">5.2.3.1</span> Path Diagram</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  </ul>
+</li>
+  <li><a href="#cross-lagged-panel-model" id="toc-cross-lagged-panel-model" class="nav-link" data-scroll-target="#cross-lagged-panel-model"><span class="header-section-number">6</span> Cross-Lagged Panel Model</a></li>
+  <li><a href="#random-intercepts-cross-lagged-panel-model" id="toc-random-intercepts-cross-lagged-panel-model" class="nav-link" data-scroll-target="#random-intercepts-cross-lagged-panel-model"><span class="header-section-number">7</span> Random-Intercepts Cross-Lagged Panel Model</a></li>
+  <li><a href="#longitudinal-measurement-invariance" id="toc-longitudinal-measurement-invariance" class="nav-link" data-scroll-target="#longitudinal-measurement-invariance"><span class="header-section-number">8</span> Longitudinal Measurement Invariance</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/edit/main/structural-equation-models.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/blob/main/structural-equation-models.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Structural Equation Models</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Structural Equation Models</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -253,61 +286,693 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
   
 
 
-</header>
-
-
-<p>For an overview of structural equation modeling, see my chapter on “<a href="https://isaactpetersen.github.io/Principles-Psychological-Assessment/structural-equation-modeling.html">Structural Equation Modeling</a>” in the following textbook:</p>
+</header><p>For an overview of structural equation modeling, see my chapter on “<a href="https://isaactpetersen.github.io/Principles-Psychological-Assessment/structural-equation-modeling.html">Structural Equation Modeling</a>” in the following textbook:</p>
 <p>Petersen, I. T. (2025). <em>Principles of psychological assessment: With applied examples in R</em>. University of Iowa Libraries. <a href="https://isaactpetersen.github.io/Principles-Psychological-Assessment" class="uri">https://isaactpetersen.github.io/Principles-Psychological-Assessment</a>. <a href="https://doi.org/10.25820/work.007199" class="uri">https://doi.org/10.25820/work.007199</a></p>
-<section id="preamble" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Preamble</h1>
-<section id="load-libraries" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="load-libraries"><span class="header-section-number">1.1</span> Load Libraries</h2>
-</section>
-<section id="load-data" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="load-data"><span class="header-section-number">1.2</span> Load Data</h2>
-</section>
-</section>
-<section id="latent-growth-curve-model" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Latent Growth Curve Model</h1>
-</section>
-<section id="latent-change-score-model" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Latent Change Score Model</h1>
-</section>
-<section id="cross-lagged-panel-model" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Cross-Lagged Panel Model</h1>
-</section>
-<section id="random-intercepts-cross-lagged-panel-model" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Random-Intercepts Cross-Lagged Panel Model</h1>
-</section>
-<section id="longitudinal-measurement-invariance" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Longitudinal Measurement Invariance</h1>
+<section id="preamble" class="level1" data-number="1"><h1 data-number="1">
+<span class="header-section-number">1</span> Preamble</h1>
+<section id="load-libraries" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="load-libraries">
+<span class="header-section-number">1.1</span> Load Libraries</h2>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://lavaan.ugent.be">"lavaan"</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/simsem/semTools/wiki">"semTools"</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in `library()`:
+! there is no package called 'semTools'</code></pre>
+</div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/alishinski/lavaanPlot">"lavaanPlot"</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in `library()`:
+! there is no package called 'lavaanPlot'</code></pre>
+</div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://milanwiedemann.github.io/lcsm/">"lcsm"</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in `library()`:
+! there is no package called 'lcsm'</code></pre>
+</div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="load-data" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="load-data">
+<span class="header-section-number">1.2</span> Load Data</h2>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"./data/mydata_long.csv"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section></section><section id="pre-model-computation" class="level1" data-number="2"><h1 data-number="2">
+<span class="header-section-number">2</span> Pre-Model Computation</h1>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata_long</span><span class="op">$</span><span class="va">sexFactor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">mydata_long</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mydata_wide</span> <span class="op">&lt;-</span> <span class="va">mydata_long</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span></span>
+<span>    names_from  <span class="op">=</span> <span class="va">timepoint</span>,</span>
+<span>    values_from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ses</span>, <span class="va">sleep</span>, <span class="va">depression</span>, <span class="va">anxiety</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="latent-growth-curve-model" class="level1" data-number="3"><h1 data-number="3">
+<span class="header-section-number">3</span> Latent Growth Curve Model</h1>
+<section id="linear-growth-curve-model" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="linear-growth-curve-model">
+<span class="header-section-number">3.1</span> Linear Growth Curve Model</h2>
+<section id="model-syntax" class="level3" data-number="3.1.1"><h3 data-number="3.1.1" class="anchored" data-anchor-id="model-syntax">
+<span class="header-section-number">3.1.1</span> Model Syntax</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linearGCM_syntax</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">  # Intercept and slope</span></span>
+<span><span class="st">  intercept =~ 1*depression_1 + 1*depression_2 + 1*depression_3 + 1*depression_4</span></span>
+<span><span class="st">  slope =~ 0*depression_1 + 1*depression_2 + 2*depression_3 + 3*depression_4</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">  # Regression paths</span></span>
+<span><span class="st">  intercept ~ sexMale</span></span>
+<span><span class="st">  slope ~ sexMale</span></span>
+<span><span class="st">  </span></span>
+<span><span class="st">  # Time-varying covariates</span></span>
+<span><span class="st">  depression_1 ~ sleep_1</span></span>
+<span><span class="st">  depression_2 ~ sleep_2</span></span>
+<span><span class="st">  depression_3 ~ sleep_3</span></span>
+<span><span class="st">  depression_4 ~ sleep_4</span></span>
+<span><span class="st">  </span></span>
+<span><span class="st">  # Constrain observed intercepts to zero</span></span>
+<span><span class="st">  depression_1 ~ 0</span></span>
+<span><span class="st">  depression_2 ~ 0</span></span>
+<span><span class="st">  depression_3 ~ 0</span></span>
+<span><span class="st">  depression_4 ~ 0</span></span>
+<span><span class="st">  </span></span>
+<span><span class="st">  # Estimate mean of intercept and slope</span></span>
+<span><span class="st">  intercept ~ 1</span></span>
+<span><span class="st">  slope ~ 1</span></span>
+<span><span class="st">'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="fit-model" class="level3" data-number="3.1.2"><h3 data-number="3.1.2" class="anchored" data-anchor-id="fit-model">
+<span class="header-section-number">3.1.2</span> Fit Model</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linearGCM_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html">sem</a></span><span class="op">(</span></span>
+<span>  <span class="va">linearGCM_syntax</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">mydata_wide</span>,</span>
+<span>  missing <span class="op">=</span> <span class="st">"ML"</span>,</span>
+<span>  estimator <span class="op">=</span> <span class="st">"MLR"</span>,</span>
+<span>  meanstructure <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  fixed.x <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="model-summary" class="level3" data-number="3.1.3"><h3 data-number="3.1.3" class="anchored" data-anchor-id="model-summary">
+<span class="header-section-number">3.1.3</span> Model Summary</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span></span>
+<span>  <span class="va">linearGCM_fit</span>,</span>
+<span>  fit.measures <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  standardized <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  rsquare <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>lavaan 0.6-21 ended normally after 104 iterations
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                        35
+
+  Number of observations                           250
+  Number of missing patterns                         6
+
+Model Test User Model:
+                                              Standard      Scaled
+  Test Statistic                                66.129      60.323
+  Degrees of freedom                                19          19
+  P-value (Chi-square)                           0.000       0.000
+  Scaling correction factor                                  1.096
+    Yuan-Bentler correction (Mplus variant)                       
+
+Model Test Baseline Model:
+
+  Test statistic                              1500.227    1240.836
+  Degrees of freedom                                26          26
+  P-value                                        0.000       0.000
+  Scaling correction factor                                  1.209
+
+User Model versus Baseline Model:
+
+  Comparative Fit Index (CFI)                    0.968       0.966
+  Tucker-Lewis Index (TLI)                       0.956       0.953
+                                                                  
+  Robust Comparative Fit Index (CFI)                         0.969
+  Robust Tucker-Lewis Index (TLI)                            0.957
+
+Loglikelihood and Information Criteria:
+
+  Loglikelihood user model (H0)              -3691.824   -3691.824
+  Scaling correction factor                                  1.065
+      for the MLR correction                                      
+  Loglikelihood unrestricted model (H1)      -3658.760   -3658.760
+  Scaling correction factor                                  1.076
+      for the MLR correction                                      
+                                                                  
+  Akaike (AIC)                                7453.649    7453.649
+  Bayesian (BIC)                              7576.900    7576.900
+  Sample-size adjusted Bayesian (SABIC)       7465.947    7465.947
+
+Root Mean Square Error of Approximation:
+
+  RMSEA                                          0.100       0.093
+  90 Percent confidence interval - lower         0.074       0.069
+  90 Percent confidence interval - upper         0.126       0.119
+  P-value H_0: RMSEA &lt;= 0.050                    0.001       0.003
+  P-value H_0: RMSEA &gt;= 0.080                    0.900       0.821
+                                                                  
+  Robust RMSEA                                               0.104
+  90 Percent confidence interval - lower                     0.074
+  90 Percent confidence interval - upper                     0.135
+  P-value H_0: Robust RMSEA &lt;= 0.050                         0.002
+  P-value H_0: Robust RMSEA &gt;= 0.080                         0.909
+
+Standardized Root Mean Square Residual:
+
+  SRMR                                           0.084       0.084
+
+Parameter Estimates:
+
+  Standard errors                             Sandwich
+  Information bread                           Observed
+  Observed information based on                Hessian
+
+Latent Variables:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+  intercept =~                                                          
+    depression_1      1.000                               4.034    0.936
+    depression_2      1.000                               4.034    0.734
+    depression_3      1.000                               4.034    0.585
+    depression_4      1.000                               4.034    0.466
+  slope =~                                                              
+    depression_1      0.000                               0.000    0.000
+    depression_2      1.000                               1.753    0.319
+    depression_3      2.000                               3.505    0.508
+    depression_4      3.000                               5.258    0.608
+
+Regressions:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+  intercept ~                                                           
+    sexMale          -2.265    0.508   -4.463    0.000   -0.561   -0.279
+  slope ~                                                               
+    sexMale          -1.623    0.210   -7.737    0.000   -0.926   -0.460
+  depression_1 ~                                                        
+    sleep_1          -0.758    0.126   -6.037    0.000   -0.758   -0.203
+  depression_2 ~                                                        
+    sleep_2          -0.951    0.102   -9.339    0.000   -0.951   -0.189
+  depression_3 ~                                                        
+    sleep_3          -0.976    0.125   -7.835    0.000   -0.976   -0.155
+  depression_4 ~                                                        
+    sleep_4          -0.862    0.178   -4.851    0.000   -0.862   -0.118
+
+Covariances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+ .intercept ~~                                                          
+   .slope             3.158    0.515    6.137    0.000    0.524    0.524
+  sexMale ~~                                                            
+    sleep_1          -0.050    0.036   -1.387    0.165   -0.050   -0.088
+    sleep_2          -0.009    0.035   -0.271    0.787   -0.009   -0.017
+    sleep_3           0.008    0.035    0.215    0.830    0.008    0.014
+    sleep_4          -0.004    0.039   -0.111    0.911   -0.004   -0.007
+  sleep_1 ~~                                                            
+    sleep_2           0.822    0.085    9.661    0.000    0.822    0.653
+    sleep_3           0.860    0.090    9.533    0.000    0.860    0.681
+    sleep_4           0.808    0.094    8.629    0.000    0.808    0.593
+  sleep_2 ~~                                                            
+    sleep_3           0.705    0.080    8.817    0.000    0.705    0.587
+    sleep_4           0.856    0.087    9.892    0.000    0.856    0.661
+  sleep_3 ~~                                                            
+    sleep_4           0.769    0.089    8.668    0.000    0.769    0.591
+
+Intercepts:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+   .depression_1      0.000                               0.000    0.000
+   .depression_2      0.000                               0.000    0.000
+   .depression_3      0.000                               0.000    0.000
+   .depression_4      0.000                               0.000    0.000
+   .intercept        17.205    1.082   15.899    0.000    4.265    4.265
+   .slope             1.245    0.614    2.028    0.043    0.711    0.711
+    sexMale           0.440    0.031   14.015    0.000    0.440    0.886
+    sleep_1           7.991    0.073  109.788    0.000    7.991    6.944
+    sleep_2           7.978    0.070  113.929    0.000    7.978    7.294
+    sleep_3           8.124    0.071  114.162    0.000    8.124    7.403
+    sleep_4           8.019    0.078  102.868    0.000    8.019    6.768
+
+Variances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+   .depression_1      1.714    0.421    4.071    0.000    1.714    0.092
+   .depression_2      1.678    0.317    5.295    0.000    1.678    0.056
+   .depression_3      1.570    0.417    3.765    0.000    1.570    0.033
+   .depression_4      5.562    1.067    5.211    0.000    5.562    0.074
+   .intercept        15.007    1.870    8.024    0.000    0.922    0.922
+   .slope             2.422    0.314    7.721    0.000    0.789    0.789
+    sexMale           0.246    0.004   65.405    0.000    0.246    1.000
+    sleep_1           1.325    0.104   12.729    0.000    1.325    1.000
+    sleep_2           1.196    0.090   13.271    0.000    1.196    1.000
+    sleep_3           1.204    0.092   13.036    0.000    1.204    1.000
+    sleep_4           1.404    0.116   12.110    0.000    1.404    1.000
+
+R-Square:
+                   Estimate
+    depression_1      0.908
+    depression_2      0.944
+    depression_3      0.967
+    depression_4      0.926
+    intercept         0.078
+    slope             0.211</code></pre>
+</div>
+</div>
+</section><section id="modification-indices" class="level3" data-number="3.1.4"><h3 data-number="3.1.4" class="anchored" data-anchor-id="modification-indices">
+<span class="header-section-number">3.1.4</span> Modification Indices</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/modificationIndices.html">modificationindices</a></span><span class="op">(</span></span>
+<span>  <span class="va">linearGCM_fit</span>,</span>
+<span>  sort. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["lhs"],"name":[1],"type":["chr"],"align":["left"]},{"label":["op"],"name":[2],"type":["chr"],"align":["left"]},{"label":["rhs"],"name":[3],"type":["chr"],"align":["left"]},{"label":["mi"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["epc"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["sepc.lv"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["sepc.all"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["sepc.nox"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"depression_3","2":"~","3":"sleep_2","4":"1.872615e+01","5":"-0.6964835395","6":"-0.6964835395","7":"-0.1104023069","8":"-0.1009379093","_rn_":"91"},{"1":"depression_1","2":"~~","3":"depression_3","4":"1.811758e+01","5":"-1.1972938028","6":"-1.1972938028","7":"-0.7299073648","8":"-0.7299073648","_rn_":"49"},{"1":"intercept","2":"~","3":"sleep_1","4":"1.589020e+01","5":"-1.0891849118","6":"-0.2700203627","7":"-0.3107605521","8":"-0.2700203627","_rn_":"59"},{"1":"depression_2","2":"~~","3":"depression_3","4":"1.524166e+01","5":"1.6246964896","6":"1.6246964896","7":"1.0009817062","8":"1.0009817062","_rn_":"51"},{"1":"depression_1","2":"~~","3":"depression_4","4":"1.471728e+01","5":"1.7982297337","6":"1.7982297337","7":"0.5824135484","8":"0.5824135484","_rn_":"50"},{"1":"depression_1","2":"~~","3":"depression_2","4":"1.319350e+01","5":"2.9721910917","6":"2.9721910917","7":"1.7525206638","8":"1.7525206638","_rn_":"48"},{"1":"slope","2":"~","3":"sleep_2","4":"1.254552e+01","5":"-0.4052724382","6":"-0.2312493716","7":"-0.2529323648","8":"-0.2312493716","_rn_":"69"},{"1":"slope","2":"~","3":"depression_3","4":"1.243934e+01","5":"0.3642819476","6":"0.2078601048","7":"1.4342593629","8":"1.4342593629","_rn_":"66"},{"1":"depression_2","2":"~~","3":"depression_4","4":"1.065102e+01","5":"-1.4219022116","6":"-1.4219022116","7":"-0.4654177172","8":"-0.4654177172","_rn_":"52"},{"1":"intercept","2":"~","3":"depression_2","4":"1.015667e+01","5":"0.6678380433","6":"0.1655640551","7":"0.9092745261","8":"0.9092745261","_rn_":"56"},{"1":"depression_2","2":"~","3":"sleep_1","4":"1.006737e+01","5":"-0.4288941376","6":"-0.4288941376","7":"-0.0898774017","8":"-0.0780946244","_rn_":"83"},{"1":"sleep_2","2":"~","3":"slope","4":"8.442581e+00","5":"-0.0977080032","6":"-0.1712366196","7":"-0.1565571124","8":"-0.1565571124","_rn_":"121"},{"1":"depression_2","2":"~","3":"depression_1","4":"7.016795e+00","5":"0.0649155435","6":"0.0649155435","7":"0.0509429413","8":"0.0509429413","_rn_":"79"},{"1":"depression_3","2":"~","3":"depression_1","4":"6.568332e+00","5":"-0.0697202714","6":"-0.0697202714","7":"-0.0435478587","8":"-0.0435478587","_rn_":"86"},{"1":"sleep_2","2":"~","3":"depression_3","4":"6.055893e+00","5":"-0.0190056503","6":"-0.0190056503","7":"-0.1198989675","8":"-0.1198989675","_rn_":"124"},{"1":"depression_1","2":"~","3":"sleep_2","4":"5.917532e+00","5":"0.4092991674","6":"0.4092991674","7":"0.1038724599","8":"0.0949678428","_rn_":"76"},{"1":"sleep_1","2":"~","3":"depression_1","4":"5.219255e+00","5":"-0.0282280234","6":"-0.0282280234","7":"-0.1057098335","8":"-0.1057098335","_rn_":"112"},{"1":"slope","2":"~","3":"sleep_4","4":"5.067657e+00","5":"-0.2567736216","6":"-0.1465156104","7":"-0.1735956064","8":"-0.1465156104","_rn_":"71"},{"1":"sexMale","2":"~","3":"intercept","4":"4.807175e+00","5":"-0.1380320869","6":"-0.5567819585","7":"-1.1216692933","8":"-1.1216692933","_rn_":"100"},{"1":"slope","2":"~","3":"depression_2","4":"4.668603e+00","5":"0.2011255422","6":"0.1147626902","7":"0.6302744317","8":"0.6302744317","_rn_":"65"},{"1":"intercept","2":"~","3":"depression_1","4":"4.447213e+00","5":"0.6573720442","6":"0.1629694241","7":"0.7023772218","8":"0.7023772218","_rn_":"55"},{"1":"sleep_1","2":"~","3":"intercept","4":"4.431834e+00","5":"-0.0273436088","6":"-0.1102962972","7":"-0.0958366368","8":"-0.0958366368","_rn_":"110"},{"1":"slope","2":"~","3":"sleep_3","4":"4.223388e+00","5":"-0.2495706613","6":"-0.1424055849","7":"-0.1562750821","8":"-0.1424055849","_rn_":"70"},{"1":"intercept","2":"=~","3":"depression_2","4":"4.171554e+00","5":"0.0504543265","6":"0.2035183220","7":"0.0370573657","8":"0.0370573657","_rn_":"2"},{"1":"depression_1","2":"~","3":"depression_3","4":"4.105277e+00","5":"-0.0487081227","6":"-0.0487081227","7":"-0.0779818718","8":"-0.0779818718","_rn_":"73"},{"1":"sleep_1","2":"~","3":"depression_2","4":"3.645661e+00","5":"-0.0181722241","6":"-0.0181722241","7":"-0.0867176871","8":"-0.0867176871","_rn_":"113"},{"1":"depression_2","2":"~","3":"depression_3","4":"3.575619e+00","5":"0.0277148219","6":"0.0277148219","7":"0.0348208745","8":"0.0348208745","_rn_":"80"},{"1":"intercept","2":"=~","3":"depression_3","4":"3.523577e+00","5":"-0.0543427698","6":"-0.2192031902","7":"-0.0317680325","8":"-0.0317680325","_rn_":"3"},{"1":"depression_4","2":"~","3":"sleep_2","4":"3.373475e+00","5":"0.4435364522","6":"0.4435364522","7":"0.0560728744","8":"0.0512659460","_rn_":"98"},{"1":"sleep_2","2":"~","3":"depression_4","4":"3.099714e+00","5":"-0.0108831139","6":"-0.0108831139","7":"-0.0860854339","8":"-0.0860854339","_rn_":"125"},{"1":"depression_3","2":"~","3":"sleep_4","4":"2.855462e+00","5":"-0.2837183766","6":"-0.2837183766","7":"-0.0487175842","8":"-0.0411178989","_rn_":"92"},{"1":"depression_1","2":"~","3":"depression_2","4":"2.558043e+00","5":"-0.0494503967","6":"-0.0494503967","7":"-0.0630136247","8":"-0.0630136247","_rn_":"72"},{"1":"depression_4","2":"~1","3":"","4":"2.552719e+00","5":"2.5952601703","6":"2.5952601703","7":"0.2999718900","8":"0.2999718900","_rn_":"18"},{"1":"slope","2":"=~","3":"depression_4","4":"2.536842e+00","5":"-0.2385830275","6":"-0.4181249211","7":"-0.0483287665","8":"-0.0483287665","_rn_":"8"},{"1":"slope","2":"~","3":"depression_4","4":"2.313248e+00","5":"-0.1301729881","6":"-0.0742770020","7":"-0.6426206963","8":"-0.6426206963","_rn_":"67"},{"1":"intercept","2":"~","3":"sleep_3","4":"2.262588e+00","5":"-0.3817523396","6":"-0.0946404087","7":"-0.1038578484","8":"-0.0946404087","_rn_":"61"},{"1":"intercept","2":"~","3":"depression_4","4":"1.996334e+00","5":"0.2046737300","6":"0.0507407642","7":"0.4389927484","8":"0.4389927484","_rn_":"58"},{"1":"intercept","2":"=~","3":"depression_1","4":"1.950465e+00","5":"-0.0582112964","6":"-0.2348077201","7":"-0.0544813780","8":"-0.0544813780","_rn_":"1"},{"1":"depression_3","2":"~1","3":"","4":"1.870926e+00","5":"-1.3789621255","6":"-1.3789621255","7":"-0.1998461501","8":"-0.1998461501","_rn_":"17"},{"1":"sexMale","2":"~","3":"depression_2","4":"1.867484e+00","5":"-0.0345637210","6":"-0.0345637210","7":"-0.3824099091","8":"-0.3824099091","_rn_":"103"},{"1":"sleep_2","2":"~","3":"depression_2","4":"1.831424e+00","5":"-0.0131344650","6":"-0.0131344650","7":"-0.0659504123","8":"-0.0659504123","_rn_":"123"},{"1":"slope","2":"=~","3":"depression_1","4":"1.805283e+00","5":"-0.1514060668","6":"-0.2653443140","7":"-0.0615666464","8":"-0.0615666464","_rn_":"5"},{"1":"sexMale","2":"~","3":"depression_1","4":"1.551931e+00","5":"-0.0473603826","6":"-0.0473603826","7":"-0.4112057386","8":"-0.4112057386","_rn_":"102"},{"1":"depression_4","2":"~","3":"depression_1","4":"1.519693e+00","5":"0.0575850360","6":"0.0575850360","7":"0.0286862374","8":"0.0286862374","_rn_":"93"},{"1":"intercept","2":"~","3":"sleep_2","4":"1.503691e+00","5":"-0.3117713211","6":"-0.0772913803","7":"-0.0845385718","8":"-0.0772913803","_rn_":"60"},{"1":"sleep_4","2":"~","3":"depression_2","4":"1.050105e+00","5":"0.0115841112","6":"0.0115841112","7":"0.0536953720","8":"0.0536953720","_rn_":"143"},{"1":"depression_4","2":"~","3":"sleep_3","4":"1.044145e+00","5":"-0.2697361510","6":"-0.2697361510","7":"-0.0342138170","8":"-0.0311773224","_rn_":"99"},{"1":"sleep_2","2":"~","3":"intercept","4":"1.038745e+00","5":"-0.0130657985","6":"-0.0527036941","7":"-0.0481855936","8":"-0.0481855936","_rn_":"120"},{"1":"sleep_3","2":"~","3":"depression_4","4":"1.004307e+00","5":"-0.0064891328","6":"-0.0064891328","7":"-0.0511592641","8":"-0.0511592641","_rn_":"135"},{"1":"sleep_4","2":"~","3":"intercept","4":"9.864471e-01","5":"0.0150566608","6":"0.0607342631","7":"0.0512600394","8":"0.0512600394","_rn_":"140"},{"1":"depression_4","2":"~","3":"sleep_1","4":"8.821239e-01","5":"0.2025074852","6":"0.2025074852","7":"0.0269382951","8":"0.0234067296","_rn_":"97"},{"1":"depression_2","2":"~","3":"depression_4","4":"8.787771e-01","5":"0.0109409436","6":"0.0109409436","7":"0.0172355898","8":"0.0172355898","_rn_":"81"},{"1":"depression_1","2":"~","3":"sleep_4","4":"8.726545e-01","5":"0.1279285286","6":"0.1279285286","7":"0.0351688322","8":"0.0296826804","_rn_":"78"},{"1":"depression_3","2":"~~","3":"depression_4","4":"8.362995e-01","5":"1.3526515263","6":"1.3526515263","7":"0.4577619608","8":"0.4577619608","_rn_":"53"},{"1":"sleep_1","2":"~","3":"slope","4":"7.699474e-01","5":"0.0301151734","6":"0.0527778720","7":"0.0458587811","8":"0.0458587811","_rn_":"111"},{"1":"sleep_4","2":"~","3":"depression_1","4":"7.577181e-01","5":"0.0121111054","6":"0.0121111054","7":"0.0440548009","8":"0.0440548009","_rn_":"142"},{"1":"slope","2":"=~","3":"depression_2","4":"7.560232e-01","5":"0.0572141202","6":"0.1002697038","7":"0.0182574770","8":"0.0182574770","_rn_":"6"},{"1":"sleep_3","2":"~","3":"slope","4":"7.411555e-01","5":"-0.0307312348","6":"-0.0538575408","7":"-0.0490776552","8":"-0.0490776552","_rn_":"131"},{"1":"sleep_4","2":"~","3":"depression_3","4":"7.269052e-01","5":"0.0078053383","6":"0.0078053383","7":"0.0454562342","8":"0.0454562342","_rn_":"144"},{"1":"slope","2":"=~","3":"depression_3","4":"6.797508e-01","5":"0.0727592236","6":"0.1275130295","7":"0.0184798317","8":"0.0184798317","_rn_":"7"},{"1":"depression_1","2":"~1","3":"","4":"6.512520e-01","5":"1.0668498470","6":"1.0668498470","7":"0.2475363662","8":"0.2475363662","_rn_":"15"},{"1":"intercept","2":"=~","3":"depression_4","4":"5.746901e-01","5":"0.0366823645","6":"0.1479661663","7":"0.0171025977","8":"0.0171025977","_rn_":"4"},{"1":"depression_2","2":"~","3":"sleep_3","4":"4.747265e-01","5":"-0.0894083847","6":"-0.0894083847","7":"-0.0178653691","8":"-0.0162798080","_rn_":"84"},{"1":"intercept","2":"~","3":"sleep_4","4":"4.538841e-01","5":"-0.1592541817","6":"-0.0394807819","7":"-0.0467778843","8":"-0.0394807819","_rn_":"62"},{"1":"depression_3","2":"~","3":"sleep_1","4":"4.528878e-01","5":"0.1000236047","6":"0.1000236047","7":"0.0166830449","8":"0.0144959256","_rn_":"90"},{"1":"depression_1","2":"~","3":"depression_4","4":"3.367245e-01","5":"-0.0113615844","6":"-0.0113615844","7":"-0.0228073566","8":"-0.0228073566","_rn_":"74"},{"1":"depression_4","2":"~","3":"depression_2","4":"2.991186e-01","5":"-0.0202524959","6":"-0.0202524959","7":"-0.0128560390","8":"-0.0128560390","_rn_":"94"},{"1":"sleep_2","2":"~","3":"depression_1","4":"2.851239e-01","5":"-0.0062643531","6":"-0.0062643531","7":"-0.0246840645","8":"-0.0246840645","_rn_":"122"},{"1":"sexMale","2":"~","3":"depression_3","4":"2.783934e-01","5":"-0.0144330447","6":"-0.0144330447","7":"-0.2006292207","8":"-0.2006292207","_rn_":"104"},{"1":"sleep_1","2":"~","3":"depression_3","4":"2.599634e-01","5":"-0.0039299084","6":"-0.0039299084","7":"-0.0235618622","8":"-0.0235618622","_rn_":"114"},{"1":"depression_1","2":"~","3":"sleep_3","4":"2.567374e-01","5":"0.0789042003","6":"0.0789042003","7":"0.0200908610","8":"0.0183077863","_rn_":"77"},{"1":"sleep_4","2":"~","3":"depression_4","4":"2.291055e-01","5":"0.0035838906","6":"0.0035838906","7":"0.0261697912","8":"0.0261697912","_rn_":"145"},{"1":"sexMale","2":"~","3":"slope","4":"2.237543e-01","5":"0.0785792106","6":"0.1377127560","7":"0.2774302711","8":"0.2774302711","_rn_":"101"},{"1":"intercept","2":"~","3":"depression_3","4":"2.143598e-01","5":"-0.0941884437","6":"-0.0233503030","7":"-0.1611198589","8":"-0.1611198589","_rn_":"57"},{"1":"sleep_4","2":"~","3":"slope","4":"1.862617e-01","5":"0.0173759394","6":"0.0304519286","7":"0.0257015888","8":"0.0257015888","_rn_":"141"},{"1":"depression_3","2":"~","3":"depression_4","4":"1.458031e-01","5":"-0.0059036782","6":"-0.0059036782","7":"-0.0074022963","8":"-0.0074022963","_rn_":"88"},{"1":"depression_1","2":"~","3":"sexMale","4":"1.265900e-01","5":"0.1224575479","6":"0.1224575479","7":"0.0141039771","8":"0.0284132734","_rn_":"75"},{"1":"sleep_1","2":"~","3":"depression_4","4":"1.257442e-01","5":"-0.0021906180","6":"-0.0021906180","7":"-0.0164678771","8":"-0.0164678771","_rn_":"115"},{"1":"depression_3","2":"~","3":"depression_2","4":"1.034907e-01","5":"-0.0072950476","6":"-0.0072950476","7":"-0.0058063144","8":"-0.0058063144","_rn_":"87"},{"1":"depression_2","2":"~","3":"sexMale","4":"9.879432e-02","5":"-0.0640779459","6":"-0.0640779459","7":"-0.0057916184","8":"-0.0116675484","_rn_":"82"},{"1":"sleep_3","2":"~","3":"depression_3","4":"5.513713e-02","5":"-0.0019279419","6":"-0.0019279419","7":"-0.0121223771","8":"-0.0121223771","_rn_":"134"},{"1":"sexMale","2":"~","3":"depression_4","4":"5.339588e-02","5":"-0.0036997998","6":"-0.0036997998","7":"-0.0644849320","8":"-0.0644849320","_rn_":"105"},{"1":"depression_4","2":"~","3":"sexMale","4":"4.987009e-02","5":"0.0948652533","6":"0.0948652533","7":"0.0054428599","8":"0.0109649544","_rn_":"96"},{"1":"depression_2","2":"~1","3":"","4":"3.601303e-02","5":"-0.1517694023","6":"-0.1517694023","7":"-0.0276347318","8":"-0.0276347318","_rn_":"16"},{"1":"slope","2":"~","3":"sleep_1","4":"3.020859e-02","5":"-0.0223897680","6":"-0.0127756524","7":"-0.0147032199","8":"-0.0127756524","_rn_":"68"},{"1":"slope","2":"~","3":"depression_1","4":"2.866951e-02","5":"-0.0247745724","6":"-0.0141364271","7":"-0.0609261797","8":"-0.0609261797","_rn_":"64"},{"1":"sleep_3","2":"~","3":"depression_2","4":"2.672969e-03","5":"-0.0005161949","6":"-0.0005161949","7":"-0.0025833306","8":"-0.0025833306","_rn_":"133"},{"1":"depression_2","2":"~","3":"sleep_4","4":"2.363784e-03","5":"0.0060157111","6":"0.0060157111","7":"0.0012978151","8":"0.0010953628","_rn_":"85"},{"1":"sleep_3","2":"~","3":"intercept","4":"1.062156e-03","5":"0.0004364283","6":"0.0017604267","7":"0.0016041879","8":"0.0016041879","_rn_":"130"},{"1":"depression_4","2":"~","3":"depression_3","4":"6.993422e-04","5":"-0.0008204043","6":"-0.0008204043","7":"-0.0006543108","8":"-0.0006543108","_rn_":"95"},{"1":"sleep_3","2":"~","3":"depression_1","4":"4.489932e-04","5":"-0.0002603947","6":"-0.0002603947","7":"-0.0010226658","8":"-0.0010226658","_rn_":"132"},{"1":"depression_3","2":"~","3":"sexMale","4":"2.028355e-05","5":"-0.0011491308","6":"-0.0011491308","7":"-0.0000826672","8":"-0.0001665378","_rn_":"89"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section><section id="plots" class="level3" data-number="3.1.5"><h3 data-number="3.1.5" class="anchored" data-anchor-id="plots">
+<span class="header-section-number">3.1.5</span> Plots</h3>
+<section id="path-diagram" class="level4" data-number="3.1.5.1"><h4 data-number="3.1.5.1" class="anchored" data-anchor-id="path-diagram">
+<span class="header-section-number">3.1.5.1</span> Path Diagram</h4>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">lavaanPlot</span><span class="fu">::</span><span class="fu">lavaanPlot</span><span class="op">(</span></span>
+<span>  <span class="va">linearGCM_fit</span>,</span>
+<span>  coefs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="co">#covs = TRUE,</span></span>
+<span>  stand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in `loadNamespace()`:
+! there is no package called 'lavaanPlot'</code></pre>
+</div>
+</div>
+</section></section></section><section id="quadratic-growth-curve-model" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="quadratic-growth-curve-model">
+<span class="header-section-number">3.2</span> Quadratic Growth Curve Model</h2>
+<section id="model-syntax-1" class="level3" data-number="3.2.1"><h3 data-number="3.2.1" class="anchored" data-anchor-id="model-syntax-1">
+<span class="header-section-number">3.2.1</span> Model Syntax</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">quadraticGCM_syntax</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">  # Intercept and slope</span></span>
+<span><span class="st">  intercept =~ 1*depression_1 + 1*depression_2 + 1*depression_3 + 1*depression_4</span></span>
+<span><span class="st">  linear =~ 0*depression_1 + 1*depression_2 + 2*depression_3 + 3*depression_4</span></span>
+<span><span class="st">  quadratic =~ 0*depression_1 + 1*depression_2 + 4*depression_3 + 9*depression_4</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">  # Regression paths</span></span>
+<span><span class="st">  intercept ~ sexMale</span></span>
+<span><span class="st">  linear ~ sexMale</span></span>
+<span><span class="st">  quadratic ~ sexMale</span></span>
+<span><span class="st">  </span></span>
+<span><span class="st">  # Time-varying covariates</span></span>
+<span><span class="st">  depression_1 ~ sleep_1</span></span>
+<span><span class="st">  depression_2 ~ sleep_2</span></span>
+<span><span class="st">  depression_3 ~ sleep_3</span></span>
+<span><span class="st">  depression_4 ~ sleep_4</span></span>
+<span><span class="st">  </span></span>
+<span><span class="st">  # Constrain observed intercepts to zero</span></span>
+<span><span class="st">  depression_1 ~ 0</span></span>
+<span><span class="st">  depression_2 ~ 0</span></span>
+<span><span class="st">  depression_3 ~ 0</span></span>
+<span><span class="st">  depression_4 ~ 0</span></span>
+<span><span class="st">  </span></span>
+<span><span class="st">  # Constrain residual variances to be equal (needed to address negative variance)</span></span>
+<span><span class="st">  depression_1 ~~ vardep*depression_1</span></span>
+<span><span class="st">  depression_2 ~~ vardep*depression_2</span></span>
+<span><span class="st">  depression_3 ~~ vardep*depression_3</span></span>
+<span><span class="st">  depression_4 ~~ vardep*depression_4</span></span>
+<span><span class="st">  </span></span>
+<span><span class="st">  # Estimate mean of intercept and slope</span></span>
+<span><span class="st">  intercept ~ 1</span></span>
+<span><span class="st">  linear ~ 1</span></span>
+<span><span class="st">  quadratic ~ 1</span></span>
+<span><span class="st">'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="fit-model-1" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="fit-model-1">
+<span class="header-section-number">3.2.2</span> Fit Model</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">quadraticGCM_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html">sem</a></span><span class="op">(</span></span>
+<span>  <span class="va">quadraticGCM_syntax</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">mydata_wide</span>,</span>
+<span>  missing <span class="op">=</span> <span class="st">"ML"</span>,</span>
+<span>  estimator <span class="op">=</span> <span class="st">"MLR"</span>,</span>
+<span>  meanstructure <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  fixed.x <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="model-summary-1" class="level3" data-number="3.2.3"><h3 data-number="3.2.3" class="anchored" data-anchor-id="model-summary-1">
+<span class="header-section-number">3.2.3</span> Model Summary</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span></span>
+<span>  <span class="va">quadraticGCM_fit</span>,</span>
+<span>  fit.measures <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  standardized <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  rsquare <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>lavaan 0.6-21 ended normally after 118 iterations
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                        40
+  Number of equality constraints                     3
+
+  Number of observations                           250
+  Number of missing patterns                         6
+
+Model Test User Model:
+                                              Standard      Scaled
+  Test Statistic                                54.898      51.696
+  Degrees of freedom                                17          17
+  P-value (Chi-square)                           0.000       0.000
+  Scaling correction factor                                  1.062
+    Yuan-Bentler correction (Mplus variant)                       
+
+Model Test Baseline Model:
+
+  Test statistic                              1500.227    1240.836
+  Degrees of freedom                                26          26
+  P-value                                        0.000       0.000
+  Scaling correction factor                                  1.209
+
+User Model versus Baseline Model:
+
+  Comparative Fit Index (CFI)                    0.974       0.971
+  Tucker-Lewis Index (TLI)                       0.961       0.956
+                                                                  
+  Robust Comparative Fit Index (CFI)                         0.976
+  Robust Tucker-Lewis Index (TLI)                            0.964
+
+Loglikelihood and Information Criteria:
+
+  Loglikelihood user model (H0)              -3686.209   -3686.209
+  Scaling correction factor                                  1.001
+      for the MLR correction                                      
+  Loglikelihood unrestricted model (H1)      -3658.760   -3658.760
+  Scaling correction factor                                  1.076
+      for the MLR correction                                      
+                                                                  
+  Akaike (AIC)                                7446.418    7446.418
+  Bayesian (BIC)                              7576.712    7576.712
+  Sample-size adjusted Bayesian (SABIC)       7459.419    7459.419
+
+Root Mean Square Error of Approximation:
+
+  RMSEA                                          0.094       0.090
+  90 Percent confidence interval - lower         0.067       0.064
+  90 Percent confidence interval - upper         0.123       0.118
+  P-value H_0: RMSEA &lt;= 0.050                    0.005       0.008
+  P-value H_0: RMSEA &gt;= 0.080                    0.820       0.755
+                                                                  
+  Robust RMSEA                                               0.096
+  90 Percent confidence interval - lower                     0.064
+  90 Percent confidence interval - upper                     0.129
+  P-value H_0: Robust RMSEA &lt;= 0.050                         0.012
+  P-value H_0: Robust RMSEA &gt;= 0.080                         0.806
+
+Standardized Root Mean Square Residual:
+
+  SRMR                                           0.085       0.085
+
+Parameter Estimates:
+
+  Standard errors                             Sandwich
+  Information bread                           Observed
+  Observed information based on                Hessian
+
+Latent Variables:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+  intercept =~                                                          
+    depression_1      1.000                               4.027    0.940
+    depression_2      1.000                               4.027    0.727
+    depression_3      1.000                               4.027    0.579
+    depression_4      1.000                               4.027    0.472
+  linear =~                                                             
+    depression_1      0.000                               0.000    0.000
+    depression_2      1.000                               2.450    0.442
+    depression_3      2.000                               4.900    0.705
+    depression_4      3.000                               7.350    0.861
+  quadratic =~                                                          
+    depression_1      0.000                               0.000    0.000
+    depression_2      1.000                               0.631    0.114
+    depression_3      4.000                               2.525    0.363
+    depression_4      9.000                               5.681    0.665
+
+Regressions:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+  intercept ~                                                           
+    sexMale          -2.257    0.509   -4.436    0.000   -0.560   -0.278
+  linear ~                                                              
+    sexMale          -1.671    0.367   -4.549    0.000   -0.682   -0.339
+  quadratic ~                                                           
+    sexMale           0.019    0.112    0.169    0.866    0.030    0.015
+  depression_1 ~                                                        
+    sleep_1          -0.807    0.130   -6.195    0.000   -0.807   -0.217
+  depression_2 ~                                                        
+    sleep_2          -0.815    0.116   -7.004    0.000   -0.815   -0.161
+  depression_3 ~                                                        
+    sleep_3          -0.869    0.131   -6.624    0.000   -0.869   -0.137
+  depression_4 ~                                                        
+    sleep_4          -0.986    0.188   -5.234    0.000   -0.986   -0.137
+
+Covariances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+ .intercept ~~                                                          
+   .linear            3.029    1.010    2.999    0.003    0.340    0.340
+   .quadratic         0.034    0.308    0.111    0.912    0.014    0.014
+ .linear ~~                                                             
+   .quadratic        -1.038    0.329   -3.160    0.002   -0.714   -0.714
+  sexMale ~~                                                            
+    sleep_1          -0.050    0.036   -1.387    0.165   -0.050   -0.088
+    sleep_2          -0.009    0.035   -0.271    0.787   -0.009   -0.017
+    sleep_3           0.008    0.035    0.215    0.830    0.008    0.014
+    sleep_4          -0.004    0.039   -0.111    0.911   -0.004   -0.007
+  sleep_1 ~~                                                            
+    sleep_2           0.822    0.085    9.661    0.000    0.822    0.653
+    sleep_3           0.860    0.090    9.533    0.000    0.860    0.681
+    sleep_4           0.808    0.094    8.629    0.000    0.808    0.593
+  sleep_2 ~~                                                            
+    sleep_3           0.705    0.080    8.817    0.000    0.705    0.587
+    sleep_4           0.856    0.087    9.892    0.000    0.856    0.661
+  sleep_3 ~~                                                            
+    sleep_4           0.769    0.089    8.668    0.000    0.769    0.591
+
+Intercepts:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+   .depression_1      0.000                               0.000    0.000
+   .depression_2      0.000                               0.000    0.000
+   .depression_3      0.000                               0.000    0.000
+   .depression_4      0.000                               0.000    0.000
+   .intercept        17.596    1.110   15.850    0.000    4.369    4.369
+   .linear           -1.063    1.501   -0.708    0.479   -0.434   -0.434
+   .quadratic         0.841    0.486    1.730    0.084    1.332    1.332
+    sexMale           0.440    0.031   14.015    0.000    0.440    0.886
+    sleep_1           7.991    0.073  109.788    0.000    7.991    6.944
+    sleep_2           7.978    0.070  113.929    0.000    7.978    7.294
+    sleep_3           8.124    0.071  114.162    0.000    8.124    7.403
+    sleep_4           8.019    0.078  102.868    0.000    8.019    6.768
+
+Variances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+   .dprss_1 (vrdp)    1.458    0.223    6.531    0.000    1.458    0.079
+   .dprss_2 (vrdp)    1.458    0.223    6.531    0.000    1.458    0.048
+   .dprss_3 (vrdp)    1.458    0.223    6.531    0.000    1.458    0.030
+   .dprss_4 (vrdp)    1.458    0.223    6.531    0.000    1.458    0.020
+   .intrcpt          14.965    1.822    8.213    0.000    0.923    0.923
+   .linear            5.314    1.193    4.454    0.000    0.885    0.885
+   .quadrtc           0.398    0.106    3.765    0.000    1.000    1.000
+    sexMale           0.246    0.004   65.405    0.000    0.246    1.000
+    sleep_1           1.325    0.104   12.729    0.000    1.325    1.000
+    sleep_2           1.196    0.090   13.271    0.000    1.196    1.000
+    sleep_3           1.204    0.092   13.036    0.000    1.204    1.000
+    sleep_4           1.404    0.116   12.110    0.000    1.404    1.000
+
+R-Square:
+                   Estimate
+    depression_1      0.921
+    depression_2      0.952
+    depression_3      0.970
+    depression_4      0.980
+    intercept         0.077
+    linear            0.115
+    quadratic         0.000</code></pre>
+</div>
+</div>
+</section><section id="modification-indices-1" class="level3" data-number="3.2.4"><h3 data-number="3.2.4" class="anchored" data-anchor-id="modification-indices-1">
+<span class="header-section-number">3.2.4</span> Modification Indices</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/modificationIndices.html">modificationindices</a></span><span class="op">(</span></span>
+<span>  <span class="va">quadraticGCM_fit</span>,</span>
+<span>  sort. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["lhs"],"name":[1],"type":["chr"],"align":["left"]},{"label":["op"],"name":[2],"type":["chr"],"align":["left"]},{"label":["rhs"],"name":[3],"type":["chr"],"align":["left"]},{"label":["mi"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["epc"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["sepc.lv"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["sepc.all"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["sepc.nox"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"depression_3","2":"~","3":"sleep_2","4":"1.598674e+01","5":"-0.6579381507","6":"-0.6579381507","7":"-1.035181e-01","8":"-9.464386e-02","_rn_":"115"},{"1":"intercept","2":"~","3":"sleep_1","4":"1.538437e+01","5":"-1.1182201874","6":"-0.2776518545","7":"-3.195435e-01","8":"-2.776519e-01","_rn_":"72"},{"1":"depression_2","2":"~","3":"depression_1","4":"1.188884e+01","5":"0.0909960262","6":"0.0909960262","7":"7.038337e-02","8":"7.038337e-02","_rn_":"103"},{"1":"sleep_2","2":"~","3":"linear","4":"1.187496e+01","5":"-0.0908037838","6":"-0.2224705434","7":"-2.033990e-01","8":"-2.033990e-01","_rn_":"147"},{"1":"linear","2":"~","3":"sleep_2","4":"1.177215e+01","5":"-0.3914964253","6":"-0.1597935449","7":"-1.747765e-01","8":"-1.597935e-01","_rn_":"83"},{"1":"depression_2","2":"~","3":"sleep_1","4":"9.210865e+00","5":"-0.4193511961","6":"-0.4193511961","7":"-8.712406e-02","8":"-7.570225e-02","_rn_":"107"},{"1":"depression_3","2":"~","3":"depression_1","4":"9.130520e+00","5":"-0.0799180447","6":"-0.0799180447","7":"-4.925712e-02","8":"-4.925712e-02","_rn_":"110"},{"1":"depression_1","2":"~~","3":"depression_2","4":"8.610799e+00","5":"0.7039730946","6":"0.7039730946","7":"4.829230e-01","8":"4.829230e-01","_rn_":"60"},{"1":"depression_1","2":"~~","3":"depression_3","4":"8.108350e+00","5":"-0.8923125826","6":"-0.8923125826","7":"-6.121232e-01","8":"-6.121232e-01","_rn_":"61"},{"1":"intercept","2":"~","3":"depression_1","4":"7.588526e+00","5":"0.9108134361","6":"0.2261531695","7":"9.689904e-01","8":"9.689904e-01","_rn_":"68"},{"1":"intercept","2":"~","3":"depression_2","4":"7.429708e+00","5":"0.6004291169","6":"0.1490853587","7":"8.258556e-01","8":"8.258556e-01","_rn_":"69"},{"1":"intercept","2":"=~","3":"depression_2","4":"6.989930e+00","5":"0.0735039728","6":"0.2960312527","7":"5.344025e-02","8":"5.344025e-02","_rn_":"2"},{"1":"intercept","2":"=~","3":"depression_1","4":"6.989912e+00","5":"-0.2205116311","6":"-0.8880926006","7":"-2.072724e-01","8":"-2.072724e-01","_rn_":"1"},{"1":"intercept","2":"=~","3":"depression_3","4":"6.989901e+00","5":"-0.0735038197","6":"-0.2960306360","7":"-4.258376e-02","8":"-4.258376e-02","_rn_":"3"},{"1":"intercept","2":"=~","3":"depression_4","4":"6.989856e+00","5":"0.2205107554","6":"0.8880890738","7":"1.039755e-01","8":"1.039755e-01","_rn_":"4"},{"1":"depression_4","2":"~","3":"depression_1","4":"6.872861e+00","5":"0.2000207398","6":"0.2000207398","7":"1.003382e-01","8":"1.003382e-01","_rn_":"117"},{"1":"depression_1","2":"~","3":"depression_3","4":"6.528778e+00","5":"-0.1248794992","6":"-0.1248794992","7":"-2.026129e-01","8":"-2.026129e-01","_rn_":"97"},{"1":"linear","2":"~","3":"sleep_3","4":"6.412440e+00","5":"-0.2988510821","6":"-0.1219793355","7":"-1.338595e-01","8":"-1.219793e-01","_rn_":"84"},{"1":"sleep_2","2":"~","3":"depression_3","4":"6.052054e+00","5":"-0.0187648725","6":"-0.0187648725","7":"-1.192654e-01","8":"-1.192654e-01","_rn_":"151"},{"1":"linear","2":"~","3":"sleep_4","4":"5.457808e+00","5":"-0.2734198677","6":"-0.1115993074","7":"-1.322259e-01","8":"-1.115993e-01","_rn_":"85"},{"1":"depression_1","2":"~","3":"sleep_2","4":"5.115663e+00","5":"0.3891973308","6":"0.3891973308","7":"9.935205e-02","8":"9.083497e-02","_rn_":"100"},{"1":"linear","2":"~","3":"depression_3","4":"4.837193e+00","5":"0.2097864237","6":"0.0856266217","7":"5.952528e-01","8":"5.952528e-01","_rn_":"80"},{"1":"sleep_1","2":"~","3":"depression_1","4":"4.743388e+00","5":"-0.0274572679","6":"-0.0274572679","7":"-1.022221e-01","8":"-1.022221e-01","_rn_":"138"},{"1":"quadratic","2":"=~","3":"depression_2","4":"4.576032e+00","5":"0.5632668401","6":"0.3555210439","7":"6.417948e-02","8":"6.417948e-02","_rn_":"10"},{"1":"quadratic","2":"=~","3":"depression_1","4":"4.576028e+00","5":"-1.6897998264","6":"-1.0665626938","7":"-2.489256e-01","8":"-2.489256e-01","_rn_":"9"},{"1":"quadratic","2":"=~","3":"depression_3","4":"4.576016e+00","5":"-0.5632658578","6":"-0.3555204239","7":"-5.114132e-02","8":"-5.114132e-02","_rn_":"11"},{"1":"quadratic","2":"=~","3":"depression_4","4":"4.575990e+00","5":"1.6897929053","6":"1.0665583254","7":"1.248703e-01","8":"1.248703e-01","_rn_":"12"},{"1":"quadratic","2":"~","3":"depression_4","4":"4.502678e+00","5":"0.1015706178","6":"0.1609225724","7":"1.374493e+00","8":"1.374493e+00","_rn_":"91"},{"1":"sexMale","2":"~","3":"intercept","4":"4.464713e+00","5":"-0.1347409160","6":"-0.5426580444","7":"-1.093216e+00","8":"-1.093216e+00","_rn_":"124"},{"1":"sleep_2","2":"~","3":"quadratic","4":"4.436165e+00","5":"0.2469945865","6":"0.1558972888","7":"1.425328e-01","8":"1.425328e-01","_rn_":"148"},{"1":"linear","2":"~","3":"depression_4","4":"4.295257e+00","5":"0.2360207286","6":"0.0963344400","7":"8.228241e-01","8":"8.228241e-01","_rn_":"81"},{"1":"quadratic","2":"~","3":"sleep_4","4":"4.271820e+00","5":"-0.1063557115","6":"-0.1685037962","7":"-1.996478e-01","8":"-1.685038e-01","_rn_":"95"},{"1":"quadratic","2":"~","3":"sleep_3","4":"4.206934e+00","5":"-0.0712486033","6":"-0.1128821382","7":"-1.238763e-01","8":"-1.128821e-01","_rn_":"94"},{"1":"sleep_1","2":"~","3":"intercept","4":"4.189654e+00","5":"-0.0269586242","6":"-0.1085736593","7":"-9.433984e-02","8":"-9.433984e-02","_rn_":"135"},{"1":"depression_1","2":"~","3":"depression_4","4":"3.978678e+00","5":"-0.0805985993","6":"-0.0805985993","7":"-1.606705e-01","8":"-1.606705e-01","_rn_":"98"},{"1":"depression_2","2":"~","3":"depression_4","4":"3.955650e+00","5":"0.0278892060","6":"0.0278892060","7":"4.300238e-02","8":"4.300238e-02","_rn_":"105"},{"1":"linear","2":"~","3":"depression_2","4":"3.781419e+00","5":"0.1881417126","6":"0.0767920963","7":"4.253884e-01","8":"4.253884e-01","_rn_":"79"},{"1":"depression_3","2":"~","3":"depression_4","4":"3.688025e+00","5":"-0.0269786231","6":"-0.0269786231","7":"-3.314764e-02","8":"-3.314764e-02","_rn_":"112"},{"1":"sexMale","2":"~","3":"depression_1","4":"3.590184e+00","5":"-0.1033981807","6":"-0.1033981807","7":"-8.925022e-01","8":"-8.925022e-01","_rn_":"127"},{"1":"depression_4","2":"~","3":"depression_2","4":"3.568724e+00","5":"0.1180449625","6":"0.1180449625","7":"7.655810e-02","8":"7.655810e-02","_rn_":"118"},{"1":"sleep_3","2":"~","3":"quadratic","4":"3.560704e+00","5":"-0.2243689055","6":"-0.1416164805","7":"-1.290479e-01","8":"-1.290479e-01","_rn_":"159"},{"1":"depression_3","2":"~~","3":"depression_4","4":"3.529547e+00","5":"-0.5832957067","6":"-0.5832957067","7":"-4.001388e-01","8":"-4.001388e-01","_rn_":"65"},{"1":"sleep_1","2":"~","3":"depression_2","4":"3.518489e+00","5":"-0.0175931976","6":"-0.0175931976","7":"-8.468072e-02","8":"-8.468072e-02","_rn_":"139"},{"1":"depression_2","2":"~","3":"depression_3","4":"3.412550e+00","5":"0.0321103414","6":"0.0321103414","7":"4.029660e-02","8":"4.029660e-02","_rn_":"104"},{"1":"sleep_2","2":"~","3":"depression_4","4":"3.289237e+00","5":"-0.0113979285","6":"-0.0113979285","7":"-8.900770e-02","8":"-8.900770e-02","_rn_":"152"},{"1":"sexMale","2":"~","3":"quadratic","4":"3.057308e+00","5":"0.9747082932","6":"0.6152134038","7":"1.239383e+00","8":"1.239383e+00","_rn_":"126"},{"1":"depression_4","2":"~","3":"sleep_3","4":"3.031472e+00","5":"-0.4838876139","6":"-0.4838876139","7":"-6.217015e-02","8":"-5.665250e-02","_rn_":"123"},{"1":"depression_3","2":"~","3":"sleep_4","4":"2.778887e+00","5":"-0.2750856155","6":"-0.2750856155","7":"-4.688459e-02","8":"-3.957084e-02","_rn_":"116"},{"1":"depression_3","2":"~","3":"depression_2","4":"2.774517e+00","5":"-0.0361931077","6":"-0.0361931077","7":"-2.884047e-02","8":"-2.884047e-02","_rn_":"111"},{"1":"sleep_2","2":"~","3":"depression_2","4":"2.730089e+00","5":"-0.0158770718","6":"-0.0158770718","7":"-8.041105e-02","8":"-8.041105e-02","_rn_":"150"},{"1":"depression_1","2":"~~","3":"depression_4","4":"2.699969e+00","5":"1.1649093417","6":"1.1649093417","7":"7.991236e-01","8":"7.991236e-01","_rn_":"62"},{"1":"depression_2","2":"~~","3":"depression_3","4":"2.699957e+00","5":"-1.1649066240","6":"-1.1649066240","7":"-7.991217e-01","8":"-7.991217e-01","_rn_":"63"},{"1":"depression_4","2":"~","3":"depression_3","4":"2.670723e+00","5":"0.0824278293","6":"0.0824278293","7":"6.708742e-02","8":"6.708742e-02","_rn_":"119"},{"1":"quadratic","2":"~","3":"sleep_2","4":"2.589791e+00","5":"-0.0622358823","6":"-0.0986029079","7":"-1.078483e-01","8":"-9.860291e-02","_rn_":"93"},{"1":"depression_2","2":"~~","3":"depression_4","4":"2.325119e+00","5":"0.8000482684","6":"0.8000482684","7":"5.488302e-01","8":"5.488302e-01","_rn_":"64"},{"1":"sexMale","2":"~","3":"depression_2","4":"2.186090e+00","5":"-0.0454599886","6":"-0.0454599886","7":"-5.073154e-01","8":"-5.073154e-01","_rn_":"128"},{"1":"quadratic","2":"~","3":"depression_2","4":"2.166111e+00","5":"0.0449654451","6":"0.0712406329","7":"3.946362e-01","8":"3.946362e-01","_rn_":"89"},{"1":"depression_4","2":"~","3":"sleep_2","4":"2.046227e+00","5":"0.3313407713","6":"0.3313407713","7":"4.243002e-02","8":"3.879265e-02","_rn_":"122"},{"1":"depression_1","2":"~","3":"depression_2","4":"1.963587e+00","5":"-0.0820908360","6":"-0.0820908360","7":"-1.061322e-01","8":"-1.061322e-01","_rn_":"96"},{"1":"intercept","2":"~","3":"depression_4","4":"1.743470e+00","5":"0.3063472764","6":"0.0760654211","7":"6.496997e-01","8":"6.496997e-01","_rn_":"71"},{"1":"intercept","2":"~","3":"sleep_3","4":"1.740464e+00","5":"-0.3359305448","6":"-0.0834108879","7":"-9.153467e-02","8":"-8.341089e-02","_rn_":"74"},{"1":"intercept","2":"~","3":"sleep_2","4":"1.585038e+00","5":"-0.3183802768","6":"-0.0790531912","7":"-8.646557e-02","8":"-7.905319e-02","_rn_":"73"},{"1":"sleep_1","2":"~","3":"quadratic","4":"1.373452e+00","5":"0.1360384019","6":"0.0858643031","7":"7.460764e-02","8":"7.460764e-02","_rn_":"137"},{"1":"sleep_3","2":"~","3":"depression_4","4":"1.126281e+00","5":"-0.0069856348","6":"-0.0069856348","7":"-5.437114e-02","8":"-5.437114e-02","_rn_":"163"},{"1":"depression_2","2":"~1","3":"","4":"1.111029e+00","5":"1.0503566382","6":"1.0503566382","7":"1.896128e-01","8":"1.896128e-01","_rn_":"21"},{"1":"depression_1","2":"~1","3":"","4":"1.111028e+00","5":"-3.1510685893","6":"-3.1510685893","7":"-7.354296e-01","8":"-7.354296e-01","_rn_":"20"},{"1":"depression_3","2":"~1","3":"","4":"1.111004e+00","5":"-1.0503449423","6":"-1.0503449423","7":"-1.510913e-01","8":"-1.510913e-01","_rn_":"22"},{"1":"depression_4","2":"~1","3":"","4":"1.110972e+00","5":"3.1509887791","6":"3.1509887791","7":"3.689109e-01","8":"3.689109e-01","_rn_":"23"},{"1":"quadratic","2":"~","3":"depression_3","4":"1.096083e+00","5":"0.0295903661","6":"0.0468812529","7":"3.259056e-01","8":"3.259056e-01","_rn_":"90"},{"1":"depression_3","2":"~","3":"sleep_1","4":"9.977668e-01","5":"0.1363268432","6":"0.1363268432","7":"2.256930e-02","8":"1.961050e-02","_rn_":"114"},{"1":"sleep_4","2":"~","3":"depression_2","4":"9.939944e-01","5":"0.0111068589","6":"0.0111068589","7":"5.192847e-02","8":"5.192847e-02","_rn_":"172"},{"1":"depression_1","2":"~","3":"sleep_4","4":"9.866658e-01","5":"0.1430624369","6":"0.1430624369","7":"3.956068e-02","8":"3.338942e-02","_rn_":"102"},{"1":"sleep_2","2":"~","3":"intercept","4":"9.168673e-01","5":"-0.0122861823","6":"-0.0494815967","7":"-4.523972e-02","8":"-4.523972e-02","_rn_":"146"},{"1":"sleep_4","2":"~","3":"intercept","4":"8.810853e-01","5":"0.0142546085","6":"0.0574092724","7":"4.845372e-02","8":"4.845372e-02","_rn_":"168"},{"1":"sleep_4","2":"~","3":"depression_1","4":"7.714893e-01","5":"0.0123311442","6":"0.0123311442","7":"4.459285e-02","8":"4.459285e-02","_rn_":"171"},{"1":"sleep_4","2":"~","3":"depression_3","4":"7.286344e-01","5":"0.0077180195","6":"0.0077180195","7":"4.528388e-02","8":"4.528388e-02","_rn_":"173"},{"1":"intercept","2":"~","3":"depression_3","4":"6.660274e-01","5":"-0.1746144265","6":"-0.0433564157","7":"-3.014019e-01","8":"-3.014019e-01","_rn_":"70"},{"1":"linear","2":"~","3":"depression_1","4":"6.132386e-01","5":"0.1170862581","6":"0.0477900359","7":"2.047643e-01","8":"2.047643e-01","_rn_":"78"},{"1":"sleep_4","2":"~","3":"linear","4":"5.993508e-01","5":"0.0239105751","6":"0.0585812442","7":"4.944287e-02","8":"4.944287e-02","_rn_":"169"},{"1":"sleep_4","2":"~","3":"quadratic","4":"5.762134e-01","5":"-0.1207205281","6":"-0.0761960143","7":"-6.430983e-02","8":"-6.430983e-02","_rn_":"170"},{"1":"intercept","2":"~","3":"sleep_4","4":"4.887158e-01","5":"-0.1649669272","6":"-0.0409609608","7":"-4.853165e-02","8":"-4.096096e-02","_rn_":"75"},{"1":"sleep_4","2":"~","3":"depression_4","4":"4.821145e-01","5":"0.0053292266","6":"0.0053292266","7":"3.841800e-02","8":"3.841800e-02","_rn_":"174"},{"1":"quadratic","2":"~","3":"depression_1","4":"4.581070e-01","5":"-0.0267974972","6":"-0.0424563941","7":"-1.819114e-01","8":"-1.819114e-01","_rn_":"88"},{"1":"depression_1","2":"~","3":"sleep_3","4":"3.863467e-01","5":"0.1031263030","6":"0.1031263030","7":"2.641287e-02","8":"2.406870e-02","_rn_":"101"},{"1":"linear","2":"~","3":"sleep_1","4":"3.675518e-01","5":"-0.0788138074","6":"-0.0321687169","7":"-3.702227e-02","8":"-3.216872e-02","_rn_":"82"},{"1":"linear","2":"=~","3":"depression_2","4":"3.579309e-01","5":"-0.0353504691","6":"-0.0866091448","7":"-1.563488e-02","8":"-1.563488e-02","_rn_":"6"},{"1":"linear","2":"=~","3":"depression_1","4":"3.579303e-01","5":"0.1060513155","6":"0.2598272097","7":"6.064121e-02","8":"6.064121e-02","_rn_":"5"},{"1":"linear","2":"=~","3":"depression_3","4":"3.579294e-01","5":"0.0353503963","6":"0.0866089665","7":"1.245863e-02","8":"1.245863e-02","_rn_":"7"},{"1":"linear","2":"=~","3":"depression_4","4":"3.579279e-01","5":"-0.1060509585","6":"-0.2598263352","7":"-3.041990e-02","8":"-3.041990e-02","_rn_":"8"},{"1":"sexMale","2":"~","3":"linear","4":"3.133136e-01","5":"-0.0747532031","6":"-0.1831463956","7":"-3.689589e-01","8":"-3.689589e-01","_rn_":"125"},{"1":"sleep_2","2":"~","3":"depression_1","4":"2.903064e-01","5":"-0.0063781709","6":"-0.0063781709","7":"-2.498556e-02","8":"-2.498556e-02","_rn_":"149"},{"1":"sexMale","2":"~","3":"depression_3","4":"2.877578e-01","5":"-0.0148150937","6":"-0.0148150937","7":"-2.074802e-01","8":"-2.074802e-01","_rn_":"129"},{"1":"quadratic","2":"~","3":"sleep_1","4":"2.682898e-01","5":"0.0175345682","6":"0.0277807488","7":"3.197226e-02","8":"2.778075e-02","_rn_":"92"},{"1":"sleep_1","2":"~","3":"depression_3","4":"2.455387e-01","5":"-0.0037725471","6":"-0.0037725471","7":"-2.278757e-02","8":"-2.278757e-02","_rn_":"140"},{"1":"sexMale","2":"~","3":"depression_4","4":"2.373684e-01","5":"-0.0143901517","6":"-0.0143901517","7":"-2.476113e-01","8":"-2.476113e-01","_rn_":"130"},{"1":"sleep_3","2":"~","3":"depression_3","4":"1.830744e-01","5":"-0.0034686072","6":"-0.0034686072","7":"-2.197277e-02","8":"-2.197277e-02","_rn_":"162"},{"1":"depression_2","2":"~","3":"sleep_3","4":"1.652624e-01","5":"-0.0620683202","6":"-0.0620683202","7":"-1.229600e-02","8":"-1.120472e-02","_rn_":"108"},{"1":"sleep_1","2":"~","3":"depression_4","4":"1.208225e-01","5":"-0.0021829585","6":"-0.0021829585","7":"-1.620099e-02","8":"-1.620099e-02","_rn_":"141"},{"1":"depression_4","2":"~","3":"sleep_1","4":"3.506529e-02","5":"0.0395004881","6":"0.0395004881","7":"5.322386e-03","8":"4.624631e-03","_rn_":"121"},{"1":"sleep_3","2":"~","3":"linear","4":"4.376995e-03","5":"0.0018437589","6":"0.0045172351","7":"4.116327e-03","8":"4.116327e-03","_rn_":"158"},{"1":"sleep_3","2":"~","3":"intercept","4":"3.807544e-03","5":"-0.0008276563","6":"-0.0033333181","7":"-3.037483e-03","8":"-3.037483e-03","_rn_":"157"},{"1":"sleep_1","2":"~","3":"linear","4":"2.989242e-03","5":"0.0015223103","6":"0.0037296816","7":"3.240727e-03","8":"3.240727e-03","_rn_":"136"},{"1":"sleep_3","2":"~","3":"depression_2","4":"2.394207e-03","5":"-0.0004814329","6":"-0.0004814329","7":"-2.430200e-03","8":"-2.430200e-03","_rn_":"161"},{"1":"depression_2","2":"~","3":"sleep_4","4":"9.478627e-04","5":"0.0039055258","6":"0.0039055258","7":"8.353438e-04","8":"7.050345e-04","_rn_":"109"},{"1":"sleep_3","2":"~","3":"depression_1","4":"4.570888e-04","5":"-0.0002651070","6":"-0.0002651070","7":"-1.035083e-03","8":"-1.035083e-03","_rn_":"160"},{"1":"depression_2","2":"~","3":"sexMale","4":"2.397569e-06","5":"0.0003801559","6":"0.0003801559","7":"3.406536e-05","8":"6.862663e-05","_rn_":"106"},{"1":"depression_3","2":"~","3":"sexMale","4":"2.394007e-06","5":"-0.0003798735","6":"-0.0003798735","7":"-2.712481e-05","8":"-5.464448e-05","_rn_":"113"},{"1":"depression_4","2":"~","3":"sexMale","4":"2.388100e-06","5":"0.0011382136","6":"0.0011382136","7":"6.614831e-05","8":"1.332596e-04","_rn_":"120"},{"1":"depression_1","2":"~","3":"sexMale","4":"2.387929e-06","5":"-0.0011381728","6":"-0.0011381728","7":"-1.318596e-04","8":"-2.656387e-04","_rn_":"99"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section><section id="plots-1" class="level3" data-number="3.2.5"><h3 data-number="3.2.5" class="anchored" data-anchor-id="plots-1">
+<span class="header-section-number">3.2.5</span> Plots</h3>
+<section id="path-diagram-1" class="level4" data-number="3.2.5.1"><h4 data-number="3.2.5.1" class="anchored" data-anchor-id="path-diagram-1">
+<span class="header-section-number">3.2.5.1</span> Path Diagram</h4>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">lavaanPlot</span><span class="fu">::</span><span class="fu">lavaanPlot2</span><span class="op">(</span></span>
+<span>  <span class="va">quadraticGCM_fit</span>,</span>
+<span>  stand <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  coef_labels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in `loadNamespace()`:
+! there is no package called 'lavaanPlot'</code></pre>
+</div>
+</div>
+</section></section></section></section><section id="compare-models" class="level1" data-number="4"><h1 data-number="4">
+<span class="header-section-number">4</span> Compare Models</h1>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span></span>
+<span>  <span class="va">linearGCM_fit</span>,</span>
+<span>  <span class="va">quadraticGCM_fit</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Df"],"name":[1],"type":["int"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["BIC"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Chisq"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Chisq diff"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Df diff"],"name":[6],"type":["int"],"align":["right"]},{"label":["Pr(>Chisq)"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"17","2":"7446.418","3":"7576.712","4":"54.89847","5":"NA","6":"NA","7":"NA","_rn_":"quadraticGCM_fit"},{"1":"19","2":"7453.649","3":"7576.900","4":"66.12907","5":"8.092501","6":"2","7":"0.01748783","_rn_":"linearGCM_fit"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section><section id="latent-change-score-model" class="level1" data-number="5"><h1 data-number="5">
+<span class="header-section-number">5</span> Latent Change Score Model</h1>
+<section id="model-syntax-2" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="model-syntax-2">
+<span class="header-section-number">5.1</span> Model Syntax</h2>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">bivariateLCSM_syntax</span> <span class="op">&lt;-</span> <span class="fu">lcsm</span><span class="fu">::</span><span class="fu">specify_bi_lcsm</span><span class="op">(</span></span>
+<span>  timepoints <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  var_x <span class="op">=</span> <span class="st">"depression_"</span>,</span>
+<span>  model_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    alpha_constant <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># alpha = intercept (constant change factor)</span></span>
+<span>    beta <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># beta = proportional change factor (latent true score predicting its change score)</span></span>
+<span>    phi <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="co"># phi = autoregression of change scores</span></span>
+<span>  var_y <span class="op">=</span> <span class="st">"anxiety_"</span>,</span>
+<span>  model_y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    alpha_constant <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># alpha = intercept (constant change factor)</span></span>
+<span>    beta <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># beta = proportional change factor (latent true score predicting its change score)</span></span>
+<span>    phi <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="co"># phi = autoregression of change scores</span></span>
+<span>  coupling <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    delta_lag_xy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    delta_lag_yx <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  change_letter_x <span class="op">=</span> <span class="st">"g"</span>,</span>
+<span>  change_letter_y <span class="op">=</span> <span class="st">"j"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in `loadNamespace()`:
+! there is no package called 'lcsm'</code></pre>
+</div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="va">bivariateLCSM_syntax</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error:
+! object 'bivariateLCSM_syntax' not found</code></pre>
+</div>
+</div>
+</section><section id="fit-model-2" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="fit-model-2">
+<span class="header-section-number">5.2</span> Fit Model</h2>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">bivariateLCSM_fit</span> <span class="op">&lt;-</span> <span class="fu">lcsm</span><span class="fu">::</span><span class="fu">fit_bi_lcsm</span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">mydata_wide</span>,</span>
+<span>  var_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"depression_1"</span>,<span class="st">"depression_2"</span>,<span class="st">"depression_3"</span>,<span class="st">"depression_4"</span><span class="op">)</span>,</span>
+<span>  var_y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"anxiety_1"</span>,<span class="st">"anxiety_2"</span>,<span class="st">"anxiety_3"</span>,<span class="st">"anxiety_4"</span><span class="op">)</span>,</span>
+<span>  model_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    alpha_constant <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># alpha = intercept (constant change factor)</span></span>
+<span>    beta <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># beta = proportional change factor (latent true score predicting its change score)</span></span>
+<span>    phi <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="co"># phi = autoregression of change scores</span></span>
+<span>  model_y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    alpha_constant <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># alpha = intercept (constant change factor)</span></span>
+<span>    beta <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># beta = proportional change factor (latent true score predicting its change score)</span></span>
+<span>    phi <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="co"># phi = autoregression of change scores</span></span>
+<span>  coupling <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    delta_lag_xy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    xi_lag_yx <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  fixed.x <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in `loadNamespace()`:
+! there is no package called 'lcsm'</code></pre>
+</div>
+</div>
+<section id="model-summary-2" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="model-summary-2">
+<span class="header-section-number">5.2.1</span> Model Summary</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span></span>
+<span>  <span class="va">bivariateLCSM_fit</span>,</span>
+<span>  fit.measures <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  standardized <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  rsquare <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in `h()`:
+! error in evaluating the argument 'object' in selecting a method for function 'summary': object 'bivariateLCSM_fit' not found</code></pre>
+</div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">extract_param</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error:
+! object 'extract_param' not found</code></pre>
+</div>
+</div>
+</section><section id="modification-indices-2" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="modification-indices-2">
+<span class="header-section-number">5.2.2</span> Modification Indices</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/modificationIndices.html">modificationindices</a></span><span class="op">(</span></span>
+<span>  <span class="va">bivariateLCSM_fit</span>,</span>
+<span>  sort. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error:
+! object 'bivariateLCSM_fit' not found</code></pre>
+</div>
+</div>
+</section><section id="plots-2" class="level3" data-number="5.2.3"><h3 data-number="5.2.3" class="anchored" data-anchor-id="plots-2">
+<span class="header-section-number">5.2.3</span> Plots</h3>
+<section id="path-diagram-2" class="level4" data-number="5.2.3.1"><h4 data-number="5.2.3.1" class="anchored" data-anchor-id="path-diagram-2">
+<span class="header-section-number">5.2.3.1</span> Path Diagram</h4>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">lavaanPlot</span><span class="fu">::</span><span class="fu">lavaanPlot2</span><span class="op">(</span></span>
+<span>  <span class="va">bivariateLCSM_fit</span>,</span>
+<span>  stand <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  coef_labels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in `loadNamespace()`:
+! there is no package called 'lavaanPlot'</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">lcsm</span><span class="fu">::</span><span class="fu">plot_lcsm</span><span class="op">(</span></span>
+<span>  lavaan_object <span class="op">=</span> <span class="va">bivariateLCSM_fit</span>,</span>
+<span>  lcsm <span class="op">=</span> <span class="st">"bivariate"</span>,</span>
+<span>  lavaan_syntax <span class="op">=</span> <span class="va">bivariateLCSM_syntax</span>,</span>
+<span>  edge.label.cex <span class="op">=</span> <span class="fl">.9</span>,</span>
+<span>  lcsm_colours <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in `loadNamespace()`:
+! there is no package called 'lcsm'</code></pre>
+</div>
+</div>
+<p>To plot model-implied trajectories, see this resource:</p>
+<p><a href="https://thechangelab.stanford.edu/tutorials/growth-modeling/latent-change-score-modeling-lavaan/" class="uri">https://thechangelab.stanford.edu/tutorials/growth-modeling/latent-change-score-modeling-lavaan/</a> (archived at <a href="https://perma.cc/A2KZ-QPD9" class="uri">https://perma.cc/A2KZ-QPD9</a>)</p>
+</section></section></section></section><section id="cross-lagged-panel-model" class="level1" data-number="6"><h1 data-number="6">
+<span class="header-section-number">6</span> Cross-Lagged Panel Model</h1>
+</section><section id="random-intercepts-cross-lagged-panel-model" class="level1" data-number="7"><h1 data-number="7">
+<span class="header-section-number">7</span> Random-Intercepts Cross-Lagged Panel Model</h1>
+</section><section id="longitudinal-measurement-invariance" class="level1" data-number="8"><h1 data-number="8">
+<span class="header-section-number">8</span> Longitudinal Measurement Invariance</h1>
 
 
 <!-- -->
 
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main> <!-- /main -->
-<br>
-<br>
-<br>
-
-<!-- Add lab logo -->
-<p style="text-align: center;">
+</section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main><!-- /main --><br><br><br><!-- Add lab logo --><p style="text-align: center;">
     <a href="https://developmental-psychopathology.lab.uiowa.edu" target="_blank">
-        <img alt="Developmental Psychopathology Lab" src="images/formalLogo.png" width="60%">
-    </a>
+        <img alt="Developmental Psychopathology Lab" src="images/formalLogo.png" width="60%"></a>
 </p>
 
-<br>
-<br>
-<br>
-
-<!-- Add icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<!-- Add font awesome icons -->
-<p style="text-align: center;">
+<br><br><br><!-- Add icon library --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Add font awesome icons --><p style="text-align: center;">
     <a href="https://github.com/DevPsyLab" target="_blank" class="fa fa-github fa-fw fa-3x"></a>
     <a href="https://twitter.com/devpsylab" target="_blank" class="fa fa-twitter fa-fw fa-3x"></a>
     <a href="https://www.facebook.com/DevPsyLab" target="_blank" class="fa fa-facebook fa-fw fa-3x"></a>
@@ -769,32 +1434,320 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Structural Equation Models"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>For an overview of structural equation modeling, see my chapter on "<span class="co">[</span><span class="ot">Structural Equation Modeling</span><span class="co">](https://isaactpetersen.github.io/Principles-Psychological-Assessment/structural-equation-modeling.html)</span>" in the following textbook:</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Petersen, I. T. (2025). *Principles of psychological assessment: With applied examples in R*. University of Iowa Libraries. <span class="ot">&lt;https://isaactpetersen.github.io/Principles-Psychological-Assessment&gt;</span>. <span class="ot">&lt;https://doi.org/10.25820/work.007199&gt;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu"># Preamble</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Load Libraries</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Load Data</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu"># Latent Growth Curve Model</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu"># Latent Change Score Model</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu"># Cross-Lagged Panel Model</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu"># Random-Intercepts Cross-Lagged Panel Model</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu"># Longitudinal Measurement Invariance</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Structural Equation Models"</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>For an overview of structural equation modeling, see my chapter on "<span class="co">[</span><span class="ot">Structural Equation Modeling</span><span class="co">](https://isaactpetersen.github.io/Principles-Psychological-Assessment/structural-equation-modeling.html)</span>" in the following textbook:</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>Petersen, I. T. (2025). *Principles of psychological assessment: With applied examples in R*. University of Iowa Libraries. <span class="ot">&lt;https://isaactpetersen.github.io/Principles-Psychological-Assessment&gt;</span>. <span class="ot">&lt;https://doi.org/10.25820/work.007199&gt;</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="fu"># Preamble</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Load Libraries</span></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lavaan"</span>)</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"semTools"</span>)</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lavaanPlot"</span>)</span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lcsm"</span>)</span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Load Data</span></span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a>mydata_long <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/mydata_long.csv"</span>)</span>
+<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a><span class="fu"># Pre-Model Computation</span></span>
+<span id="cb41-32"><a href="#cb41-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a>mydata_long<span class="sc">$</span>sexFactor <span class="ot">&lt;-</span> <span class="fu">factor</span>(mydata_long<span class="sc">$</span>sex)</span>
+<span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a>mydata_wide <span class="ot">&lt;-</span> mydata_long <span class="sc">|&gt;</span></span>
+<span id="cb41-39"><a href="#cb41-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>age) <span class="sc">|&gt;</span></span>
+<span id="cb41-40"><a href="#cb41-40" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(</span>
+<span id="cb41-41"><a href="#cb41-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from  =</span> timepoint,</span>
+<span id="cb41-42"><a href="#cb41-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> <span class="fu">c</span>(ses, sleep, depression, anxiety)</span>
+<span id="cb41-43"><a href="#cb41-43" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb41-44"><a href="#cb41-44" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-45"><a href="#cb41-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-46"><a href="#cb41-46" aria-hidden="true" tabindex="-1"></a><span class="fu"># Latent Growth Curve Model</span></span>
+<span id="cb41-47"><a href="#cb41-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-48"><a href="#cb41-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## Linear Growth Curve Model</span></span>
+<span id="cb41-49"><a href="#cb41-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-50"><a href="#cb41-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model Syntax</span></span>
+<span id="cb41-51"><a href="#cb41-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-54"><a href="#cb41-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-55"><a href="#cb41-55" aria-hidden="true" tabindex="-1"></a>linearGCM_syntax <span class="ot">&lt;-</span> <span class="st">'</span></span>
+<span id="cb41-56"><a href="#cb41-56" aria-hidden="true" tabindex="-1"></a><span class="st">  # Intercept and slope</span></span>
+<span id="cb41-57"><a href="#cb41-57" aria-hidden="true" tabindex="-1"></a><span class="st">  intercept =~ 1*depression_1 + 1*depression_2 + 1*depression_3 + 1*depression_4</span></span>
+<span id="cb41-58"><a href="#cb41-58" aria-hidden="true" tabindex="-1"></a><span class="st">  slope =~ 0*depression_1 + 1*depression_2 + 2*depression_3 + 3*depression_4</span></span>
+<span id="cb41-59"><a href="#cb41-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-60"><a href="#cb41-60" aria-hidden="true" tabindex="-1"></a><span class="st">  # Regression paths</span></span>
+<span id="cb41-61"><a href="#cb41-61" aria-hidden="true" tabindex="-1"></a><span class="st">  intercept ~ sexMale</span></span>
+<span id="cb41-62"><a href="#cb41-62" aria-hidden="true" tabindex="-1"></a><span class="st">  slope ~ sexMale</span></span>
+<span id="cb41-63"><a href="#cb41-63" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb41-64"><a href="#cb41-64" aria-hidden="true" tabindex="-1"></a><span class="st">  # Time-varying covariates</span></span>
+<span id="cb41-65"><a href="#cb41-65" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_1 ~ sleep_1</span></span>
+<span id="cb41-66"><a href="#cb41-66" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_2 ~ sleep_2</span></span>
+<span id="cb41-67"><a href="#cb41-67" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_3 ~ sleep_3</span></span>
+<span id="cb41-68"><a href="#cb41-68" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_4 ~ sleep_4</span></span>
+<span id="cb41-69"><a href="#cb41-69" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb41-70"><a href="#cb41-70" aria-hidden="true" tabindex="-1"></a><span class="st">  # Constrain observed intercepts to zero</span></span>
+<span id="cb41-71"><a href="#cb41-71" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_1 ~ 0</span></span>
+<span id="cb41-72"><a href="#cb41-72" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_2 ~ 0</span></span>
+<span id="cb41-73"><a href="#cb41-73" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_3 ~ 0</span></span>
+<span id="cb41-74"><a href="#cb41-74" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_4 ~ 0</span></span>
+<span id="cb41-75"><a href="#cb41-75" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb41-76"><a href="#cb41-76" aria-hidden="true" tabindex="-1"></a><span class="st">  # Estimate mean of intercept and slope</span></span>
+<span id="cb41-77"><a href="#cb41-77" aria-hidden="true" tabindex="-1"></a><span class="st">  intercept ~ 1</span></span>
+<span id="cb41-78"><a href="#cb41-78" aria-hidden="true" tabindex="-1"></a><span class="st">  slope ~ 1</span></span>
+<span id="cb41-79"><a href="#cb41-79" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span>
+<span id="cb41-80"><a href="#cb41-80" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-81"><a href="#cb41-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-82"><a href="#cb41-82" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fit Model</span></span>
+<span id="cb41-83"><a href="#cb41-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-86"><a href="#cb41-86" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-87"><a href="#cb41-87" aria-hidden="true" tabindex="-1"></a>linearGCM_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(</span>
+<span id="cb41-88"><a href="#cb41-88" aria-hidden="true" tabindex="-1"></a>  linearGCM_syntax,</span>
+<span id="cb41-89"><a href="#cb41-89" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata_wide,</span>
+<span id="cb41-90"><a href="#cb41-90" aria-hidden="true" tabindex="-1"></a>  <span class="at">missing =</span> <span class="st">"ML"</span>,</span>
+<span id="cb41-91"><a href="#cb41-91" aria-hidden="true" tabindex="-1"></a>  <span class="at">estimator =</span> <span class="st">"MLR"</span>,</span>
+<span id="cb41-92"><a href="#cb41-92" aria-hidden="true" tabindex="-1"></a>  <span class="at">meanstructure =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb41-93"><a href="#cb41-93" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed.x =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb41-94"><a href="#cb41-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-95"><a href="#cb41-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-96"><a href="#cb41-96" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model Summary</span></span>
+<span id="cb41-97"><a href="#cb41-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-100"><a href="#cb41-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-101"><a href="#cb41-101" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(</span>
+<span id="cb41-102"><a href="#cb41-102" aria-hidden="true" tabindex="-1"></a>  linearGCM_fit,</span>
+<span id="cb41-103"><a href="#cb41-103" aria-hidden="true" tabindex="-1"></a>  <span class="at">fit.measures =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb41-104"><a href="#cb41-104" aria-hidden="true" tabindex="-1"></a>  <span class="at">standardized =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb41-105"><a href="#cb41-105" aria-hidden="true" tabindex="-1"></a>  <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-106"><a href="#cb41-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-107"><a href="#cb41-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-108"><a href="#cb41-108" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modification Indices</span></span>
+<span id="cb41-109"><a href="#cb41-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-112"><a href="#cb41-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-113"><a href="#cb41-113" aria-hidden="true" tabindex="-1"></a><span class="fu">modificationindices</span>(</span>
+<span id="cb41-114"><a href="#cb41-114" aria-hidden="true" tabindex="-1"></a>  linearGCM_fit,</span>
+<span id="cb41-115"><a href="#cb41-115" aria-hidden="true" tabindex="-1"></a>  <span class="at">sort. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-116"><a href="#cb41-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-117"><a href="#cb41-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-118"><a href="#cb41-118" aria-hidden="true" tabindex="-1"></a><span class="fu">### Plots</span></span>
+<span id="cb41-119"><a href="#cb41-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-120"><a href="#cb41-120" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Path Diagram</span></span>
+<span id="cb41-121"><a href="#cb41-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-124"><a href="#cb41-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-125"><a href="#cb41-125" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Path Diagram"</span></span>
+<span id="cb41-126"><a href="#cb41-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-127"><a href="#cb41-127" aria-hidden="true" tabindex="-1"></a>lavaanPlot<span class="sc">::</span><span class="fu">lavaanPlot</span>(</span>
+<span id="cb41-128"><a href="#cb41-128" aria-hidden="true" tabindex="-1"></a>  linearGCM_fit,</span>
+<span id="cb41-129"><a href="#cb41-129" aria-hidden="true" tabindex="-1"></a>  <span class="at">coefs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb41-130"><a href="#cb41-130" aria-hidden="true" tabindex="-1"></a>  <span class="co">#covs = TRUE,</span></span>
+<span id="cb41-131"><a href="#cb41-131" aria-hidden="true" tabindex="-1"></a>  <span class="at">stand =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-132"><a href="#cb41-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-133"><a href="#cb41-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-134"><a href="#cb41-134" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quadratic Growth Curve Model</span></span>
+<span id="cb41-135"><a href="#cb41-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-136"><a href="#cb41-136" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model Syntax</span></span>
+<span id="cb41-137"><a href="#cb41-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-140"><a href="#cb41-140" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-141"><a href="#cb41-141" aria-hidden="true" tabindex="-1"></a>quadraticGCM_syntax <span class="ot">&lt;-</span> <span class="st">'</span></span>
+<span id="cb41-142"><a href="#cb41-142" aria-hidden="true" tabindex="-1"></a><span class="st">  # Intercept and slope</span></span>
+<span id="cb41-143"><a href="#cb41-143" aria-hidden="true" tabindex="-1"></a><span class="st">  intercept =~ 1*depression_1 + 1*depression_2 + 1*depression_3 + 1*depression_4</span></span>
+<span id="cb41-144"><a href="#cb41-144" aria-hidden="true" tabindex="-1"></a><span class="st">  linear =~ 0*depression_1 + 1*depression_2 + 2*depression_3 + 3*depression_4</span></span>
+<span id="cb41-145"><a href="#cb41-145" aria-hidden="true" tabindex="-1"></a><span class="st">  quadratic =~ 0*depression_1 + 1*depression_2 + 4*depression_3 + 9*depression_4</span></span>
+<span id="cb41-146"><a href="#cb41-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-147"><a href="#cb41-147" aria-hidden="true" tabindex="-1"></a><span class="st">  # Regression paths</span></span>
+<span id="cb41-148"><a href="#cb41-148" aria-hidden="true" tabindex="-1"></a><span class="st">  intercept ~ sexMale</span></span>
+<span id="cb41-149"><a href="#cb41-149" aria-hidden="true" tabindex="-1"></a><span class="st">  linear ~ sexMale</span></span>
+<span id="cb41-150"><a href="#cb41-150" aria-hidden="true" tabindex="-1"></a><span class="st">  quadratic ~ sexMale</span></span>
+<span id="cb41-151"><a href="#cb41-151" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb41-152"><a href="#cb41-152" aria-hidden="true" tabindex="-1"></a><span class="st">  # Time-varying covariates</span></span>
+<span id="cb41-153"><a href="#cb41-153" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_1 ~ sleep_1</span></span>
+<span id="cb41-154"><a href="#cb41-154" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_2 ~ sleep_2</span></span>
+<span id="cb41-155"><a href="#cb41-155" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_3 ~ sleep_3</span></span>
+<span id="cb41-156"><a href="#cb41-156" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_4 ~ sleep_4</span></span>
+<span id="cb41-157"><a href="#cb41-157" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb41-158"><a href="#cb41-158" aria-hidden="true" tabindex="-1"></a><span class="st">  # Constrain observed intercepts to zero</span></span>
+<span id="cb41-159"><a href="#cb41-159" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_1 ~ 0</span></span>
+<span id="cb41-160"><a href="#cb41-160" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_2 ~ 0</span></span>
+<span id="cb41-161"><a href="#cb41-161" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_3 ~ 0</span></span>
+<span id="cb41-162"><a href="#cb41-162" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_4 ~ 0</span></span>
+<span id="cb41-163"><a href="#cb41-163" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb41-164"><a href="#cb41-164" aria-hidden="true" tabindex="-1"></a><span class="st">  # Constrain residual variances to be equal (needed to address negative variance)</span></span>
+<span id="cb41-165"><a href="#cb41-165" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_1 ~~ vardep*depression_1</span></span>
+<span id="cb41-166"><a href="#cb41-166" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_2 ~~ vardep*depression_2</span></span>
+<span id="cb41-167"><a href="#cb41-167" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_3 ~~ vardep*depression_3</span></span>
+<span id="cb41-168"><a href="#cb41-168" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_4 ~~ vardep*depression_4</span></span>
+<span id="cb41-169"><a href="#cb41-169" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb41-170"><a href="#cb41-170" aria-hidden="true" tabindex="-1"></a><span class="st">  # Estimate mean of intercept and slope</span></span>
+<span id="cb41-171"><a href="#cb41-171" aria-hidden="true" tabindex="-1"></a><span class="st">  intercept ~ 1</span></span>
+<span id="cb41-172"><a href="#cb41-172" aria-hidden="true" tabindex="-1"></a><span class="st">  linear ~ 1</span></span>
+<span id="cb41-173"><a href="#cb41-173" aria-hidden="true" tabindex="-1"></a><span class="st">  quadratic ~ 1</span></span>
+<span id="cb41-174"><a href="#cb41-174" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span>
+<span id="cb41-175"><a href="#cb41-175" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-176"><a href="#cb41-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-177"><a href="#cb41-177" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fit Model</span></span>
+<span id="cb41-178"><a href="#cb41-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-181"><a href="#cb41-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-182"><a href="#cb41-182" aria-hidden="true" tabindex="-1"></a>quadraticGCM_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(</span>
+<span id="cb41-183"><a href="#cb41-183" aria-hidden="true" tabindex="-1"></a>  quadraticGCM_syntax,</span>
+<span id="cb41-184"><a href="#cb41-184" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata_wide,</span>
+<span id="cb41-185"><a href="#cb41-185" aria-hidden="true" tabindex="-1"></a>  <span class="at">missing =</span> <span class="st">"ML"</span>,</span>
+<span id="cb41-186"><a href="#cb41-186" aria-hidden="true" tabindex="-1"></a>  <span class="at">estimator =</span> <span class="st">"MLR"</span>,</span>
+<span id="cb41-187"><a href="#cb41-187" aria-hidden="true" tabindex="-1"></a>  <span class="at">meanstructure =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb41-188"><a href="#cb41-188" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed.x =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb41-189"><a href="#cb41-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-190"><a href="#cb41-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-191"><a href="#cb41-191" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model Summary</span></span>
+<span id="cb41-192"><a href="#cb41-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-195"><a href="#cb41-195" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-196"><a href="#cb41-196" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(</span>
+<span id="cb41-197"><a href="#cb41-197" aria-hidden="true" tabindex="-1"></a>  quadraticGCM_fit,</span>
+<span id="cb41-198"><a href="#cb41-198" aria-hidden="true" tabindex="-1"></a>  <span class="at">fit.measures =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb41-199"><a href="#cb41-199" aria-hidden="true" tabindex="-1"></a>  <span class="at">standardized =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb41-200"><a href="#cb41-200" aria-hidden="true" tabindex="-1"></a>  <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-201"><a href="#cb41-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-202"><a href="#cb41-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-203"><a href="#cb41-203" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modification Indices</span></span>
+<span id="cb41-204"><a href="#cb41-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-207"><a href="#cb41-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-208"><a href="#cb41-208" aria-hidden="true" tabindex="-1"></a><span class="fu">modificationindices</span>(</span>
+<span id="cb41-209"><a href="#cb41-209" aria-hidden="true" tabindex="-1"></a>  quadraticGCM_fit,</span>
+<span id="cb41-210"><a href="#cb41-210" aria-hidden="true" tabindex="-1"></a>  <span class="at">sort. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-211"><a href="#cb41-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-212"><a href="#cb41-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-213"><a href="#cb41-213" aria-hidden="true" tabindex="-1"></a><span class="fu">### Plots</span></span>
+<span id="cb41-214"><a href="#cb41-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-215"><a href="#cb41-215" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Path Diagram</span></span>
+<span id="cb41-216"><a href="#cb41-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-219"><a href="#cb41-219" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-220"><a href="#cb41-220" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Path Diagram"</span></span>
+<span id="cb41-221"><a href="#cb41-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-222"><a href="#cb41-222" aria-hidden="true" tabindex="-1"></a>lavaanPlot<span class="sc">::</span><span class="fu">lavaanPlot2</span>(</span>
+<span id="cb41-223"><a href="#cb41-223" aria-hidden="true" tabindex="-1"></a>  quadraticGCM_fit,</span>
+<span id="cb41-224"><a href="#cb41-224" aria-hidden="true" tabindex="-1"></a>  <span class="at">stand =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb41-225"><a href="#cb41-225" aria-hidden="true" tabindex="-1"></a>  <span class="at">coef_labels =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-226"><a href="#cb41-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-227"><a href="#cb41-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-228"><a href="#cb41-228" aria-hidden="true" tabindex="-1"></a><span class="fu"># Compare Models</span></span>
+<span id="cb41-229"><a href="#cb41-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-232"><a href="#cb41-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-233"><a href="#cb41-233" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(</span>
+<span id="cb41-234"><a href="#cb41-234" aria-hidden="true" tabindex="-1"></a>  linearGCM_fit,</span>
+<span id="cb41-235"><a href="#cb41-235" aria-hidden="true" tabindex="-1"></a>  quadraticGCM_fit</span>
+<span id="cb41-236"><a href="#cb41-236" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-237"><a href="#cb41-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-238"><a href="#cb41-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-239"><a href="#cb41-239" aria-hidden="true" tabindex="-1"></a><span class="fu"># Latent Change Score Model</span></span>
+<span id="cb41-240"><a href="#cb41-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-241"><a href="#cb41-241" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model Syntax</span></span>
+<span id="cb41-242"><a href="#cb41-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-245"><a href="#cb41-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-246"><a href="#cb41-246" aria-hidden="true" tabindex="-1"></a>bivariateLCSM_syntax <span class="ot">&lt;-</span> lcsm<span class="sc">::</span><span class="fu">specify_bi_lcsm</span>(</span>
+<span id="cb41-247"><a href="#cb41-247" aria-hidden="true" tabindex="-1"></a>  <span class="at">timepoints =</span> <span class="dv">4</span>,</span>
+<span id="cb41-248"><a href="#cb41-248" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_x =</span> <span class="st">"depression_"</span>,</span>
+<span id="cb41-249"><a href="#cb41-249" aria-hidden="true" tabindex="-1"></a>  <span class="at">model_x =</span> <span class="fu">list</span>(</span>
+<span id="cb41-250"><a href="#cb41-250" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha_constant =</span> <span class="cn">TRUE</span>, <span class="co"># alpha = intercept (constant change factor)</span></span>
+<span id="cb41-251"><a href="#cb41-251" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="cn">TRUE</span>, <span class="co"># beta = proportional change factor (latent true score predicting its change score)</span></span>
+<span id="cb41-252"><a href="#cb41-252" aria-hidden="true" tabindex="-1"></a>    <span class="at">phi =</span> <span class="cn">TRUE</span>), <span class="co"># phi = autoregression of change scores</span></span>
+<span id="cb41-253"><a href="#cb41-253" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_y =</span> <span class="st">"anxiety_"</span>,</span>
+<span id="cb41-254"><a href="#cb41-254" aria-hidden="true" tabindex="-1"></a>  <span class="at">model_y =</span> <span class="fu">list</span>(</span>
+<span id="cb41-255"><a href="#cb41-255" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha_constant =</span> <span class="cn">TRUE</span>, <span class="co"># alpha = intercept (constant change factor)</span></span>
+<span id="cb41-256"><a href="#cb41-256" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="cn">TRUE</span>, <span class="co"># beta = proportional change factor (latent true score predicting its change score)</span></span>
+<span id="cb41-257"><a href="#cb41-257" aria-hidden="true" tabindex="-1"></a>    <span class="at">phi =</span> <span class="cn">TRUE</span>), <span class="co"># phi = autoregression of change scores</span></span>
+<span id="cb41-258"><a href="#cb41-258" aria-hidden="true" tabindex="-1"></a>  <span class="at">coupling =</span> <span class="fu">list</span>(</span>
+<span id="cb41-259"><a href="#cb41-259" aria-hidden="true" tabindex="-1"></a>    <span class="at">delta_lag_xy =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb41-260"><a href="#cb41-260" aria-hidden="true" tabindex="-1"></a>    <span class="at">delta_lag_yx =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb41-261"><a href="#cb41-261" aria-hidden="true" tabindex="-1"></a>  <span class="at">change_letter_x =</span> <span class="st">"g"</span>,</span>
+<span id="cb41-262"><a href="#cb41-262" aria-hidden="true" tabindex="-1"></a>  <span class="at">change_letter_y =</span> <span class="st">"j"</span>)</span>
+<span id="cb41-263"><a href="#cb41-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-264"><a href="#cb41-264" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(bivariateLCSM_syntax)</span>
+<span id="cb41-265"><a href="#cb41-265" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-266"><a href="#cb41-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-267"><a href="#cb41-267" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fit Model</span></span>
+<span id="cb41-268"><a href="#cb41-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-271"><a href="#cb41-271" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-272"><a href="#cb41-272" aria-hidden="true" tabindex="-1"></a>bivariateLCSM_fit <span class="ot">&lt;-</span> lcsm<span class="sc">::</span><span class="fu">fit_bi_lcsm</span>(</span>
+<span id="cb41-273"><a href="#cb41-273" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata_wide,</span>
+<span id="cb41-274"><a href="#cb41-274" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_x =</span> <span class="fu">c</span>(<span class="st">"depression_1"</span>,<span class="st">"depression_2"</span>,<span class="st">"depression_3"</span>,<span class="st">"depression_4"</span>),</span>
+<span id="cb41-275"><a href="#cb41-275" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_y =</span> <span class="fu">c</span>(<span class="st">"anxiety_1"</span>,<span class="st">"anxiety_2"</span>,<span class="st">"anxiety_3"</span>,<span class="st">"anxiety_4"</span>),</span>
+<span id="cb41-276"><a href="#cb41-276" aria-hidden="true" tabindex="-1"></a>  <span class="at">model_x =</span> <span class="fu">list</span>(</span>
+<span id="cb41-277"><a href="#cb41-277" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha_constant =</span> <span class="cn">TRUE</span>, <span class="co"># alpha = intercept (constant change factor)</span></span>
+<span id="cb41-278"><a href="#cb41-278" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="cn">TRUE</span>, <span class="co"># beta = proportional change factor (latent true score predicting its change score)</span></span>
+<span id="cb41-279"><a href="#cb41-279" aria-hidden="true" tabindex="-1"></a>    <span class="at">phi =</span> <span class="cn">TRUE</span>), <span class="co"># phi = autoregression of change scores</span></span>
+<span id="cb41-280"><a href="#cb41-280" aria-hidden="true" tabindex="-1"></a>  <span class="at">model_y =</span> <span class="fu">list</span>(</span>
+<span id="cb41-281"><a href="#cb41-281" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha_constant =</span> <span class="cn">TRUE</span>, <span class="co"># alpha = intercept (constant change factor)</span></span>
+<span id="cb41-282"><a href="#cb41-282" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="cn">TRUE</span>, <span class="co"># beta = proportional change factor (latent true score predicting its change score)</span></span>
+<span id="cb41-283"><a href="#cb41-283" aria-hidden="true" tabindex="-1"></a>    <span class="at">phi =</span> <span class="cn">TRUE</span>), <span class="co"># phi = autoregression of change scores</span></span>
+<span id="cb41-284"><a href="#cb41-284" aria-hidden="true" tabindex="-1"></a>  <span class="at">coupling =</span> <span class="fu">list</span>(</span>
+<span id="cb41-285"><a href="#cb41-285" aria-hidden="true" tabindex="-1"></a>    <span class="at">delta_lag_xy =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb41-286"><a href="#cb41-286" aria-hidden="true" tabindex="-1"></a>    <span class="at">xi_lag_yx =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb41-287"><a href="#cb41-287" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed.x =</span> <span class="cn">FALSE</span></span>
+<span id="cb41-288"><a href="#cb41-288" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb41-289"><a href="#cb41-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-290"><a href="#cb41-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-291"><a href="#cb41-291" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model Summary</span></span>
+<span id="cb41-292"><a href="#cb41-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-295"><a href="#cb41-295" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-296"><a href="#cb41-296" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(</span>
+<span id="cb41-297"><a href="#cb41-297" aria-hidden="true" tabindex="-1"></a>  bivariateLCSM_fit,</span>
+<span id="cb41-298"><a href="#cb41-298" aria-hidden="true" tabindex="-1"></a>  <span class="at">fit.measures =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb41-299"><a href="#cb41-299" aria-hidden="true" tabindex="-1"></a>  <span class="at">standardized =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb41-300"><a href="#cb41-300" aria-hidden="true" tabindex="-1"></a>  <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-301"><a href="#cb41-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-302"><a href="#cb41-302" aria-hidden="true" tabindex="-1"></a>extract_param</span>
+<span id="cb41-303"><a href="#cb41-303" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-304"><a href="#cb41-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-305"><a href="#cb41-305" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modification Indices</span></span>
+<span id="cb41-306"><a href="#cb41-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-309"><a href="#cb41-309" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-310"><a href="#cb41-310" aria-hidden="true" tabindex="-1"></a><span class="fu">modificationindices</span>(</span>
+<span id="cb41-311"><a href="#cb41-311" aria-hidden="true" tabindex="-1"></a>  bivariateLCSM_fit,</span>
+<span id="cb41-312"><a href="#cb41-312" aria-hidden="true" tabindex="-1"></a>  <span class="at">sort. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-313"><a href="#cb41-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-314"><a href="#cb41-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-315"><a href="#cb41-315" aria-hidden="true" tabindex="-1"></a><span class="fu">### Plots</span></span>
+<span id="cb41-316"><a href="#cb41-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-317"><a href="#cb41-317" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Path Diagram</span></span>
+<span id="cb41-318"><a href="#cb41-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-321"><a href="#cb41-321" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-322"><a href="#cb41-322" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Path Diagram"</span></span>
+<span id="cb41-323"><a href="#cb41-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-324"><a href="#cb41-324" aria-hidden="true" tabindex="-1"></a>lavaanPlot<span class="sc">::</span><span class="fu">lavaanPlot2</span>(</span>
+<span id="cb41-325"><a href="#cb41-325" aria-hidden="true" tabindex="-1"></a>  bivariateLCSM_fit,</span>
+<span id="cb41-326"><a href="#cb41-326" aria-hidden="true" tabindex="-1"></a>  <span class="at">stand =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb41-327"><a href="#cb41-327" aria-hidden="true" tabindex="-1"></a>  <span class="at">coef_labels =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-328"><a href="#cb41-328" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-329"><a href="#cb41-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-332"><a href="#cb41-332" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-333"><a href="#cb41-333" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Path Diagram"</span></span>
+<span id="cb41-334"><a href="#cb41-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-335"><a href="#cb41-335" aria-hidden="true" tabindex="-1"></a>lcsm<span class="sc">::</span><span class="fu">plot_lcsm</span>(</span>
+<span id="cb41-336"><a href="#cb41-336" aria-hidden="true" tabindex="-1"></a>  <span class="at">lavaan_object =</span> bivariateLCSM_fit,</span>
+<span id="cb41-337"><a href="#cb41-337" aria-hidden="true" tabindex="-1"></a>  <span class="at">lcsm =</span> <span class="st">"bivariate"</span>,</span>
+<span id="cb41-338"><a href="#cb41-338" aria-hidden="true" tabindex="-1"></a>  <span class="at">lavaan_syntax =</span> bivariateLCSM_syntax,</span>
+<span id="cb41-339"><a href="#cb41-339" aria-hidden="true" tabindex="-1"></a>  <span class="at">edge.label.cex =</span> .<span class="dv">9</span>,</span>
+<span id="cb41-340"><a href="#cb41-340" aria-hidden="true" tabindex="-1"></a>  <span class="at">lcsm_colours =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-341"><a href="#cb41-341" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-342"><a href="#cb41-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-343"><a href="#cb41-343" aria-hidden="true" tabindex="-1"></a>To plot model-implied trajectories, see this resource:</span>
+<span id="cb41-344"><a href="#cb41-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-345"><a href="#cb41-345" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://thechangelab.stanford.edu/tutorials/growth-modeling/latent-change-score-modeling-lavaan/&gt;</span> (archived at <span class="ot">&lt;https://perma.cc/A2KZ-QPD9&gt;</span>)</span>
+<span id="cb41-346"><a href="#cb41-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-347"><a href="#cb41-347" aria-hidden="true" tabindex="-1"></a><span class="fu"># Cross-Lagged Panel Model</span></span>
+<span id="cb41-348"><a href="#cb41-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-349"><a href="#cb41-349" aria-hidden="true" tabindex="-1"></a><span class="fu"># Random-Intercepts Cross-Lagged Panel Model</span></span>
+<span id="cb41-350"><a href="#cb41-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-351"><a href="#cb41-351" aria-hidden="true" tabindex="-1"></a><span class="fu"># Longitudinal Measurement Invariance</span></span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-
 
 
 
