@@ -12,6 +12,8 @@ library("tidyverse")
 
 ## Load Data
 
+The data for this example were simulated:
+
 ```{r}
 mydata_long <- read.csv("./data/mydata_long.csv")
 ```
@@ -35,6 +37,8 @@ mydata_long_summary <- mydata_long |>
 ## Observed Growth Curves
 
 ```{r}
+#| fig-cap: "Observed Growth Curves of Depression Symptoms"
+
 ggplot(
   data = mydata_long,
   mapping = aes(
@@ -52,6 +56,8 @@ ggplot(
 ```
 
 ```{r}
+#| fig-cap: "Observed Growth Curves of Anxiety Symptoms"
+
 ggplot(
   data = mydata_long,
   mapping = aes(
@@ -71,6 +77,8 @@ ggplot(
 ## Overlaid with Means by Sex
 
 ```{r}
+#| fig-cap: "Observed Growth Curves of Depression Symptoms Overlaid with Means by Sex"
+
 ggplot(
   data = mydata_long,
   mapping = aes(
@@ -99,6 +107,8 @@ ggplot(
 ```
 
 ```{r}
+#| fig-cap: "Observed Growth Curves of Anxiety Symptoms Overlaid with Means by Sex"
+
 ggplot(
   data = mydata_long,
   mapping = aes(
@@ -126,9 +136,11 @@ ggplot(
   theme_classic()
 ```
 
-## Faceted Plots of a Random Sample
+## Faceted Plots of a Random Subsample
 
 ```{r}
+#| fig-cap: "Faceted Plots of Observed Growth Curves of Depression Symptoms for a Random Subsample of Individuals"
+
 set.seed(52242) # for reproducibility
 
 random_n <- 12
@@ -164,6 +176,8 @@ mydata_long %>%
 ```
 
 ```{r}
+#| fig-cap: "Faceted Plots of Observed Growth Curves of Anxiety Symptoms for a Random Subsample of Individuals"
+
 mydata_long %>%
   filter(ID %in% ids_subset) %>%
   ggplot(
