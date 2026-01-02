@@ -4,7 +4,21 @@
     "href": "structural-equation-models.html",
     "title": "Structural Equation Models",
     "section": "",
-    "text": "For an overview of structural equation modeling, see my chapter on “Structural Equation Modeling” in the following textbook:\nPetersen, I. T. (2025). Principles of psychological assessment: With applied examples in R. University of Iowa Libraries. https://isaactpetersen.github.io/Principles-Psychological-Assessment. https://doi.org/10.25820/work.007199\n\n\n\n\n\nReuseCC BY 4.0"
+    "text": "For an overview of structural equation modeling, see my chapter on “Structural Equation Modeling” in the following textbook:\nPetersen, I. T. (2025). Principles of psychological assessment: With applied examples in R. University of Iowa Libraries. https://isaactpetersen.github.io/Principles-Psychological-Assessment. https://doi.org/10.25820/work.007199"
+  },
+  {
+    "objectID": "structural-equation-models.html#load-libraries",
+    "href": "structural-equation-models.html#load-libraries",
+    "title": "Structural Equation Models",
+    "section": "1.1 Load Libraries",
+    "text": "1.1 Load Libraries"
+  },
+  {
+    "objectID": "structural-equation-models.html#load-data",
+    "href": "structural-equation-models.html#load-data",
+    "title": "Structural Equation Models",
+    "section": "1.2 Load Data",
+    "text": "1.2 Load Data"
   },
   {
     "objectID": "simulate-data.html",
@@ -102,7 +116,21 @@
     "href": "mixed-effects-models.html",
     "title": "Mixed-Effects Models",
     "section": "",
-    "text": "For an overview of mixed modeling, see my chapter on “Mixed Modeling” in the following textbook:\nPetersen, I. T. (2025). Fantasy football analytics: Statistics, prediction, and empiricism using R. University of Iowa Libraries. https://github.com/isaactpetersen/Fantasy-Football-Analytics-Textbook\n\n\n\n\n\nReuseCC BY 4.0"
+    "text": "For an overview of mixed modeling, see my chapter on “Mixed Modeling” in the following textbook:\nPetersen, I. T. (2025). Fantasy football analytics: Statistics, prediction, and empiricism using R. University of Iowa Libraries. https://isaactpetersen.github.io/Fantasy-Football-Analytics-Textbook"
+  },
+  {
+    "objectID": "mixed-effects-models.html#load-libraries",
+    "href": "mixed-effects-models.html#load-libraries",
+    "title": "Mixed-Effects Models",
+    "section": "1.1 Load Libraries",
+    "text": "1.1 Load Libraries"
+  },
+  {
+    "objectID": "mixed-effects-models.html#load-data",
+    "href": "mixed-effects-models.html#load-data",
+    "title": "Mixed-Effects Models",
+    "section": "1.2 Load Data",
+    "text": "1.2 Load Data"
   },
   {
     "objectID": "about.html",
@@ -116,6 +144,6 @@
     "href": "missing-data.html",
     "title": "Missing Data",
     "section": "",
-    "text": "ReuseCC BY 4.0"
+    "text": "1 Multiple Imputation\n\n\n2 Full Information Maximum Likelihood\n\n\n\n\n\n\nReuseCC BY 4.0"
   }
 ]

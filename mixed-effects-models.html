@@ -216,8 +216,21 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble"><span class="header-section-number">1</span> Preamble</a>
+  <ul>
+  <li><a href="#load-libraries" id="toc-load-libraries" class="nav-link" data-scroll-target="#load-libraries"><span class="header-section-number">1.1</span> Load Libraries</a></li>
+  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data"><span class="header-section-number">1.2</span> Load Data</a></li>
+  </ul></li>
+  <li><a href="#linear-growth-curve-model" id="toc-linear-growth-curve-model" class="nav-link" data-scroll-target="#linear-growth-curve-model"><span class="header-section-number">2</span> Linear Growth Curve Model</a></li>
+  <li><a href="#polynomial-quadratic-growth-curve-model" id="toc-polynomial-quadratic-growth-curve-model" class="nav-link" data-scroll-target="#polynomial-quadratic-growth-curve-model"><span class="header-section-number">3</span> Polynomial (Quadratic) Growth Curve Model</a></li>
+  <li><a href="#generalized-additive-mixed-model" id="toc-generalized-additive-mixed-model" class="nav-link" data-scroll-target="#generalized-additive-mixed-model"><span class="header-section-number">4</span> Generalized Additive Mixed Model</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/edit/main/mixed-effects-models.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/blob/main/mixed-effects-models.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -242,11 +255,29 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 
 
 <p>For an overview of mixed modeling, see my chapter on “<a href="https://isaactpetersen.github.io/Fantasy-Football-Analytics-Textbook/mixed-models.html">Mixed Modeling</a>” in the following textbook:</p>
-<p>Petersen, I. T. (2025). <em>Fantasy football analytics: Statistics, prediction, and empiricism using R</em>. University of Iowa Libraries. <a href="https://github.com/isaactpetersen/Fantasy-Football-Analytics-Textbook" class="uri">https://github.com/isaactpetersen/Fantasy-Football-Analytics-Textbook</a></p>
+<p>Petersen, I. T. (2025). <em>Fantasy football analytics: Statistics, prediction, and empiricism using R</em>. University of Iowa Libraries. <a href="https://isaactpetersen.github.io/Fantasy-Football-Analytics-Textbook" class="uri">https://isaactpetersen.github.io/Fantasy-Football-Analytics-Textbook</a></p>
+<section id="preamble" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Preamble</h1>
+<section id="load-libraries" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="load-libraries"><span class="header-section-number">1.1</span> Load Libraries</h2>
+</section>
+<section id="load-data" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="load-data"><span class="header-section-number">1.2</span> Load Data</h2>
+</section>
+</section>
+<section id="linear-growth-curve-model" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Linear Growth Curve Model</h1>
+</section>
+<section id="polynomial-quadratic-growth-curve-model" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Polynomial (Quadratic) Growth Curve Model</h1>
+</section>
+<section id="generalized-additive-mixed-model" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Generalized Additive Mixed Model</h1>
 
 
 <!-- -->
 
+</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main> <!-- /main -->
 <br>
@@ -736,11 +767,23 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>For an overview of mixed modeling, see my chapter on "<span class="co">[</span><span class="ot">Mixed Modeling</span><span class="co">](https://isaactpetersen.github.io/Fantasy-Football-Analytics-Textbook/mixed-models.html)</span>" in the following textbook:</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Petersen, I. T. (2025). *Fantasy football analytics: Statistics, prediction, and empiricism using R*. University of Iowa Libraries. <span class="ot">&lt;https://github.com/isaactpetersen/Fantasy-Football-Analytics-Textbook&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Petersen, I. T. (2025). *Fantasy football analytics: Statistics, prediction, and empiricism using R*. University of Iowa Libraries. <span class="ot">&lt;https://isaactpetersen.github.io/Fantasy-Football-Analytics-Textbook&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu"># Preamble</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Load Libraries</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Load Data</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu"># Linear Growth Curve Model</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu"># Polynomial (Quadratic) Growth Curve Model</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu"># Generalized Additive Mixed Model </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/edit/main/mixed-effects-models.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/blob/main/mixed-effects-models.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/edit/main/mixed-effects-models.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/blob/main/mixed-effects-models.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
