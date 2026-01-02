@@ -17,6 +17,10 @@ Imports:
   mgcv,
   parallelly,
   MuMIn,
+  lavaan,
+  semTools,
+  lavaanPlot,
+  lcsm,
   petersenlab
 Remotes:
   DevPsyLab/petersenlab
