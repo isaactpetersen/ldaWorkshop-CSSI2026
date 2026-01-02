@@ -12,7 +12,7 @@ library("tidyverse")
 
 ## Load Data
 
-The data for this example were simulated:
+The data for this example were [simulated](simulate-data.qmd):
 
 ```{r}
 mydata_long <- read.csv("./data/mydata_long.csv")
@@ -139,7 +139,7 @@ ggplot(
 ## Faceted Plots of a Random Subsample
 
 ```{r}
-#| fig-cap: "Faceted Plots of Observed Growth Curves of Depression Symptoms for a Random Subsample of Individuals"
+#| fig-cap: "Faceted Plot of Observed Growth Curves of Depression Symptoms for a Random Subsample of Individuals"
 
 set.seed(52242) # for reproducibility
 
@@ -176,7 +176,7 @@ mydata_long %>%
 ```
 
 ```{r}
-#| fig-cap: "Faceted Plots of Observed Growth Curves of Anxiety Symptoms for a Random Subsample of Individuals"
+#| fig-cap: "Faceted Plot of Observed Growth Curves of Anxiety Symptoms for a Random Subsample of Individuals"
 
 mydata_long %>%
   filter(ID %in% ids_subset) %>%
