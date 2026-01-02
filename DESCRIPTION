@@ -15,6 +15,7 @@ Imports:
   lme4,
   lmerTest,
   mgcv,
+  parallelly,
   MuMIn,
   petersenlab
 Remotes:
