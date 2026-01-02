@@ -10,10 +10,493 @@ Petersen, I. T. (2025). *Fantasy football analytics: Statistics, prediction, and
 
 ## Load Libraries
 
+```{r}
+library("lme4")
+library("lmerTest")
+library("mgcv")
+library("easystats")
+library("parallelly")
+library("MuMIn")
+library("tidyverse")
+```
+
 ## Load Data
+
+The data for this example were [simulated](simulate-data.qmd):
+
+```{r}
+mydata_long <- read.csv("./data/mydata_long.csv")
+```
+
+# Pre-Model Computation
+
+It can be helpful to center the age/time variable so that the intercept in a growth curve model has meaning.
+For instance, we can subtract the youngest participant age to set the intercepts to be the earliest age in the sample.
+
+```{r}
+mydata_long$sexFactor <- factor(mydata_long$sex)
+
+mydata_long$ageCentered <- mydata_long$age - min(mydata_long$age, na.rm = TRUE)
+
+mydata_long$ageCenteredSquared <- mydata_long$ageCentered ^ 2
+```
 
 # Linear Growth Curve Model
 
+## Fit the Model
+
+```{r}
+linearGCM <- lmer(
+  depression ~ sexFactor + ageCentered + sexFactor:ageCentered + 
+    sleep + sleep:ageCentered + sexFactor:sleep + sexFactor:sleep:ageCentered + 
+    (1 + ageCentered | ID), # random intercepts and slopes; sex as a fixed-effect predictor of the intercepts and slopes
+  data = mydata_long,
+  REML = FALSE, #for ML
+  na.action = na.exclude)
+```
+
+## Model Summary
+
+```{r}
+summary(linearGCM)
+
+print(effectsize::standardize_parameters(
+  linearGCM,
+  method = "refit"),
+  digits = 2)
+
+performance::r2(linearGCM)
+```
+
+## Plots
+
+### Prototypical Growth Curve
+
+```{r}
+#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex"
+
+newData <- expand.grid(
+  sexFactor = c("female", "male"),
+  age = c(
+    min(mydata_long$age, na.rm = TRUE),
+    max(mydata_long$age, na.rm = TRUE))
+)
+
+newData$ageCentered <- newData$age - min(newData$age)
+
+newData$sleep <- NA
+newData$sleep[which(newData$sexFactor == "female" & newData$age == 14)] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age == 14)] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age == 17)] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age == 17)] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE)
+
+newData$modelImpliedDepression <- predict( # predict.merMod
+  linearGCM,
+  newdata = newData,
+  re.form = NA # include no random effects
+)
+
+ggplot(
+  data = newData,
+  mapping = aes(
+    x = age,
+    y = modelImpliedDepression,
+    color = sexFactor)) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  geom_line() +
+  theme_classic()
+```
+
+### Individuals' Growth Curves
+
+```{r}
+#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms"
+
+mydata_long$modelImpliedDepression <- predict( # predict.merMod
+  linearGCM,
+  newdata = mydata_long,
+  re.form = NULL # include all random effects
+)
+
+ggplot(
+  data = mydata_long,
+  mapping = aes(
+    x = age,
+    y = modelImpliedDepression,
+    group = ID,
+    color = sexFactor)) +
+  geom_smooth(
+    method = "lm",
+    se = FALSE,
+    linewidth = 0.5
+  ) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
+### Individuals' Trajectories Overlaid with Prototypical Trajectory
+
+```{r}
+#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms Overlaid With Prototypical Growth Curves By Sex"
+
+ggplot(
+  data = mydata_long,
+  mapping = aes(
+    x = age,
+    y = modelImpliedDepression,
+    group = ID)) +
+  geom_smooth(
+    method = "lm",
+    se = FALSE,
+    linewidth = 0.5,
+    color = "gray",
+    alpha = 0.30
+  ) +
+  geom_line(
+    data = newData,
+    mapping = aes(
+      x = age,
+      y = modelImpliedDepression,
+      group = sexFactor,
+      color = sexFactor),
+    linewidth = 2) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
 # Polynomial (Quadratic) Growth Curve Model
 
-# Generalized Additive Mixed Model 
+## Fit the Model
+
+```{r}
+quadraticGCM <- lmer(
+  depression ~ sexFactor + ageCentered + ageCenteredSquared + 
+    sexFactor:ageCentered + sexFactor:ageCenteredSquared + sleep + 
+    sleep:ageCentered + sleep:ageCenteredSquared + sexFactor:sleep + 
+    sexFactor:sleep:ageCentered + sexFactor:sleep:ageCenteredSquared + 
+    (1 + ageCentered + ageCenteredSquared | ID), # random intercepts, linear slopes, and quadratic slopes; sex as a fixed-effect predictor of the intercepts and slopes
+  data = mydata_long,
+  REML = FALSE, #for ML
+  na.action = na.exclude)
+```
+
+## Model Summary
+
+```{r}
+summary(quadraticGCM)
+
+print(effectsize::standardize_parameters(
+  quadraticGCM,
+  method = "refit"),
+  digits = 2)
+
+performance::r2(quadraticGCM)
+```
+
+## Plots
+
+### Prototypical Growth Curve
+
+```{r}
+#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex"
+
+newData <- expand.grid(
+  sexFactor = c("female", "male"),
+  age = seq(
+    from = min(mydata_long$age, na.rm = TRUE),
+    to = max(mydata_long$age, na.rm = TRUE),
+    length.out = 10000
+  ),
+  sleep = mean(mydata_long$sleep, na.rm = TRUE)
+)
+
+newData$ageCentered <- newData$age - min(newData$age)
+newData$ageCenteredSquared <- newData$ageCentered ^ 2
+
+newData$modelImpliedDepression <- predict( # predict.merMod
+  quadraticGCM,
+  newdata = newData,
+  re.form = NA # include no random effects
+)
+
+ggplot(
+  data = newData,
+  mapping = aes(
+    x = age,
+    y = modelImpliedDepression,
+    color = sexFactor)) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  geom_line() +
+  theme_classic()
+```
+
+### Individuals' Growth Curves
+
+```{r}
+#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms"
+
+mydata_long$modelImpliedDepression <- predict( # predict.merMod
+  quadraticGCM,
+  newdata = mydata_long,
+  re.form = NULL # include all random effects
+)
+
+ggplot(
+  data = mydata_long,
+  mapping = aes(
+    x = age,
+    y = modelImpliedDepression,
+    group = ID,
+    color = sexFactor)) +
+  geom_smooth(
+    method = "lm",
+    formula = y ~ x + I(x^2),
+    se = FALSE,
+    linewidth = 0.5
+  ) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
+### Individuals' Trajectories Overlaid with Prototypical Trajectory
+
+```{r}
+#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms Overlaid With Prototypical Growth Curves By Sex"
+
+ggplot(
+  data = mydata_long,
+  mapping = aes(
+    x = age,
+    y = modelImpliedDepression,
+    group = ID)) +
+  geom_smooth(
+    method = "lm",
+    formula = y ~ x + I(x^2),
+    se = FALSE,
+    linewidth = 0.5,
+    color = "gray",
+    alpha = 0.30
+  ) +
+  geom_line(
+    data = newData,
+    mapping = aes(
+      x = age,
+      y = modelImpliedDepression,
+      group = sexFactor,
+      color = sexFactor),
+    linewidth = 2) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
+# Generalized Additive Mixed Model
+
+## Fit the Model
+
+```{r}
+#| include: false
+
+num_cores <- parallelly::availableCores()
+num_true_cores <- parallelly::availableCores(logical = FALSE)
+```
+
+```{r}
+#| eval: false
+
+num_cores <- parallelly::availableCores() - 1
+num_true_cores <- parallelly::availableCores(logical = FALSE) - 1
+```
+
+```{r}
+gamGCM <- mgcv::gam(
+  depression ~ sexFactor + sleep + sexFactor:sleep +
+    
+    # sex-specific trajectories
+    s(ageCentered, by = sexFactor, k = 4) +
+    
+    # sex-specific effects of sleep on trajectories
+    ti(ageCentered, sleep, by = sexFactor, k = 4) +
+    
+    # random effects
+    s(ageCentered, ID, bs = "re"),
+  data = mydata_long,
+  nthreads = num_cores)
+```
+
+## Model Summary
+
+```{r}
+summary(gamGCM)
+
+print(effectsize::standardize_parameters(
+  gamGCM,
+  method = "refit"),
+  digits = 2)
+
+performance::r2(gamGCM)
+```
+
+## Plots
+
+### Prototypical Growth Curve
+
+```{r}
+#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex"
+
+newData <- expand.grid(
+  sexFactor = c("female", "male"),
+  age = seq(
+    from = min(mydata_long$age, na.rm = TRUE),
+    to = max(mydata_long$age, na.rm = TRUE),
+    length.out = 10000
+  ),
+  sleep = mean(mydata_long$sleep, na.rm = TRUE)
+)
+
+newData$ageCentered <- newData$age - min(newData$age)
+#newData$ageCenteredSquared <- newData$ageCentered ^ 2
+
+# add a dummy id
+newData$ID <- mydata_long$ID[1]
+
+newData$modelImpliedDepression <- predict( # predict.gam
+  gamGCM,
+  newdata = newData,
+  #re.form = NA # include no random effects
+)
+
+ggplot(
+  data = newData,
+  mapping = aes(
+    x = age,
+    y = modelImpliedDepression,
+    color = sexFactor)) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  geom_line() +
+  theme_classic()
+```
+
+### Individuals' Growth Curves
+
+```{r}
+#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms"
+
+mydata_long$modelImpliedDepression <- predict( # predict.gam
+  gamGCM,
+  newdata = mydata_long,
+  #re.form = NULL # include all random effects
+)
+
+gamMethod <- function(formula, data, weights, ...) {
+  if(nrow(data) >= 4){ # gam smooth if 4+ timepoints
+    mgcv::gam(y ~ s(x, bs = "cs", k = 3), data = data, ...)
+  } else if(nrow(data) == 3){  # quadratic smooth if 3 timepoints
+    lm(y ~ x + I(x^2), data = data, ...)
+  } else{ # linear if fewer than 3 timepoints
+    lm(y ~ x, data = data, ...)
+  }
+}
+
+ggplot(
+  data = mydata_long,
+  mapping = aes(
+    x = age,
+    y = modelImpliedDepression,
+    group = ID,
+    color = sexFactor)) +
+  geom_smooth(
+    method = gamMethod,
+    se = FALSE,
+    linewidth = 0.5
+  ) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
+### Individuals' Trajectories Overlaid with Prototypical Trajectory
+
+```{r}
+#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms Overlaid With Prototypical Growth Curves By Sex"
+
+ggplot(
+  data = mydata_long,
+  mapping = aes(
+    x = age,
+    y = modelImpliedDepression,
+    group = ID)) +
+  geom_smooth(
+    method = gamMethod,
+    se = FALSE,
+    linewidth = 0.5,
+    color = "gray",
+    alpha = 0.30
+  ) +
+  geom_line(
+    data = newData,
+    mapping = aes(
+      x = age,
+      y = modelImpliedDepression,
+      group = sexFactor,
+      color = sexFactor),
+    linewidth = 2) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
+# Compare Models
+
+```{r}
+anova(
+  linearGCM,
+  quadraticGCM
+)
+
+AIC(
+  linearGCM,
+  quadraticGCM,
+  gamGCM
+)
+
+MuMIn::AICc(
+  linearGCM,
+  quadraticGCM,
+  gamGCM
+)
+```
+

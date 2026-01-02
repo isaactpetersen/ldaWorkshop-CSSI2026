@@ -9,12 +9,13 @@ Imports:
   xml2,
   remotes,
   tidyverse,
+  easystats,
   MASS,
   psych,
   lme4,
   lmerTest,
   mgcv,
-  performance,
+  MuMIn,
   petersenlab
 Remotes:
   DevPsyLab/petersenlab
