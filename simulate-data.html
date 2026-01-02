@@ -258,6 +258,7 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 <span><span class="co"># 1. Settings</span></span>
 <span><span class="co"># -----------------------------</span></span>
 <span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">250</span></span>
+<span><span class="va">timepoints</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span></span>
 <span><span class="va">ages</span> <span class="op">&lt;-</span> <span class="fl">14</span><span class="op">:</span><span class="fl">17</span></span>
 <span><span class="va">n_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">ages</span><span class="op">)</span></span>
 <span></span>
@@ -265,9 +266,15 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 <span><span class="va">id</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="va">N</span></span>
 <span><span class="va">sexMale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="va">N</span>, <span class="fl">1</span>, <span class="fl">0.5</span><span class="op">)</span>  <span class="co"># 0=female, 1=male</span></span>
 <span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="va">id</span>, age <span class="op">=</span> <span class="va">ages</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">age</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="va">id</span>, timepoint <span class="op">=</span> <span class="va">timepoints</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">timepoint</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>sexMale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">sexMale</span>, each <span class="op">=</span> <span class="va">n_time</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">age</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">age</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">timepoint</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">14</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">age</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">timepoint</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">15</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">age</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">timepoint</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">16</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">age</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">timepoint</span> <span class="op">==</span> <span class="fl">4</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">17</span></span>
 <span></span>
 <span><span class="co"># -----------------------------</span></span>
 <span><span class="co"># 2. Random intercepts (person-level)</span></span>
@@ -416,15 +423,22 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 <span><span class="co"># 9. Introduce attrition</span></span>
 <span><span class="co"># -----------------------------</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p_dropout <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span></span>
-<span>    <span class="va">age</span> <span class="op">==</span> <span class="fl">14</span> <span class="op">~</span> <span class="fl">0.00</span>,</span>
-<span>    <span class="va">age</span> <span class="op">==</span> <span class="fl">15</span> <span class="op">~</span> <span class="fl">0.05</span>,</span>
-<span>    <span class="va">age</span> <span class="op">==</span> <span class="fl">16</span> <span class="op">~</span> <span class="fl">0.10</span>,</span>
-<span>    <span class="va">age</span> <span class="op">==</span> <span class="fl">17</span> <span class="op">~</span> <span class="fl">0.15</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">1</span>, <span class="fl">1</span> <span class="op">-</span> <span class="va">p_dropout</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">keep</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/lm.ridge.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">p_dropout</span>, <span class="op">-</span><span class="va">keep</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    p_dropout <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span></span>
+<span>      <span class="va">age</span> <span class="op">==</span> <span class="fl">14</span> <span class="op">~</span> <span class="fl">0.00</span>,</span>
+<span>      <span class="va">age</span> <span class="op">==</span> <span class="fl">15</span> <span class="op">~</span> <span class="fl">0.05</span>,</span>
+<span>      <span class="va">age</span> <span class="op">==</span> <span class="fl">16</span> <span class="op">~</span> <span class="fl">0.10</span>,</span>
+<span>      <span class="va">age</span> <span class="op">==</span> <span class="fl">17</span> <span class="op">~</span> <span class="fl">0.15</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    dropout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">1</span>, <span class="va">p_dropout</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    ses        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">dropout</span> <span class="op">==</span> <span class="fl">1</span>, <span class="cn">NA</span>, <span class="va">ses</span><span class="op">)</span>,</span>
+<span>    sleep      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">dropout</span> <span class="op">==</span> <span class="fl">1</span>, <span class="cn">NA</span>, <span class="va">sleep</span><span class="op">)</span>,</span>
+<span>    depression <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">dropout</span> <span class="op">==</span> <span class="fl">1</span>, <span class="cn">NA</span>, <span class="va">depression</span><span class="op">)</span>,</span>
+<span>    anxiety    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">dropout</span> <span class="op">==</span> <span class="fl">1</span>, <span class="cn">NA</span>, <span class="va">anxiety</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/lm.ridge.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">p_dropout</span>, <span class="op">-</span><span class="va">dropout</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># -----------------------------</span></span>
 <span><span class="co"># 10. Factorize sex for plotting</span></span>
@@ -436,7 +450,8 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 <span><span class="co"># -----------------------------</span></span>
 <span><span class="co"># 11. Final dataset</span></span>
 <span><span class="co"># -----------------------------</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/lm.ridge.html">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">age</span>, <span class="va">sex</span>, <span class="va">sexMale</span>, <span class="va">ses</span>, <span class="va">sleep</span>, <span class="va">depression</span>, <span class="va">anxiety</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/lm.ridge.html">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">timepoint</span>, <span class="va">age</span>, <span class="va">sex</span>, <span class="va">sexMale</span>, <span class="va">ses</span>, <span class="va">sleep</span>, <span class="va">depression</span>, <span class="va">anxiety</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <section id="check" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="check">
@@ -446,7 +461,7 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 </details><div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["vars"],"name":[1],"type":["int"],"align":["right"]},{"label":["n"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["median"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["trimmed"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["mad"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["min"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["max"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["range"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["skew"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["kurtosis"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["se"],"name":[13],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"931","3":"126.041890440","4":"72.4147060","5":"126.00000000","6":"1.261074e+02","7":"93.4038000","8":"1.000000","9":"250.000000","10":"249.00000","11":"0.001737639","12":"-1.2136593","13":"2.37329613","_rn_":"ID"},{"1":"2","2":"931","3":"15.436090226","4":"1.1163243","5":"15.00000000","6":"1.542013e+01","7":"1.4826000","8":"14.000000","9":"17.000000","10":"3.00000","11":"0.079197036","12":"-1.3531782","13":"0.03658605","_rn_":"age"},{"1":"3","2":"931","3":"1.436090226","4":"0.4961653","5":"1.00000000","6":"1.420134e+00","7":"0.0000000","8":"1.000000","9":"2.000000","10":"1.00000","11":"0.257338162","12":"-1.9358529","13":"0.01626116","_rn_":"sex*"},{"1":"4","2":"931","3":"0.436090226","4":"0.4961653","5":"0.00000000","6":"4.201342e-01","7":"0.0000000","8":"0.000000","9":"1.000000","10":"1.00000","11":"0.257338162","12":"-1.9358529","13":"0.01626116","_rn_":"sexMale"},{"1":"5","2":"931","3":"-0.001406395","4":"1.0067395","5":"-0.01066373","6":"-5.035652e-04","7":"0.9594387","8":"-3.230721","9":"4.538459","10":"7.76918","11":"0.059884744","12":"0.7884009","13":"0.03299455","_rn_":"ses"},{"1":"6","2":"931","3":"8.033969896","4":"1.0905188","5":"8.05147088","6":"8.044695e+00","7":"1.1371050","8":"5.000000","9":"10.000000","10":"5.00000","11":"-0.101506347","12":"-0.5333316","13":"0.03574031","_rn_":"sleep"},{"1":"7","2":"931","3":"9.908700322","4":"6.6432308","5":"8.00000000","6":"9.144966e+00","7":"5.9304000","8":"0.000000","9":"30.000000","10":"30.00000","11":"0.989216147","12":"0.5626516","13":"0.21772310","_rn_":"depression"},{"1":"8","2":"931","3":"9.865735768","4":"6.5842935","5":"8.00000000","6":"9.106040e+00","7":"5.9304000","8":"0.000000","9":"30.000000","10":"30.00000","11":"1.009485191","12":"0.6725759","13":"0.21579151","_rn_":"anxiety"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["vars"],"name":[1],"type":["int"],"align":["right"]},{"label":["n"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["median"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["trimmed"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["mad"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["min"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["max"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["range"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["skew"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["kurtosis"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["se"],"name":[13],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"1000","3":"125.500000000","4":"72.2043175","5":"125.50000000","6":"1.255000e+02","7":"92.6625000","8":"1.000000","9":"250.000000","10":"249.00000","11":"0.00000000","12":"-1.2036365","13":"2.28330100","_rn_":"ID"},{"1":"2","2":"1000","3":"2.500000000","4":"1.1185934","5":"2.50000000","6":"2.500000e+00","7":"1.4826000","8":"1.000000","9":"4.000000","10":"3.00000","11":"0.00000000","12":"-1.3632784","13":"0.03537303","_rn_":"timepoint"},{"1":"3","2":"1000","3":"15.500000000","4":"1.1185934","5":"15.50000000","6":"1.550000e+01","7":"1.4826000","8":"14.000000","9":"17.000000","10":"3.00000","11":"0.00000000","12":"-1.3632784","13":"0.03537303","_rn_":"age"},{"1":"4","2":"1000","3":"1.440000000","4":"0.4966353","5":"1.00000000","6":"1.425000e+00","7":"0.0000000","8":"1.000000","9":"2.000000","10":"1.00000","11":"0.24138436","12":"-1.9436743","13":"0.01570499","_rn_":"sex*"},{"1":"5","2":"1000","3":"0.440000000","4":"0.4966353","5":"0.00000000","6":"4.250000e-01","7":"0.0000000","8":"0.000000","9":"1.000000","10":"1.00000","11":"0.24138436","12":"-1.9436743","13":"0.01570499","_rn_":"sexMale"},{"1":"6","2":"931","3":"-0.001406395","4":"1.0067395","5":"-0.01066373","6":"-5.035652e-04","7":"0.9594387","8":"-3.230721","9":"4.538459","10":"7.76918","11":"0.05988474","12":"0.7884009","13":"0.03299455","_rn_":"ses"},{"1":"7","2":"931","3":"8.033969896","4":"1.0905188","5":"8.05147088","6":"8.044695e+00","7":"1.1371050","8":"5.000000","9":"10.000000","10":"5.00000","11":"-0.10150635","12":"-0.5333316","13":"0.03574031","_rn_":"sleep"},{"1":"8","2":"931","3":"9.908700322","4":"6.6432308","5":"8.00000000","6":"9.144966e+00","7":"5.9304000","8":"0.000000","9":"30.000000","10":"30.00000","11":"0.98921615","12":"0.5626516","13":"0.21772310","_rn_":"depression"},{"1":"9","2":"931","3":"9.865735768","4":"6.5842935","5":"8.00000000","6":"9.106040e+00","7":"5.9304000","8":"0.000000","9":"30.000000","10":"30.00000","11":"1.00948519","12":"0.6725759","13":"0.21579151","_rn_":"anxiety"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -464,7 +479,7 @@ ses        -0.3171477 -0.2497336  0.4948693  1.0000000</code></pre>
 </details><div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["ID"],"name":[1],"type":["int"],"align":["right"]},{"label":["age"],"name":[2],"type":["int"],"align":["right"]},{"label":["sex"],"name":[3],"type":["chr"],"align":["left"]},{"label":["sexMale"],"name":[4],"type":["int"],"align":["right"]},{"label":["ses"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["sleep"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["depression"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["anxiety"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"14","3":"male","4":"1","5":"1.4943855","6":"8.773540","7":"10","8":"4","_rn_":"1"},{"1":"1","2":"15","3":"male","4":"1","5":"0.8554406","6":"8.025721","7":"5","8":"2","_rn_":"2"},{"1":"1","2":"16","3":"male","4":"1","5":"0.5472559","6":"8.052089","7":"6","8":"2","_rn_":"3"},{"1":"1","2":"17","3":"male","4":"1","5":"-0.0565045","6":"7.906905","7":"5","8":"3","_rn_":"4"},{"1":"2","2":"14","3":"male","4":"1","5":"-0.4785739","6":"6.398314","7":"12","8":"5","_rn_":"5"},{"1":"2","2":"15","3":"male","4":"1","5":"0.2238341","6":"6.938468","7":"8","8":"3","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["ID"],"name":[1],"type":["int"],"align":["right"]},{"label":["timepoint"],"name":[2],"type":["int"],"align":["right"]},{"label":["age"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sex"],"name":[4],"type":["chr"],"align":["left"]},{"label":["sexMale"],"name":[5],"type":["int"],"align":["right"]},{"label":["ses"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["sleep"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["depression"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["anxiety"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"1","3":"14","4":"male","5":"1","6":"1.4943855","7":"8.773540","8":"10","9":"4","_rn_":"1"},{"1":"1","2":"2","3":"15","4":"male","5":"1","6":"0.8554406","7":"8.025721","8":"5","9":"2","_rn_":"2"},{"1":"1","2":"3","3":"16","4":"male","5":"1","6":"0.5472559","7":"8.052089","8":"6","9":"2","_rn_":"3"},{"1":"1","2":"4","3":"17","4":"male","5":"1","6":"-0.0565045","7":"7.906905","8":"5","9":"3","_rn_":"4"},{"1":"2","2":"1","3":"14","4":"male","5":"1","6":"-0.4785739","7":"6.398314","8":"12","9":"5","_rn_":"5"},{"1":"2","2":"2","3":"15","4":"male","5":"1","6":"0.2238341","7":"6.938468","8":"8","9":"3","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -478,34 +493,34 @@ Formula: depression ~ lag(anxiety) + lag(depression) + age + sex + (1 |
     ID)
    Data: df
 
-REML criterion at convergence: 5108.5
+REML criterion at convergence: 4775.6
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--3.1695 -0.5467 -0.1462  0.5048  3.2615 
+-3.2002 -0.5081 -0.1284  0.4673  3.3306 
 
 Random effects:
  Groups   Name        Variance Std.Dev.
- ID       (Intercept) 21.672   4.655   
- Residual              7.207   2.685   
-Number of obs: 930, groups:  ID, 250
+ ID       (Intercept) 21.83    4.672   
+ Residual              7.16    2.676   
+Number of obs: 866, groups:  ID, 250
 
 Fixed effects:
                  Estimate Std. Error        df t value Pr(&gt;|t|)    
-(Intercept)       1.86387    1.33874 796.03268   1.392    0.164    
-lag(anxiety)      0.11285    0.02691 765.46724   4.193 3.07e-05 ***
-lag(depression)   0.16571    0.02767 778.29303   5.990 3.21e-09 ***
-age               0.45407    0.08022 660.52460   5.660 2.26e-08 ***
-sexmale          -3.92139    0.62199 230.99201  -6.305 1.45e-09 ***
+(Intercept)       1.01595    1.44137 715.47955   0.705  0.48113    
+lag(anxiety)      0.10589    0.02851 708.01306   3.714  0.00022 ***
+lag(depression)   0.18044    0.02891 717.42565   6.241 7.43e-10 ***
+age               0.49832    0.08698 605.87838   5.729 1.59e-08 ***
+sexmale          -3.82035    0.62760 229.13169  -6.087 4.79e-09 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
             (Intr) lg(nx) lg(dp) age   
-lag(anxity) -0.056                     
-lag(dprssn) -0.108 -0.764              
-age         -0.939  0.011  0.050       
-sexmale     -0.227  0.015  0.043  0.012</code></pre>
+lag(anxity) -0.045                     
+lag(dprssn) -0.120 -0.766              
+age         -0.946 -0.001  0.067       
+sexmale     -0.211  0.015  0.042  0.009</code></pre>
 </div>
 <details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span></span>
 <span>  <span class="va">anxiety</span> <span class="op">~</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">depression</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">anxiety</span><span class="op">)</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="va">sex</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">ID</span><span class="op">)</span>,</span>
@@ -516,34 +531,34 @@ lmerModLmerTest]
 Formula: anxiety ~ lag(depression) + lag(anxiety) + age + sex + (1 | ID)
    Data: df
 
-REML criterion at convergence: 5150.2
+REML criterion at convergence: 4812.4
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--3.2615 -0.5765 -0.1203  0.4798  3.4546 
+-3.2445 -0.5619 -0.1192  0.4608  3.4108 
 
 Random effects:
  Groups   Name        Variance Std.Dev.
- ID       (Intercept) 21.125   4.596   
- Residual              7.715   2.778   
-Number of obs: 930, groups:  ID, 250
+ ID       (Intercept) 20.639   4.543   
+ Residual              7.736   2.781   
+Number of obs: 866, groups:  ID, 250
 
 Fixed effects:
                  Estimate Std. Error        df t value Pr(&gt;|t|)    
-(Intercept)      -2.65061    1.37938 789.69258  -1.922    0.055 .  
-lag(depression)   0.03772    0.02851 790.06329   1.323    0.186    
-lag(anxiety)      0.21180    0.02775 776.61807   7.633 6.76e-14 ***
-age               0.76387    0.08299 664.68741   9.205  &lt; 2e-16 ***
-sexmale          -3.96124    0.61679 234.72831  -6.422 7.38e-10 ***
+(Intercept)      -3.53258    1.48987 707.97997  -2.371    0.018 *  
+lag(depression)   0.04526    0.02987 732.31955   1.516    0.130    
+lag(anxiety)      0.21592    0.02947 722.36199   7.328 6.27e-13 ***
+age               0.81105    0.09034 609.49541   8.978  &lt; 2e-16 ***
+sexmale          -3.91681    0.61448 231.11897  -6.374 9.87e-10 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
             (Intr) lg(dp) lg(nx) age   
-lag(dprssn) -0.108                     
-lag(anxity) -0.056 -0.764              
-age         -0.943  0.050  0.012       
-sexmale     -0.221  0.045  0.016  0.013</code></pre>
+lag(dprssn) -0.120                     
+lag(anxity) -0.046 -0.765              
+age         -0.950  0.066 -0.001       
+sexmale     -0.202  0.045  0.016  0.010</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1126,269 +1141,284 @@ sexmale     -0.221  0.045  0.016  0.013</code></pre>
 <span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Settings</span></span>
 <span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
 <span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">250</span></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="dv">14</span><span class="sc">:</span><span class="dv">17</span></span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>n_time <span class="ot">&lt;-</span> <span class="fu">length</span>(ages)</span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Participant-level info</span></span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>N</span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>sexMale <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(N, <span class="dv">1</span>, <span class="fl">0.5</span>)  <span class="co"># 0=female, 1=male</span></span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">ID =</span> id, <span class="at">age =</span> ages) <span class="sc">%&gt;%</span></span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ID, age) <span class="sc">%&gt;%</span></span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sexMale =</span> <span class="fu">rep</span>(sexMale, <span class="at">each =</span> n_time))</span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Random intercepts (person-level)</span></span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlated latent traits: depression, anxiety, sleep, SES</span></span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>Sigma_u <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>  <span class="fl">6.0</span>, <span class="fl">3.0</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.3</span>,</span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>  <span class="fl">3.0</span>, <span class="fl">6.0</span>, <span class="sc">-</span><span class="fl">0.4</span>, <span class="sc">-</span><span class="fl">0.3</span>,</span>
-<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a> <span class="sc">-</span><span class="fl">0.5</span>,<span class="sc">-</span><span class="fl">0.4</span>, <span class="fl">1.0</span>, <span class="fl">0.5</span>,</span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a> <span class="sc">-</span><span class="fl">0.3</span>,<span class="sc">-</span><span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span></span>
-<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>), <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
-<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(N, <span class="at">mu=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">Sigma=</span>Sigma_u)</span>
-<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(u) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"u_dep"</span>,<span class="st">"u_anx"</span>,<span class="st">"u_sleep"</span>,<span class="st">"u_ses"</span>)</span>
-<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">data.frame</span>(<span class="at">ID=</span>id, <span class="at">u_dep=</span>u[,<span class="dv">1</span>], <span class="at">u_anx=</span>u[,<span class="dv">2</span>], <span class="at">u_sleep=</span>u[,<span class="dv">3</span>], <span class="at">u_ses=</span>u[,<span class="dv">4</span>]), <span class="at">by=</span><span class="st">"ID"</span>)</span>
-<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Time-varying residuals</span></span>
-<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>Sigma_e <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
-<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>  <span class="fl">2.0</span>, <span class="fl">1.0</span>, <span class="sc">-</span><span class="fl">0.3</span>, <span class="sc">-</span><span class="fl">0.2</span>,</span>
-<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="sc">-</span><span class="fl">0.2</span>,</span>
-<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a> <span class="sc">-</span><span class="fl">0.3</span>,<span class="sc">-</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.3</span>,</span>
-<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a> <span class="sc">-</span><span class="fl">0.2</span>,<span class="sc">-</span><span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span></span>
-<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>), <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
-<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>N, <span class="cf">function</span>(i){</span>
-<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mvrnorm</span>(n_time, <span class="at">mu=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">Sigma=</span>Sigma_e)</span>
-<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, res)</span>
-<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(res) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"e_dep"</span>,<span class="st">"e_anx"</span>,<span class="st">"e_sleep"</span>,<span class="st">"e_ses"</span>)</span>
-<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(df, <span class="fu">as.data.frame</span>(res))</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>timepoints <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="dv">14</span><span class="sc">:</span><span class="dv">17</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>n_time <span class="ot">&lt;-</span> <span class="fu">length</span>(ages)</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Participant-level info</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>N</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>sexMale <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(N, <span class="dv">1</span>, <span class="fl">0.5</span>)  <span class="co"># 0=female, 1=male</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">ID =</span> id, <span class="at">timepoint =</span> timepoints) <span class="sc">%&gt;%</span></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ID, timepoint) <span class="sc">%&gt;%</span></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sexMale =</span> <span class="fu">rep</span>(sexMale, <span class="at">each =</span> n_time))</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age[<span class="fu">which</span>(df<span class="sc">$</span>timepoint <span class="sc">==</span> <span class="dv">1</span>)] <span class="ot">&lt;-</span> <span class="dv">14</span></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age[<span class="fu">which</span>(df<span class="sc">$</span>timepoint <span class="sc">==</span> <span class="dv">2</span>)] <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age[<span class="fu">which</span>(df<span class="sc">$</span>timepoint <span class="sc">==</span> <span class="dv">3</span>)] <span class="ot">&lt;-</span> <span class="dv">16</span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age[<span class="fu">which</span>(df<span class="sc">$</span>timepoint <span class="sc">==</span> <span class="dv">4</span>)] <span class="ot">&lt;-</span> <span class="dv">17</span></span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Random intercepts (person-level)</span></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlated latent traits: depression, anxiety, sleep, SES</span></span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>Sigma_u <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>  <span class="fl">6.0</span>, <span class="fl">3.0</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.3</span>,</span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>  <span class="fl">3.0</span>, <span class="fl">6.0</span>, <span class="sc">-</span><span class="fl">0.4</span>, <span class="sc">-</span><span class="fl">0.3</span>,</span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a> <span class="sc">-</span><span class="fl">0.5</span>,<span class="sc">-</span><span class="fl">0.4</span>, <span class="fl">1.0</span>, <span class="fl">0.5</span>,</span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a> <span class="sc">-</span><span class="fl">0.3</span>,<span class="sc">-</span><span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>), <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(N, <span class="at">mu=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">Sigma=</span>Sigma_u)</span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(u) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"u_dep"</span>,<span class="st">"u_anx"</span>,<span class="st">"u_sleep"</span>,<span class="st">"u_ses"</span>)</span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">data.frame</span>(<span class="at">ID=</span>id, <span class="at">u_dep=</span>u[,<span class="dv">1</span>], <span class="at">u_anx=</span>u[,<span class="dv">2</span>], <span class="at">u_sleep=</span>u[,<span class="dv">3</span>], <span class="at">u_ses=</span>u[,<span class="dv">4</span>]), <span class="at">by=</span><span class="st">"ID"</span>)</span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Time-varying residuals</span></span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>Sigma_e <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>  <span class="fl">2.0</span>, <span class="fl">1.0</span>, <span class="sc">-</span><span class="fl">0.3</span>, <span class="sc">-</span><span class="fl">0.2</span>,</span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="sc">-</span><span class="fl">0.2</span>,</span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a> <span class="sc">-</span><span class="fl">0.3</span>,<span class="sc">-</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.3</span>,</span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a> <span class="sc">-</span><span class="fl">0.2</span>,<span class="sc">-</span><span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span></span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>), <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
 <span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Fixed effects</span></span>
-<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>beta_age_dep <span class="ot">&lt;-</span> <span class="fl">1.0</span></span>
-<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a>beta_age_anx <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
-<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>beta_sex_dep <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span></span>
-<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>beta_sex_anx <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span></span>
-<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>beta_age_sex_dep <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.4</span></span>
-<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>beta_age_sex_anx <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.3</span></span>
-<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>beta_ses_dep <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.5</span></span>
-<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>beta_ses_anx <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.5</span></span>
-<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>beta_sleep_dep <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.3</span></span>
-<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>beta_sleep_anx <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.2</span></span>
-<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Compute SES (z-scored)</span></span>
-<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>ses_cont <span class="ot">&lt;-</span> df<span class="sc">$</span>u_ses <span class="sc">+</span> df<span class="sc">$</span>e_ses</span>
-<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>ses <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(df<span class="sc">$</span>ses_cont))</span>
-<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Compute Sleep (5-10 hrs)</span></span>
-<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>sleep_cont <span class="ot">&lt;-</span> df<span class="sc">$</span>u_sleep <span class="sc">+</span> df<span class="sc">$</span>e_sleep</span>
-<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>sleep <span class="ot">&lt;-</span> <span class="fu">pmin</span>(<span class="fu">pmax</span>(<span class="dv">8</span> <span class="sc">+</span> df<span class="sc">$</span>sleep_cont, <span class="dv">5</span>), <span class="dv">10</span>)</span>
-<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. Latent depression &amp; anxiety with cross-lagged structure</span></span>
-<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort correctly</span></span>
-<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(ID, age)</span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>N, <span class="cf">function</span>(i){</span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mvrnorm</span>(n_time, <span class="at">mu=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">Sigma=</span>Sigma_e)</span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, res)</span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(res) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"e_dep"</span>,<span class="st">"e_anx"</span>,<span class="st">"e_sleep"</span>,<span class="st">"e_ses"</span>)</span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(df, <span class="fu">as.data.frame</span>(res))</span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Fixed effects</span></span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>beta_age_dep <span class="ot">&lt;-</span> <span class="fl">1.0</span></span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>beta_age_anx <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>beta_sex_dep <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span></span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>beta_sex_anx <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span></span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>beta_age_sex_dep <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.4</span></span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>beta_age_sex_anx <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.3</span></span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>beta_ses_dep <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.5</span></span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a>beta_ses_anx <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.5</span></span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>beta_sleep_dep <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.3</span></span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>beta_sleep_anx <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.2</span></span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Compute SES (z-scored)</span></span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>ses_cont <span class="ot">&lt;-</span> df<span class="sc">$</span>u_ses <span class="sc">+</span> df<span class="sc">$</span>e_ses</span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>ses <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(df<span class="sc">$</span>ses_cont))</span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Compute Sleep (5-10 hrs)</span></span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>sleep_cont <span class="ot">&lt;-</span> df<span class="sc">$</span>u_sleep <span class="sc">+</span> df<span class="sc">$</span>e_sleep</span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>sleep <span class="ot">&lt;-</span> <span class="fu">pmin</span>(<span class="fu">pmax</span>(<span class="dv">8</span> <span class="sc">+</span> df<span class="sc">$</span>sleep_cont, <span class="dv">5</span>), <span class="dv">10</span>)</span>
 <span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters for temporal dynamics</span></span>
-<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>phi_dep <span class="ot">&lt;-</span> <span class="fl">0.50</span>   <span class="co"># autoregressive depression</span></span>
-<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a>phi_anx <span class="ot">&lt;-</span> <span class="fl">0.50</span>   <span class="co"># autoregressive anxiety</span></span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. Latent depression &amp; anxiety with cross-lagged structure</span></span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
 <span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a>cl_anx_to_dep <span class="ot">&lt;-</span> <span class="fl">0.35</span>  <span class="co"># anxiety -&gt; later depression (stronger)</span></span>
-<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>cl_dep_to_anx <span class="ot">&lt;-</span> <span class="fl">0.10</span>  <span class="co"># depression -&gt; later anxiety (weaker)</span></span>
+<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort correctly</span></span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(ID, age)</span>
 <span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize latent variables</span></span>
-<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>depression_latent <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>anxiety_latent    <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters for temporal dynamics</span></span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a>phi_dep <span class="ot">&lt;-</span> <span class="fl">0.50</span>   <span class="co"># autoregressive depression</span></span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>phi_anx <span class="ot">&lt;-</span> <span class="fl">0.50</span>   <span class="co"># autoregressive anxiety</span></span>
 <span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">unique</span>(df<span class="sc">$</span>ID)) {</span>
-<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a>  idx <span class="ot">&lt;-</span> <span class="fu">which</span>(df<span class="sc">$</span>ID <span class="sc">==</span> i)</span>
-<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (t <span class="cf">in</span> <span class="fu">seq_along</span>(idx)) {</span>
-<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a>    row <span class="ot">&lt;-</span> idx[t]</span>
-<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Baseline (age 14)</span></span>
-<span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (t <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a>cl_anx_to_dep <span class="ot">&lt;-</span> <span class="fl">0.35</span>  <span class="co"># anxiety -&gt; later depression (stronger)</span></span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a>cl_dep_to_anx <span class="ot">&lt;-</span> <span class="fl">0.10</span>  <span class="co"># depression -&gt; later anxiety (weaker)</span></span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize latent variables</span></span>
+<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>depression_latent <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>anxiety_latent    <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">unique</span>(df<span class="sc">$</span>ID)) {</span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a>  idx <span class="ot">&lt;-</span> <span class="fu">which</span>(df<span class="sc">$</span>ID <span class="sc">==</span> i)</span>
 <span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a>      df<span class="sc">$</span>depression_latent[row] <span class="ot">&lt;-</span></span>
-<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>u_dep[row] <span class="sc">+</span></span>
-<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a>        beta_sex_dep <span class="sc">*</span> df<span class="sc">$</span>sexMale[row] <span class="sc">+</span></span>
-<span id="cb16-134"><a href="#cb16-134" aria-hidden="true" tabindex="-1"></a>        beta_ses_dep <span class="sc">*</span> df<span class="sc">$</span>ses[row] <span class="sc">+</span></span>
-<span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a>        beta_sleep_dep <span class="sc">*</span> df<span class="sc">$</span>sleep[row] <span class="sc">+</span></span>
-<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>e_dep[row]</span>
+<span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (t <span class="cf">in</span> <span class="fu">seq_along</span>(idx)) {</span>
+<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a>    row <span class="ot">&lt;-</span> idx[t]</span>
+<span id="cb16-134"><a href="#cb16-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Baseline (age 14)</span></span>
+<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (t <span class="sc">==</span> <span class="dv">1</span>) {</span>
 <span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a>      df<span class="sc">$</span>anxiety_latent[row] <span class="ot">&lt;-</span></span>
-<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>u_anx[row] <span class="sc">+</span></span>
-<span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a>        beta_sex_anx <span class="sc">*</span> df<span class="sc">$</span>sexMale[row] <span class="sc">+</span></span>
-<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a>        beta_ses_anx <span class="sc">*</span> df<span class="sc">$</span>ses[row] <span class="sc">+</span></span>
-<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a>        beta_sleep_anx <span class="sc">*</span> df<span class="sc">$</span>sleep[row] <span class="sc">+</span></span>
-<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>e_anx[row]</span>
+<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a>      df<span class="sc">$</span>depression_latent[row] <span class="ot">&lt;-</span></span>
+<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>u_dep[row] <span class="sc">+</span></span>
+<span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a>        beta_sex_dep <span class="sc">*</span> df<span class="sc">$</span>sexMale[row] <span class="sc">+</span></span>
+<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a>        beta_ses_dep <span class="sc">*</span> df<span class="sc">$</span>ses[row] <span class="sc">+</span></span>
+<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a>        beta_sleep_dep <span class="sc">*</span> df<span class="sc">$</span>sleep[row] <span class="sc">+</span></span>
+<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>e_dep[row]</span>
 <span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a>      prev <span class="ot">&lt;-</span> idx[t <span class="sc">-</span> <span class="dv">1</span>]</span>
-<span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a>      df<span class="sc">$</span>depression_latent[row] <span class="ot">&lt;-</span></span>
-<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>u_dep[row] <span class="sc">+</span></span>
-<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a>        phi_dep <span class="sc">*</span> df<span class="sc">$</span>depression_latent[prev] <span class="sc">+</span></span>
-<span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a>        cl_anx_to_dep <span class="sc">*</span> df<span class="sc">$</span>anxiety_latent[prev] <span class="sc">+</span></span>
-<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a>        (beta_age_dep <span class="sc">+</span> beta_age_sex_dep <span class="sc">*</span> df<span class="sc">$</span>sexMale[row]) <span class="sc">*</span> (df<span class="sc">$</span>age[row] <span class="sc">-</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a>        beta_sex_dep <span class="sc">*</span> df<span class="sc">$</span>sexMale[row] <span class="sc">+</span></span>
-<span id="cb16-155"><a href="#cb16-155" aria-hidden="true" tabindex="-1"></a>        beta_ses_dep <span class="sc">*</span> df<span class="sc">$</span>ses[row] <span class="sc">+</span></span>
-<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a>        beta_sleep_dep <span class="sc">*</span> df<span class="sc">$</span>sleep[row] <span class="sc">+</span></span>
-<span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>e_dep[row]</span>
-<span id="cb16-158"><a href="#cb16-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a>      df<span class="sc">$</span>anxiety_latent[row] <span class="ot">&lt;-</span></span>
-<span id="cb16-160"><a href="#cb16-160" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>u_anx[row] <span class="sc">+</span></span>
-<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a>        phi_anx <span class="sc">*</span> df<span class="sc">$</span>anxiety_latent[prev] <span class="sc">+</span></span>
-<span id="cb16-162"><a href="#cb16-162" aria-hidden="true" tabindex="-1"></a>        cl_dep_to_anx <span class="sc">*</span> df<span class="sc">$</span>depression_latent[prev] <span class="sc">+</span></span>
-<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a>        (beta_age_anx <span class="sc">+</span> beta_age_sex_anx <span class="sc">*</span> df<span class="sc">$</span>sexMale[row]) <span class="sc">*</span> (df<span class="sc">$</span>age[row] <span class="sc">-</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb16-164"><a href="#cb16-164" aria-hidden="true" tabindex="-1"></a>        beta_sex_anx <span class="sc">*</span> df<span class="sc">$</span>sexMale[row] <span class="sc">+</span></span>
-<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a>        beta_ses_anx <span class="sc">*</span> df<span class="sc">$</span>ses[row] <span class="sc">+</span></span>
-<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a>        beta_sleep_anx <span class="sc">*</span> df<span class="sc">$</span>sleep[row] <span class="sc">+</span></span>
-<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>e_anx[row]</span>
-<span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-172"><a href="#cb16-172" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-173"><a href="#cb16-173" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. Transform to skewed counts (preserve ordering &amp; skew)</span></span>
-<span id="cb16-174"><a href="#cb16-174" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-175"><a href="#cb16-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-176"><a href="#cb16-176" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb16-177"><a href="#cb16-177" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a>    <span class="at">dep_rank =</span> <span class="fu">rank</span>(depression_latent, <span class="at">ties.method =</span> <span class="st">"average"</span>) <span class="sc">/</span> (<span class="fu">n</span>() <span class="sc">+</span> <span class="dv">1</span>),</span>
-<span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a>    <span class="at">anx_rank =</span> <span class="fu">rank</span>(anxiety_latent,    <span class="at">ties.method =</span> <span class="st">"average"</span>) <span class="sc">/</span> (<span class="fu">n</span>() <span class="sc">+</span> <span class="dv">1</span>),</span>
-<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a>    <span class="at">depression =</span> <span class="fu">round</span>(<span class="fu">pmin</span>(<span class="fu">qgamma</span>(dep_rank, <span class="at">shape =</span> <span class="dv">2</span>, <span class="at">scale =</span> <span class="dv">5</span>), <span class="dv">30</span>)),</span>
-<span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety    =</span> <span class="fu">round</span>(<span class="fu">pmin</span>(<span class="fu">qgamma</span>(anx_rank, <span class="at">shape =</span> <span class="dv">2</span>, <span class="at">scale =</span> <span class="dv">5</span>), <span class="dv">30</span>))</span>
-<span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb16-184"><a href="#cb16-184" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>dep_rank, <span class="sc">-</span>anx_rank)</span>
-<span id="cb16-185"><a href="#cb16-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-186"><a href="#cb16-186" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-187"><a href="#cb16-187" aria-hidden="true" tabindex="-1"></a><span class="co"># 9. Introduce attrition</span></span>
-<span id="cb16-188"><a href="#cb16-188" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-189"><a href="#cb16-189" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb16-190"><a href="#cb16-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p_dropout =</span> <span class="fu">case_when</span>(</span>
-<span id="cb16-191"><a href="#cb16-191" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">==</span> <span class="dv">14</span> <span class="sc">~</span> <span class="fl">0.00</span>,</span>
-<span id="cb16-192"><a href="#cb16-192" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">==</span> <span class="dv">15</span> <span class="sc">~</span> <span class="fl">0.05</span>,</span>
-<span id="cb16-193"><a href="#cb16-193" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">==</span> <span class="dv">16</span> <span class="sc">~</span> <span class="fl">0.10</span>,</span>
-<span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">==</span> <span class="dv">17</span> <span class="sc">~</span> <span class="fl">0.15</span></span>
-<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb16-196"><a href="#cb16-196" aria-hidden="true" tabindex="-1"></a>  <span class="at">keep =</span> <span class="fu">rbinom</span>(<span class="fu">n</span>(), <span class="dv">1</span>, <span class="dv">1</span> <span class="sc">-</span> p_dropout)) <span class="sc">%&gt;%</span></span>
-<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(keep <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb16-198"><a href="#cb16-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>p_dropout, <span class="sc">-</span>keep)</span>
-<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-200"><a href="#cb16-200" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a><span class="co"># 10. Factorize sex for plotting</span></span>
-<span id="cb16-202"><a href="#cb16-202" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-203"><a href="#cb16-203" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb16-204"><a href="#cb16-204" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>sex[<span class="fu">which</span>(df<span class="sc">$</span>sexMale <span class="sc">==</span> <span class="dv">0</span>)] <span class="ot">&lt;-</span> <span class="st">"female"</span></span>
-<span id="cb16-205"><a href="#cb16-205" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>sex[<span class="fu">which</span>(df<span class="sc">$</span>sexMale <span class="sc">==</span> <span class="dv">1</span>)] <span class="ot">&lt;-</span> <span class="st">"male"</span></span>
-<span id="cb16-206"><a href="#cb16-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-207"><a href="#cb16-207" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-208"><a href="#cb16-208" aria-hidden="true" tabindex="-1"></a><span class="co"># 11. Final dataset</span></span>
-<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb16-210"><a href="#cb16-210" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">select</span>(ID, age, sex, sexMale, ses, sleep, depression, anxiety)</span>
-<span id="cb16-211"><a href="#cb16-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-212"><a href="#cb16-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-213"><a href="#cb16-213" aria-hidden="true" tabindex="-1"></a><span class="fu">## Check</span></span>
-<span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-217"><a href="#cb16-217" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-218"><a href="#cb16-218" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(df)</span>
-<span id="cb16-219"><a href="#cb16-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(</span>
-<span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> df <span class="sc">%&gt;%</span> <span class="fu">select</span>(depression, anxiety, sleep, ses),</span>
-<span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a>  <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span>
-<span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span>
-<span id="cb16-225"><a href="#cb16-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-226"><a href="#cb16-226" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lmer</span>(</span>
-<span id="cb16-227"><a href="#cb16-227" aria-hidden="true" tabindex="-1"></a>  depression <span class="sc">~</span> <span class="fu">lag</span>(anxiety) <span class="sc">+</span> <span class="fu">lag</span>(depression) <span class="sc">+</span> age <span class="sc">+</span> sex <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>ID),</span>
-<span id="cb16-228"><a href="#cb16-228" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df))</span>
+<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a>      df<span class="sc">$</span>anxiety_latent[row] <span class="ot">&lt;-</span></span>
+<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>u_anx[row] <span class="sc">+</span></span>
+<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a>        beta_sex_anx <span class="sc">*</span> df<span class="sc">$</span>sexMale[row] <span class="sc">+</span></span>
+<span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a>        beta_ses_anx <span class="sc">*</span> df<span class="sc">$</span>ses[row] <span class="sc">+</span></span>
+<span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a>        beta_sleep_anx <span class="sc">*</span> df<span class="sc">$</span>sleep[row] <span class="sc">+</span></span>
+<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>e_anx[row]</span>
+<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a>      prev <span class="ot">&lt;-</span> idx[t <span class="sc">-</span> <span class="dv">1</span>]</span>
+<span id="cb16-155"><a href="#cb16-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a>      df<span class="sc">$</span>depression_latent[row] <span class="ot">&lt;-</span></span>
+<span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>u_dep[row] <span class="sc">+</span></span>
+<span id="cb16-158"><a href="#cb16-158" aria-hidden="true" tabindex="-1"></a>        phi_dep <span class="sc">*</span> df<span class="sc">$</span>depression_latent[prev] <span class="sc">+</span></span>
+<span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a>        cl_anx_to_dep <span class="sc">*</span> df<span class="sc">$</span>anxiety_latent[prev] <span class="sc">+</span></span>
+<span id="cb16-160"><a href="#cb16-160" aria-hidden="true" tabindex="-1"></a>        (beta_age_dep <span class="sc">+</span> beta_age_sex_dep <span class="sc">*</span> df<span class="sc">$</span>sexMale[row]) <span class="sc">*</span> (df<span class="sc">$</span>age[row] <span class="sc">-</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a>        beta_sex_dep <span class="sc">*</span> df<span class="sc">$</span>sexMale[row] <span class="sc">+</span></span>
+<span id="cb16-162"><a href="#cb16-162" aria-hidden="true" tabindex="-1"></a>        beta_ses_dep <span class="sc">*</span> df<span class="sc">$</span>ses[row] <span class="sc">+</span></span>
+<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a>        beta_sleep_dep <span class="sc">*</span> df<span class="sc">$</span>sleep[row] <span class="sc">+</span></span>
+<span id="cb16-164"><a href="#cb16-164" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>e_dep[row]</span>
+<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a>      df<span class="sc">$</span>anxiety_latent[row] <span class="ot">&lt;-</span></span>
+<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>u_anx[row] <span class="sc">+</span></span>
+<span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a>        phi_anx <span class="sc">*</span> df<span class="sc">$</span>anxiety_latent[prev] <span class="sc">+</span></span>
+<span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a>        cl_dep_to_anx <span class="sc">*</span> df<span class="sc">$</span>depression_latent[prev] <span class="sc">+</span></span>
+<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a>        (beta_age_anx <span class="sc">+</span> beta_age_sex_anx <span class="sc">*</span> df<span class="sc">$</span>sexMale[row]) <span class="sc">*</span> (df<span class="sc">$</span>age[row] <span class="sc">-</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a>        beta_sex_anx <span class="sc">*</span> df<span class="sc">$</span>sexMale[row] <span class="sc">+</span></span>
+<span id="cb16-172"><a href="#cb16-172" aria-hidden="true" tabindex="-1"></a>        beta_ses_anx <span class="sc">*</span> df<span class="sc">$</span>ses[row] <span class="sc">+</span></span>
+<span id="cb16-173"><a href="#cb16-173" aria-hidden="true" tabindex="-1"></a>        beta_sleep_anx <span class="sc">*</span> df<span class="sc">$</span>sleep[row] <span class="sc">+</span></span>
+<span id="cb16-174"><a href="#cb16-174" aria-hidden="true" tabindex="-1"></a>        df<span class="sc">$</span>e_anx[row]</span>
+<span id="cb16-175"><a href="#cb16-175" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb16-176"><a href="#cb16-176" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-177"><a href="#cb16-177" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. Transform to skewed counts (preserve ordering &amp; skew)</span></span>
+<span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb16-184"><a href="#cb16-184" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb16-185"><a href="#cb16-185" aria-hidden="true" tabindex="-1"></a>    <span class="at">dep_rank =</span> <span class="fu">rank</span>(depression_latent, <span class="at">ties.method =</span> <span class="st">"average"</span>) <span class="sc">/</span> (<span class="fu">n</span>() <span class="sc">+</span> <span class="dv">1</span>),</span>
+<span id="cb16-186"><a href="#cb16-186" aria-hidden="true" tabindex="-1"></a>    <span class="at">anx_rank =</span> <span class="fu">rank</span>(anxiety_latent,    <span class="at">ties.method =</span> <span class="st">"average"</span>) <span class="sc">/</span> (<span class="fu">n</span>() <span class="sc">+</span> <span class="dv">1</span>),</span>
+<span id="cb16-187"><a href="#cb16-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-188"><a href="#cb16-188" aria-hidden="true" tabindex="-1"></a>    <span class="at">depression =</span> <span class="fu">round</span>(<span class="fu">pmin</span>(<span class="fu">qgamma</span>(dep_rank, <span class="at">shape =</span> <span class="dv">2</span>, <span class="at">scale =</span> <span class="dv">5</span>), <span class="dv">30</span>)),</span>
+<span id="cb16-189"><a href="#cb16-189" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety    =</span> <span class="fu">round</span>(<span class="fu">pmin</span>(<span class="fu">qgamma</span>(anx_rank, <span class="at">shape =</span> <span class="dv">2</span>, <span class="at">scale =</span> <span class="dv">5</span>), <span class="dv">30</span>))</span>
+<span id="cb16-190"><a href="#cb16-190" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-191"><a href="#cb16-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>dep_rank, <span class="sc">-</span>anx_rank)</span>
+<span id="cb16-192"><a href="#cb16-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-193"><a href="#cb16-193" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a><span class="co"># 9. Introduce attrition</span></span>
+<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-196"><a href="#cb16-196" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb16-198"><a href="#cb16-198" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_dropout =</span> <span class="fu">case_when</span>(</span>
+<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a>      age <span class="sc">==</span> <span class="dv">14</span> <span class="sc">~</span> <span class="fl">0.00</span>,</span>
+<span id="cb16-200"><a href="#cb16-200" aria-hidden="true" tabindex="-1"></a>      age <span class="sc">==</span> <span class="dv">15</span> <span class="sc">~</span> <span class="fl">0.05</span>,</span>
+<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a>      age <span class="sc">==</span> <span class="dv">16</span> <span class="sc">~</span> <span class="fl">0.10</span>,</span>
+<span id="cb16-202"><a href="#cb16-202" aria-hidden="true" tabindex="-1"></a>      age <span class="sc">==</span> <span class="dv">17</span> <span class="sc">~</span> <span class="fl">0.15</span></span>
+<span id="cb16-203"><a href="#cb16-203" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb16-204"><a href="#cb16-204" aria-hidden="true" tabindex="-1"></a>    <span class="at">dropout =</span> <span class="fu">rbinom</span>(<span class="fu">n</span>(), <span class="dv">1</span>, p_dropout)</span>
+<span id="cb16-205"><a href="#cb16-205" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-206"><a href="#cb16-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb16-207"><a href="#cb16-207" aria-hidden="true" tabindex="-1"></a>    <span class="at">ses        =</span> <span class="fu">ifelse</span>(dropout <span class="sc">==</span> <span class="dv">1</span>, <span class="cn">NA</span>, ses),</span>
+<span id="cb16-208"><a href="#cb16-208" aria-hidden="true" tabindex="-1"></a>    <span class="at">sleep      =</span> <span class="fu">ifelse</span>(dropout <span class="sc">==</span> <span class="dv">1</span>, <span class="cn">NA</span>, sleep),</span>
+<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a>    <span class="at">depression =</span> <span class="fu">ifelse</span>(dropout <span class="sc">==</span> <span class="dv">1</span>, <span class="cn">NA</span>, depression),</span>
+<span id="cb16-210"><a href="#cb16-210" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety    =</span> <span class="fu">ifelse</span>(dropout <span class="sc">==</span> <span class="dv">1</span>, <span class="cn">NA</span>, anxiety)</span>
+<span id="cb16-211"><a href="#cb16-211" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-212"><a href="#cb16-212" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>p_dropout, <span class="sc">-</span>dropout)</span>
+<span id="cb16-213"><a href="#cb16-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-215"><a href="#cb16-215" aria-hidden="true" tabindex="-1"></a><span class="co"># 10. Factorize sex for plotting</span></span>
+<span id="cb16-216"><a href="#cb16-216" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-217"><a href="#cb16-217" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-218"><a href="#cb16-218" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>sex[<span class="fu">which</span>(df<span class="sc">$</span>sexMale <span class="sc">==</span> <span class="dv">0</span>)] <span class="ot">&lt;-</span> <span class="st">"female"</span></span>
+<span id="cb16-219"><a href="#cb16-219" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>sex[<span class="fu">which</span>(df<span class="sc">$</span>sexMale <span class="sc">==</span> <span class="dv">1</span>)] <span class="ot">&lt;-</span> <span class="st">"male"</span></span>
+<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a><span class="co"># 11. Final dataset</span></span>
+<span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb16-225"><a href="#cb16-225" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ID, timepoint, age, sex, sexMale, ses, sleep, depression, anxiety)</span>
+<span id="cb16-226"><a href="#cb16-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-227"><a href="#cb16-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-228"><a href="#cb16-228" aria-hidden="true" tabindex="-1"></a><span class="fu">## Check</span></span>
 <span id="cb16-229"><a href="#cb16-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-230"><a href="#cb16-230" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lmer</span>(</span>
-<span id="cb16-231"><a href="#cb16-231" aria-hidden="true" tabindex="-1"></a>  anxiety <span class="sc">~</span> <span class="fu">lag</span>(depression) <span class="sc">+</span> <span class="fu">lag</span>(anxiety) <span class="sc">+</span> age <span class="sc">+</span> sex <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>ID),</span>
-<span id="cb16-232"><a href="#cb16-232" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df))</span>
-<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-232"><a href="#cb16-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(df)</span>
 <span id="cb16-234"><a href="#cb16-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-238"><a href="#cb16-238" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(</span>
-<span id="cb16-239"><a href="#cb16-239" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>depression,</span>
-<span id="cb16-240"><a href="#cb16-240" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="dv">30</span>,</span>
-<span id="cb16-241"><a href="#cb16-241" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Depression Distribution"</span>,</span>
-<span id="cb16-242"><a href="#cb16-242" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Depression symptoms"</span>)</span>
-<span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-235"><a href="#cb16-235" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(</span>
+<span id="cb16-236"><a href="#cb16-236" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> df <span class="sc">%&gt;%</span> <span class="fu">select</span>(depression, anxiety, sleep, ses),</span>
+<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a>  <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span>
+<span id="cb16-238"><a href="#cb16-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-239"><a href="#cb16-239" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span>
+<span id="cb16-240"><a href="#cb16-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-241"><a href="#cb16-241" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lmer</span>(</span>
+<span id="cb16-242"><a href="#cb16-242" aria-hidden="true" tabindex="-1"></a>  depression <span class="sc">~</span> <span class="fu">lag</span>(anxiety) <span class="sc">+</span> <span class="fu">lag</span>(depression) <span class="sc">+</span> age <span class="sc">+</span> sex <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>ID),</span>
+<span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df))</span>
 <span id="cb16-244"><a href="#cb16-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-248"><a href="#cb16-248" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(</span>
-<span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>anxiety,</span>
-<span id="cb16-250"><a href="#cb16-250" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="dv">30</span>,</span>
-<span id="cb16-251"><a href="#cb16-251" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Anxiety Distribution"</span>,</span>
-<span id="cb16-252"><a href="#cb16-252" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Anxiety symptoms"</span>)</span>
-<span id="cb16-253"><a href="#cb16-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-254"><a href="#cb16-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-257"><a href="#cb16-257" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-258"><a href="#cb16-258" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Summarize mean + SD by age and sex ---</span></span>
-<span id="cb16-259"><a href="#cb16-259" aria-hidden="true" tabindex="-1"></a>df_summary <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb16-260"><a href="#cb16-260" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb16-261"><a href="#cb16-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb16-262"><a href="#cb16-262" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_dep =</span> <span class="fu">mean</span>(depression, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb16-263"><a href="#cb16-263" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_dep   =</span> <span class="fu">sd</span>(depression, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb16-264"><a href="#cb16-264" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_anx =</span> <span class="fu">mean</span>(anxiety, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb16-265"><a href="#cb16-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_anx   =</span> <span class="fu">sd</span>(anxiety, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb16-266"><a href="#cb16-266" aria-hidden="true" tabindex="-1"></a>    <span class="at">n        =</span> <span class="fu">n</span>(),</span>
-<span id="cb16-267"><a href="#cb16-267" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb16-268"><a href="#cb16-268" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lmer</span>(</span>
+<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a>  anxiety <span class="sc">~</span> <span class="fu">lag</span>(depression) <span class="sc">+</span> <span class="fu">lag</span>(anxiety) <span class="sc">+</span> age <span class="sc">+</span> sex <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>ID),</span>
+<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df))</span>
+<span id="cb16-248"><a href="#cb16-248" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-252"><a href="#cb16-252" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-253"><a href="#cb16-253" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(</span>
+<span id="cb16-254"><a href="#cb16-254" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>depression,</span>
+<span id="cb16-255"><a href="#cb16-255" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="dv">30</span>,</span>
+<span id="cb16-256"><a href="#cb16-256" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Depression Distribution"</span>,</span>
+<span id="cb16-257"><a href="#cb16-257" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Depression symptoms"</span>)</span>
+<span id="cb16-258"><a href="#cb16-258" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-259"><a href="#cb16-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-262"><a href="#cb16-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-263"><a href="#cb16-263" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(</span>
+<span id="cb16-264"><a href="#cb16-264" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>anxiety,</span>
+<span id="cb16-265"><a href="#cb16-265" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="dv">30</span>,</span>
+<span id="cb16-266"><a href="#cb16-266" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Anxiety Distribution"</span>,</span>
+<span id="cb16-267"><a href="#cb16-267" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Anxiety symptoms"</span>)</span>
+<span id="cb16-268"><a href="#cb16-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-269"><a href="#cb16-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-270"><a href="#cb16-270" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Plot Depression by Age and Sex ---</span></span>
-<span id="cb16-271"><a href="#cb16-271" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_summary, <span class="fu">aes</span>(<span class="at">x=</span>age, <span class="at">y=</span>mean_dep, <span class="at">color=</span>sex)) <span class="sc">+</span></span>
-<span id="cb16-272"><a href="#cb16-272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth=</span><span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb16-273"><a href="#cb16-273" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb16-274"><a href="#cb16-274" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean_dep<span class="sc">-</span>sd_dep, <span class="at">ymax=</span>mean_dep<span class="sc">+</span>sd_dep, <span class="at">fill=</span>sex), <span class="at">alpha=</span><span class="fl">0.2</span>, <span class="at">color=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb16-275"><a href="#cb16-275" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Depression Symptoms by Age and Sex"</span>,</span>
-<span id="cb16-276"><a href="#cb16-276" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"Age"</span>, <span class="at">y=</span><span class="st">"Mean Depression Symptoms"</span>) <span class="sc">+</span></span>
-<span id="cb16-277"><a href="#cb16-277" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb16-278"><a href="#cb16-278" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"female"</span><span class="ot">=</span><span class="st">"red"</span>, <span class="st">"male"</span><span class="ot">=</span><span class="st">"blue"</span>)) <span class="sc">+</span></span>
-<span id="cb16-279"><a href="#cb16-279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"female"</span><span class="ot">=</span><span class="st">"red"</span>, <span class="st">"male"</span><span class="ot">=</span><span class="st">"blue"</span>))</span>
-<span id="cb16-280"><a href="#cb16-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-281"><a href="#cb16-281" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Plot Anxiety by Age and Sex ---</span></span>
-<span id="cb16-282"><a href="#cb16-282" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_summary, <span class="fu">aes</span>(<span class="at">x=</span>age, <span class="at">y=</span>mean_anx, <span class="at">color=</span>sex)) <span class="sc">+</span></span>
-<span id="cb16-283"><a href="#cb16-283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth=</span><span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb16-284"><a href="#cb16-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb16-285"><a href="#cb16-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean_anx<span class="sc">-</span>sd_anx, <span class="at">ymax=</span>mean_anx<span class="sc">+</span>sd_anx, <span class="at">fill=</span>sex), <span class="at">alpha=</span><span class="fl">0.2</span>, <span class="at">color=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb16-286"><a href="#cb16-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Anxiety Symptoms by Age and Sex"</span>,</span>
-<span id="cb16-287"><a href="#cb16-287" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"Age"</span>, <span class="at">y=</span><span class="st">"Mean Anxiety Symptoms"</span>) <span class="sc">+</span></span>
-<span id="cb16-288"><a href="#cb16-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb16-289"><a href="#cb16-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"female"</span><span class="ot">=</span><span class="st">"red"</span>, <span class="st">"male"</span><span class="ot">=</span><span class="st">"blue"</span>)) <span class="sc">+</span></span>
-<span id="cb16-290"><a href="#cb16-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"female"</span><span class="ot">=</span><span class="st">"red"</span>, <span class="st">"male"</span><span class="ot">=</span><span class="st">"blue"</span>))</span>
-<span id="cb16-291"><a href="#cb16-291" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-292"><a href="#cb16-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-293"><a href="#cb16-293" aria-hidden="true" tabindex="-1"></a><span class="fu"># Save Data</span></span>
-<span id="cb16-294"><a href="#cb16-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-297"><a href="#cb16-297" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-298"><a href="#cb16-298" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb16-299"><a href="#cb16-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-300"><a href="#cb16-300" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(</span>
-<span id="cb16-301"><a href="#cb16-301" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> df,</span>
-<span id="cb16-302"><a href="#cb16-302" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"./data/mydata_long.csv"</span>,</span>
-<span id="cb16-303"><a href="#cb16-303" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb16-304"><a href="#cb16-304" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-272"><a href="#cb16-272" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-273"><a href="#cb16-273" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Summarize mean + SD by age and sex ---</span></span>
+<span id="cb16-274"><a href="#cb16-274" aria-hidden="true" tabindex="-1"></a>df_summary <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb16-275"><a href="#cb16-275" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age, sex) <span class="sc">%&gt;%</span></span>
+<span id="cb16-276"><a href="#cb16-276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb16-277"><a href="#cb16-277" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_dep =</span> <span class="fu">mean</span>(depression, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb16-278"><a href="#cb16-278" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_dep   =</span> <span class="fu">sd</span>(depression, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb16-279"><a href="#cb16-279" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_anx =</span> <span class="fu">mean</span>(anxiety, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb16-280"><a href="#cb16-280" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_anx   =</span> <span class="fu">sd</span>(anxiety, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb16-281"><a href="#cb16-281" aria-hidden="true" tabindex="-1"></a>    <span class="at">n        =</span> <span class="fu">n</span>(),</span>
+<span id="cb16-282"><a href="#cb16-282" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb16-283"><a href="#cb16-283" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb16-284"><a href="#cb16-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-285"><a href="#cb16-285" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Plot Depression by Age and Sex ---</span></span>
+<span id="cb16-286"><a href="#cb16-286" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_summary, <span class="fu">aes</span>(<span class="at">x=</span>age, <span class="at">y=</span>mean_dep, <span class="at">color=</span>sex)) <span class="sc">+</span></span>
+<span id="cb16-287"><a href="#cb16-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth=</span><span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb16-288"><a href="#cb16-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb16-289"><a href="#cb16-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean_dep<span class="sc">-</span>sd_dep, <span class="at">ymax=</span>mean_dep<span class="sc">+</span>sd_dep, <span class="at">fill=</span>sex), <span class="at">alpha=</span><span class="fl">0.2</span>, <span class="at">color=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb16-290"><a href="#cb16-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Depression Symptoms by Age and Sex"</span>,</span>
+<span id="cb16-291"><a href="#cb16-291" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"Age"</span>, <span class="at">y=</span><span class="st">"Mean Depression Symptoms"</span>) <span class="sc">+</span></span>
+<span id="cb16-292"><a href="#cb16-292" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb16-293"><a href="#cb16-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"female"</span><span class="ot">=</span><span class="st">"red"</span>, <span class="st">"male"</span><span class="ot">=</span><span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb16-294"><a href="#cb16-294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"female"</span><span class="ot">=</span><span class="st">"red"</span>, <span class="st">"male"</span><span class="ot">=</span><span class="st">"blue"</span>))</span>
+<span id="cb16-295"><a href="#cb16-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-296"><a href="#cb16-296" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Plot Anxiety by Age and Sex ---</span></span>
+<span id="cb16-297"><a href="#cb16-297" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_summary, <span class="fu">aes</span>(<span class="at">x=</span>age, <span class="at">y=</span>mean_anx, <span class="at">color=</span>sex)) <span class="sc">+</span></span>
+<span id="cb16-298"><a href="#cb16-298" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth=</span><span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb16-299"><a href="#cb16-299" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb16-300"><a href="#cb16-300" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean_anx<span class="sc">-</span>sd_anx, <span class="at">ymax=</span>mean_anx<span class="sc">+</span>sd_anx, <span class="at">fill=</span>sex), <span class="at">alpha=</span><span class="fl">0.2</span>, <span class="at">color=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb16-301"><a href="#cb16-301" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Anxiety Symptoms by Age and Sex"</span>,</span>
+<span id="cb16-302"><a href="#cb16-302" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"Age"</span>, <span class="at">y=</span><span class="st">"Mean Anxiety Symptoms"</span>) <span class="sc">+</span></span>
+<span id="cb16-303"><a href="#cb16-303" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb16-304"><a href="#cb16-304" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"female"</span><span class="ot">=</span><span class="st">"red"</span>, <span class="st">"male"</span><span class="ot">=</span><span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb16-305"><a href="#cb16-305" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"female"</span><span class="ot">=</span><span class="st">"red"</span>, <span class="st">"male"</span><span class="ot">=</span><span class="st">"blue"</span>))</span>
+<span id="cb16-306"><a href="#cb16-306" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-307"><a href="#cb16-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-308"><a href="#cb16-308" aria-hidden="true" tabindex="-1"></a><span class="fu"># Save Data</span></span>
+<span id="cb16-309"><a href="#cb16-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-312"><a href="#cb16-312" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-313"><a href="#cb16-313" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb16-314"><a href="#cb16-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-315"><a href="#cb16-315" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(</span>
+<span id="cb16-316"><a href="#cb16-316" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> df,</span>
+<span id="cb16-317"><a href="#cb16-317" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"./data/mydata_long.csv"</span>,</span>
+<span id="cb16-318"><a href="#cb16-318" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-319"><a href="#cb16-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
