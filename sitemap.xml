@@ -2,30 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/structural-equation-models.html</loc>
-    <lastmod>2025-12-31T22:31:51.986Z</lastmod>
+    <lastmod>2026-01-02T00:24:07.608Z</lastmod>
   </url>
   <url>
-    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/about.html</loc>
-    <lastmod>2025-12-31T22:31:51.973Z</lastmod>
-  </url>
-  <url>
-    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/mixed-effects-models.html</loc>
-    <lastmod>2025-12-31T22:31:51.986Z</lastmod>
-  </url>
-  <url>
-    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/data-manipulation.html</loc>
-    <lastmod>2025-12-31T22:31:51.973Z</lastmod>
-  </url>
-  <url>
-    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/index.html</loc>
-    <lastmod>2025-12-31T22:31:51.986Z</lastmod>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/simulate-data.html</loc>
+    <lastmod>2026-01-02T00:24:07.608Z</lastmod>
   </url>
   <url>
     <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/data-visualization.html</loc>
-    <lastmod>2025-12-31T22:31:51.973Z</lastmod>
+    <lastmod>2026-01-02T00:24:07.594Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/index.html</loc>
+    <lastmod>2026-01-02T00:24:07.608Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/data-manipulation.html</loc>
+    <lastmod>2026-01-02T00:24:07.594Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/mixed-effects-models.html</loc>
+    <lastmod>2026-01-02T00:24:07.608Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/about.html</loc>
+    <lastmod>2026-01-02T00:24:07.594Z</lastmod>
   </url>
   <url>
     <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/missing-data.html</loc>
-    <lastmod>2025-12-31T22:31:51.986Z</lastmod>
+    <lastmod>2026-01-02T00:24:07.608Z</lastmod>
   </url>
 </urlset>

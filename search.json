@@ -7,18 +7,39 @@
     "text": "For an overview of structural equation modeling, see my chapter on “Structural Equation Modeling” in the following textbook:\nPetersen, I. T. (2025). Principles of psychological assessment: With applied examples in R. University of Iowa Libraries. https://isaactpetersen.github.io/Principles-Psychological-Assessment. https://doi.org/10.25820/work.007199\n\n\n\n\n\nReuseCC BY 4.0"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About This Website",
+    "objectID": "simulate-data.html",
+    "href": "simulate-data.html",
+    "title": "Simulate Data",
     "section": "",
-    "text": "This website for the 2026 Center for Social Science Innovation (CSSI) Workshop on Longitudinal Data Analysis was generated with Quarto. The codebase that was used to generate this website is located here.\n\n1 Contact\nFor questions about the Developmental Psychopathology Lab, please contact devpsy-lab@uiowa.edu.\n\n2 License\n\n\nCC BY 4.0\n\nThis work is licensed under a Creative Commons Attribution 4.0 International License.\n\n\nCC BY 4.0\n\n\n3 Session Info\n\nCodesessionInfo()\n\nR version 4.5.2 (2025-10-31)\nPlatform: x86_64-pc-linux-gnu\nRunning under: Ubuntu 24.04.3 LTS\n\nMatrix products: default\nBLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 \nLAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0\n\nlocale:\n [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       \n [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   \n [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          \n[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   \n\ntime zone: UTC\ntzcode source: system (glibc)\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.5.2    fastmap_1.2.0     cli_3.6.5        \n [5] tools_4.5.2       htmltools_0.5.9   otel_0.2.0        yaml_2.3.12      \n [9] rmarkdown_2.30    knitr_1.51        jsonlite_2.0.0    xfun_0.55        \n[13] digest_0.6.39     rlang_1.1.6       evaluate_1.0.5   \n\n\n\n\n\n\nReuseCC BY 4.0"
+    "text": "Codelibrary(\"MASS\")\nlibrary(\"psych\")\nlibrary(\"tidyverse\")"
   },
   {
-    "objectID": "mixed-effects-models.html",
-    "href": "mixed-effects-models.html",
-    "title": "Mixed-Effects Models",
+    "objectID": "simulate-data.html#load-libraries",
+    "href": "simulate-data.html#load-libraries",
+    "title": "Simulate Data",
     "section": "",
-    "text": "For an overview of mixed modeling, see my chapter on “Mixed Modeling” in the following textbook:\nPetersen, I. T. (2025). Fantasy football analytics: Statistics, prediction, and empiricism using R. University of Iowa Libraries. https://github.com/isaactpetersen/Fantasy-Football-Analytics-Textbook\n\n\n\n\n\nReuseCC BY 4.0"
+    "text": "Codelibrary(\"MASS\")\nlibrary(\"psych\")\nlibrary(\"tidyverse\")"
+  },
+  {
+    "objectID": "simulate-data.html#check",
+    "href": "simulate-data.html#check",
+    "title": "Simulate Data",
+    "section": "\n2.1 Check",
+    "text": "2.1 Check\n\nCodedescribe(df)\n\n\n  \n\n\nCodecor(\n  x = df %&gt;% select(depression, anxiety, sleep, ses),\n  use = \"pairwise.complete.obs\")\n\n           depression    anxiety      sleep        ses\ndepression  1.0000000  0.5820936 -0.3602623 -0.3655482\nanxiety     0.5820936  1.0000000 -0.2729997 -0.2763510\nsleep      -0.3602623 -0.2729997  1.0000000  0.4948693\nses        -0.3655482 -0.2763510  0.4948693  1.0000000\n\nCodehead(df)\n\n\n  \n\n\n\n\nCodehist(\n  df$depression,\n  breaks = 30,\n  main = \"Depression Distribution\",\n  xlab = \"Depression symptoms\")\n\n\n\n\n\n\n\n\nCodehist(\n  df$anxiety,\n  breaks = 30,\n  main = \"Anxiety Distribution\",\n  xlab = \"Anxiety symptoms\")\n\n\n\n\n\n\n\n\nCode# --- Summarize mean + SD by age and sex ---\ndf_summary &lt;- df %&gt;%\n  group_by(age, sexFactor) %&gt;%\n  summarize(\n    mean_dep = mean(depression, na.rm=TRUE),\n    sd_dep   = sd(depression, na.rm=TRUE),\n    mean_anx = mean(anxiety, na.rm=TRUE),\n    sd_anx   = sd(anxiety, na.rm=TRUE),\n    n        = n(),\n    .groups = \"drop\"\n  )\n\n# --- Plot Depression by Age and Sex ---\nggplot(df_summary, aes(x=age, y=mean_dep, color=sexFactor)) +\n  geom_line(size=1.2) +\n  geom_point(size=2) +\n  geom_ribbon(aes(ymin=mean_dep-sd_dep, ymax=mean_dep+sd_dep, fill=sexFactor), alpha=0.2, color=NA) +\n  labs(title=\"Depression Symptoms by Age and Sex\",\n       x=\"Age\", y=\"Mean Depression Symptoms\") +\n  theme_minimal() +\n  scale_color_manual(values=c(\"female\"=\"red\", \"male\"=\"blue\")) +\n  scale_fill_manual(values=c(\"female\"=\"red\", \"male\"=\"blue\"))\n\n\n\n\n\n\nCode# --- Plot Anxiety by Age and Sex ---\nggplot(df_summary, aes(x=age, y=mean_anx, color=sexFactor)) +\n  geom_line(size=1.2) +\n  geom_point(size=2) +\n  geom_ribbon(aes(ymin=mean_anx-sd_anx, ymax=mean_anx+sd_anx, fill=sexFactor), alpha=0.2, color=NA) +\n  labs(title=\"Anxiety Symptoms by Age and Sex\",\n       x=\"Age\", y=\"Mean Anxiety Symptoms\") +\n  theme_minimal() +\n  scale_color_manual(values=c(\"female\"=\"red\", \"male\"=\"blue\")) +\n  scale_fill_manual(values=c(\"female\"=\"red\", \"male\"=\"blue\"))"
+  },
+  {
+    "objectID": "data-visualization.html",
+    "href": "data-visualization.html",
+    "title": "Visualization of Longitudinal Data",
+    "section": "",
+    "text": "ReuseCC BY 4.0"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "2026 CSSI Workshop on Longitudinal Data Analysis",
+    "section": "",
+    "text": "This is the website for the 2026 Center for Social Science Innovation (CSSI) Workshop on Longitudinal Data Analysis led by Isaac T. Petersen. Isaac is an Associate Professor in the Department of Psychological and Brain Sciences at the University of Iowa.\nThis workshop provides an applied overview of principles and methods for longitudinal data analysis, with hands-on examples in R. Topics include types of longitudinal data, data manipulation and visualization, statistical methods for longitudinal analysis (including mixed-effects models and structural equation models), longitudinal measurement invariance, handling missing data, and separating within-person and between-person effects. Participants are encouraged to bring a laptop with R and RStudio installed for interactive exercises.\n\n\n\n\n\nReuseCC BY 4.0"
   },
   {
     "objectID": "data-manipulation.html",
@@ -42,18 +63,18 @@
     "text": "First, let’s generate some example data.\n\nCodeset.seed(52242) # for a reproducible result\n\nexampleData_long &lt;- expand.grid(\n  ID = 1001:1003,\n  timepoint = 1:4\n)\n\nexampleData_long$score &lt;- sample(\n  x = 50:100,\n  size = nrow(exampleData_long),\n  replace = TRUE\n)\n\n\nThe data are in long form—each participant (identified by ID) has multiple rows (i.e., each row is uniquely identified by the combination of ID and timepoint; thus, we would say the data are in ID–timepoint form):\n\nCodeexampleData_long"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "2026 CSSI Workshop on Longitudinal Data Analysis",
+    "objectID": "mixed-effects-models.html",
+    "href": "mixed-effects-models.html",
+    "title": "Mixed-Effects Models",
     "section": "",
-    "text": "This is the website for the 2026 Center for Social Science Innovation (CSSI) Workshop on Longitudinal Data Analysis led by Isaac T. Petersen. Isaac is an Associate Professor in the Department of Psychological and Brain Sciences at the University of Iowa.\nThis workshop provides an applied overview of principles and methods for longitudinal data analysis, with hands-on examples in R. Topics include types of longitudinal data, data manipulation and visualization, statistical methods for longitudinal analysis (including mixed-effects models and structural equation models), longitudinal measurement invariance, handling missing data, and separating within-person and between-person effects. Participants are encouraged to bring a laptop with R and RStudio installed for interactive exercises.\n\n\n\n\n\nReuseCC BY 4.0"
+    "text": "For an overview of mixed modeling, see my chapter on “Mixed Modeling” in the following textbook:\nPetersen, I. T. (2025). Fantasy football analytics: Statistics, prediction, and empiricism using R. University of Iowa Libraries. https://github.com/isaactpetersen/Fantasy-Football-Analytics-Textbook\n\n\n\n\n\nReuseCC BY 4.0"
   },
   {
-    "objectID": "data-visualization.html",
-    "href": "data-visualization.html",
-    "title": "Visualization of Longitudinal Data",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About This Website",
     "section": "",
-    "text": "ReuseCC BY 4.0"
+    "text": "This website for the 2026 Center for Social Science Innovation (CSSI) Workshop on Longitudinal Data Analysis was generated with Quarto. The codebase that was used to generate this website is located here.\n\n1 Contact\nFor questions about the Developmental Psychopathology Lab, please contact devpsy-lab@uiowa.edu.\n\n2 License\n\n\nCC BY 4.0\n\nThis work is licensed under a Creative Commons Attribution 4.0 International License.\n\n\nCC BY 4.0\n\n\n3 Session Info\n\nCodesessionInfo()\n\nR version 4.5.2 (2025-10-31)\nPlatform: x86_64-pc-linux-gnu\nRunning under: Ubuntu 24.04.3 LTS\n\nMatrix products: default\nBLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 \nLAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0\n\nlocale:\n [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       \n [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   \n [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          \n[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   \n\ntime zone: UTC\ntzcode source: system (glibc)\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.5.2    fastmap_1.2.0     cli_3.6.5        \n [5] tools_4.5.2       htmltools_0.5.9   otel_0.2.0        yaml_2.3.12      \n [9] rmarkdown_2.30    knitr_1.51        jsonlite_2.0.0    xfun_0.55        \n[13] digest_0.6.39     rlang_1.1.6       evaluate_1.0.5   \n\n\n\n\n\n\nReuseCC BY 4.0"
   },
   {
     "objectID": "missing-data.html",
