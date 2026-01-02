@@ -25,6 +25,7 @@ set.seed(52242)
 # 1. Settings
 # -----------------------------
 N <- 250
+timepoints <- 1:4
 ages <- 14:17
 n_time <- length(ages)
 
@@ -32,9 +33,15 @@ n_time <- length(ages)
 id <- 1:N
 sexMale <- rbinom(N, 1, 0.5)  # 0=female, 1=male
 
-df <- expand.grid(ID = id, age = ages) %>%
-  arrange(ID, age) %>%
+df <- expand.grid(ID = id, timepoint = timepoints) %>%
+  arrange(ID, timepoint) %>%
   mutate(sexMale = rep(sexMale, each = n_time))
+
+df$age <- NA
+df$age[which(df$timepoint == 1)] <- 14
+df$age[which(df$timepoint == 2)] <- 15
+df$age[which(df$timepoint == 3)] <- 16
+df$age[which(df$timepoint == 4)] <- 17
 
 # -----------------------------
 # 2. Random intercepts (person-level)
@@ -183,15 +190,22 @@ df <- df %>%
 # 9. Introduce attrition
 # -----------------------------
 df <- df %>%
-  mutate(p_dropout = case_when(
-    age == 14 ~ 0.00,
-    age == 15 ~ 0.05,
-    age == 16 ~ 0.10,
-    age == 17 ~ 0.15
-  ),
-  keep = rbinom(n(), 1, 1 - p_dropout)) %>%
-  filter(keep == 1) %>%
-  select(-p_dropout, -keep)
+  mutate(
+    p_dropout = case_when(
+      age == 14 ~ 0.00,
+      age == 15 ~ 0.05,
+      age == 16 ~ 0.10,
+      age == 17 ~ 0.15
+    ),
+    dropout = rbinom(n(), 1, p_dropout)
+  ) %>%
+  mutate(
+    ses        = ifelse(dropout == 1, NA, ses),
+    sleep      = ifelse(dropout == 1, NA, sleep),
+    depression = ifelse(dropout == 1, NA, depression),
+    anxiety    = ifelse(dropout == 1, NA, anxiety)
+  ) %>%
+  select(-p_dropout, -dropout)
 
 # -----------------------------
 # 10. Factorize sex for plotting
@@ -203,7 +217,8 @@ df$sex[which(df$sexMale == 1)] <- "male"
 # -----------------------------
 # 11. Final dataset
 # -----------------------------
-df <- df %>% select(ID, age, sex, sexMale, ses, sleep, depression, anxiety)
+df <- df %>% 
+  select(ID, timepoint, age, sex, sexMale, ses, sleep, depression, anxiety)
 ```
 
 ## Check
