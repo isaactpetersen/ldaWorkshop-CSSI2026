@@ -199,11 +199,97 @@ lavaanPlot::lavaanPlot2(
   coef_labels = TRUE)
 ```
 
+## Latent Basis Growth Curve Model
+
+### Model Syntax
+
+```{r}
+latentBasisGCM_syntax <- '
+  # Intercept and slope
+  intercept =~ 1*depression_1 + 1*depression_2 + 1*depression_3 + 1*depression_4
+  slope =~ 0*depression_1 + a*depression_2 + b*depression_3 + 3*depression_4 # freely estimate the loadings for t2 and t3
+
+  # Regression paths
+  intercept ~ sexMale
+  slope ~ sexMale
+  
+  # Time-varying covariates
+  depression_1 ~ sleep_1
+  depression_2 ~ sleep_2
+  depression_3 ~ sleep_3
+  depression_4 ~ sleep_4
+  
+  # Constrain observed intercepts to zero
+  depression_1 ~ 0
+  depression_2 ~ 0
+  depression_3 ~ 0
+  depression_4 ~ 0
+  
+  # Estimate mean of intercept and slope
+  intercept ~ 1
+  slope ~ 1
+'
+```
+
+### Fit Model
+
+```{r}
+latentBasisGCM_fit <- sem(
+  latentBasisGCM_syntax,
+  data = mydata_wide,
+  missing = "ML",
+  estimator = "MLR",
+  meanstructure = TRUE,
+  fixed.x = FALSE)
+```
+
+### Model Summary
+
+```{r}
+summary(
+  latentBasisGCM_fit,
+  fit.measures = TRUE,
+  standardized = TRUE,
+  rsquare = TRUE)
+```
+
+### Modification Indices
+
+```{r}
+modificationindices(
+  latentBasisGCM_fit,
+  sort. = TRUE)
+```
+
+### Plots
+
+#### Path Diagram
+
+```{r}
+#| fig-cap: "Path Diagram"
+
+lavaanPlot::lavaanPlot(
+  latentBasisGCM_fit,
+  coefs = TRUE,
+  #covs = TRUE,
+  stand = TRUE)
+```
+
 # Compare Models
 
 ```{r}
 anova(
   linearGCM_fit,
+  quadraticGCM_fit
+)
+
+anova(
+  linearGCM_fit,
+  latentBasisGCM_fit
+)
+
+anova(
+  latentBasisGCM_fit,
   quadraticGCM_fit
 )
 ```
@@ -256,7 +342,7 @@ bivariateLCSM_fit <- lcsm::fit_bi_lcsm(
   )
 ```
 
-### Model Summary
+## Model Summary
 
 ```{r}
 summary(
@@ -265,10 +351,10 @@ summary(
   standardized = TRUE,
   rsquare = TRUE)
 
-extract_param
+lcsm::extract_param(bivariateLCSM_fit)
 ```
 
-### Modification Indices
+## Modification Indices
 
 ```{r}
 modificationindices(
@@ -276,9 +362,9 @@ modificationindices(
   sort. = TRUE)
 ```
 
-### Plots
+## Plots
 
-#### Path Diagram
+### Path Diagram
 
 ```{r}
 #| fig-cap: "Path Diagram"
@@ -306,6 +392,85 @@ To plot model-implied trajectories, see this resource:
 
 # Cross-Lagged Panel Model
 
+## Model Syntax
+
+```{r}
+clpm_syntax <- '
+  # Autoregressive Paths
+  depression_4 ~ depression_3
+  depression_3 ~ depression_2
+  depression_2 ~ depression_1
+  
+  anxiety_4 ~ anxiety_3
+  anxiety_3 ~ anxiety_2
+  anxiety_2 ~ anxiety_1
+  
+  # Concurrent Covariances
+  depression_1 ~~ anxiety_1
+  depression_2 ~~ anxiety_2
+  depression_3 ~~ anxiety_3
+  depression_4 ~~ anxiety_4
+  
+  # Cross-Lagged Paths
+  depression_4 ~ anxiety_3
+  depression_3 ~ anxiety_2
+  depression_2 ~ anxiety_1
+  
+  anxiety_4 ~ depression_3
+  anxiety_3 ~ depression_2
+  anxiety_2 ~ depression_1
+'
+```
+
+## Fit Model
+
+```{r}
+clpm_fit <- sem(
+  clpm_syntax,
+  data = mydata_wide,
+  missing = "ML",
+  estimator = "MLR",
+  meanstructure = TRUE,
+  fixed.x = FALSE)
+```
+
+## Model Summary
+
+```{r}
+summary(
+  clpm_fit,
+  fit.measures = TRUE,
+  standardized = TRUE,
+  rsquare = TRUE)
+```
+
+## Modification Indices
+
+```{r}
+modificationindices(
+  clpm_fit,
+  sort. = TRUE)
+```
+
+## Plots
+
+### Path Diagram
+
+```{r}
+#| fig-cap: "Path Diagram"
+
+lavaanPlot::lavaanPlot(
+  clpm_fit,
+  coefs = TRUE,
+  #covs = TRUE,
+  stand = TRUE)
+```
+
 # Random-Intercepts Cross-Lagged Panel Model
 
+Adapted from:
+
+- Mulder & Hamaker (2021): <https://doi.org/10.1080/10705511.2020.1784738>
+  - <https://jeroendmulder.github.io/RI-CLPM/lavaan.html> (archived at <https://perma.cc/2K6A-WUJQ>)
+- Mund & Nestler (2017): <https://osf.io/a4dhk>
 # Longitudinal Measurement Invariance
