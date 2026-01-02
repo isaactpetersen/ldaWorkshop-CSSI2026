@@ -10,11 +10,299 @@ Petersen, I. T. (2025). *Principles of psychological assessment: With applied ex
 
 ## Load Libraries
 
+```{r}
+library("lavaan")
+library("semTools")
+library("lavaanPlot")
+library("lcsm")
+library("tidyverse")
+```
+
 ## Load Data
+
+```{r}
+mydata_long <- read.csv("./data/mydata_long.csv")
+```
+
+# Pre-Model Computation
+
+```{r}
+mydata_long$sexFactor <- factor(mydata_long$sex)
+
+mydata_wide <- mydata_long |>
+  select(-age) |>
+  tidyr::pivot_wider(
+    names_from  = timepoint,
+    values_from = c(ses, sleep, depression, anxiety)
+  )
+```
 
 # Latent Growth Curve Model
 
+## Linear Growth Curve Model
+
+### Model Syntax
+
+```{r}
+linearGCM_syntax <- '
+  # Intercept and slope
+  intercept =~ 1*depression_1 + 1*depression_2 + 1*depression_3 + 1*depression_4
+  slope =~ 0*depression_1 + 1*depression_2 + 2*depression_3 + 3*depression_4
+
+  # Regression paths
+  intercept ~ sexMale
+  slope ~ sexMale
+  
+  # Time-varying covariates
+  depression_1 ~ sleep_1
+  depression_2 ~ sleep_2
+  depression_3 ~ sleep_3
+  depression_4 ~ sleep_4
+  
+  # Constrain observed intercepts to zero
+  depression_1 ~ 0
+  depression_2 ~ 0
+  depression_3 ~ 0
+  depression_4 ~ 0
+  
+  # Estimate mean of intercept and slope
+  intercept ~ 1
+  slope ~ 1
+'
+```
+
+### Fit Model
+
+```{r}
+linearGCM_fit <- sem(
+  linearGCM_syntax,
+  data = mydata_wide,
+  missing = "ML",
+  estimator = "MLR",
+  meanstructure = TRUE,
+  fixed.x = FALSE)
+```
+
+### Model Summary
+
+```{r}
+summary(
+  linearGCM_fit,
+  fit.measures = TRUE,
+  standardized = TRUE,
+  rsquare = TRUE)
+```
+
+### Modification Indices
+
+```{r}
+modificationindices(
+  linearGCM_fit,
+  sort. = TRUE)
+```
+
+### Plots
+
+#### Path Diagram
+
+```{r}
+#| fig-cap: "Path Diagram"
+
+lavaanPlot::lavaanPlot(
+  linearGCM_fit,
+  coefs = TRUE,
+  #covs = TRUE,
+  stand = TRUE)
+```
+
+## Quadratic Growth Curve Model
+
+### Model Syntax
+
+```{r}
+quadraticGCM_syntax <- '
+  # Intercept and slope
+  intercept =~ 1*depression_1 + 1*depression_2 + 1*depression_3 + 1*depression_4
+  linear =~ 0*depression_1 + 1*depression_2 + 2*depression_3 + 3*depression_4
+  quadratic =~ 0*depression_1 + 1*depression_2 + 4*depression_3 + 9*depression_4
+
+  # Regression paths
+  intercept ~ sexMale
+  linear ~ sexMale
+  quadratic ~ sexMale
+  
+  # Time-varying covariates
+  depression_1 ~ sleep_1
+  depression_2 ~ sleep_2
+  depression_3 ~ sleep_3
+  depression_4 ~ sleep_4
+  
+  # Constrain observed intercepts to zero
+  depression_1 ~ 0
+  depression_2 ~ 0
+  depression_3 ~ 0
+  depression_4 ~ 0
+  
+  # Constrain residual variances to be equal (needed to address negative variance)
+  depression_1 ~~ vardep*depression_1
+  depression_2 ~~ vardep*depression_2
+  depression_3 ~~ vardep*depression_3
+  depression_4 ~~ vardep*depression_4
+  
+  # Estimate mean of intercept and slope
+  intercept ~ 1
+  linear ~ 1
+  quadratic ~ 1
+'
+```
+
+### Fit Model
+
+```{r}
+quadraticGCM_fit <- sem(
+  quadraticGCM_syntax,
+  data = mydata_wide,
+  missing = "ML",
+  estimator = "MLR",
+  meanstructure = TRUE,
+  fixed.x = FALSE)
+```
+
+### Model Summary
+
+```{r}
+summary(
+  quadraticGCM_fit,
+  fit.measures = TRUE,
+  standardized = TRUE,
+  rsquare = TRUE)
+```
+
+### Modification Indices
+
+```{r}
+modificationindices(
+  quadraticGCM_fit,
+  sort. = TRUE)
+```
+
+### Plots
+
+#### Path Diagram
+
+```{r}
+#| fig-cap: "Path Diagram"
+
+lavaanPlot::lavaanPlot2(
+  quadraticGCM_fit,
+  stand = TRUE,
+  coef_labels = TRUE)
+```
+
+# Compare Models
+
+```{r}
+anova(
+  linearGCM_fit,
+  quadraticGCM_fit
+)
+```
+
 # Latent Change Score Model
+
+## Model Syntax
+
+```{r}
+bivariateLCSM_syntax <- lcsm::specify_bi_lcsm(
+  timepoints = 4,
+  var_x = "depression_",
+  model_x = list(
+    alpha_constant = TRUE, # alpha = intercept (constant change factor)
+    beta = TRUE, # beta = proportional change factor (latent true score predicting its change score)
+    phi = TRUE), # phi = autoregression of change scores
+  var_y = "anxiety_",
+  model_y = list(
+    alpha_constant = TRUE, # alpha = intercept (constant change factor)
+    beta = TRUE, # beta = proportional change factor (latent true score predicting its change score)
+    phi = TRUE), # phi = autoregression of change scores
+  coupling = list(
+    delta_lag_xy = TRUE,
+    delta_lag_yx = TRUE),
+  change_letter_x = "g",
+  change_letter_y = "j")
+
+cat(bivariateLCSM_syntax)
+```
+
+## Fit Model
+
+```{r}
+bivariateLCSM_fit <- lcsm::fit_bi_lcsm(
+  data = mydata_wide,
+  var_x = c("depression_1","depression_2","depression_3","depression_4"),
+  var_y = c("anxiety_1","anxiety_2","anxiety_3","anxiety_4"),
+  model_x = list(
+    alpha_constant = TRUE, # alpha = intercept (constant change factor)
+    beta = TRUE, # beta = proportional change factor (latent true score predicting its change score)
+    phi = TRUE), # phi = autoregression of change scores
+  model_y = list(
+    alpha_constant = TRUE, # alpha = intercept (constant change factor)
+    beta = TRUE, # beta = proportional change factor (latent true score predicting its change score)
+    phi = TRUE), # phi = autoregression of change scores
+  coupling = list(
+    delta_lag_xy = TRUE,
+    xi_lag_yx = TRUE),
+  fixed.x = FALSE
+  )
+```
+
+### Model Summary
+
+```{r}
+summary(
+  bivariateLCSM_fit,
+  fit.measures = TRUE,
+  standardized = TRUE,
+  rsquare = TRUE)
+
+extract_param
+```
+
+### Modification Indices
+
+```{r}
+modificationindices(
+  bivariateLCSM_fit,
+  sort. = TRUE)
+```
+
+### Plots
+
+#### Path Diagram
+
+```{r}
+#| fig-cap: "Path Diagram"
+
+lavaanPlot::lavaanPlot2(
+  bivariateLCSM_fit,
+  stand = TRUE,
+  coef_labels = TRUE)
+```
+
+```{r}
+#| fig-cap: "Path Diagram"
+
+lcsm::plot_lcsm(
+  lavaan_object = bivariateLCSM_fit,
+  lcsm = "bivariate",
+  lavaan_syntax = bivariateLCSM_syntax,
+  edge.label.cex = .9,
+  lcsm_colours = TRUE)
+```
+
+To plot model-implied trajectories, see this resource:
+
+<https://thechangelab.stanford.edu/tutorials/growth-modeling/latent-change-score-modeling-lavaan/> (archived at <https://perma.cc/A2KZ-QPD9>)
 
 # Cross-Lagged Panel Model
 
