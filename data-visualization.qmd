@@ -21,6 +21,8 @@ mydata_long <- read.csv("./data/mydata_long.csv")
 # Pre-Figure Processing
 
 ```{r}
+mydata_long$sexFactor <- factor(mydata_long$sex)
+
 mydata_long_summary <- mydata_long |>
   group_by(age, sexFactor) |>
   summarise(
