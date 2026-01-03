@@ -88,7 +88,7 @@ linearGCM_syntax <- '
 ### Fit Model
 
 ```{r}
-linearGCM_fit <- sem(
+linearGCM_fit <- lavaan::sem(
   linearGCM_syntax,
   data = mydata_wide,
   missing = "ML",
@@ -173,7 +173,7 @@ quadraticGCM_syntax <- '
 ### Fit Model
 
 ```{r}
-quadraticGCM_fit <- sem(
+quadraticGCM_fit <- lavaan::sem(
   quadraticGCM_syntax,
   data = mydata_wide,
   missing = "ML",
@@ -248,7 +248,7 @@ latentBasisGCM_syntax <- '
 ### Fit Model
 
 ```{r}
-latentBasisGCM_fit <- sem(
+latentBasisGCM_fit <- lavaan::sem(
   latentBasisGCM_syntax,
   data = mydata_wide,
   missing = "ML",
@@ -439,7 +439,7 @@ clpm_syntax <- '
 ## Fit Model
 
 ```{r}
-clpm_fit <- sem(
+clpm_fit <- lavaan::sem(
   clpm_syntax,
   data = mydata_wide,
   missing = "ML",
@@ -595,7 +595,7 @@ riclpm_syntax <- '
 ## Fit Model
 
 ```{r}
-riclpm_fit <- sem(
+riclpm_fit <- lavaan::sem(
   riclpm_syntax,
   data = mydata_wide,
   missing = "ML",
@@ -657,7 +657,7 @@ multilevelSEM_syntax <- '
 ## Fit Model
 
 ```{r}
-multilevelSEM_fit <- sem(
+multilevelSEM_fit <- lavaan::sem(
   multilevelSEM_syntax,
   data = mydata_long,
   cluster = "ID",
