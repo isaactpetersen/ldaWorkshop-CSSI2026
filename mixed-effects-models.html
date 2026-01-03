@@ -1049,12 +1049,12 @@ Adjusted R2
 <section id="pre-model-computations" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="pre-model-computations">
 <span class="header-section-number">7.1</span> Pre-Model Computations</h2>
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata_long</span> <span class="op">&lt;-</span> <span class="va">mydata_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ID</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mydata_long</span> <span class="op">&lt;-</span> <span class="va">mydata_long</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ID</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
 <span>    sleep_personMean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">sleep</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>    sleep_personMeanCentered<span class="op">=</span> <span class="va">sleep</span> <span class="op">-</span> <span class="va">sleep_personMean</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
@@ -2290,12 +2290,12 @@ ageCenteredSquared × sleep personMeanCentered                      |      -0.11
 <span id="cb48-547"><a href="#cb48-547" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pre-Model Computations</span></span>
 <span id="cb48-548"><a href="#cb48-548" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-551"><a href="#cb48-551" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-552"><a href="#cb48-552" aria-hidden="true" tabindex="-1"></a>mydata_long <span class="ot">&lt;-</span> mydata_long <span class="sc">%&gt;%</span></span>
-<span id="cb48-553"><a href="#cb48-553" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ID) <span class="sc">%&gt;%</span></span>
+<span id="cb48-552"><a href="#cb48-552" aria-hidden="true" tabindex="-1"></a>mydata_long <span class="ot">&lt;-</span> mydata_long <span class="sc">|&gt;</span></span>
+<span id="cb48-553"><a href="#cb48-553" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ID) <span class="sc">|&gt;</span></span>
 <span id="cb48-554"><a href="#cb48-554" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb48-555"><a href="#cb48-555" aria-hidden="true" tabindex="-1"></a>    <span class="at">sleep_personMean =</span> <span class="fu">mean</span>(sleep, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb48-556"><a href="#cb48-556" aria-hidden="true" tabindex="-1"></a>    <span class="at">sleep_personMeanCentered=</span> sleep <span class="sc">-</span> sleep_personMean</span>
-<span id="cb48-557"><a href="#cb48-557" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb48-557"><a href="#cb48-557" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb48-558"><a href="#cb48-558" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
 <span id="cb48-559"><a href="#cb48-559" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb48-560"><a href="#cb48-560" aria-hidden="true" tabindex="-1"></a></span>
