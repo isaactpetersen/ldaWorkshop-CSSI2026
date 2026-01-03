@@ -153,8 +153,8 @@ ids_subset <- sample(
   replace = FALSE
 )
 
-mydata_long %>%
-  filter(ID %in% ids_subset) %>%
+mydata_long |>
+  filter(ID %in% ids_subset) |>
   ggplot(
     aes(
       x = age,
@@ -180,8 +180,8 @@ mydata_long %>%
 ```{r}
 #| fig-cap: "Faceted Plot of Observed Growth Curves of Anxiety Symptoms for a Random Subsample of Individuals"
 
-mydata_long %>%
-  filter(ID %in% ids_subset) %>%
+mydata_long |>
+  filter(ID %in% ids_subset) |>
   ggplot(
     aes(
       x = age,

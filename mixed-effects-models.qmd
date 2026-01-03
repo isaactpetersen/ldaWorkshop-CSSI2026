@@ -505,12 +505,12 @@ MuMIn::AICc(
 ## Pre-Model Computations
 
 ```{r}
-mydata_long <- mydata_long %>%
-  group_by(ID) %>%
+mydata_long <- mydata_long |>
+  group_by(ID) |>
   mutate(
     sleep_personMean = mean(sleep, na.rm = TRUE),
     sleep_personMeanCentered= sleep - sleep_personMean
-  ) %>%
+  ) |>
   ungroup()
 ```
 

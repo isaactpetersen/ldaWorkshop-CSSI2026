@@ -33,8 +33,8 @@ n_time <- length(ages)
 id <- 1:N
 sexMale <- rbinom(N, 1, 0.5)  # 0=female, 1=male
 
-df <- expand.grid(ID = id, timepoint = timepoints) %>%
-  arrange(ID, timepoint) %>%
+df <- expand.grid(ID = id, timepoint = timepoints) |>
+  arrange(ID, timepoint) |>
   mutate(sexMale = rep(sexMale, each = n_time))
 
 df$age <- NA
@@ -56,7 +56,7 @@ Sigma_u <- matrix(c(
 
 u <- mvrnorm(N, mu=c(0,0,0,0), Sigma=Sigma_u)
 colnames(u) <- c("u_dep","u_anx","u_sleep","u_ses")
-df <- df %>%
+df <- df |>
   left_join(data.frame(ID=id, u_dep=u[,1], u_anx=u[,2], u_sleep=u[,3], u_ses=u[,4]), by="ID")
 
 # -----------------------------
@@ -107,7 +107,7 @@ df$sleep <- pmin(pmax(8 + df$sleep_cont, 5), 10)
 # -----------------------------
 
 # Sort correctly
-df <- df %>% arrange(ID, age)
+df <- df |> arrange(ID, age)
 
 # Parameters for temporal dynamics
 phi_dep <- 0.50   # autoregressive depression
@@ -176,20 +176,20 @@ for (i in unique(df$ID)) {
 # 8. Transform to skewed counts (preserve ordering & skew)
 # -----------------------------
 
-df <- df %>%
+df <- df |>
   mutate(
     dep_rank = rank(depression_latent, ties.method = "average") / (n() + 1),
     anx_rank = rank(anxiety_latent,    ties.method = "average") / (n() + 1),
 
     depression = round(pmin(qgamma(dep_rank, shape = 2, scale = 5), 30)),
     anxiety    = round(pmin(qgamma(anx_rank, shape = 2, scale = 5), 30))
-  ) %>%
+  ) |>
   select(-dep_rank, -anx_rank)
 
 # -----------------------------
 # 9. Introduce attrition
 # -----------------------------
-df <- df %>%
+df <- df |>
   mutate(
     p_dropout = case_when(
       age == 14 ~ 0.00,
@@ -198,13 +198,13 @@ df <- df %>%
       age == 17 ~ 0.15
     ),
     dropout = rbinom(n(), 1, p_dropout)
-  ) %>%
+  ) |>
   mutate(
     ses        = ifelse(dropout == 1, NA, ses),
     sleep      = ifelse(dropout == 1, NA, sleep),
     depression = ifelse(dropout == 1, NA, depression),
     anxiety    = ifelse(dropout == 1, NA, anxiety)
-  ) %>%
+  ) |>
   select(-p_dropout, -dropout)
 
 # -----------------------------
@@ -217,7 +217,7 @@ df$sex[which(df$sexMale == 1)] <- "male"
 # -----------------------------
 # 11. Final dataset
 # -----------------------------
-df <- df %>% 
+df <- df |>
   select(ID, timepoint, age, sex, sexMale, ses, sleep, depression, anxiety)
 ```
 
@@ -227,7 +227,7 @@ df <- df %>%
 describe(df)
 
 cor(
-  x = df %>% select(depression, anxiety, sleep, ses),
+  x = df |> select(depression, anxiety, sleep, ses),
   use = "pairwise.complete.obs")
 
 head(df)
@@ -259,8 +259,8 @@ hist(
 
 ```{r}
 # --- Summarize mean + SD by age and sex ---
-df_summary <- df %>%
-  group_by(age, sex) %>%
+df_summary <- df |>
+  group_by(age, sex) |>
   summarize(
     mean_dep = mean(depression, na.rm=TRUE),
     sd_dep   = sd(depression, na.rm=TRUE),
