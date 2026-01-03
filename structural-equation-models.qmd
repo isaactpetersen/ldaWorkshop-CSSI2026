@@ -29,11 +29,25 @@ mydata_long <- read.csv("./data/mydata_long.csv")
 ```{r}
 mydata_long$sexFactor <- factor(mydata_long$sex)
 
+mydata_long <- mydata_long |>
+  group_by(ID) |>
+  mutate(
+    ses_personMean = mean(ses, na.rm = TRUE),
+    ses_personMeanCentered = ses - ses_personMean,
+    sleep_personMean = mean(sleep, na.rm = TRUE),
+    sleep_personMeanCentered = sleep - sleep_personMean,
+    depression_personMean = mean(depression, na.rm = TRUE),
+    depression_personMeanCentered = depression - depression_personMean,
+    anxiety_personMean = mean(anxiety, na.rm = TRUE),
+    anxiety_personMeanCentered = anxiety - anxiety_personMean,
+  ) |>
+  ungroup()
+
 mydata_wide <- mydata_long |>
   select(-age) |>
   tidyr::pivot_wider(
     names_from  = timepoint,
-    values_from = c(ses, sleep, depression, anxiety)
+    values_from = c(ses, ses_personMeanCentered, sleep, sleep_personMeanCentered, depression, depression_personMeanCentered, anxiety, anxiety_personMeanCentered)
   )
 ```
 
@@ -473,4 +487,211 @@ Adapted from:
 - Mulder & Hamaker (2021): <https://doi.org/10.1080/10705511.2020.1784738>
   - <https://jeroendmulder.github.io/RI-CLPM/lavaan.html> (archived at <https://perma.cc/2K6A-WUJQ>)
 - Mund & Nestler (2017): <https://osf.io/a4dhk>
+
+## Model Syntax
+
+```{r}
+riclpm_syntax <- '
+  # Random Intercepts
+  depression =~ 1*depression_1 + 1*depression_2 + 1*depression_3 + 1*depression_4
+  anxiety =~ 1*anxiety_1 + 1*anxiety_2 + 1*anxiety_3 + 1*anxiety_4
+  
+  # Create Within-Person Centered Variables
+  wdep1 =~ 1*depression_1
+  wdep2 =~ 1*depression_2
+  wdep3 =~ 1*depression_3
+  wdep4 =~ 1*depression_4
+  
+  wanx1 =~ 1*anxiety_1
+  wanx2 =~ 1*anxiety_2
+  wanx3 =~ 1*anxiety_3
+  wanx4 =~ 1*anxiety_4
+  
+  # Autoregressive Paths
+  wdep4 ~ wdep3
+  wdep3 ~ wdep2
+  wdep2 ~ wdep1
+  
+  wanx4 ~ wanx3
+  wanx3 ~ wanx2
+  wanx2 ~ wanx1
+  
+  # Concurrent Covariances
+  wdep1 ~~ wanx1
+  wdep2 ~~ wanx2
+  wdep3 ~~ wanx3
+  wdep4 ~~ wanx4
+  
+  # Cross-Lagged Paths
+  wdep4 ~ wanx3
+  wdep3 ~ wanx2
+  wdep2 ~ wanx1
+  
+  wanx4 ~ wdep3
+  wanx3 ~ wdep2
+  wanx2 ~ wdep1
+  
+  # Variance and Covariance of Random Intercepts
+  depression ~~ depression
+  anxiety ~~ anxiety
+  depression ~~ anxiety
+  
+  # Variances of Within-Person Centered Variables
+  wdep1 ~~ wdep1
+  wdep2 ~~ wdep2
+  wdep3 ~~ wdep3
+  wdep4 ~~ wdep4
+  
+  wanx1 ~~ wanx1
+  wanx2 ~~ wanx2
+  wanx3 ~~ wanx3
+  wanx4 ~~ wanx4
+  
+  # Fix Error Variances of Observed Variables to Zero
+  depression_1 ~~ 0*depression_1
+  depression_2 ~~ 0*depression_2
+  depression_3 ~~ 0*depression_3
+  depression_4 ~~ 0*depression_4
+  
+  anxiety_1 ~~ 0*anxiety_1
+  anxiety_2 ~~ 0*anxiety_2
+  anxiety_3 ~~ 0*anxiety_3
+  anxiety_4 ~~ 0*anxiety_4
+  
+  # Fix the Covariances Between the Random Intercepts and the Latents at T1 to Zero
+  wdep1 ~~ 0*depression
+  wdep1 ~~ 0*anxiety
+  
+  wanx1 ~~ 0*depression
+  wanx1 ~~ 0*anxiety
+  
+  # Estimate Observed Intercepts
+  depression_1 ~ 1
+  depression_2 ~ 1
+  depression_3 ~ 1
+  depression_4 ~ 1
+  
+  anxiety_1 ~ 1
+  anxiety_2 ~ 1
+  anxiety_3 ~ 1
+  anxiety_4 ~ 1
+  
+  # Fix the Means of the Latents to Zero
+  wdep1 ~ 0*1
+  wdep2 ~ 0*1
+  wdep3 ~ 0*1
+  wdep4 ~ 0*1
+  
+  wanx1 ~ 0*1
+  wanx2 ~ 0*1
+  wanx3 ~ 0*1
+  wanx4 ~ 0*1
+  
+  depression ~ 0*1
+  anxiety ~ 0*1
+'
+```
+
+## Fit Model
+
+```{r}
+riclpm_fit <- sem(
+  riclpm_syntax,
+  data = mydata_wide,
+  missing = "ML",
+  estimator = "MLR",
+  fixed.x = FALSE,
+  bounds = "standard"
+)
+```
+
+Modify the syntax to address the model fit errors.
+
+## Model Summary
+
+```{r}
+#| eval: false
+
+summary(
+  withinPersonCLPM_fit,
+  fit.measures = TRUE,
+  standardized = TRUE,
+  rsquare = TRUE)
+```
+
+## Modification Indices
+
+```{r}
+#| eval: false
+
+modificationindices(
+  riclpm_fit,
+  sort. = TRUE)
+```
+
+## Path Diagram
+
+```{r}
+#| eval: false
+
+lavaanPlot::lavaanPlot(
+  riclpm_fit,
+  coefs = TRUE,
+  #covs = TRUE,
+  stand = TRUE)
+```
+
+# Multilevel SEM
+
+## Model Syntax
+
+```{r}
+multilevelSEM_syntax <- '
+    level: 1
+        depression ~ sleep_personMeanCentered + anxiety_personMeanCentered + ses_personMeanCentered
+    level: 2
+        depression ~ sleep_personMean + anxiety_personMean + ses_personMean + sexMale
+'
+```
+
+## Fit Model
+
+```{r}
+multilevelSEM_fit <- sem(
+  multilevelSEM_syntax,
+  data = mydata_long,
+  cluster = "ID",
+  #missing = "ML", # commenting out due to error
+  estimator = "MLR",
+  fixed.x = FALSE)
+```
+
+## Model Summary
+
+```{r}
+summary(
+  multilevelSEM_fit,
+  fit.measures = TRUE,
+  standardized = TRUE,
+  rsquare = TRUE)
+```
+
+## Modification Indices
+
+```{r}
+modificationindices(
+  multilevelSEM_fit,
+  sort. = TRUE)
+```
+
+## Path Diagram
+
+```{r}
+lavaanPlot::lavaanPlot(
+  multilevelSEM_fit,
+  coefs = TRUE,
+  #covs = TRUE,
+  stand = TRUE)
+```
+
 # Longitudinal Measurement Invariance
