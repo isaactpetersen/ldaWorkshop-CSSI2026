@@ -753,8 +753,8 @@ We will follow the approach suggested by Widaman et al. (2010).
 
 Widaman, K. F., Ferrer, E., & Conger, R. D. (2010). Factorial invariance within longitudinal structural equation models: Measuring the same construct across time. *Child Development Perspectives*, *4*(1), 10–18. <https://doi.org/10.1111/j.1750-8606.2009.00110.x>
 
-For the longitudinal measurement invariance models, we will use simulated data from <https://mycourses.aalto.fi/mod/assign/view.php?id=1203047>.
-As noted [here](https://mycourses.aalto.fi/mod/assign/view.php?id=1203047), "The data are in wide format where the variables are coded as [VARIABLE NAME][time index][indicator index]."
+For the longitudinal measurement invariance models, we will use simulated data from <https://mycourses.aalto.fi/mod/assign/view.php?id=1203047> (archived at <https://perma.cc/QTL2-ZHX2>).
+As noted [here](https://mycourses.aalto.fi/mod/assign/view.php?id=1203047) (archived at <https://perma.cc/QTL2-ZHX2>), "The data are in wide format where the variables are coded as [VARIABLE NAME][time index][indicator index]."
 
 Questions:
 
@@ -765,6 +765,12 @@ Which level of longitudinal measurement invariance holds for each dataset?
 The answers to these questions are [here](answers.qmd).
 
 ## Configural Invariance
+
+Evaluates whether there are the same number of latent factors across time and whether the indicators load onto the same latent factor(s) across time.
+
+1. Standardize the latent factor(s) at T1 (i.e., fix the mean to zero and the variance to one)
+1. For each latent construct, constrain the first indicator's factor loading to be the same across time
+1. For each latent construct, constrain the first indicator's intercept to be the same across time
 
 ### Model Syntax
 
@@ -932,6 +938,11 @@ lavaangui::plot_lavaan(configuralInvariance_fit)
 ```
 
 ## Configural Invariance With Correlated Residuals Within-Indicator Across Time
+
+1. Standardize the latent factor(s) at T1 (i.e., fix the mean to zero and the variance to one)
+1. For each latent construct, constrain the first indicator's factor loading to be the same across time
+1. For each latent construct, constrain the first indicator's intercept to be the same across time
+1. **Allow within-indicator residuals to covary across time**
 
 ### Model Syntax
 
@@ -1146,6 +1157,13 @@ anova(
 
 ## Metric ("Weak Factorial") Invariance
 
+Evaluates whether the items' factor loadings are the same across time.
+
+1. Standardize the latent factor(s) at T1 (i.e., fix the mean to zero and the variance to one)
+1. For each latent construct, constrain the first indicator's intercept to be the same across time
+1. Allow within-indicator residuals to covary across time
+1. **For each indicator, constrain its factor loading to be the same across time**
+
 ### Model Syntax
 
 ```{r}
@@ -1359,6 +1377,13 @@ anova(
 
 ## Scalar ("Strong Factorial") Invariance
 
+Evaluates whether the items' intercepts are the same across time.
+
+1. Standardize the latent factor(s) at T1 (i.e., fix the mean to zero and the variance to one)
+1. Allow within-indicator residuals to covary across time
+1. For each indicator, constrain its factor loading to be the same across time
+1. **For each indicator, constrain its intercept to be the same across time**
+
 ### Model Syntax
 
 ```{r}
@@ -1567,6 +1592,14 @@ anova(
 ```
 
 ## Residual ("Strict Factorial") Invariance
+
+Evaluates whether the items' residual variances are the same across time.
+
+1. Standardize the latent factor(s) at T1 (i.e., fix the mean to zero and the variance to one)
+1. Allow within-indicator residuals to covary across time
+1. For each indicator, constrain its factor loading to be the same across time
+1. For each indicator, constrain its intercept to be the same across time
+1. **For each indicator, constrain its residual variance to be the same across time**
 
 ### Model Syntax
 
