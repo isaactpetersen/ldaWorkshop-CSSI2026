@@ -24,15 +24,15 @@ library("tidyverse")
 ```{r}
 mydata_long <- read.csv("./data/mydata_long.csv")
 
-longitudinalMI1 <- read.csv("./data/Bliese-Ployhard-2000-indicators-1.csv")
+longitudinalMI1 <- read.csv("./data/Bliese-Ployhart-2002-indicators-1.csv")
 ```
 
 ```{r}
 #| eval: false
 
-longitudinalMI2 <- read.csv("./data/Bliese-Ployhard-2000-indicators-2.csv")
-longitudinalMI3 <- read.csv("./data/Bliese-Ployhard-2000-indicators-3.csv")
-longitudinalMI4 <- read.csv("./data/Bliese-Ployhard-2000-indicators-4.csv")
+longitudinalMI2 <- read.csv("./data/Bliese-Ployhart-2002-indicators-2.csv")
+longitudinalMI3 <- read.csv("./data/Bliese-Ployhart-2002-indicators-3.csv")
+longitudinalMI4 <- read.csv("./data/Bliese-Ployhart-2002-indicators-4.csv")
 ```
 
 # Pre-Model Computation
