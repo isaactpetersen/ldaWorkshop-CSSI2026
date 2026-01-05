@@ -25,9 +25,6 @@ library("tidyverse")
 mydata_long <- read.csv("./data/mydata_long.csv")
 
 longitudinalMI1 <- read.csv("./data/Bliese-Ployhard-2000-indicators-1.csv")
-longitudinalMI2 <- read.csv("./data/Bliese-Ployhard-2000-indicators-2.csv")
-longitudinalMI3 <- read.csv("./data/Bliese-Ployhard-2000-indicators-3.csv")
-longitudinalMI4 <- read.csv("./data/Bliese-Ployhard-2000-indicators-4.csv")
 ```
 
 ```{r}
@@ -761,9 +758,11 @@ As noted [here](https://mycourses.aalto.fi/mod/assign/view.php?id=1203047), "The
 
 Questions:
 
-- Which level of longitudinal measurement invariance holds for the `Bliese-Ployhard-2000-indicators-1.csv` dataset (saved in object `longitudinalMI1`)?
-- Repeat the tests of longitudinal measurement invariance for the remaining datasets.
+1. Which level of longitudinal measurement invariance holds for the `Bliese-Ployhard-2000-indicators-1.csv` dataset (saved in object `longitudinalMI1`)?
+1. Repeat the tests of longitudinal measurement invariance for the remaining datasets: `Bliese-Ployhard-2000-indicators-2.csv`, `Bliese-Ployhard-2000-indicators-3.csv`, and `Bliese-Ployhard-2000-indicators-4.csv`.
 Which level of longitudinal measurement invariance holds for each dataset?
+
+The answers to these questions are [here](answers.qmd).
 
 ## Configural Invariance
 
