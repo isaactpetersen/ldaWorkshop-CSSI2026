@@ -18,7 +18,7 @@
     "href": "structural-equation-models.html#load-data",
     "title": "Structural Equation Models",
     "section": "\n1.2 Load Data",
-    "text": "1.2 Load Data\n\nCodemydata_long &lt;- read.csv(\"./data/mydata_long.csv\")\n\nlongitudinalMI1 &lt;- read.csv(\"./data/Bliese-Ployhard-2000-indicators-1.csv\")\n\n\n\nCodelongitudinalMI2 &lt;- read.csv(\"./data/Bliese-Ployhard-2000-indicators-2.csv\")\nlongitudinalMI3 &lt;- read.csv(\"./data/Bliese-Ployhard-2000-indicators-3.csv\")\nlongitudinalMI4 &lt;- read.csv(\"./data/Bliese-Ployhard-2000-indicators-4.csv\")"
+    "text": "1.2 Load Data\n\nCodemydata_long &lt;- read.csv(\"./data/mydata_long.csv\")\n\nlongitudinalMI1 &lt;- read.csv(\"./data/Bliese-Ployhart-2002-indicators-1.csv\")\n\n\n\nCodelongitudinalMI2 &lt;- read.csv(\"./data/Bliese-Ployhart-2002-indicators-2.csv\")\nlongitudinalMI3 &lt;- read.csv(\"./data/Bliese-Ployhart-2002-indicators-3.csv\")\nlongitudinalMI4 &lt;- read.csv(\"./data/Bliese-Ployhart-2002-indicators-4.csv\")"
   },
   {
     "objectID": "structural-equation-models.html#linear-growth-curve-model",
