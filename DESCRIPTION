@@ -19,8 +19,9 @@ Imports:
   MuMIn,
   lavaan,
   semTools,
-  lavaanPlot,
   lcsm,
+  lavaanPlot,
+  lavaangui,
   petersenlab
 Remotes:
   DevPsyLab/petersenlab
