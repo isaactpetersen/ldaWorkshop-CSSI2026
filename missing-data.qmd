@@ -2,6 +2,29 @@
 title: "Missing Data"
 ---
 
-# Multiple Imputation
+# Preamble
+
+## Load Libraries
+
+```{r}
+library("mice")
+library("lme4")
+library("lavaan")
+library("tidyverse")
+```
+
+## Load Data
+
+The data for this example were [simulated](simulate-data.qmd):
+
+```{r}
+mydata_long <- read.csv("./data/mydata_long.csv")
+```
 
 # Full Information Maximum Likelihood
+
+For examples using full information maximum likelihood (FIML), see examples of structural equation models [here](structural-equation-models.qmd).
+
+# Multiple Imputation
+
+
