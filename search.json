@@ -438,6 +438,20 @@
     "href": "missing-data.html",
     "title": "Missing Data",
     "section": "",
-    "text": "1 Multiple Imputation\n\n\n2 Full Information Maximum Likelihood\n\n\n\n\n\n\nReuseCC BY 4.0"
+    "text": "Codelibrary(\"mice\")\nlibrary(\"lme4\")\nlibrary(\"lavaan\")\nlibrary(\"tidyverse\")\n\n\n\nThe data for this example were simulated:\n\nCodemydata_long &lt;- read.csv(\"./data/mydata_long.csv\")"
+  },
+  {
+    "objectID": "missing-data.html#load-libraries",
+    "href": "missing-data.html#load-libraries",
+    "title": "Missing Data",
+    "section": "",
+    "text": "Codelibrary(\"mice\")\nlibrary(\"lme4\")\nlibrary(\"lavaan\")\nlibrary(\"tidyverse\")"
+  },
+  {
+    "objectID": "missing-data.html#load-data",
+    "href": "missing-data.html#load-data",
+    "title": "Missing Data",
+    "section": "",
+    "text": "The data for this example were simulated:\n\nCodemydata_long &lt;- read.csv(\"./data/mydata_long.csv\")"
   }
 ]
