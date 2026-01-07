@@ -51,7 +51,6 @@ linearGCM <- lmer(
     sleep + sleep:ageCentered + sexFactor:sleep + sexFactor:sleep:ageCentered + 
     (1 + ageCentered | ID), # random intercepts and slopes; sex as a fixed-effect predictor of the intercepts and slopes
   data = mydata_long,
-  REML = FALSE, #for ML
   na.action = na.exclude)
 ```
 
@@ -188,7 +187,6 @@ quadraticGCM <- lmer(
     sexFactor:sleep:ageCentered + sexFactor:sleep:ageCenteredSquared + 
     (1 + ageCentered + ageCenteredSquared | ID), # random intercepts, linear slopes, and quadratic slopes; sex as a fixed-effect predictor of the intercepts and slopes
   data = mydata_long,
-  REML = FALSE, #for ML
   na.action = na.exclude)
 ```
 
@@ -524,7 +522,6 @@ withinBetweenPersonSleepModel <- lmer(
     sexFactor*sleep_personMeanCentered*ageCenteredSquared + 
     (1 + ageCentered + ageCenteredSquared | ID), # random intercepts, linear slopes, and quadratic slopes; sex as a fixed-effect predictor of the intercepts and slopes
   data = mydata_long,
-  REML = FALSE, #for ML
   na.action = na.exclude)
 ```
 

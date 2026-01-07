@@ -102,10 +102,10 @@ linearGCM_syntax <- '
 linearGCM_fit <- lavaan::sem(
   linearGCM_syntax,
   data = mydata_wide,
-  missing = "ML",
-  estimator = "MLR",
-  meanstructure = TRUE,
-  fixed.x = FALSE)
+  missing = "ML", # FIML
+  estimator = "MLR", # Huber-White robust standard errors (for heteroscedasticity and nonnormally distributed residuals)
+  meanstructure = TRUE, # estimate means/intercepts
+  fixed.x = FALSE)  # estimate (i.e., do not consider as fixed) means/variances/covariances of observed variables; allows missing information to be included as part of FIML
 ```
 
 ### Model Summary
