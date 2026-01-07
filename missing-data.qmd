@@ -8,8 +8,14 @@ title: "Missing Data"
 
 ```{r}
 library("mice")
+library("miceadds")
+library("micemd")
 library("lme4")
 library("lavaan")
+library("lavaan.mi")
+library("psych")
+library("parallelly")
+library("furrr")
 library("tidyverse")
 ```
 
@@ -27,4 +33,264 @@ For examples using full information maximum likelihood (FIML), see examples of s
 
 # Multiple Imputation
 
+## Describe Missing Data
 
+```{r}
+psych::describe(mydata_long)
+
+mice::md.pattern(mydata_long, rotate.names = TRUE)
+```
+
+## Pre-Imputation Setup
+
+### Specify Variables to Impute
+
+```{r}
+varsToImpute <- c("ses","sleep","depression","anxiety")
+Y <- varsToImpute
+```
+
+### Specify Number of Imputations
+
+```{r}
+numImputations <- 5 # generally use 100 imputations; this example uses 5 for speed
+```
+
+### Detect Cores
+
+```{r}
+#| include: false
+
+num_cores <- parallelly::availableCores()
+num_true_cores <- parallelly::availableCores(logical = FALSE)
+```
+
+```{r}
+#| eval: false
+
+num_cores <- parallelly::availableCores() - 1
+num_true_cores <- parallelly::availableCores(logical = FALSE) - 1
+```
+
+### Specifying the Imputation Method
+
+```{r}
+imputationMethods <- mice::make.method(mydata_long)
+imputationMethods[1:length(imputationMethods)] <- ""
+imputationMethods[Y] <- "2l.pmm" # specify the imputation method here; this can differ by outcome variable
+```
+
+### Specifying the Predictor Matrix
+
+A predictor matrix is a matrix of values, where:
+
+- columns with non-zero values are predictors of the variable specified in the given row
+- the diagonal of the predictor matrix should be zero because a variable cannot predict itself
+
+The values are:
+
+- NOT a predictor of the outcome: `0`
+- cluster variable: `-2`
+- fixed effect of predictor: `1`
+- fixed effect and random effect of predictor: `2`
+- include cluster mean of predictor in addition to fixed effect of predictor: `3`
+- include cluster mean of predictor in addition to fixed effect and random effect of predictor: `4`
+
+```{r}
+predictorMatrix <- mice::make.predictorMatrix(mydata_long)
+predictorMatrix[1:nrow(predictorMatrix), 1:ncol(predictorMatrix)] <- 0 # make everything zero by default to manually specify all predictors used for imputation
+predictorMatrix[Y, "ID"] <- (-2) # cluster variable
+predictorMatrix[Y, "age"] <- 2 # random effect predictor
+#predictorMatrix[Y, "ses"] <- 2 # random effect predictor
+#predictorMatrix[Y, "sleep"] <- 1 # random effect predictor
+#predictorMatrix[Y, "depression"] <- 1 # random effect predictor
+#predictorMatrix[Y, "anxiety"] <- 1 # random effect predictor
+predictorMatrix[Y, "sexMale"] <- 1 # fixed effect predictor
+predictorMatrix[Y, Y] <- 1 # fixed effect predictor; make sure all predictors predict each other
+
+diag(predictorMatrix) <- 0 # don't have a variable predicting itself
+predictorMatrix
+```
+
+## Run Imputation
+
+### Sequential Processing
+
+```{r}
+mi_mice <- mice::mice(
+  as.data.frame(mydata_long),
+  method = imputationMethods,
+  predictorMatrix = predictorMatrix,
+  m = numImputations,
+  maxit = 5, # generally use 100 maximum iterations; this example uses 5 for speed
+  seed = 52242)
+```
+
+### Parallel Processing
+
+```{r}
+mi_parallel_mice <- mice::futuremice(
+  as.data.frame(mydata_long),
+  method = imputationMethods,
+  predictorMatrix = predictorMatrix,
+  m = numImputations,
+  maxit = 5, # generally use 100 maximum iterations; this example uses 5 for speed
+  parallelseed = 52242,
+  n.core = num_cores,
+  packages = "miceadds")
+```
+
+## Imputation Diagnostics
+
+### Logged Events
+
+```{r}
+mi_mice$loggedEvents
+```
+
+### Trace Plots
+
+On convergence, the streams of the trace plots should intermingle and be free of any trend (at the later iterations).
+Convergence is diagnosed when the variance between different sequences is no larger than the variance within each individual sequence.
+
+https://stefvanbuuren.name/fimd/sec-algoptions.html (archived at https://perma.cc/4S54-465R)
+
+```{r}
+plot(mi_mice)
+```
+
+### Density Plots
+
+```{r}
+densityplot(mi_mice)
+```
+
+### Strip Plots
+
+```{r}
+stripplot(mi_mice)
+
+stripplot(mi_mice, depression ~ .imp)
+```
+
+## Post-Processing
+
+### Modify/Create New Variables
+
+```{r}
+mi_mice_long <- mice::complete(
+  mi_mice,
+  action = "long",
+  include = TRUE)
+
+mi_mice_long <- mi_mice_long |> # for mixed-effects modeling
+  group_by(ID, .imp) |>
+  mutate(
+    sexFactor = factor(sex),
+    ageCentered = age - min(age, na.rm = TRUE),
+    ageCenteredSquared = ageCentered ^ 2,
+    ses_personMean = mean(ses, na.rm = TRUE),
+    ses_personMeanCentered = ses - ses_personMean,
+    sleep_personMean = mean(sleep, na.rm = TRUE),
+    sleep_personMeanCentered = sleep - sleep_personMean,
+    depression_personMean = mean(depression, na.rm = TRUE),
+    depression_personMeanCentered = depression - depression_personMean,
+    anxiety_personMean = mean(anxiety, na.rm = TRUE),
+    anxiety_personMeanCentered = anxiety - anxiety_personMean,
+  ) |>
+  ungroup()
+
+mi_mice_wide <- mi_mice_long |> # for structural equation modeling: widen by time
+  select(-.id, -age, -ageCentered, -ageCenteredSquared) |> # drop time-varying variables
+  tidyr::pivot_wider(
+    names_from  = timepoint,
+    values_from = c(ses, ses_personMeanCentered, sleep, sleep_personMeanCentered, depression, depression_personMeanCentered, anxiety, anxiety_personMeanCentered)
+  )
+```
+
+### Convert to `mids` object
+
+```{r}
+mi_mice_long_mids <- mice::as.mids(mi_mice_long)
+
+mi_mice_wide_mids <- mice::as.mids(mi_mice_wide)
+```
+
+## Fit Models to Multiple Imputed Data
+
+### Mixed-Effects Models
+
+#### Fit Model
+
+```{r}
+linearGCM_mice <- with(
+  data = mi_mice_long_mids,
+  expr = lme4::lmer(
+    formula = depression ~ sexFactor + ageCentered + sexFactor:ageCentered + 
+      sleep + sleep:ageCentered + sexFactor:sleep + sexFactor:sleep:ageCentered + 
+      (1 + ageCentered | ID), # random intercepts and slopes; sex as a fixed-effect predictor of the intercepts and slopes
+  )
+)
+```
+
+#### Model Summary
+
+```{r}
+linearGCM_mice
+
+mice::pool(linearGCM_mice)
+```
+
+### Structural Equation Models
+
+#### Model Syntax
+
+```{r}
+linearGCM_syntax <- '
+  # Intercept and slope
+  intercept =~ 1*depression_1 + 1*depression_2 + 1*depression_3 + 1*depression_4
+  slope =~ 0*depression_1 + 1*depression_2 + 2*depression_3 + 3*depression_4
+
+  # Regression paths
+  intercept ~ sexMale
+  slope ~ sexMale
+  
+  # Time-varying covariates
+  depression_1 ~ sleep_1
+  depression_2 ~ sleep_2
+  depression_3 ~ sleep_3
+  depression_4 ~ sleep_4
+  
+  # Constrain observed intercepts to zero
+  depression_1 ~ 0
+  depression_2 ~ 0
+  depression_3 ~ 0
+  depression_4 ~ 0
+  
+  # Estimate mean of intercept and slope
+  intercept ~ 1
+  slope ~ 1
+'
+```
+
+#### Fit Model
+
+```{r}
+linearGCM_fit_mice <- lavaan.mi::sem.mi(
+  linearGCM_syntax,
+  data = mi_mice_wide_mids,
+  missing = "ML", # FIML
+  estimator = "MLR", # Huber-White robust standard errors (for heteroscedasticity and nonnormally distributed residuals)
+  meanstructure = TRUE # estimate means/intercepts
+)
+```
+
+#### Model Summary
+
+```{r}
+summary(
+  linearGCM_fit_mice,
+  fit.measures = TRUE,
+  standardized = TRUE,
+  rsquare = TRUE)
+```

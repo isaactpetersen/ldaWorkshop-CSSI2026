@@ -18,11 +18,15 @@ Imports:
   parallelly,
   MuMIn,
   lavaan,
+  lavaan.mi,
   semTools,
   lcsm,
   lavaanPlot,
   lavaangui,
   mice,
+  miceadds,
+  micemd,
+  furrr,
   petersenlab
 Remotes:
   DevPsyLab/petersenlab
