@@ -73,7 +73,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9278de052701f0b3f1191ef96b26c196.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-9278de052701f0b3f1191ef96b26c196.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -210,7 +213,65 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
   </ul>
 </li>
   <li><a href="#full-information-maximum-likelihood" id="toc-full-information-maximum-likelihood" class="nav-link" data-scroll-target="#full-information-maximum-likelihood"><span class="header-section-number">2</span> Full Information Maximum Likelihood</a></li>
-  <li><a href="#multiple-imputation" id="toc-multiple-imputation" class="nav-link" data-scroll-target="#multiple-imputation"><span class="header-section-number">3</span> Multiple Imputation</a></li>
+  <li>
+<a href="#multiple-imputation" id="toc-multiple-imputation" class="nav-link" data-scroll-target="#multiple-imputation"><span class="header-section-number">3</span> Multiple Imputation</a>
+  <ul>
+<li><a href="#describe-missing-data" id="toc-describe-missing-data" class="nav-link" data-scroll-target="#describe-missing-data"><span class="header-section-number">3.1</span> Describe Missing Data</a></li>
+  <li>
+<a href="#pre-imputation-setup" id="toc-pre-imputation-setup" class="nav-link" data-scroll-target="#pre-imputation-setup"><span class="header-section-number">3.2</span> Pre-Imputation Setup</a>
+  <ul>
+<li><a href="#specify-variables-to-impute" id="toc-specify-variables-to-impute" class="nav-link" data-scroll-target="#specify-variables-to-impute"><span class="header-section-number">3.2.1</span> Specify Variables to Impute</a></li>
+  <li><a href="#specify-number-of-imputations" id="toc-specify-number-of-imputations" class="nav-link" data-scroll-target="#specify-number-of-imputations"><span class="header-section-number">3.2.2</span> Specify Number of Imputations</a></li>
+  <li><a href="#detect-cores" id="toc-detect-cores" class="nav-link" data-scroll-target="#detect-cores"><span class="header-section-number">3.2.3</span> Detect Cores</a></li>
+  <li><a href="#specifying-the-imputation-method" id="toc-specifying-the-imputation-method" class="nav-link" data-scroll-target="#specifying-the-imputation-method"><span class="header-section-number">3.2.4</span> Specifying the Imputation Method</a></li>
+  <li><a href="#specifying-the-predictor-matrix" id="toc-specifying-the-predictor-matrix" class="nav-link" data-scroll-target="#specifying-the-predictor-matrix"><span class="header-section-number">3.2.5</span> Specifying the Predictor Matrix</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#run-imputation" id="toc-run-imputation" class="nav-link" data-scroll-target="#run-imputation"><span class="header-section-number">3.3</span> Run Imputation</a>
+  <ul>
+<li><a href="#sequential-processing" id="toc-sequential-processing" class="nav-link" data-scroll-target="#sequential-processing"><span class="header-section-number">3.3.1</span> Sequential Processing</a></li>
+  <li><a href="#parallel-processing" id="toc-parallel-processing" class="nav-link" data-scroll-target="#parallel-processing"><span class="header-section-number">3.3.2</span> Parallel Processing</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#imputation-diagnostics" id="toc-imputation-diagnostics" class="nav-link" data-scroll-target="#imputation-diagnostics"><span class="header-section-number">3.4</span> Imputation Diagnostics</a>
+  <ul>
+<li><a href="#logged-events" id="toc-logged-events" class="nav-link" data-scroll-target="#logged-events"><span class="header-section-number">3.4.1</span> Logged Events</a></li>
+  <li><a href="#trace-plots" id="toc-trace-plots" class="nav-link" data-scroll-target="#trace-plots"><span class="header-section-number">3.4.2</span> Trace Plots</a></li>
+  <li><a href="#density-plots" id="toc-density-plots" class="nav-link" data-scroll-target="#density-plots"><span class="header-section-number">3.4.3</span> Density Plots</a></li>
+  <li><a href="#strip-plots" id="toc-strip-plots" class="nav-link" data-scroll-target="#strip-plots"><span class="header-section-number">3.4.4</span> Strip Plots</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#post-processing" id="toc-post-processing" class="nav-link" data-scroll-target="#post-processing"><span class="header-section-number">3.5</span> Post-Processing</a>
+  <ul>
+<li><a href="#modifycreate-new-variables" id="toc-modifycreate-new-variables" class="nav-link" data-scroll-target="#modifycreate-new-variables"><span class="header-section-number">3.5.1</span> Modify/Create New Variables</a></li>
+  <li><a href="#convert-to-mids-object" id="toc-convert-to-mids-object" class="nav-link" data-scroll-target="#convert-to-mids-object"><span class="header-section-number">3.5.2</span> Convert to <code>mids</code> object</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#fit-models-to-multiple-imputed-data" id="toc-fit-models-to-multiple-imputed-data" class="nav-link" data-scroll-target="#fit-models-to-multiple-imputed-data"><span class="header-section-number">3.6</span> Fit Models to Multiple Imputed Data</a>
+  <ul>
+<li>
+<a href="#mixed-effects-models" id="toc-mixed-effects-models" class="nav-link" data-scroll-target="#mixed-effects-models"><span class="header-section-number">3.6.1</span> Mixed-Effects Models</a>
+  <ul class="collapse">
+<li><a href="#fit-model" id="toc-fit-model" class="nav-link" data-scroll-target="#fit-model"><span class="header-section-number">3.6.1.1</span> Fit Model</a></li>
+  <li><a href="#model-summary" id="toc-model-summary" class="nav-link" data-scroll-target="#model-summary"><span class="header-section-number">3.6.1.2</span> Model Summary</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#structural-equation-models" id="toc-structural-equation-models" class="nav-link" data-scroll-target="#structural-equation-models"><span class="header-section-number">3.6.2</span> Structural Equation Models</a>
+  <ul class="collapse">
+<li><a href="#model-syntax" id="toc-model-syntax" class="nav-link" data-scroll-target="#model-syntax"><span class="header-section-number">3.6.2.1</span> Model Syntax</a></li>
+  <li><a href="#fit-model-1" id="toc-fit-model-1" class="nav-link" data-scroll-target="#fit-model-1"><span class="header-section-number">3.6.2.2</span> Fit Model</a></li>
+  <li><a href="#model-summary-1" id="toc-model-summary-1" class="nav-link" data-scroll-target="#model-summary-1"><span class="header-section-number">3.6.2.3</span> Model Summary</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  </ul>
+</li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/edit/main/missing-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/blob/main/missing-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -235,8 +296,14 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 <span class="header-section-number">1.1</span> Load Libraries</h2>
 <div class="cell">
 <details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/amices/mice">"mice"</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/alexanderrobitzsch/miceadds">"miceadds"</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st">"micemd"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/lme4/lme4/">"lme4"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://lavaan.ugent.be">"lavaan"</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/TDJorgensen/lavaan.mi">"lavaan.mi"</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://personality-project.org/r/psych/">"psych"</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://parallelly.futureverse.org">"parallelly"</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/DavisVaughan/furrr">"furrr"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
@@ -252,11 +319,669 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 <p>For examples using full information maximum likelihood (FIML), see examples of structural equation models <a href="./structural-equation-models.html">here</a>.</p>
 </section><section id="multiple-imputation" class="level1" data-number="3"><h1 data-number="3">
 <span class="header-section-number">3</span> Multiple Imputation</h1>
+<section id="describe-missing-data" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="describe-missing-data">
+<span class="header-section-number">3.1</span> Describe Missing Data</h2>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">psych</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/describe.html">describe</a></span><span class="op">(</span><span class="va">mydata_long</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["vars"],"name":[1],"type":["int"],"align":["right"]},{"label":["n"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["median"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["trimmed"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["mad"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["min"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["max"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["range"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["skew"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["kurtosis"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["se"],"name":[13],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"1000","3":"125.50000000","4":"72.2043175","5":"125.500000000","6":"1.255000e+02","7":"92.6625000","8":"1.000000","9":"250.000000","10":"249.000000","11":"0.00000000","12":"-1.2036365","13":"2.28330100","_rn_":"ID"},{"1":"2","2":"1000","3":"2.50000000","4":"1.1185934","5":"2.500000000","6":"2.500000e+00","7":"1.4826000","8":"1.000000","9":"4.000000","10":"3.000000","11":"0.00000000","12":"-1.3632784","13":"0.03537303","_rn_":"timepoint"},{"1":"3","2":"1000","3":"15.50000000","4":"1.1185934","5":"15.500000000","6":"1.550000e+01","7":"1.4826000","8":"14.000000","9":"17.000000","10":"3.000000","11":"0.00000000","12":"-1.3632784","13":"0.03537303","_rn_":"age"},{"1":"4","2":"1000","3":"1.44000000","4":"0.4966353","5":"1.000000000","6":"1.425000e+00","7":"0.0000000","8":"1.000000","9":"2.000000","10":"1.000000","11":"0.24138436","12":"-1.9436743","13":"0.01570499","_rn_":"sex*"},{"1":"5","2":"1000","3":"0.44000000","4":"0.4966353","5":"0.000000000","6":"4.250000e-01","7":"0.0000000","8":"0.000000","9":"1.000000","10":"1.000000","11":"0.24138436","12":"-1.9436743","13":"0.01570499","_rn_":"sexMale"},{"1":"6","2":"931","3":"0.00502408","4":"1.0044142","5":"-0.008477967","6":"2.446282e-03","7":"0.9669229","8":"-3.206694","9":"3.233629","10":"6.440323","11":"0.02849379","12":"0.1089007","13":"0.03291835","_rn_":"ses"},{"1":"7","2":"931","3":"8.02526305","4":"1.1315397","5":"8.018337050","6":"8.056317e+00","7":"1.2021712","8":"5.000000","9":"10.000000","10":"5.000000","11":"-0.21208628","12":"-0.5422655","13":"0.03708471","_rn_":"sleep"},{"1":"8","2":"931","3":"9.87969925","4":"6.6100710","5":"8.000000000","6":"9.112752e+00","7":"5.9304000","8":"0.000000","9":"30.000000","10":"30.000000","11":"1.00411622","12":"0.6050809","13":"0.21663633","_rn_":"depression"},{"1":"9","2":"931","3":"9.85177229","4":"6.5518236","5":"8.000000000","6":"9.103356e+00","7":"5.9304000","8":"0.000000","9":"30.000000","10":"30.000000","11":"0.99232855","12":"0.5996769","13":"0.21472734","_rn_":"anxiety"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">mice</span><span class="fu">::</span><span class="fu"><a href="https://amices.org/mice/reference/md.pattern.html">md.pattern</a></span><span class="op">(</span><span class="va">mydata_long</span>, rotate.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="missing-data_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="missing-data_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    ID timepoint age sex sexMale ses sleep depression anxiety    
+931  1         1   1   1       1   1     1          1       1   0
+69   1         1   1   1       1   0     0          0       0   4
+     0         0   0   0       0  69    69         69      69 276</code></pre>
+</div>
+</div>
+</section><section id="pre-imputation-setup" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="pre-imputation-setup">
+<span class="header-section-number">3.2</span> Pre-Imputation Setup</h2>
+<section id="specify-variables-to-impute" class="level3" data-number="3.2.1"><h3 data-number="3.2.1" class="anchored" data-anchor-id="specify-variables-to-impute">
+<span class="header-section-number">3.2.1</span> Specify Variables to Impute</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">varsToImpute</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ses"</span>,<span class="st">"sleep"</span>,<span class="st">"depression"</span>,<span class="st">"anxiety"</span><span class="op">)</span></span>
+<span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="va">varsToImpute</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="specify-number-of-imputations" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="specify-number-of-imputations">
+<span class="header-section-number">3.2.2</span> Specify Number of Imputations</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">numImputations</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="co"># generally use 100 imputations; this example uses 5 for speed</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="detect-cores" class="level3" data-number="3.2.3"><h3 data-number="3.2.3" class="anchored" data-anchor-id="detect-cores">
+<span class="header-section-number">3.2.3</span> Detect Cores</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">num_cores</span> <span class="op">&lt;-</span> <span class="fu">parallelly</span><span class="fu">::</span><span class="fu"><a href="https://parallelly.futureverse.org/reference/availableCores.html">availableCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span></span>
+<span><span class="va">num_true_cores</span> <span class="op">&lt;-</span> <span class="fu">parallelly</span><span class="fu">::</span><span class="fu"><a href="https://parallelly.futureverse.org/reference/availableCores.html">availableCores</a></span><span class="op">(</span>logical <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="specifying-the-imputation-method" class="level3" data-number="3.2.4"><h3 data-number="3.2.4" class="anchored" data-anchor-id="specifying-the-imputation-method">
+<span class="header-section-number">3.2.4</span> Specifying the Imputation Method</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">imputationMethods</span> <span class="op">&lt;-</span> <span class="fu">mice</span><span class="fu">::</span><span class="fu"><a href="https://amices.org/mice/reference/make.method.html">make.method</a></span><span class="op">(</span><span class="va">mydata_long</span><span class="op">)</span></span>
+<span><span class="va">imputationMethods</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">imputationMethods</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">""</span></span>
+<span><span class="va">imputationMethods</span><span class="op">[</span><span class="va">Y</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"2l.pmm"</span> <span class="co"># specify the imputation method here; this can differ by outcome variable</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="specifying-the-predictor-matrix" class="level3" data-number="3.2.5"><h3 data-number="3.2.5" class="anchored" data-anchor-id="specifying-the-predictor-matrix">
+<span class="header-section-number">3.2.5</span> Specifying the Predictor Matrix</h3>
+<p>A predictor matrix is a matrix of values, where:</p>
+<ul>
+<li>columns with non-zero values are predictors of the variable specified in the given row</li>
+<li>the diagonal of the predictor matrix should be zero because a variable cannot predict itself</li>
+</ul>
+<p>The values are:</p>
+<ul>
+<li>NOT a predictor of the outcome: <code>0</code>
+</li>
+<li>cluster variable: <code>-2</code>
+</li>
+<li>fixed effect of predictor: <code>1</code>
+</li>
+<li>fixed effect and random effect of predictor: <code>2</code>
+</li>
+<li>include cluster mean of predictor in addition to fixed effect of predictor: <code>3</code>
+</li>
+<li>include cluster mean of predictor in addition to fixed effect and random effect of predictor: <code>4</code>
+</li>
+</ul>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">predictorMatrix</span> <span class="op">&lt;-</span> <span class="fu">mice</span><span class="fu">::</span><span class="fu"><a href="https://amices.org/mice/reference/make.predictorMatrix.html">make.predictorMatrix</a></span><span class="op">(</span><span class="va">mydata_long</span><span class="op">)</span></span>
+<span><span class="va">predictorMatrix</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">predictorMatrix</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">predictorMatrix</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co"># make everything zero by default to manually specify all predictors used for imputation</span></span>
+<span><span class="va">predictorMatrix</span><span class="op">[</span><span class="va">Y</span>, <span class="st">"ID"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span> <span class="co"># cluster variable</span></span>
+<span><span class="va">predictorMatrix</span><span class="op">[</span><span class="va">Y</span>, <span class="st">"age"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="co"># random effect predictor</span></span>
+<span><span class="co">#predictorMatrix[Y, "ses"] &lt;- 2 # random effect predictor</span></span>
+<span><span class="co">#predictorMatrix[Y, "sleep"] &lt;- 1 # random effect predictor</span></span>
+<span><span class="co">#predictorMatrix[Y, "depression"] &lt;- 1 # random effect predictor</span></span>
+<span><span class="co">#predictorMatrix[Y, "anxiety"] &lt;- 1 # random effect predictor</span></span>
+<span><span class="va">predictorMatrix</span><span class="op">[</span><span class="va">Y</span>, <span class="st">"sexMale"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="co"># fixed effect predictor</span></span>
+<span><span class="va">predictorMatrix</span><span class="op">[</span><span class="va">Y</span>, <span class="va">Y</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="co"># fixed effect predictor; make sure all predictors predict each other</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">predictorMatrix</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co"># don't have a variable predicting itself</span></span>
+<span><span class="va">predictorMatrix</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>           ID timepoint age sex sexMale ses sleep depression anxiety
+ID          0         0   0   0       0   0     0          0       0
+timepoint   0         0   0   0       0   0     0          0       0
+age         0         0   0   0       0   0     0          0       0
+sex         0         0   0   0       0   0     0          0       0
+sexMale     0         0   0   0       0   0     0          0       0
+ses        -2         0   2   0       1   0     1          1       1
+sleep      -2         0   2   0       1   1     0          1       1
+depression -2         0   2   0       1   1     1          0       1
+anxiety    -2         0   2   0       1   1     1          1       0</code></pre>
+</div>
+</div>
+</section></section><section id="run-imputation" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="run-imputation">
+<span class="header-section-number">3.3</span> Run Imputation</h2>
+<section id="sequential-processing" class="level3" data-number="3.3.1"><h3 data-number="3.3.1" class="anchored" data-anchor-id="sequential-processing">
+<span class="header-section-number">3.3.1</span> Sequential Processing</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mi_mice</span> <span class="op">&lt;-</span> <span class="fu">mice</span><span class="fu">::</span><span class="fu"><a href="https://amices.org/mice/reference/mice.html">mice</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">mydata_long</span><span class="op">)</span>,</span>
+<span>  method <span class="op">=</span> <span class="va">imputationMethods</span>,</span>
+<span>  predictorMatrix <span class="op">=</span> <span class="va">predictorMatrix</span>,</span>
+<span>  m <span class="op">=</span> <span class="va">numImputations</span>,</span>
+<span>  maxit <span class="op">=</span> <span class="fl">5</span>, <span class="co"># generally use 100 maximum iterations; this example uses 5 for speed</span></span>
+<span>  seed <span class="op">=</span> <span class="fl">52242</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+ iter imp variable
+  1   1  ses  sleep  depression  anxiety
+  1   2  ses  sleep  depression  anxiety
+  1   3  ses  sleep  depression  anxiety
+  1   4  ses  sleep  depression  anxiety
+  1   5  ses  sleep  depression  anxiety
+  2   1  ses  sleep  depression  anxiety
+  2   2  ses  sleep  depression  anxiety
+  2   3  ses  sleep  depression  anxiety
+  2   4  ses  sleep  depression  anxiety
+  2   5  ses  sleep  depression  anxiety
+  3   1  ses  sleep  depression  anxiety
+  3   2  ses  sleep  depression  anxiety
+  3   3  ses  sleep  depression  anxiety
+  3   4  ses  sleep  depression  anxiety
+  3   5  ses  sleep  depression  anxiety
+  4   1  ses  sleep  depression  anxiety
+  4   2  ses  sleep  depression  anxiety
+  4   3  ses  sleep  depression  anxiety
+  4   4  ses  sleep  depression  anxiety
+  4   5  ses  sleep  depression  anxiety
+  5   1  ses  sleep  depression  anxiety
+  5   2  ses  sleep  depression  anxiety
+  5   3  ses  sleep  depression  anxiety
+  5   4  ses  sleep  depression  anxiety
+  5   5  ses  sleep  depression  anxiety</code></pre>
+</div>
+</div>
+</section><section id="parallel-processing" class="level3" data-number="3.3.2"><h3 data-number="3.3.2" class="anchored" data-anchor-id="parallel-processing">
+<span class="header-section-number">3.3.2</span> Parallel Processing</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mi_parallel_mice</span> <span class="op">&lt;-</span> <span class="fu">mice</span><span class="fu">::</span><span class="fu"><a href="https://amices.org/mice/reference/futuremice.html">futuremice</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">mydata_long</span><span class="op">)</span>,</span>
+<span>  method <span class="op">=</span> <span class="va">imputationMethods</span>,</span>
+<span>  predictorMatrix <span class="op">=</span> <span class="va">predictorMatrix</span>,</span>
+<span>  m <span class="op">=</span> <span class="va">numImputations</span>,</span>
+<span>  maxit <span class="op">=</span> <span class="fl">5</span>, <span class="co"># generally use 100 maximum iterations; this example uses 5 for speed</span></span>
+<span>  parallelseed <span class="op">=</span> <span class="fl">52242</span>,</span>
+<span>  n.core <span class="op">=</span> <span class="va">num_cores</span>,</span>
+<span>  packages <span class="op">=</span> <span class="st">"miceadds"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section></section><section id="imputation-diagnostics" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="imputation-diagnostics">
+<span class="header-section-number">3.4</span> Imputation Diagnostics</h2>
+<section id="logged-events" class="level3" data-number="3.4.1"><h3 data-number="3.4.1" class="anchored" data-anchor-id="logged-events">
+<span class="header-section-number">3.4.1</span> Logged Events</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mi_mice</span><span class="op">$</span><span class="va">loggedEvents</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
+</section><section id="trace-plots" class="level3" data-number="3.4.2"><h3 data-number="3.4.2" class="anchored" data-anchor-id="trace-plots">
+<span class="header-section-number">3.4.2</span> Trace Plots</h3>
+<p>On convergence, the streams of the trace plots should intermingle and be free of any trend (at the later iterations). Convergence is diagnosed when the variance between different sequences is no larger than the variance within each individual sequence.</p>
+<p>https://stefvanbuuren.name/fimd/sec-algoptions.html (archived at https://perma.cc/4S54-465R)</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">mi_mice</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="missing-data_files/figure-html/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="missing-data_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="missing-data_files/figure-html/unnamed-chunk-13-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="missing-data_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="density-plots" class="level3" data-number="3.4.3"><h3 data-number="3.4.3" class="anchored" data-anchor-id="density-plots">
+<span class="header-section-number">3.4.3</span> Density Plots</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/histogram.html">densityplot</a></span><span class="op">(</span><span class="va">mi_mice</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="missing-data_files/figure-html/unnamed-chunk-14-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="missing-data_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="strip-plots" class="level3" data-number="3.4.4"><h3 data-number="3.4.4" class="anchored" data-anchor-id="strip-plots">
+<span class="header-section-number">3.4.4</span> Strip Plots</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/xyplot.html">stripplot</a></span><span class="op">(</span><span class="va">mi_mice</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="missing-data_files/figure-html/unnamed-chunk-15-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="missing-data_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/xyplot.html">stripplot</a></span><span class="op">(</span><span class="va">mi_mice</span>, <span class="va">depression</span> <span class="op">~</span> <span class="va">.imp</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="missing-data_files/figure-html/unnamed-chunk-15-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="missing-data_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section id="post-processing" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="post-processing">
+<span class="header-section-number">3.5</span> Post-Processing</h2>
+<section id="modifycreate-new-variables" class="level3" data-number="3.5.1"><h3 data-number="3.5.1" class="anchored" data-anchor-id="modifycreate-new-variables">
+<span class="header-section-number">3.5.1</span> Modify/Create New Variables</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mi_mice_long</span> <span class="op">&lt;-</span> <span class="fu">mice</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/complete.html">complete</a></span><span class="op">(</span></span>
+<span>  <span class="va">mi_mice</span>,</span>
+<span>  action <span class="op">=</span> <span class="st">"long"</span>,</span>
+<span>  include <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mi_mice_long</span> <span class="op">&lt;-</span> <span class="va">mi_mice_long</span> <span class="op">|&gt;</span> <span class="co"># for mixed-effects modeling</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">.imp</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    sexFactor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span>,</span>
+<span>    ageCentered <span class="op">=</span> <span class="va">age</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">age</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    ageCenteredSquared <span class="op">=</span> <span class="va">ageCentered</span> <span class="op">^</span> <span class="fl">2</span>,</span>
+<span>    ses_personMean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ses</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    ses_personMeanCentered <span class="op">=</span> <span class="va">ses</span> <span class="op">-</span> <span class="va">ses_personMean</span>,</span>
+<span>    sleep_personMean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">sleep</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    sleep_personMeanCentered <span class="op">=</span> <span class="va">sleep</span> <span class="op">-</span> <span class="va">sleep_personMean</span>,</span>
+<span>    depression_personMean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">depression</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    depression_personMeanCentered <span class="op">=</span> <span class="va">depression</span> <span class="op">-</span> <span class="va">depression_personMean</span>,</span>
+<span>    anxiety_personMean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">anxiety</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    anxiety_personMeanCentered <span class="op">=</span> <span class="va">anxiety</span> <span class="op">-</span> <span class="va">anxiety_personMean</span>,</span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mi_mice_wide</span> <span class="op">&lt;-</span> <span class="va">mi_mice_long</span> <span class="op">|&gt;</span> <span class="co"># for structural equation modeling: widen by time</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">.id</span>, <span class="op">-</span><span class="va">age</span>, <span class="op">-</span><span class="va">ageCentered</span>, <span class="op">-</span><span class="va">ageCenteredSquared</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># drop time-varying variables</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span></span>
+<span>    names_from  <span class="op">=</span> <span class="va">timepoint</span>,</span>
+<span>    values_from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ses</span>, <span class="va">ses_personMeanCentered</span>, <span class="va">sleep</span>, <span class="va">sleep_personMeanCentered</span>, <span class="va">depression</span>, <span class="va">depression_personMeanCentered</span>, <span class="va">anxiety</span>, <span class="va">anxiety_personMeanCentered</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="convert-to-mids-object" class="level3" data-number="3.5.2"><h3 data-number="3.5.2" class="anchored" data-anchor-id="convert-to-mids-object">
+<span class="header-section-number">3.5.2</span> Convert to <code>mids</code> object</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mi_mice_long_mids</span> <span class="op">&lt;-</span> <span class="fu">mice</span><span class="fu">::</span><span class="fu"><a href="https://amices.org/mice/reference/as.mids.html">as.mids</a></span><span class="op">(</span><span class="va">mi_mice_long</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mi_mice_wide_mids</span> <span class="op">&lt;-</span> <span class="fu">mice</span><span class="fu">::</span><span class="fu"><a href="https://amices.org/mice/reference/as.mids.html">as.mids</a></span><span class="op">(</span><span class="va">mi_mice_wide</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section></section><section id="fit-models-to-multiple-imputed-data" class="level2" data-number="3.6"><h2 data-number="3.6" class="anchored" data-anchor-id="fit-models-to-multiple-imputed-data">
+<span class="header-section-number">3.6</span> Fit Models to Multiple Imputed Data</h2>
+<section id="mixed-effects-models" class="level3" data-number="3.6.1"><h3 data-number="3.6.1" class="anchored" data-anchor-id="mixed-effects-models">
+<span class="header-section-number">3.6.1</span> Mixed-Effects Models</h3>
+<section id="fit-model" class="level4" data-number="3.6.1.1"><h4 data-number="3.6.1.1" class="anchored" data-anchor-id="fit-model">
+<span class="header-section-number">3.6.1.1</span> Fit Model</h4>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linearGCM_mice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">mi_mice_long_mids</span>,</span>
+<span>  expr <span class="op">=</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span></span>
+<span>    formula <span class="op">=</span> <span class="va">depression</span> <span class="op">~</span> <span class="va">sexFactor</span> <span class="op">+</span> <span class="va">ageCentered</span> <span class="op">+</span> <span class="va">sexFactor</span><span class="op">:</span><span class="va">ageCentered</span> <span class="op">+</span> </span>
+<span>      <span class="va">sleep</span> <span class="op">+</span> <span class="va">sleep</span><span class="op">:</span><span class="va">ageCentered</span> <span class="op">+</span> <span class="va">sexFactor</span><span class="op">:</span><span class="va">sleep</span> <span class="op">+</span> <span class="va">sexFactor</span><span class="op">:</span><span class="va">sleep</span><span class="op">:</span><span class="va">ageCentered</span> <span class="op">+</span> </span>
+<span>      <span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">ageCentered</span> <span class="op">|</span> <span class="va">ID</span><span class="op">)</span>, <span class="co"># random intercepts and slopes; sex as a fixed-effect predictor of the intercepts and slopes</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="model-summary" class="level4" data-number="3.6.1.2"><h4 data-number="3.6.1.2" class="anchored" data-anchor-id="model-summary">
+<span class="header-section-number">3.6.1.2</span> Model Summary</h4>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linearGCM_mice</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>call :
+with.mids(data = mi_mice_long_mids, expr = lme4::lmer(formula = depression ~ 
+    sexFactor + ageCentered + sexFactor:ageCentered + sleep + 
+        sleep:ageCentered + sexFactor:sleep + sexFactor:sleep:ageCentered + 
+        (1 + ageCentered | ID), ))
+
+call1 :
+mice(data = data, m = m, where = where, maxit = 0, remove.collinear = FALSE, 
+    allow.na = TRUE)
+
+nmis :
+ [1]  0  0  0  0  0 69 69 69 69  0  0  0  0 69  0 69  0 69  0 69
+
+analyses :
+[[1]]
+Linear mixed model fit by REML ['lmerMod']
+Formula: depression ~ sexFactor + ageCentered + sexFactor:ageCentered +  
+    sleep + sleep:ageCentered + sexFactor:sleep + sexFactor:sleep:ageCentered +  
+    (1 + ageCentered | ID)
+REML criterion at convergence: 5102.748
+Random effects:
+ Groups   Name        Std.Dev. Corr
+ ID       (Intercept) 3.789        
+          ageCentered 1.499    0.57
+ Residual             1.774        
+Number of obs: 1000, groups:  ID, 250
+Fixed Effects:
+                      (Intercept)                    sexFactorfemale  
+                         15.35933                            1.98820  
+                      ageCentered                              sleep  
+                         -0.84863                           -0.88422  
+      sexFactorfemale:ageCentered                  ageCentered:sleep  
+                          2.60367                            0.01942  
+            sexFactorfemale:sleep  sexFactorfemale:ageCentered:sleep  
+                          0.04039                           -0.12621  
+
+[[2]]
+Linear mixed model fit by REML ['lmerMod']
+Formula: depression ~ sexFactor + ageCentered + sexFactor:ageCentered +  
+    sleep + sleep:ageCentered + sexFactor:sleep + sexFactor:sleep:ageCentered +  
+    (1 + ageCentered | ID)
+REML criterion at convergence: 5099.018
+Random effects:
+ Groups   Name        Std.Dev. Corr
+ ID       (Intercept) 3.801        
+          ageCentered 1.518    0.55
+ Residual             1.756        
+Number of obs: 1000, groups:  ID, 250
+Fixed Effects:
+                      (Intercept)                    sexFactorfemale  
+                         16.19658                            1.07289  
+                      ageCentered                              sleep  
+                         -0.63998                           -0.99307  
+      sexFactorfemale:ageCentered                  ageCentered:sleep  
+                          2.50714                            0.00242  
+            sexFactorfemale:sleep  sexFactorfemale:ageCentered:sleep  
+                          0.15416                           -0.12000  
+
+[[3]]
+Linear mixed model fit by REML ['lmerMod']
+Formula: depression ~ sexFactor + ageCentered + sexFactor:ageCentered +  
+    sleep + sleep:ageCentered + sexFactor:sleep + sexFactor:sleep:ageCentered +  
+    (1 + ageCentered | ID)
+REML criterion at convergence: 5135.067
+Random effects:
+ Groups   Name        Std.Dev. Corr
+ ID       (Intercept) 3.761        
+          ageCentered 1.497    0.58
+ Residual             1.827        
+Number of obs: 1000, groups:  ID, 250
+Fixed Effects:
+                      (Intercept)                    sexFactorfemale  
+                        16.005936                           2.236513  
+                      ageCentered                              sleep  
+                        -0.644327                          -0.972059  
+      sexFactorfemale:ageCentered                  ageCentered:sleep  
+                         1.985518                           0.008007  
+            sexFactorfemale:sleep  sexFactorfemale:ageCentered:sleep  
+                         0.017228                          -0.065530  
+
+[[4]]
+Linear mixed model fit by REML ['lmerMod']
+Formula: depression ~ sexFactor + ageCentered + sexFactor:ageCentered +  
+    sleep + sleep:ageCentered + sexFactor:sleep + sexFactor:sleep:ageCentered +  
+    (1 + ageCentered | ID)
+REML criterion at convergence: 5082.771
+Random effects:
+ Groups   Name        Std.Dev. Corr
+ ID       (Intercept) 3.799        
+          ageCentered 1.535    0.57
+ Residual             1.731        
+Number of obs: 1000, groups:  ID, 250
+Fixed Effects:
+                      (Intercept)                    sexFactorfemale  
+                         15.84159                            1.71636  
+                      ageCentered                              sleep  
+                         -1.06624                           -0.95303  
+      sexFactorfemale:ageCentered                  ageCentered:sleep  
+                          2.68593                            0.06101  
+            sexFactorfemale:sleep  sexFactorfemale:ageCentered:sleep  
+                          0.08381                           -0.15154  
+
+[[5]]
+Linear mixed model fit by REML ['lmerMod']
+Formula: depression ~ sexFactor + ageCentered + sexFactor:ageCentered +  
+    sleep + sleep:ageCentered + sexFactor:sleep + sexFactor:sleep:ageCentered +  
+    (1 + ageCentered | ID)
+REML criterion at convergence: 5114.765
+Random effects:
+ Groups   Name        Std.Dev. Corr
+ ID       (Intercept) 3.737        
+          ageCentered 1.491    0.63
+ Residual             1.813        
+Number of obs: 1000, groups:  ID, 250
+Fixed Effects:
+                      (Intercept)                    sexFactorfemale  
+                         15.74746                            2.14466  
+                      ageCentered                              sleep  
+                         -0.47781                           -0.93500  
+      sexFactorfemale:ageCentered                  ageCentered:sleep  
+                          2.22335                           -0.01803  
+            sexFactorfemale:sleep  sexFactorfemale:ageCentered:sleep  
+                          0.02546                           -0.08941  </code></pre>
+</div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">mice</span><span class="fu">::</span><span class="fu"><a href="https://amices.org/mice/reference/pool.html">pool</a></span><span class="op">(</span><span class="va">linearGCM_mice</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error:
+! arguments imply differing number of rows: 1, 0</code></pre>
+</div>
+</div>
+</section></section><section id="structural-equation-models" class="level3" data-number="3.6.2"><h3 data-number="3.6.2" class="anchored" data-anchor-id="structural-equation-models">
+<span class="header-section-number">3.6.2</span> Structural Equation Models</h3>
+<section id="model-syntax" class="level4" data-number="3.6.2.1"><h4 data-number="3.6.2.1" class="anchored" data-anchor-id="model-syntax">
+<span class="header-section-number">3.6.2.1</span> Model Syntax</h4>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linearGCM_syntax</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">  # Intercept and slope</span></span>
+<span><span class="st">  intercept =~ 1*depression_1 + 1*depression_2 + 1*depression_3 + 1*depression_4</span></span>
+<span><span class="st">  slope =~ 0*depression_1 + 1*depression_2 + 2*depression_3 + 3*depression_4</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">  # Regression paths</span></span>
+<span><span class="st">  intercept ~ sexMale</span></span>
+<span><span class="st">  slope ~ sexMale</span></span>
+<span><span class="st">  </span></span>
+<span><span class="st">  # Time-varying covariates</span></span>
+<span><span class="st">  depression_1 ~ sleep_1</span></span>
+<span><span class="st">  depression_2 ~ sleep_2</span></span>
+<span><span class="st">  depression_3 ~ sleep_3</span></span>
+<span><span class="st">  depression_4 ~ sleep_4</span></span>
+<span><span class="st">  </span></span>
+<span><span class="st">  # Constrain observed intercepts to zero</span></span>
+<span><span class="st">  depression_1 ~ 0</span></span>
+<span><span class="st">  depression_2 ~ 0</span></span>
+<span><span class="st">  depression_3 ~ 0</span></span>
+<span><span class="st">  depression_4 ~ 0</span></span>
+<span><span class="st">  </span></span>
+<span><span class="st">  # Estimate mean of intercept and slope</span></span>
+<span><span class="st">  intercept ~ 1</span></span>
+<span><span class="st">  slope ~ 1</span></span>
+<span><span class="st">'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="fit-model-1" class="level4" data-number="3.6.2.2"><h4 data-number="3.6.2.2" class="anchored" data-anchor-id="fit-model-1">
+<span class="header-section-number">3.6.2.2</span> Fit Model</h4>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linearGCM_fit_mice</span> <span class="op">&lt;-</span> <span class="fu">lavaan.mi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lavaan.mi/man/lavaan.mi.html">sem.mi</a></span><span class="op">(</span></span>
+<span>  <span class="va">linearGCM_syntax</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">mi_mice_wide_mids</span>,</span>
+<span>  missing <span class="op">=</span> <span class="st">"ML"</span>, <span class="co"># FIML</span></span>
+<span>  estimator <span class="op">=</span> <span class="st">"MLR"</span>, <span class="co"># Huber-White robust standard errors (for heteroscedasticity and nonnormally distributed residuals)</span></span>
+<span>  meanstructure <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># estimate means/intercepts</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="model-summary-1" class="level4" data-number="3.6.2.3"><h4 data-number="3.6.2.3" class="anchored" data-anchor-id="model-summary-1">
+<span class="header-section-number">3.6.2.3</span> Model Summary</h4>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span></span>
+<span>  <span class="va">linearGCM_fit_mice</span>,</span>
+<span>  fit.measures <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  standardized <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  rsquare <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>lavaan.mi object fit to 5 imputed data sets using:
+ - lavaan    (0.6-21)
+ - lavaan.mi (0.1-0)
+See class?lavaan.mi help page for available methods. 
+
+Convergence information:
+The model converged on 5 imputed data sets.
+Standard errors were available for all imputations.
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                        15
+
+  Number of observations                           250
+  Number of missing patterns                         1
+
+Model Test User Model:
+
+                                                    Standard      Scaled
+  Test statistic                                      46.920      43.683
+  Degrees of freedom                                      19          19
+  P-value                                              0.000       0.001
+  Average scaling correction factor                                1.074
+  Pooling method                                          D4            
+    Pooled statistic                              "standard"            
+    "yuan.bentler.mplus" correction applied            AFTER     pooling
+
+Model Test Baseline Model:
+
+  Test statistic                              1219.809    1049.685
+  Degrees of freedom                                26          26
+  P-value                                        0.000       0.000
+  Scaling correction factor                                  1.162
+
+User Model versus Baseline Model:
+
+  Comparative Fit Index (CFI)                    0.977       0.976
+  Tucker-Lewis Index (TLI)                       0.968       0.967
+                                                                  
+  Robust Comparative Fit Index (CFI)                         0.977
+  Robust Tucker-Lewis Index (TLI)                            0.968
+
+Loglikelihood and Information Criteria:
+
+  Loglikelihood user model (H0)              -2477.613   -2477.613
+  Scaling correction factor                                  1.228
+      for the MLR correction                                      
+  Loglikelihood unrestricted model (H1)      -2449.740   -2449.740
+  Scaling correction factor                                  1.144
+      for the MLR correction                                      
+                                                                  
+  Akaike (AIC)                                4985.225    4985.225
+  Bayesian (BIC)                              5038.047    5038.047
+  Sample-size adjusted Bayesian (SABIC)       4990.496    4990.496
+
+Root Mean Square Error of Approximation:
+
+  RMSEA                                          0.077       0.072
+  90 Percent confidence interval - lower         0.049       0.045
+  90 Percent confidence interval - upper         0.105       0.099
+  P-value H_0: RMSEA &lt;= 0.050                    0.054       0.087
+  P-value H_0: RMSEA &gt;= 0.080                    0.450       0.334
+                                                                  
+  Robust RMSEA                                               0.088
+  90 Percent confidence interval - lower                     0.060
+  90 Percent confidence interval - upper                     0.117
+  P-value H_0: Robust RMSEA &lt;= 0.050                         0.015
+  P-value H_0: Robust RMSEA &gt;= 0.080                         0.702
+
+Standardized Root Mean Square Residual:
+
+  SRMR                                           0.082       0.082
+
+Parameter Estimates:
+
+  Standard errors                                   Sandwich
+  Information bread                                 Observed
+  Observed information based on                      Hessian
+                                                            
+  Pooled across imputations             Rubin's (1987) rules
+  Augment within-imputation variance    Scale by average RIV
+  Wald test for pooled parameters         t(df) distribution
+
+  Pooled t statistics with df &gt;= 1000 are displayed with
+  df = Inf(inity) to save space. Although the t distribution
+  with large df closely approximates a standard normal
+  distribution, exact df for reporting these t tests can be
+  obtained from parameterEstimates.mi() 
+
+
+Latent Variables:
+                   Estimate  Std.Err  t-value       df  P(&gt;|t|)   Std.lv
+  intercept =~                                                          
+    depression_1      1.000                                        4.038
+    depression_2      1.000                                        4.038
+    depression_3      1.000                                        4.038
+    depression_4      1.000                                        4.038
+  slope =~                                                              
+    depression_1      0.000                                        0.000
+    depression_2      1.000                                        1.701
+    depression_3      2.000                                        3.402
+    depression_4      3.000                                        5.104
+  Std.all
+         
+    0.935
+    0.737
+    0.587
+    0.472
+         
+    0.000
+    0.311
+    0.495
+    0.597
+
+Regressions:
+                   Estimate  Std.Err  t-value       df  P(&gt;|t|)   Std.lv
+  intercept ~                                                           
+    sexMale          -2.314    0.551   -4.203      Inf    0.000   -0.573
+  slope ~                                                               
+    sexMale          -1.539    0.222   -6.925      Inf    0.000   -0.905
+  depression_1 ~                                                        
+    sleep_1          -0.791    0.131   -6.055      Inf    0.000   -0.791
+  depression_2 ~                                                        
+    sleep_2          -0.974    0.103   -9.423  804.857    0.000   -0.974
+  depression_3 ~                                                        
+    sleep_3          -0.990    0.124   -7.982  274.360    0.000   -0.990
+  depression_4 ~                                                        
+    sleep_4          -0.900    0.179   -5.042  242.711    0.000   -0.900
+  Std.all
+         
+   -0.284
+         
+   -0.449
+         
+   -0.211
+         
+   -0.193
+         
+   -0.157
+         
+   -0.125
+
+Covariances:
+                   Estimate  Std.Err  t-value       df  P(&gt;|t|)   Std.lv
+ .intercept ~~                                                          
+   .slope             3.104    0.521    5.954  782.471    0.000    0.527
+  Std.all
+         
+    0.527
+
+Intercepts:
+                   Estimate  Std.Err  t-value       df  P(&gt;|t|)   Std.lv
+   .depression_1      0.000                                        0.000
+   .depression_2      0.000                                        0.000
+   .depression_3      0.000                                        0.000
+   .depression_4      0.000                                        0.000
+   .intercept        17.487    1.127   15.520      Inf    0.000    4.331
+   .slope             1.177    0.633    1.859  452.471    0.064    0.692
+  Std.all
+    0.000
+    0.000
+    0.000
+    0.000
+    4.331
+    0.692
+
+Variances:
+                   Estimate  Std.Err  t-value       df  P(&gt;|t|)   Std.lv
+   .depression_1      1.717    0.457    3.757   69.505    0.000    1.717
+   .depression_2      1.817    0.342    5.316  125.818    0.000    1.817
+   .depression_3      2.115    0.454    4.659   38.212    0.000    2.115
+   .depression_4      5.681    1.058    5.369   90.930    0.000    5.681
+   .intercept        14.984    2.035    7.365      Inf    0.000    0.919
+   .slope             2.310    0.329    7.020  620.663    0.000    0.798
+  Std.all
+    0.092
+    0.061
+    0.045
+    0.078
+    0.919
+    0.798
+
+R-Square:
+                   Estimate
+    depression_1      0.908
+    depression_2      0.939
+    depression_3      0.955
+    depression_4      0.922
+    intercept         0.081
+    slope             0.202</code></pre>
+</div>
+</div>
 
 
 <!-- -->
 
-</section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main><!-- /main --><br><br><br><!-- Add lab logo --><p style="text-align: center;">
+</section></section></section></section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main><!-- /main --><br><br><br><!-- Add lab logo --><p style="text-align: center;">
     <a href="https://developmental-psychopathology.lab.uiowa.edu" target="_blank">
         <img alt="Developmental Psychopathology Lab" src="images/formalLogo.png" width="60%"></a>
 </p>
@@ -724,39 +1449,337 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Missing Data"</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu"># Preamble</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Load Libraries</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mice"</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lme4"</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lavaan"</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Load Data</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>The data for this example were <span class="co">[</span><span class="ot">simulated</span><span class="co">](simulate-data.qmd)</span>:</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>mydata_long <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/mydata_long.csv"</span>)</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="fu"># Full Information Maximum Likelihood</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>For examples using full information maximum likelihood (FIML), see examples of structural equation models <span class="co">[</span><span class="ot">here</span><span class="co">](structural-equation-models.qmd)</span>.</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="fu"># Multiple Imputation</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Missing Data"</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu"># Preamble</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Load Libraries</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mice"</span>)</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"miceadds"</span>)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"micemd"</span>)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lme4"</span>)</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lavaan"</span>)</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lavaan.mi"</span>)</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"psych"</span>)</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"parallelly"</span>)</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"furrr"</span>)</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Load Data</span></span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>The data for this example were <span class="co">[</span><span class="ot">simulated</span><span class="co">](simulate-data.qmd)</span>:</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>mydata_long <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/mydata_long.csv"</span>)</span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a><span class="fu"># Full Information Maximum Likelihood</span></span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>For examples using full information maximum likelihood (FIML), see examples of structural equation models <span class="co">[</span><span class="ot">here</span><span class="co">](structural-equation-models.qmd)</span>.</span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a><span class="fu"># Multiple Imputation</span></span>
+<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Describe Missing Data</span></span>
+<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(mydata_long)</span>
+<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a>mice<span class="sc">::</span><span class="fu">md.pattern</span>(mydata_long, <span class="at">rotate.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pre-Imputation Setup</span></span>
+<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a><span class="fu">### Specify Variables to Impute</span></span>
+<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-56"><a href="#cb32-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-57"><a href="#cb32-57" aria-hidden="true" tabindex="-1"></a>varsToImpute <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ses"</span>,<span class="st">"sleep"</span>,<span class="st">"depression"</span>,<span class="st">"anxiety"</span>)</span>
+<span id="cb32-58"><a href="#cb32-58" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> varsToImpute</span>
+<span id="cb32-59"><a href="#cb32-59" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-60"><a href="#cb32-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-61"><a href="#cb32-61" aria-hidden="true" tabindex="-1"></a><span class="fu">### Specify Number of Imputations</span></span>
+<span id="cb32-62"><a href="#cb32-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-65"><a href="#cb32-65" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-66"><a href="#cb32-66" aria-hidden="true" tabindex="-1"></a>numImputations <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># generally use 100 imputations; this example uses 5 for speed</span></span>
+<span id="cb32-67"><a href="#cb32-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-68"><a href="#cb32-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-69"><a href="#cb32-69" aria-hidden="true" tabindex="-1"></a><span class="fu">### Detect Cores</span></span>
+<span id="cb32-70"><a href="#cb32-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-73"><a href="#cb32-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-74"><a href="#cb32-74" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb32-75"><a href="#cb32-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-76"><a href="#cb32-76" aria-hidden="true" tabindex="-1"></a>num_cores <span class="ot">&lt;-</span> parallelly<span class="sc">::</span><span class="fu">availableCores</span>()</span>
+<span id="cb32-77"><a href="#cb32-77" aria-hidden="true" tabindex="-1"></a>num_true_cores <span class="ot">&lt;-</span> parallelly<span class="sc">::</span><span class="fu">availableCores</span>(<span class="at">logical =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb32-78"><a href="#cb32-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-79"><a href="#cb32-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-82"><a href="#cb32-82" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-83"><a href="#cb32-83" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb32-84"><a href="#cb32-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-85"><a href="#cb32-85" aria-hidden="true" tabindex="-1"></a>num_cores <span class="ot">&lt;-</span> parallelly<span class="sc">::</span><span class="fu">availableCores</span>() <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb32-86"><a href="#cb32-86" aria-hidden="true" tabindex="-1"></a>num_true_cores <span class="ot">&lt;-</span> parallelly<span class="sc">::</span><span class="fu">availableCores</span>(<span class="at">logical =</span> <span class="cn">FALSE</span>) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb32-87"><a href="#cb32-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-88"><a href="#cb32-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-89"><a href="#cb32-89" aria-hidden="true" tabindex="-1"></a><span class="fu">### Specifying the Imputation Method</span></span>
+<span id="cb32-90"><a href="#cb32-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-93"><a href="#cb32-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-94"><a href="#cb32-94" aria-hidden="true" tabindex="-1"></a>imputationMethods <span class="ot">&lt;-</span> mice<span class="sc">::</span><span class="fu">make.method</span>(mydata_long)</span>
+<span id="cb32-95"><a href="#cb32-95" aria-hidden="true" tabindex="-1"></a>imputationMethods[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(imputationMethods)] <span class="ot">&lt;-</span> <span class="st">""</span></span>
+<span id="cb32-96"><a href="#cb32-96" aria-hidden="true" tabindex="-1"></a>imputationMethods[Y] <span class="ot">&lt;-</span> <span class="st">"2l.pmm"</span> <span class="co"># specify the imputation method here; this can differ by outcome variable</span></span>
+<span id="cb32-97"><a href="#cb32-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-98"><a href="#cb32-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-99"><a href="#cb32-99" aria-hidden="true" tabindex="-1"></a><span class="fu">### Specifying the Predictor Matrix</span></span>
+<span id="cb32-100"><a href="#cb32-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-101"><a href="#cb32-101" aria-hidden="true" tabindex="-1"></a>A predictor matrix is a matrix of values, where:</span>
+<span id="cb32-102"><a href="#cb32-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-103"><a href="#cb32-103" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>columns with non-zero values are predictors of the variable specified in the given row</span>
+<span id="cb32-104"><a href="#cb32-104" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the diagonal of the predictor matrix should be zero because a variable cannot predict itself</span>
+<span id="cb32-105"><a href="#cb32-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-106"><a href="#cb32-106" aria-hidden="true" tabindex="-1"></a>The values are:</span>
+<span id="cb32-107"><a href="#cb32-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-108"><a href="#cb32-108" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>NOT a predictor of the outcome: <span class="in">`0`</span></span>
+<span id="cb32-109"><a href="#cb32-109" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>cluster variable: <span class="in">`-2`</span></span>
+<span id="cb32-110"><a href="#cb32-110" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>fixed effect of predictor: <span class="in">`1`</span></span>
+<span id="cb32-111"><a href="#cb32-111" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>fixed effect and random effect of predictor: <span class="in">`2`</span></span>
+<span id="cb32-112"><a href="#cb32-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>include cluster mean of predictor in addition to fixed effect of predictor: <span class="in">`3`</span></span>
+<span id="cb32-113"><a href="#cb32-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>include cluster mean of predictor in addition to fixed effect and random effect of predictor: <span class="in">`4`</span></span>
+<span id="cb32-114"><a href="#cb32-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-117"><a href="#cb32-117" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-118"><a href="#cb32-118" aria-hidden="true" tabindex="-1"></a>predictorMatrix <span class="ot">&lt;-</span> mice<span class="sc">::</span><span class="fu">make.predictorMatrix</span>(mydata_long)</span>
+<span id="cb32-119"><a href="#cb32-119" aria-hidden="true" tabindex="-1"></a>predictorMatrix[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(predictorMatrix), <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(predictorMatrix)] <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># make everything zero by default to manually specify all predictors used for imputation</span></span>
+<span id="cb32-120"><a href="#cb32-120" aria-hidden="true" tabindex="-1"></a>predictorMatrix[Y, <span class="st">"ID"</span>] <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="dv">2</span>) <span class="co"># cluster variable</span></span>
+<span id="cb32-121"><a href="#cb32-121" aria-hidden="true" tabindex="-1"></a>predictorMatrix[Y, <span class="st">"age"</span>] <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># random effect predictor</span></span>
+<span id="cb32-122"><a href="#cb32-122" aria-hidden="true" tabindex="-1"></a><span class="co">#predictorMatrix[Y, "ses"] &lt;- 2 # random effect predictor</span></span>
+<span id="cb32-123"><a href="#cb32-123" aria-hidden="true" tabindex="-1"></a><span class="co">#predictorMatrix[Y, "sleep"] &lt;- 1 # random effect predictor</span></span>
+<span id="cb32-124"><a href="#cb32-124" aria-hidden="true" tabindex="-1"></a><span class="co">#predictorMatrix[Y, "depression"] &lt;- 1 # random effect predictor</span></span>
+<span id="cb32-125"><a href="#cb32-125" aria-hidden="true" tabindex="-1"></a><span class="co">#predictorMatrix[Y, "anxiety"] &lt;- 1 # random effect predictor</span></span>
+<span id="cb32-126"><a href="#cb32-126" aria-hidden="true" tabindex="-1"></a>predictorMatrix[Y, <span class="st">"sexMale"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># fixed effect predictor</span></span>
+<span id="cb32-127"><a href="#cb32-127" aria-hidden="true" tabindex="-1"></a>predictorMatrix[Y, Y] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># fixed effect predictor; make sure all predictors predict each other</span></span>
+<span id="cb32-128"><a href="#cb32-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-129"><a href="#cb32-129" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(predictorMatrix) <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># don't have a variable predicting itself</span></span>
+<span id="cb32-130"><a href="#cb32-130" aria-hidden="true" tabindex="-1"></a>predictorMatrix</span>
+<span id="cb32-131"><a href="#cb32-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-132"><a href="#cb32-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-133"><a href="#cb32-133" aria-hidden="true" tabindex="-1"></a><span class="fu">## Run Imputation</span></span>
+<span id="cb32-134"><a href="#cb32-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-135"><a href="#cb32-135" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sequential Processing</span></span>
+<span id="cb32-136"><a href="#cb32-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-139"><a href="#cb32-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-140"><a href="#cb32-140" aria-hidden="true" tabindex="-1"></a>mi_mice <span class="ot">&lt;-</span> mice<span class="sc">::</span><span class="fu">mice</span>(</span>
+<span id="cb32-141"><a href="#cb32-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(mydata_long),</span>
+<span id="cb32-142"><a href="#cb32-142" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> imputationMethods,</span>
+<span id="cb32-143"><a href="#cb32-143" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictorMatrix =</span> predictorMatrix,</span>
+<span id="cb32-144"><a href="#cb32-144" aria-hidden="true" tabindex="-1"></a>  <span class="at">m =</span> numImputations,</span>
+<span id="cb32-145"><a href="#cb32-145" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxit =</span> <span class="dv">5</span>, <span class="co"># generally use 100 maximum iterations; this example uses 5 for speed</span></span>
+<span id="cb32-146"><a href="#cb32-146" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">52242</span>)</span>
+<span id="cb32-147"><a href="#cb32-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-148"><a href="#cb32-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-149"><a href="#cb32-149" aria-hidden="true" tabindex="-1"></a><span class="fu">### Parallel Processing</span></span>
+<span id="cb32-150"><a href="#cb32-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-153"><a href="#cb32-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-154"><a href="#cb32-154" aria-hidden="true" tabindex="-1"></a>mi_parallel_mice <span class="ot">&lt;-</span> mice<span class="sc">::</span><span class="fu">futuremice</span>(</span>
+<span id="cb32-155"><a href="#cb32-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(mydata_long),</span>
+<span id="cb32-156"><a href="#cb32-156" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> imputationMethods,</span>
+<span id="cb32-157"><a href="#cb32-157" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictorMatrix =</span> predictorMatrix,</span>
+<span id="cb32-158"><a href="#cb32-158" aria-hidden="true" tabindex="-1"></a>  <span class="at">m =</span> numImputations,</span>
+<span id="cb32-159"><a href="#cb32-159" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxit =</span> <span class="dv">5</span>, <span class="co"># generally use 100 maximum iterations; this example uses 5 for speed</span></span>
+<span id="cb32-160"><a href="#cb32-160" aria-hidden="true" tabindex="-1"></a>  <span class="at">parallelseed =</span> <span class="dv">52242</span>,</span>
+<span id="cb32-161"><a href="#cb32-161" aria-hidden="true" tabindex="-1"></a>  <span class="at">n.core =</span> num_cores,</span>
+<span id="cb32-162"><a href="#cb32-162" aria-hidden="true" tabindex="-1"></a>  <span class="at">packages =</span> <span class="st">"miceadds"</span>)</span>
+<span id="cb32-163"><a href="#cb32-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-164"><a href="#cb32-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-165"><a href="#cb32-165" aria-hidden="true" tabindex="-1"></a><span class="fu">## Imputation Diagnostics</span></span>
+<span id="cb32-166"><a href="#cb32-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-167"><a href="#cb32-167" aria-hidden="true" tabindex="-1"></a><span class="fu">### Logged Events</span></span>
+<span id="cb32-168"><a href="#cb32-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-171"><a href="#cb32-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-172"><a href="#cb32-172" aria-hidden="true" tabindex="-1"></a>mi_mice<span class="sc">$</span>loggedEvents</span>
+<span id="cb32-173"><a href="#cb32-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-174"><a href="#cb32-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-175"><a href="#cb32-175" aria-hidden="true" tabindex="-1"></a><span class="fu">### Trace Plots</span></span>
+<span id="cb32-176"><a href="#cb32-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-177"><a href="#cb32-177" aria-hidden="true" tabindex="-1"></a>On convergence, the streams of the trace plots should intermingle and be free of any trend (at the later iterations).</span>
+<span id="cb32-178"><a href="#cb32-178" aria-hidden="true" tabindex="-1"></a>Convergence is diagnosed when the variance between different sequences is no larger than the variance within each individual sequence.</span>
+<span id="cb32-179"><a href="#cb32-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-180"><a href="#cb32-180" aria-hidden="true" tabindex="-1"></a>https://stefvanbuuren.name/fimd/sec-algoptions.html (archived at https://perma.cc/4S54-465R)</span>
+<span id="cb32-181"><a href="#cb32-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-184"><a href="#cb32-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-185"><a href="#cb32-185" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mi_mice)</span>
+<span id="cb32-186"><a href="#cb32-186" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-187"><a href="#cb32-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-188"><a href="#cb32-188" aria-hidden="true" tabindex="-1"></a><span class="fu">### Density Plots</span></span>
+<span id="cb32-189"><a href="#cb32-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-192"><a href="#cb32-192" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-193"><a href="#cb32-193" aria-hidden="true" tabindex="-1"></a><span class="fu">densityplot</span>(mi_mice)</span>
+<span id="cb32-194"><a href="#cb32-194" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-195"><a href="#cb32-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-196"><a href="#cb32-196" aria-hidden="true" tabindex="-1"></a><span class="fu">### Strip Plots</span></span>
+<span id="cb32-197"><a href="#cb32-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-200"><a href="#cb32-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-201"><a href="#cb32-201" aria-hidden="true" tabindex="-1"></a><span class="fu">stripplot</span>(mi_mice)</span>
+<span id="cb32-202"><a href="#cb32-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-203"><a href="#cb32-203" aria-hidden="true" tabindex="-1"></a><span class="fu">stripplot</span>(mi_mice, depression <span class="sc">~</span> .imp)</span>
+<span id="cb32-204"><a href="#cb32-204" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-205"><a href="#cb32-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-206"><a href="#cb32-206" aria-hidden="true" tabindex="-1"></a><span class="fu">## Post-Processing</span></span>
+<span id="cb32-207"><a href="#cb32-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-208"><a href="#cb32-208" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modify/Create New Variables</span></span>
+<span id="cb32-209"><a href="#cb32-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-212"><a href="#cb32-212" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-213"><a href="#cb32-213" aria-hidden="true" tabindex="-1"></a>mi_mice_long <span class="ot">&lt;-</span> mice<span class="sc">::</span><span class="fu">complete</span>(</span>
+<span id="cb32-214"><a href="#cb32-214" aria-hidden="true" tabindex="-1"></a>  mi_mice,</span>
+<span id="cb32-215"><a href="#cb32-215" aria-hidden="true" tabindex="-1"></a>  <span class="at">action =</span> <span class="st">"long"</span>,</span>
+<span id="cb32-216"><a href="#cb32-216" aria-hidden="true" tabindex="-1"></a>  <span class="at">include =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb32-217"><a href="#cb32-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-218"><a href="#cb32-218" aria-hidden="true" tabindex="-1"></a>mi_mice_long <span class="ot">&lt;-</span> mi_mice_long <span class="sc">|&gt;</span> <span class="co"># for mixed-effects modeling</span></span>
+<span id="cb32-219"><a href="#cb32-219" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ID, .imp) <span class="sc">|&gt;</span></span>
+<span id="cb32-220"><a href="#cb32-220" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb32-221"><a href="#cb32-221" aria-hidden="true" tabindex="-1"></a>    <span class="at">sexFactor =</span> <span class="fu">factor</span>(sex),</span>
+<span id="cb32-222"><a href="#cb32-222" aria-hidden="true" tabindex="-1"></a>    <span class="at">ageCentered =</span> age <span class="sc">-</span> <span class="fu">min</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb32-223"><a href="#cb32-223" aria-hidden="true" tabindex="-1"></a>    <span class="at">ageCenteredSquared =</span> ageCentered <span class="sc">^</span> <span class="dv">2</span>,</span>
+<span id="cb32-224"><a href="#cb32-224" aria-hidden="true" tabindex="-1"></a>    <span class="at">ses_personMean =</span> <span class="fu">mean</span>(ses, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb32-225"><a href="#cb32-225" aria-hidden="true" tabindex="-1"></a>    <span class="at">ses_personMeanCentered =</span> ses <span class="sc">-</span> ses_personMean,</span>
+<span id="cb32-226"><a href="#cb32-226" aria-hidden="true" tabindex="-1"></a>    <span class="at">sleep_personMean =</span> <span class="fu">mean</span>(sleep, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb32-227"><a href="#cb32-227" aria-hidden="true" tabindex="-1"></a>    <span class="at">sleep_personMeanCentered =</span> sleep <span class="sc">-</span> sleep_personMean,</span>
+<span id="cb32-228"><a href="#cb32-228" aria-hidden="true" tabindex="-1"></a>    <span class="at">depression_personMean =</span> <span class="fu">mean</span>(depression, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb32-229"><a href="#cb32-229" aria-hidden="true" tabindex="-1"></a>    <span class="at">depression_personMeanCentered =</span> depression <span class="sc">-</span> depression_personMean,</span>
+<span id="cb32-230"><a href="#cb32-230" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_personMean =</span> <span class="fu">mean</span>(anxiety, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb32-231"><a href="#cb32-231" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_personMeanCentered =</span> anxiety <span class="sc">-</span> anxiety_personMean,</span>
+<span id="cb32-232"><a href="#cb32-232" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb32-233"><a href="#cb32-233" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb32-234"><a href="#cb32-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-235"><a href="#cb32-235" aria-hidden="true" tabindex="-1"></a>mi_mice_wide <span class="ot">&lt;-</span> mi_mice_long <span class="sc">|&gt;</span> <span class="co"># for structural equation modeling: widen by time</span></span>
+<span id="cb32-236"><a href="#cb32-236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>.id, <span class="sc">-</span>age, <span class="sc">-</span>ageCentered, <span class="sc">-</span>ageCenteredSquared) <span class="sc">|&gt;</span> <span class="co"># drop time-varying variables</span></span>
+<span id="cb32-237"><a href="#cb32-237" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(</span>
+<span id="cb32-238"><a href="#cb32-238" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from  =</span> timepoint,</span>
+<span id="cb32-239"><a href="#cb32-239" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> <span class="fu">c</span>(ses, ses_personMeanCentered, sleep, sleep_personMeanCentered, depression, depression_personMeanCentered, anxiety, anxiety_personMeanCentered)</span>
+<span id="cb32-240"><a href="#cb32-240" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb32-241"><a href="#cb32-241" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-242"><a href="#cb32-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-243"><a href="#cb32-243" aria-hidden="true" tabindex="-1"></a><span class="fu">### Convert to `mids` object</span></span>
+<span id="cb32-244"><a href="#cb32-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-247"><a href="#cb32-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-248"><a href="#cb32-248" aria-hidden="true" tabindex="-1"></a>mi_mice_long_mids <span class="ot">&lt;-</span> mice<span class="sc">::</span><span class="fu">as.mids</span>(mi_mice_long)</span>
+<span id="cb32-249"><a href="#cb32-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-250"><a href="#cb32-250" aria-hidden="true" tabindex="-1"></a>mi_mice_wide_mids <span class="ot">&lt;-</span> mice<span class="sc">::</span><span class="fu">as.mids</span>(mi_mice_wide)</span>
+<span id="cb32-251"><a href="#cb32-251" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-252"><a href="#cb32-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-253"><a href="#cb32-253" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fit Models to Multiple Imputed Data</span></span>
+<span id="cb32-254"><a href="#cb32-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-255"><a href="#cb32-255" aria-hidden="true" tabindex="-1"></a><span class="fu">### Mixed-Effects Models</span></span>
+<span id="cb32-256"><a href="#cb32-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-257"><a href="#cb32-257" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Fit Model</span></span>
+<span id="cb32-258"><a href="#cb32-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-261"><a href="#cb32-261" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-262"><a href="#cb32-262" aria-hidden="true" tabindex="-1"></a>linearGCM_mice <span class="ot">&lt;-</span> <span class="fu">with</span>(</span>
+<span id="cb32-263"><a href="#cb32-263" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mi_mice_long_mids,</span>
+<span id="cb32-264"><a href="#cb32-264" aria-hidden="true" tabindex="-1"></a>  <span class="at">expr =</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(</span>
+<span id="cb32-265"><a href="#cb32-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> depression <span class="sc">~</span> sexFactor <span class="sc">+</span> ageCentered <span class="sc">+</span> sexFactor<span class="sc">:</span>ageCentered <span class="sc">+</span> </span>
+<span id="cb32-266"><a href="#cb32-266" aria-hidden="true" tabindex="-1"></a>      sleep <span class="sc">+</span> sleep<span class="sc">:</span>ageCentered <span class="sc">+</span> sexFactor<span class="sc">:</span>sleep <span class="sc">+</span> sexFactor<span class="sc">:</span>sleep<span class="sc">:</span>ageCentered <span class="sc">+</span> </span>
+<span id="cb32-267"><a href="#cb32-267" aria-hidden="true" tabindex="-1"></a>      (<span class="dv">1</span> <span class="sc">+</span> ageCentered <span class="sc">|</span> ID), <span class="co"># random intercepts and slopes; sex as a fixed-effect predictor of the intercepts and slopes</span></span>
+<span id="cb32-268"><a href="#cb32-268" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb32-269"><a href="#cb32-269" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-270"><a href="#cb32-270" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-271"><a href="#cb32-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-272"><a href="#cb32-272" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Model Summary</span></span>
+<span id="cb32-273"><a href="#cb32-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-276"><a href="#cb32-276" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-277"><a href="#cb32-277" aria-hidden="true" tabindex="-1"></a>linearGCM_mice</span>
+<span id="cb32-278"><a href="#cb32-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-279"><a href="#cb32-279" aria-hidden="true" tabindex="-1"></a>mice<span class="sc">::</span><span class="fu">pool</span>(linearGCM_mice)</span>
+<span id="cb32-280"><a href="#cb32-280" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-281"><a href="#cb32-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-282"><a href="#cb32-282" aria-hidden="true" tabindex="-1"></a><span class="fu">### Structural Equation Models</span></span>
+<span id="cb32-283"><a href="#cb32-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-284"><a href="#cb32-284" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Model Syntax</span></span>
+<span id="cb32-285"><a href="#cb32-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-288"><a href="#cb32-288" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-289"><a href="#cb32-289" aria-hidden="true" tabindex="-1"></a>linearGCM_syntax <span class="ot">&lt;-</span> <span class="st">'</span></span>
+<span id="cb32-290"><a href="#cb32-290" aria-hidden="true" tabindex="-1"></a><span class="st">  # Intercept and slope</span></span>
+<span id="cb32-291"><a href="#cb32-291" aria-hidden="true" tabindex="-1"></a><span class="st">  intercept =~ 1*depression_1 + 1*depression_2 + 1*depression_3 + 1*depression_4</span></span>
+<span id="cb32-292"><a href="#cb32-292" aria-hidden="true" tabindex="-1"></a><span class="st">  slope =~ 0*depression_1 + 1*depression_2 + 2*depression_3 + 3*depression_4</span></span>
+<span id="cb32-293"><a href="#cb32-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-294"><a href="#cb32-294" aria-hidden="true" tabindex="-1"></a><span class="st">  # Regression paths</span></span>
+<span id="cb32-295"><a href="#cb32-295" aria-hidden="true" tabindex="-1"></a><span class="st">  intercept ~ sexMale</span></span>
+<span id="cb32-296"><a href="#cb32-296" aria-hidden="true" tabindex="-1"></a><span class="st">  slope ~ sexMale</span></span>
+<span id="cb32-297"><a href="#cb32-297" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb32-298"><a href="#cb32-298" aria-hidden="true" tabindex="-1"></a><span class="st">  # Time-varying covariates</span></span>
+<span id="cb32-299"><a href="#cb32-299" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_1 ~ sleep_1</span></span>
+<span id="cb32-300"><a href="#cb32-300" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_2 ~ sleep_2</span></span>
+<span id="cb32-301"><a href="#cb32-301" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_3 ~ sleep_3</span></span>
+<span id="cb32-302"><a href="#cb32-302" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_4 ~ sleep_4</span></span>
+<span id="cb32-303"><a href="#cb32-303" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb32-304"><a href="#cb32-304" aria-hidden="true" tabindex="-1"></a><span class="st">  # Constrain observed intercepts to zero</span></span>
+<span id="cb32-305"><a href="#cb32-305" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_1 ~ 0</span></span>
+<span id="cb32-306"><a href="#cb32-306" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_2 ~ 0</span></span>
+<span id="cb32-307"><a href="#cb32-307" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_3 ~ 0</span></span>
+<span id="cb32-308"><a href="#cb32-308" aria-hidden="true" tabindex="-1"></a><span class="st">  depression_4 ~ 0</span></span>
+<span id="cb32-309"><a href="#cb32-309" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb32-310"><a href="#cb32-310" aria-hidden="true" tabindex="-1"></a><span class="st">  # Estimate mean of intercept and slope</span></span>
+<span id="cb32-311"><a href="#cb32-311" aria-hidden="true" tabindex="-1"></a><span class="st">  intercept ~ 1</span></span>
+<span id="cb32-312"><a href="#cb32-312" aria-hidden="true" tabindex="-1"></a><span class="st">  slope ~ 1</span></span>
+<span id="cb32-313"><a href="#cb32-313" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span>
+<span id="cb32-314"><a href="#cb32-314" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-315"><a href="#cb32-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-316"><a href="#cb32-316" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Fit Model</span></span>
+<span id="cb32-317"><a href="#cb32-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-320"><a href="#cb32-320" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-321"><a href="#cb32-321" aria-hidden="true" tabindex="-1"></a>linearGCM_fit_mice <span class="ot">&lt;-</span> lavaan.mi<span class="sc">::</span><span class="fu">sem.mi</span>(</span>
+<span id="cb32-322"><a href="#cb32-322" aria-hidden="true" tabindex="-1"></a>  linearGCM_syntax,</span>
+<span id="cb32-323"><a href="#cb32-323" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mi_mice_wide_mids,</span>
+<span id="cb32-324"><a href="#cb32-324" aria-hidden="true" tabindex="-1"></a>  <span class="at">missing =</span> <span class="st">"ML"</span>, <span class="co"># FIML</span></span>
+<span id="cb32-325"><a href="#cb32-325" aria-hidden="true" tabindex="-1"></a>  <span class="at">estimator =</span> <span class="st">"MLR"</span>, <span class="co"># Huber-White robust standard errors (for heteroscedasticity and nonnormally distributed residuals)</span></span>
+<span id="cb32-326"><a href="#cb32-326" aria-hidden="true" tabindex="-1"></a>  <span class="at">meanstructure =</span> <span class="cn">TRUE</span> <span class="co"># estimate means/intercepts</span></span>
+<span id="cb32-327"><a href="#cb32-327" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-328"><a href="#cb32-328" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-329"><a href="#cb32-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-330"><a href="#cb32-330" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Model Summary</span></span>
+<span id="cb32-331"><a href="#cb32-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-334"><a href="#cb32-334" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-335"><a href="#cb32-335" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(</span>
+<span id="cb32-336"><a href="#cb32-336" aria-hidden="true" tabindex="-1"></a>  linearGCM_fit_mice,</span>
+<span id="cb32-337"><a href="#cb32-337" aria-hidden="true" tabindex="-1"></a>  <span class="at">fit.measures =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-338"><a href="#cb32-338" aria-hidden="true" tabindex="-1"></a>  <span class="at">standardized =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-339"><a href="#cb32-339" aria-hidden="true" tabindex="-1"></a>  <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb32-340"><a href="#cb32-340" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/edit/main/missing-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/blob/main/missing-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
-
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/edit/main/missing-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/blob/main/missing-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+</body></html>
