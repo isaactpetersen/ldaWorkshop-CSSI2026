@@ -102,10 +102,6 @@ predictorMatrix <- mice::make.predictorMatrix(mydata_long)
 predictorMatrix[1:nrow(predictorMatrix), 1:ncol(predictorMatrix)] <- 0 # make everything zero by default to manually specify all predictors used for imputation
 predictorMatrix[Y, "ID"] <- (-2) # cluster variable
 predictorMatrix[Y, "age"] <- 2 # random effect predictor
-#predictorMatrix[Y, "ses"] <- 2 # random effect predictor
-#predictorMatrix[Y, "sleep"] <- 1 # random effect predictor
-#predictorMatrix[Y, "depression"] <- 1 # random effect predictor
-#predictorMatrix[Y, "anxiety"] <- 1 # random effect predictor
 predictorMatrix[Y, "sexMale"] <- 1 # fixed effect predictor
 predictorMatrix[Y, Y] <- 1 # fixed effect predictor; make sure all predictors predict each other
 
@@ -163,15 +159,15 @@ plot(mi_mice)
 ### Density Plots
 
 ```{r}
-densityplot(mi_mice)
+mice::densityplot(mi_mice)
 ```
 
 ### Strip Plots
 
 ```{r}
-stripplot(mi_mice)
+mice::stripplot(mi_mice)
 
-stripplot(mi_mice, depression ~ .imp)
+mice::stripplot(mi_mice, depression ~ .imp)
 ```
 
 ## Post-Processing
@@ -179,12 +175,12 @@ stripplot(mi_mice, depression ~ .imp)
 ### Modify/Create New Variables
 
 ```{r}
-mi_mice_long <- mice::complete(
+mi_mice_long <- mice::complete( # return the completed (imputed) data
   mi_mice,
   action = "long",
   include = TRUE)
 
-mi_mice_long <- mi_mice_long |> # for mixed-effects modeling
+mi_mice_long <- mi_mice_long |> # long form for mixed-effects modeling
   group_by(ID, .imp) |>
   mutate(
     sexFactor = factor(sex),
@@ -201,7 +197,7 @@ mi_mice_long <- mi_mice_long |> # for mixed-effects modeling
   ) |>
   ungroup()
 
-mi_mice_wide <- mi_mice_long |> # for structural equation modeling: widen by time
+mi_mice_wide <- mi_mice_long |> # wide form for structural equation modeling: widen by time
   select(-.id, -age, -ageCentered, -ageCenteredSquared) |> # drop time-varying variables
   tidyr::pivot_wider(
     names_from  = timepoint,

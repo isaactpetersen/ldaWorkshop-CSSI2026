@@ -34,9 +34,9 @@ It can be helpful to center the age/time variable so that the intercept in a gro
 For instance, we can subtract the youngest participant age to set the intercepts to be the earliest age in the sample.
 
 ```{r}
-mydata_long$sexFactor <- factor(mydata_long$sex)
+mydata_long$sexFactor <- factor(mydata_long$sex) # create a factor variable for sex
 
-mydata_long$ageCentered <- mydata_long$age - min(mydata_long$age, na.rm = TRUE)
+mydata_long$ageCentered <- mydata_long$age - min(mydata_long$age, na.rm = TRUE) # shift age so that intercepts represent the earliest age in the sample
 
 mydata_long$ageCenteredSquared <- mydata_long$ageCentered ^ 2
 ```
@@ -45,11 +45,13 @@ mydata_long$ageCenteredSquared <- mydata_long$ageCentered ^ 2
 
 ## Fit the Model
 
+In estimating linear growth curves of depression symptoms, this model fits random intercepts and slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interaction (`sex` $\times$ `sleep`) in predicting the intercepts and slopes.
+
 ```{r}
 linearGCM <- lmer(
   depression ~ sexFactor + ageCentered + sexFactor:ageCentered + 
     sleep + sleep:ageCentered + sexFactor:sleep + sexFactor:sleep:ageCentered + 
-    (1 + ageCentered | ID), # random intercepts and slopes; sex as a fixed-effect predictor of the intercepts and slopes
+    (1 + ageCentered | ID),
   data = mydata_long,
   na.action = na.exclude)
 ```
@@ -179,13 +181,15 @@ ggplot(
 
 ## Fit the Model
 
+In estimating polynomial (in this case, quadratic) growth curves of depression symptoms, this model fits random intercepts and random linear and quadratic slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interaction (`sex` $\times$ `sleep`) in predicting the intercepts and slopes.
+
 ```{r}
 quadraticGCM <- lmer(
   depression ~ sexFactor + ageCentered + ageCenteredSquared + 
     sexFactor:ageCentered + sexFactor:ageCenteredSquared + sleep + 
     sleep:ageCentered + sleep:ageCenteredSquared + sexFactor:sleep + 
     sexFactor:sleep:ageCentered + sexFactor:sleep:ageCenteredSquared + 
-    (1 + ageCentered + ageCenteredSquared | ID), # random intercepts, linear slopes, and quadratic slopes; sex as a fixed-effect predictor of the intercepts and slopes
+    (1 + ageCentered + ageCenteredSquared | ID),
   data = mydata_long,
   na.action = na.exclude)
 ```
@@ -328,6 +332,8 @@ num_true_cores <- parallelly::availableCores(logical = FALSE)
 num_cores <- parallelly::availableCores() - 1
 num_true_cores <- parallelly::availableCores(logical = FALSE) - 1
 ```
+
+In estimating generalized additive growth curves of depression symptoms, this model fits random slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts, and `sleep` as a time-varying fixed-effect predictor of the intercepts, in addition to their interaction (`sex` $\times$ `sleep`) in predicting the intercepts, and  `sex`-specific effects of sleep on the trajectories as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interaction (`sex` $\times$ `sleep`) in predicting the intercepts and slopes.
 
 ```{r}
 gamGCM <- mgcv::gam(
@@ -514,13 +520,15 @@ mydata_long <- mydata_long |>
 
 ## Fit the Model
 
+In disaggregating within- and between-person effects, this model fits random intercepts and random linear and quadratic slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, `sleep_personMean` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep_personMeanCentered` as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interactions (`sex` $\times$ `sleep_personMean`; `sex` $\times$ `sleep_personMeanCentered`).
+
 ```{r}
 withinBetweenPersonSleepModel <- lmer(
   depression ~ sexFactor*sleep_personMean*ageCentered + 
     sexFactor*sleep_personMean*ageCenteredSquared + 
     sexFactor*sleep_personMeanCentered*ageCentered + 
     sexFactor*sleep_personMeanCentered*ageCenteredSquared + 
-    (1 + ageCentered + ageCenteredSquared | ID), # random intercepts, linear slopes, and quadratic slopes; sex as a fixed-effect predictor of the intercepts and slopes
+    (1 + ageCentered + ageCenteredSquared | ID),
   data = mydata_long,
   na.action = na.exclude)
 ```

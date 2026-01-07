@@ -68,6 +68,8 @@ mydata_wide <- mydata_long |>
 
 ### Model Syntax
 
+In estimating linear growth curves of depression symptoms, this model fits random intercepts and slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect covariate of the manifest variables for depression symptoms.
+
 ```{r}
 linearGCM_syntax <- '
   # Intercept and slope
@@ -149,6 +151,8 @@ lavaangui::plot_lavaan(linearGCM_fit)
 ## Quadratic Growth Curve Model
 
 ### Model Syntax
+
+In estimating quadratic growth curves of depression symptoms, this model fits random intercepts and random linear and quadratic slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect covariate of the manifest variables for depression symptoms.
 
 ```{r}
 quadraticGCM_syntax <- '
@@ -239,6 +243,8 @@ lavaangui::plot_lavaan(quadraticGCM_fit)
 ## Latent Basis Growth Curve Model
 
 ### Model Syntax
+
+In estimating latent basis growth curves of depression symptoms, this model fits random intercepts and slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect covariate of the manifest variables for depression symptoms.
 
 ```{r}
 latentBasisGCM_syntax <- '
@@ -692,6 +698,8 @@ lavaangui::plot_lavaan(riclpm_fit)
 
 ## Model Syntax
 
+In disaggregating within- and between-person effects, this model examines the within-person association of sleep, anxiety, and SES with depression, and simultaneously examines the between-person association of sleep, anxiety, and SES with depression.
+
 ```{r}
 multilevelSEM_syntax <- '
     level: 1
@@ -766,7 +774,7 @@ The answers to these questions are [here](answers.qmd).
 
 ## Configural Invariance
 
-Evaluates whether there are the same number of latent factors across time and whether the indicators load onto the same latent factor(s) across time.
+A configural invariance model whether there are the same number of latent factors across time and whether the indicators load onto the same latent factor(s) across time.
 
 1. Standardize the latent factor(s) at T1 (i.e., fix the mean to zero and the variance to one)
 1. For each latent construct, constrain the first indicator's factor loading to be the same across time
@@ -1157,7 +1165,7 @@ anova(
 
 ## Metric ("Weak Factorial") Invariance
 
-Evaluates whether the items' factor loadings are the same across time.
+A metric invariance model evaluates whether the items' factor loadings are the same across time.
 
 1. Standardize the latent factor(s) at T1 (i.e., fix the mean to zero and the variance to one)
 1. For each latent construct, constrain the first indicator's intercept to be the same across time
@@ -1377,7 +1385,7 @@ anova(
 
 ## Scalar ("Strong Factorial") Invariance
 
-Evaluates whether the items' intercepts are the same across time.
+A scalar invariance model evaluates whether the items' intercepts are the same across time.
 
 1. Standardize the latent factor(s) at T1 (i.e., fix the mean to zero and the variance to one)
 1. Allow within-indicator residuals to covary across time
@@ -1593,7 +1601,7 @@ anova(
 
 ## Residual ("Strict Factorial") Invariance
 
-Evaluates whether the items' residual variances are the same across time.
+A residual invariance model evaluates whether the items' residual variances are the same across time.
 
 1. Standardize the latent factor(s) at T1 (i.e., fix the mean to zero and the variance to one)
 1. Allow within-indicator residuals to covary across time
