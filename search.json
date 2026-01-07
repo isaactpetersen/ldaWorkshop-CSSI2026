@@ -438,14 +438,14 @@
     "href": "missing-data.html",
     "title": "Missing Data",
     "section": "",
-    "text": "Codelibrary(\"mice\")\nlibrary(\"miceadds\")\nlibrary(\"micemd\")\nlibrary(\"lme4\")\nlibrary(\"lavaan\")\nlibrary(\"lavaan.mi\")\nlibrary(\"psych\")\nlibrary(\"parallelly\")\nlibrary(\"furrr\")\nlibrary(\"tidyverse\")\n\n\n\nThe data for this example were simulated:\n\nCodemydata_long &lt;- read.csv(\"./data/mydata_long.csv\")"
+    "text": "Codelibrary(\"mice\")\nlibrary(\"miceadds\")\nlibrary(\"micemd\")\nlibrary(\"lme4\")\nlibrary(\"broom.mixed\")\nlibrary(\"lavaan\")\nlibrary(\"lavaan.mi\")\nlibrary(\"psych\")\nlibrary(\"parallelly\")\nlibrary(\"furrr\")\nlibrary(\"tidyverse\")\n\n\n\nThe data for this example were simulated:\n\nCodemydata_long &lt;- read.csv(\"./data/mydata_long.csv\")"
   },
   {
     "objectID": "missing-data.html#load-libraries",
     "href": "missing-data.html#load-libraries",
     "title": "Missing Data",
     "section": "",
-    "text": "Codelibrary(\"mice\")\nlibrary(\"miceadds\")\nlibrary(\"micemd\")\nlibrary(\"lme4\")\nlibrary(\"lavaan\")\nlibrary(\"lavaan.mi\")\nlibrary(\"psych\")\nlibrary(\"parallelly\")\nlibrary(\"furrr\")\nlibrary(\"tidyverse\")"
+    "text": "Codelibrary(\"mice\")\nlibrary(\"miceadds\")\nlibrary(\"micemd\")\nlibrary(\"lme4\")\nlibrary(\"broom.mixed\")\nlibrary(\"lavaan\")\nlibrary(\"lavaan.mi\")\nlibrary(\"psych\")\nlibrary(\"parallelly\")\nlibrary(\"furrr\")\nlibrary(\"tidyverse\")"
   },
   {
     "objectID": "missing-data.html#load-data",
