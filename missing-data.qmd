@@ -1,5 +1,8 @@
 ---
 title: "Missing Data"
+format: 
+   html:
+     df-print: default
 ---
 
 # Preamble
@@ -241,8 +244,6 @@ I have reported this bug to the package developers and they are aware of it: <ht
 In any case, the code runs fine locally.
 
 ```{r}
-#| df-print: kable
-
 linearGCM_mice_pooled <- mice::pool(linearGCM_mice)
 
 linearGCM_mice_pooled
