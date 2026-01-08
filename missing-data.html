@@ -725,7 +725,7 @@ Fixed Effects:
 </div>
 </div>
 <p>There is currently a bug in the <code>mice</code> package that prevents the pooled results from displaying online due to an error (see below). I have reported this bug to the package developers and they are aware of it: <a href="https://github.com/amices/mice/issues/733" class="uri">https://github.com/amices/mice/issues/733</a>. In any case, the code runs fine locally.</p>
-<div class="cell" data-df-print="tibble">
+<div class="cell" data-df-print="kable">
 <details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linearGCM_mice_pooled</span> <span class="op">&lt;-</span> <span class="fu">mice</span><span class="fu">::</span><span class="fu"><a href="https://amices.org/mice/reference/pool.html">pool</a></span><span class="op">(</span><span class="va">linearGCM_mice</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">linearGCM_mice_pooled</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1715,7 +1715,7 @@ R-Square:
 <span id="cb34-279"><a href="#cb34-279" aria-hidden="true" tabindex="-1"></a>In any case, the code runs fine locally.</span>
 <span id="cb34-280"><a href="#cb34-280" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-283"><a href="#cb34-283" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-284"><a href="#cb34-284" aria-hidden="true" tabindex="-1"></a><span class="co">#| df-print: tibble</span></span>
+<span id="cb34-284"><a href="#cb34-284" aria-hidden="true" tabindex="-1"></a><span class="co">#| df-print: kable</span></span>
 <span id="cb34-285"><a href="#cb34-285" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-286"><a href="#cb34-286" aria-hidden="true" tabindex="-1"></a>linearGCM_mice_pooled <span class="ot">&lt;-</span> mice<span class="sc">::</span><span class="fu">pool</span>(linearGCM_mice)</span>
 <span id="cb34-287"><a href="#cb34-287" aria-hidden="true" tabindex="-1"></a></span>
