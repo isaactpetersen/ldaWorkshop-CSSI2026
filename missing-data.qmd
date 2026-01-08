@@ -235,7 +235,11 @@ linearGCM_mice <- with(
 ```{r}
 linearGCM_mice
 
-mice::pool(linearGCM_mice)
+linearGCM_mice_pooled <- mice::pool(linearGCM_mice)
+
+linearGCM_mice_pooled
+
+summary(linearGCM_mice_pooled)
 ```
 
 ### Structural Equation Models
