@@ -48,7 +48,7 @@ mydata_long$ageCenteredSquared <- mydata_long$ageCentered ^ 2
 In estimating linear growth curves of depression symptoms, this model fits random intercepts and slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interaction (`sex` $\times$ `sleep`) in predicting the intercepts and slopes.
 
 ```{r}
-linearGCM <- lmer(
+linearGCM <- lmerTest::lmer(
   depression ~ sexFactor + ageCentered + sexFactor:ageCentered + 
     sleep + sleep:ageCentered + sexFactor:sleep + sexFactor:sleep:ageCentered + 
     (1 + ageCentered | ID),
@@ -184,7 +184,7 @@ ggplot(
 In estimating polynomial (in this case, quadratic) growth curves of depression symptoms, this model fits random intercepts and random linear and quadratic slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interaction (`sex` $\times$ `sleep`) in predicting the intercepts and slopes.
 
 ```{r}
-quadraticGCM <- lmer(
+quadraticGCM <- lmerTest::lmer(
   depression ~ sexFactor + ageCentered + ageCenteredSquared + 
     sexFactor:ageCentered + sexFactor:ageCenteredSquared + sleep + 
     sleep:ageCentered + sleep:ageCenteredSquared + sexFactor:sleep + 
@@ -523,7 +523,7 @@ mydata_long <- mydata_long |>
 In disaggregating within- and between-person effects, this model fits random intercepts and random linear and quadratic slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, `sleep_personMean` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep_personMeanCentered` as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interactions (`sex` $\times$ `sleep_personMean`; `sex` $\times$ `sleep_personMeanCentered`).
 
 ```{r}
-withinBetweenPersonSleepModel <- lmer(
+withinBetweenPersonSleepModel <- lmerTest::lmer(
   depression ~ sexFactor*sleep_personMean*ageCentered + 
     sexFactor*sleep_personMean*ageCenteredSquared + 
     sexFactor*sleep_personMeanCentered*ageCentered + 

@@ -14,6 +14,7 @@ library("mice")
 library("miceadds")
 library("micemd")
 library("lme4")
+library("lmerTest")
 library("broom.mixed")
 library("lavaan")
 library("lavaan.mi")
@@ -92,6 +93,7 @@ num_true_cores <- parallelly::availableCores(logical = FALSE) - 1
 imputationMethods <- mice::make.method(mydata_long)
 imputationMethods[1:length(imputationMethods)] <- ""
 imputationMethods[Y] <- "2l.pmm" # specify the imputation method here; this can differ by outcome variable
+imputationMethods
 ```
 
 ### Specifying the Predictor Matrix
@@ -235,7 +237,7 @@ mi_mice_wide_mids <- mice::as.mids(mi_mice_wide)
 ```{r}
 linearGCM_mice <- with(
   data = mi_mice_long_mids,
-  expr = lme4::lmer(
+  expr = lmerTest::lmer(
     formula = depression ~ sexFactor + ageCentered + sexFactor:ageCentered + 
       sleep + sleep:ageCentered + sexFactor:sleep + sexFactor:sleep:ageCentered + 
       (1 + ageCentered | ID), # random intercepts and slopes; sex as a fixed-effect predictor of the intercepts and slopes
