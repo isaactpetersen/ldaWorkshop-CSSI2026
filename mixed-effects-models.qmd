@@ -28,6 +28,13 @@ The data for this example were [simulated](simulate-data.qmd):
 mydata_long <- read.csv("./data/mydata_long.csv")
 ```
 
+# Research Questions
+
+1. What is the form of adolescents' depressive symptom trajectories across ages 14 to 17?
+1. Do the trajectories differ between boys and girls?
+1. Does how much sleep the adolescent receives predict their depressive symptoms over time?
+1. Does the association between sleep and depressive symptoms differ between boys and girls?
+
 # Pre-Model Computation
 
 It can be helpful to center the age/time variable so that the intercept in a growth curve model has meaning.
