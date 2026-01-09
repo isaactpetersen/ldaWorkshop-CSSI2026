@@ -89,6 +89,9 @@ num_true_cores <- parallelly::availableCores(logical = FALSE) - 1
 
 ### Specifying the Imputation Method
 
+You can specify any of various methods to impute each variable.
+In this case, we use a multilevel imputation (to account for longitudinal data) form of predictive mean matching (`2l.pmm` from the `miceadds` package).
+
 ```{r}
 imputationMethods <- mice::make.method(mydata_long)
 imputationMethods[1:length(imputationMethods)] <- ""
