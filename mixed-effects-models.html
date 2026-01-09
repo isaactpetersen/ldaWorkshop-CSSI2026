@@ -109,32 +109,7 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 </script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script><link rel="stylesheet" href="styles.css">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="includes/custom.css">
 <link rel="stylesheet" href="font/css/roboto.css">
 </head>
@@ -355,7 +330,7 @@ window.Quarto = {
 <span class="header-section-number">3</span> Linear Growth Curve Model</h1>
 <section id="fit-the-model" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="fit-the-model">
 <span class="header-section-number">3.1</span> Fit the Model</h2>
-<p>In estimating linear growth curves of depression symptoms, this model fits random intercepts and slopes for subjects, <code>sex</code> as a time-invariant fixed-effect predictor of the intercepts and slopes, and <code>sleep</code> as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interaction (<code>sex</code> <span class="math inline">\(\times\)</span> <code>sleep</code>) in predicting the intercepts and slopes.</p>
+<p>In estimating linear growth curves of depression symptoms, this model fits random intercepts and slopes for subjects, <code>sex</code> as a time-invariant fixed-effect predictor of the intercepts and slopes, and <code>sleep</code> as a time-varying fixed-effect predictor of depression, with effects allowed to vary over age and by sex, including two‐ and three‐way interactions with age and sex.</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linearGCM</span> <span class="op">&lt;-</span> <span class="fu">lmerTest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer</a></span><span class="op">(</span></span>
 <span>  <span class="va">depression</span> <span class="op">~</span> <span class="va">sexFactor</span> <span class="op">+</span> <span class="va">ageCentered</span> <span class="op">+</span> <span class="va">sexFactor</span><span class="op">:</span><span class="va">ageCentered</span> <span class="op">+</span> </span>
@@ -569,7 +544,7 @@ sexFactor [male] × sleep                 |       0.02 | [-0.05,  0.09]
 <span class="header-section-number">4</span> Polynomial (Quadratic) Growth Curve Model</h1>
 <section id="fit-the-model-1" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="fit-the-model-1">
 <span class="header-section-number">4.1</span> Fit the Model</h2>
-<p>In estimating polynomial (in this case, quadratic) growth curves of depression symptoms, this model fits random intercepts and random linear and quadratic slopes for subjects, <code>sex</code> as a time-invariant fixed-effect predictor of the intercepts and slopes, and <code>sleep</code> as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interaction (<code>sex</code> <span class="math inline">\(\times\)</span> <code>sleep</code>) in predicting the intercepts and slopes.</p>
+<p>In estimating polynomial (in this case, quadratic) growth curves of depression symptoms, this model fits random intercepts and random linear and quadratic slopes for subjects, <code>sex</code> as a time-invariant fixed-effect predictor of the intercepts and slopes, and <code>sleep</code> as a time-varying fixed-effect predictor of depression, with effects allowed to vary over age and by sex, including two‐ and three‐way interactions with age and sex.</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">quadraticGCM</span> <span class="op">&lt;-</span> <span class="fu">lmerTest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer</a></span><span class="op">(</span></span>
 <span>  <span class="va">depression</span> <span class="op">~</span> <span class="va">sexFactor</span> <span class="op">+</span> <span class="va">ageCentered</span> <span class="op">+</span> <span class="va">ageCenteredSquared</span> <span class="op">+</span> </span>
@@ -825,7 +800,7 @@ sexFactor [male] × sleep                        |       0.02 | [-0.04,  0.08]
 <span><span class="va">num_true_cores</span> <span class="op">&lt;-</span> <span class="fu">parallelly</span><span class="fu">::</span><span class="fu"><a href="https://parallelly.futureverse.org/reference/availableCores.html">availableCores</a></span><span class="op">(</span>logical <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>In estimating generalized additive growth curves of depression symptoms, this model fits random slopes for subjects, <code>sex</code> as a time-invariant fixed-effect predictor of the intercepts, and <code>sleep</code> as a time-varying fixed-effect predictor of the intercepts, in addition to their interaction (<code>sex</code> <span class="math inline">\(\times\)</span> <code>sleep</code>) in predicting the intercepts, and <code>sex</code>-specific effects of sleep on the trajectories as a time-invariant fixed-effect predictor of the intercepts and slopes, and <code>sleep</code> as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interaction (<code>sex</code> <span class="math inline">\(\times\)</span> <code>sleep</code>) in predicting the intercepts and slopes.</p>
+<p>In estimating generalized additive growth models of depression symptoms, this model includes sex‐specific smooth functions of age, <code>sex</code> and <code>sleep</code> as fixed effects with their interaction, and sex‐specific smooth interactions between age and sleep, along with subject‐specific smooth deviations over age.</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gamGCM</span> <span class="op">&lt;-</span> <span class="fu">mgcv</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html">gam</a></span><span class="op">(</span></span>
 <span>  <span class="va">depression</span> <span class="op">~</span> <span class="va">sexFactor</span> <span class="op">+</span> <span class="va">sleep</span> <span class="op">+</span> <span class="va">sexFactor</span><span class="op">:</span><span class="va">sleep</span> <span class="op">+</span></span>
@@ -1087,7 +1062,7 @@ Adjusted R2
 </div>
 </section><section id="fit-the-model-3" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="fit-the-model-3">
 <span class="header-section-number">7.2</span> Fit the Model</h2>
-<p>In disaggregating within- and between-person effects, this model fits random intercepts and random linear and quadratic slopes for subjects, <code>sex</code> as a time-invariant fixed-effect predictor of the intercepts and slopes, <code>sleep_personMean</code> as a time-invariant fixed-effect predictor of the intercepts and slopes, and <code>sleep_personMeanCentered</code> as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interactions (<code>sex</code> <span class="math inline">\(\times\)</span> <code>sleep_personMean</code>; <code>sex</code> <span class="math inline">\(\times\)</span> <code>sleep_personMeanCentered</code>).</p>
+<p>In disaggregating within- and between-person effects, this model fits random intercepts and random linear and quadratic slopes for subjects, <code>sex</code> and <code>sleep_personMean</code> as time-invariant fixed-effect predictors of the intercepts and slopes, and <code>sleep_personMeanCentered</code> as a time-varying fixed-effect predictor of depression, with effects allowed to vary over age and by sex, including two‐ and three‐way interactions with age and sex.</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">withinBetweenPersonSleepModel</span> <span class="op">&lt;-</span> <span class="fu">lmerTest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer</a></span><span class="op">(</span></span>
 <span>  <span class="va">depression</span> <span class="op">~</span> <span class="va">sexFactor</span><span class="op">*</span><span class="va">sleep_personMean</span><span class="op">*</span><span class="va">ageCentered</span> <span class="op">+</span> </span>
@@ -1856,7 +1831,7 @@ ageCenteredSquared × sleep personMeanCentered                      |      -0.11
 <span id="cb48-51"><a href="#cb48-51" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-52"><a href="#cb48-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fit the Model</span></span>
 <span id="cb48-53"><a href="#cb48-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-54"><a href="#cb48-54" aria-hidden="true" tabindex="-1"></a>In estimating linear growth curves of depression symptoms, this model fits random intercepts and slopes for subjects, <span class="in">`sex`</span> as a time-invariant fixed-effect predictor of the intercepts and slopes, and <span class="in">`sleep`</span> as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interaction (<span class="in">`sex`</span> $\times$ <span class="in">`sleep`</span>) in predicting the intercepts and slopes.</span>
+<span id="cb48-54"><a href="#cb48-54" aria-hidden="true" tabindex="-1"></a>In estimating linear growth curves of depression symptoms, this model fits random intercepts and slopes for subjects, <span class="in">`sex`</span> as a time-invariant fixed-effect predictor of the intercepts and slopes, and <span class="in">`sleep`</span> as a time-varying fixed-effect predictor of depression, with effects allowed to vary over age and by sex, including two‐ and three‐way interactions with age and sex.</span>
 <span id="cb48-55"><a href="#cb48-55" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-58"><a href="#cb48-58" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb48-59"><a href="#cb48-59" aria-hidden="true" tabindex="-1"></a>linearGCM <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(</span>
@@ -1992,7 +1967,7 @@ ageCenteredSquared × sleep personMeanCentered                      |      -0.11
 <span id="cb48-197"><a href="#cb48-197" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-198"><a href="#cb48-198" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fit the Model</span></span>
 <span id="cb48-199"><a href="#cb48-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-200"><a href="#cb48-200" aria-hidden="true" tabindex="-1"></a>In estimating polynomial (in this case, quadratic) growth curves of depression symptoms, this model fits random intercepts and random linear and quadratic slopes for subjects, <span class="in">`sex`</span> as a time-invariant fixed-effect predictor of the intercepts and slopes, and <span class="in">`sleep`</span> as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interaction (<span class="in">`sex`</span> $\times$ <span class="in">`sleep`</span>) in predicting the intercepts and slopes.</span>
+<span id="cb48-200"><a href="#cb48-200" aria-hidden="true" tabindex="-1"></a>In estimating polynomial (in this case, quadratic) growth curves of depression symptoms, this model fits random intercepts and random linear and quadratic slopes for subjects, <span class="in">`sex`</span> as a time-invariant fixed-effect predictor of the intercepts and slopes, and <span class="in">`sleep`</span> as a time-varying fixed-effect predictor of depression, with effects allowed to vary over age and by sex, including two‐ and three‐way interactions with age and sex.</span>
 <span id="cb48-201"><a href="#cb48-201" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-204"><a href="#cb48-204" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb48-205"><a href="#cb48-205" aria-hidden="true" tabindex="-1"></a>quadraticGCM <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(</span>
@@ -2144,7 +2119,7 @@ ageCenteredSquared × sleep personMeanCentered                      |      -0.11
 <span id="cb48-363"><a href="#cb48-363" aria-hidden="true" tabindex="-1"></a>num_true_cores <span class="ot">&lt;-</span> parallelly<span class="sc">::</span><span class="fu">availableCores</span>(<span class="at">logical =</span> <span class="cn">FALSE</span>) <span class="sc">-</span> <span class="dv">1</span></span>
 <span id="cb48-364"><a href="#cb48-364" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb48-365"><a href="#cb48-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-366"><a href="#cb48-366" aria-hidden="true" tabindex="-1"></a>In estimating generalized additive growth curves of depression symptoms, this model fits random slopes for subjects, <span class="in">`sex`</span> as a time-invariant fixed-effect predictor of the intercepts, and <span class="in">`sleep`</span> as a time-varying fixed-effect predictor of the intercepts, in addition to their interaction (<span class="in">`sex`</span> $\times$ <span class="in">`sleep`</span>) in predicting the intercepts, and  <span class="in">`sex`</span>-specific effects of sleep on the trajectories as a time-invariant fixed-effect predictor of the intercepts and slopes, and <span class="in">`sleep`</span> as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interaction (<span class="in">`sex`</span> $\times$ <span class="in">`sleep`</span>) in predicting the intercepts and slopes.</span>
+<span id="cb48-366"><a href="#cb48-366" aria-hidden="true" tabindex="-1"></a>In estimating generalized additive growth models of depression symptoms, this model includes sex‐specific smooth functions of age, <span class="in">`sex`</span> and <span class="in">`sleep`</span> as fixed effects with their interaction, and sex‐specific smooth interactions between age and sleep, along with subject‐specific smooth deviations over age.</span>
 <span id="cb48-367"><a href="#cb48-367" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-370"><a href="#cb48-370" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb48-371"><a href="#cb48-371" aria-hidden="true" tabindex="-1"></a>gamGCM <span class="ot">&lt;-</span> mgcv<span class="sc">::</span><span class="fu">gam</span>(</span>
@@ -2331,7 +2306,7 @@ ageCenteredSquared × sleep personMeanCentered                      |      -0.11
 <span id="cb48-564"><a href="#cb48-564" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-565"><a href="#cb48-565" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fit the Model</span></span>
 <span id="cb48-566"><a href="#cb48-566" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-567"><a href="#cb48-567" aria-hidden="true" tabindex="-1"></a>In disaggregating within- and between-person effects, this model fits random intercepts and random linear and quadratic slopes for subjects, <span class="in">`sex`</span> as a time-invariant fixed-effect predictor of the intercepts and slopes, <span class="in">`sleep_personMean`</span> as a time-invariant fixed-effect predictor of the intercepts and slopes, and <span class="in">`sleep_personMeanCentered`</span> as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interactions (<span class="in">`sex`</span> $\times$ <span class="in">`sleep_personMean`</span>; <span class="in">`sex`</span> $\times$ <span class="in">`sleep_personMeanCentered`</span>).</span>
+<span id="cb48-567"><a href="#cb48-567" aria-hidden="true" tabindex="-1"></a>In disaggregating within- and between-person effects, this model fits random intercepts and random linear and quadratic slopes for subjects, <span class="in">`sex`</span> and <span class="in">`sleep_personMean`</span> as time-invariant fixed-effect predictors of the intercepts and slopes, and <span class="in">`sleep_personMeanCentered`</span> as a time-varying fixed-effect predictor of depression, with effects allowed to vary over age and by sex, including two‐ and three‐way interactions with age and sex.</span>
 <span id="cb48-568"><a href="#cb48-568" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-571"><a href="#cb48-571" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb48-572"><a href="#cb48-572" aria-hidden="true" tabindex="-1"></a>withinBetweenPersonSleepModel <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(</span>
