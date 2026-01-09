@@ -68,7 +68,7 @@ mydata_wide <- mydata_long |>
 
 ### Model Syntax
 
-In estimating linear growth curves of depression symptoms, this model fits random intercepts and slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect covariate of the manifest variables for depression symptoms.
+In estimating linear latent growth curves of depression symptoms, this model specifies latent intercept and slope factors, `sex` as a time-invariant predictor of the latent intercept and slope, and `sleep` as a time-varying covariate predicting depression symptoms at each wave.
 
 ```{r}
 linearGCM_syntax <- '
@@ -152,7 +152,7 @@ lavaangui::plot_lavaan(linearGCM_fit)
 
 ### Model Syntax
 
-In estimating quadratic growth curves of depression symptoms, this model fits random intercepts and random linear and quadratic slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect covariate of the manifest variables for depression symptoms.
+In estimating quadratic latent growth curves of depression symptoms, this model specifies latent intercept and latent linear and quadratic slope factors, `sex` as a time-invariant predictor of the latent intercept and slope, and `sleep` as a time-varying covariate predicting depression symptoms at each wave.
 
 ```{r}
 quadraticGCM_syntax <- '
@@ -244,7 +244,7 @@ lavaangui::plot_lavaan(quadraticGCM_fit)
 
 ### Model Syntax
 
-In estimating latent basis growth curves of depression symptoms, this model fits random intercepts and slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect covariate of the manifest variables for depression symptoms.
+In estimating latent basis growth curves of depression symptoms, this model specifies latent intercept and slope factors, with factor loadings for the slope freely estimated at timepoints 2 and 3 to capture nonlinear patterns of change, `sex` as a time-invariant predictor of the latent intercept and slope, and `sleep` as a time-varying covariate predicting depression symptoms at each wave.
 
 ```{r}
 latentBasisGCM_syntax <- '
@@ -346,6 +346,10 @@ anova(
 # Latent Change Score Model
 
 ## Model Syntax
+
+This model examines reciprocal (i.e., bidirectional), dynamic (i.e., changing) relations between latent change in depression and latent change in anxiety.
+Each construct is modeled with a latent intercept (constant change factor), a proportional change factor (latent true score predicting its own change), and autoregressive effects of prior change scores.
+The cross-domain coupling parameters evaluate whether latent change in depression predicts subsequent latent change in anxiety, and vice versa.
 
 ```{r}
 bivariateLCSM_syntax <- lcsm::specify_bi_lcsm(
@@ -449,6 +453,9 @@ To plot model-implied trajectories, see this resource:
 
 ## Model Syntax
 
+This cross-lagged panel model examines whether depression predicts later anxiety (i.e., cross-lagged paths), controlling for prior levels of anxiety (i.e., autoregressive effects), and simultaneously examining the reverse.
+Concurrent covariances between depression and anxiety at each timepoint account for shared variance at the same occasion.
+
 ```{r}
 clpm_syntax <- '
   # Autoregressive Paths
@@ -536,6 +543,9 @@ Adapted from:
 - Mund & Nestler (2017): <https://osf.io/a4dhk>
 
 ## Model Syntax
+
+This random-intercepts cross-lagged panel model examines whether depression predicts later anxiety (i.e., cross-lagged paths), controlling for prior levels of anxiety (i.e., autoregressive effects) and controlling for a person's general latent level of anxiety, and simultaneously examining the reverse.
+Concurrent covariances between depression and anxiety at each timepoint account for shared variance at the same occasion.
 
 ```{r}
 riclpm_syntax <- '
@@ -698,7 +708,9 @@ lavaangui::plot_lavaan(riclpm_fit)
 
 ## Model Syntax
 
-In disaggregating within- and between-person effects, this model examines the within-person association of sleep, anxiety, and SES with depression, and simultaneously examines the between-person association of sleep, anxiety, and SES with depression.
+This multilevel structural equation model disaggregates within- and between-person effects to examine associations with depression.
+At the within-person level, deviations in sleep, anxiety, and SES from a person's usual levels predict concurrent deviations in depression.
+At the between-person level, person-level averages across time of sleep, anxiety, and SES, along with sex, predict overall differences in depression across individuals.
 
 ```{r}
 multilevelSEM_syntax <- '

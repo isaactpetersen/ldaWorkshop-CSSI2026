@@ -45,7 +45,7 @@ mydata_long$ageCenteredSquared <- mydata_long$ageCentered ^ 2
 
 ## Fit the Model
 
-In estimating linear growth curves of depression symptoms, this model fits random intercepts and slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interaction (`sex` $\times$ `sleep`) in predicting the intercepts and slopes.
+In estimating linear growth curves of depression symptoms, this model fits random intercepts and slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect predictor of depression, with effects allowed to vary over age and by sex, including two‐ and three‐way interactions with age and sex.
 
 ```{r}
 linearGCM <- lmerTest::lmer(
@@ -181,7 +181,7 @@ ggplot(
 
 ## Fit the Model
 
-In estimating polynomial (in this case, quadratic) growth curves of depression symptoms, this model fits random intercepts and random linear and quadratic slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interaction (`sex` $\times$ `sleep`) in predicting the intercepts and slopes.
+In estimating polynomial (in this case, quadratic) growth curves of depression symptoms, this model fits random intercepts and random linear and quadratic slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect predictor of depression, with effects allowed to vary over age and by sex, including two‐ and three‐way interactions with age and sex.
 
 ```{r}
 quadraticGCM <- lmerTest::lmer(
@@ -333,7 +333,7 @@ num_cores <- parallelly::availableCores() - 1
 num_true_cores <- parallelly::availableCores(logical = FALSE) - 1
 ```
 
-In estimating generalized additive growth curves of depression symptoms, this model fits random slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts, and `sleep` as a time-varying fixed-effect predictor of the intercepts, in addition to their interaction (`sex` $\times$ `sleep`) in predicting the intercepts, and  `sex`-specific effects of sleep on the trajectories as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep` as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interaction (`sex` $\times$ `sleep`) in predicting the intercepts and slopes.
+In estimating generalized additive growth models of depression symptoms, this model includes sex‐specific smooth functions of age, `sex` and `sleep` as fixed effects with their interaction, and sex‐specific smooth interactions between age and sleep, along with subject‐specific smooth deviations over age.
 
 ```{r}
 gamGCM <- mgcv::gam(
@@ -520,7 +520,7 @@ mydata_long <- mydata_long |>
 
 ## Fit the Model
 
-In disaggregating within- and between-person effects, this model fits random intercepts and random linear and quadratic slopes for subjects, `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, `sleep_personMean` as a time-invariant fixed-effect predictor of the intercepts and slopes, and `sleep_personMeanCentered` as a time-varying fixed-effect predictor of the intercepts and slopes, in addition to their interactions (`sex` $\times$ `sleep_personMean`; `sex` $\times$ `sleep_personMeanCentered`).
+In disaggregating within- and between-person effects, this model fits random intercepts and random linear and quadratic slopes for subjects, `sex` and `sleep_personMean` as time-invariant fixed-effect predictors of the intercepts and slopes, and `sleep_personMeanCentered` as a time-varying fixed-effect predictor of depression, with effects allowed to vary over age and by sex, including two‐ and three‐way interactions with age and sex.
 
 ```{r}
 withinBetweenPersonSleepModel <- lmerTest::lmer(
