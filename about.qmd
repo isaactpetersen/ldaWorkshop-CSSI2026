@@ -7,6 +7,7 @@ The codebase that was used to generate this website is located [here](https://gi
 
 # Contact
 
+For questions intended for Isaac Petersen, feel free to contact Isaac by email [isaac-t-petersen@uiowa.edu](mailto:isaac-t-petersen@uiowa.edu).
 For questions about the Developmental Psychopathology Lab, please contact [devpsy-lab@uiowa.edu](mailto:devpsy-lab@uiowa.edu).
 
 # License
