@@ -250,7 +250,7 @@ In estimating latent basis growth curves of depression symptoms, this model spec
 latentBasisGCM_syntax <- '
   # Intercept and slope
   intercept =~ 1*depression_1 + 1*depression_2 + 1*depression_3 + 1*depression_4
-  slope =~ 0*depression_1 + a*depression_2 + b*depression_3 + 3*depression_4 # freely estimate the loadings for t2 and t3
+  slope =~ 0*depression_1 + a*depression_2 + b*depression_3 + 1*depression_4 # freely estimate the loadings for t2 and t3
 
   # Regression paths
   intercept ~ sexMale
