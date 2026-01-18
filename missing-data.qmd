@@ -257,13 +257,14 @@ linearGCM_mice
 
 | Column label | Definition                                                          |
 |:-------------|:--------------------------------------------------------------------|
+| `m`          | Number of imputations                                               |
 | `estimate`   | Pooled complete data estimate                                       |
 | `ubar`       | Within-imputation variance of `estimate`                            |
 | `b`          | Between-imputation variance of `estimate`                           |
 | `t`          | Total variance, of `estimate`                                       |
 | `dfcom`      | Degrees of freedom in complete data                                 |
 | `df`         | Residual degrees of freedom for hypothesis testing of $t$-statistic |
-| `riv``       | Relative increase in variance due to nonresponse                    |
+| `riv`        | Relative increase in variance due to nonresponse                    |
 | `lambda`     | Proportion of total variance due to missingness                     |
 | `fmi`        | Fraction of missing information                                     |
 
