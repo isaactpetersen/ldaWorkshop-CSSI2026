@@ -35,6 +35,7 @@ mydata_long <- read.csv("./data/mydata_long.csv")
 # Full Information Maximum Likelihood
 
 For examples using full information maximum likelihood (FIML), see examples of structural equation models [here](structural-equation-models.qmd).
+You can include cases with missingness on predictors by specifying `fixed.x = FALSE`.
 
 # Multiple Imputation
 

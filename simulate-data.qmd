@@ -214,11 +214,15 @@ df$sex <- NA
 df$sex[which(df$sexMale == 0)] <- "female"
 df$sex[which(df$sexMale == 1)] <- "male"
 
+df$sexEffectCode <- NA
+df$sexEffectCode[which(df$sexMale == 0)] <- -1 # female
+df$sexEffectCode[which(df$sexMale == 1)] <- 1 # male
+
 # -----------------------------
 # 11. Final dataset
 # -----------------------------
 df <- df |>
-  select(ID, timepoint, age, sex, sexMale, ses, sleep, depression, anxiety)
+  select(ID, timepoint, age, sex, sexMale, sexEffectCode, ses, sleep, depression, anxiety)
 ```
 
 ## Check
