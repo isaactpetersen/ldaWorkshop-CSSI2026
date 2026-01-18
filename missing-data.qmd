@@ -255,6 +255,20 @@ linearGCM_mice <- with(
 linearGCM_mice
 ```
 
+| Column label | Definition                                                          |
+|:-------------|:--------------------------------------------------------------------|
+| `estimate`   | Pooled complete data estimate                                       |
+| `ubar`       | Within-imputation variance of `estimate`                            |
+| `b`          | Between-imputation variance of `estimate`                           |
+| `t`          | Total variance, of `estimate`                                       |
+| `dfcom`      | Degrees of freedom in complete data                                 |
+| `df`         | Residual degrees of freedom for hypothesis testing of $t$-statistic |
+| `riv``       | Relative increase in variance due to nonresponse                    |
+| `lambda`     | Proportion of total variance due to missingness                     |
+| `fmi`        | Fraction of missing information                                     |
+
+: Elements of pooled object {#tbl-pooledObjects}
+
 ```{r}
 linearGCM_mice_pooled <- mice::pool(linearGCM_mice)
 
