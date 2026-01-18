@@ -333,7 +333,7 @@ latentBasisGCM_fit <- lavaan::sem(
 ```
 
 A model with negative variances is uninterpretable.
-We can constrain the variances to be nonnegative.
+We can constrain the variances to be nonnegative using the `bounds = "pos.var"` argument:
 
 ```{r}
 latentBasisGCM_fit <- lavaan::sem(
@@ -795,7 +795,7 @@ multilevelSEM_fit <- lavaan::sem(
   multilevelSEM_syntax,
   data = mydata_long,
   cluster = "ID",
-  missing = "ML", # commenting out due to error
+  missing = "ML",
   estimator = "MLR")
 ```
 
