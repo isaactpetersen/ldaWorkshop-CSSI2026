@@ -336,8 +336,8 @@ A model with negative variances is uninterpretable.
 We can constrain the variances to be nonnegative.
 
 ```{r}
-latentBasisGCMmodified_fit <- lavaan::sem(
-  latentBasisGCMmodified_syntax,
+latentBasisGCM_fit <- lavaan::sem(
+  latentBasisGCM_syntax,
   data = mydata_wide,
   missing = "ML",
   estimator = "MLR",
