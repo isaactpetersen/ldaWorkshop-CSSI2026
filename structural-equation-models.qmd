@@ -44,6 +44,7 @@ longitudinalMI4 <- read.csv("./data/Bliese-Ployhart-2002-indicators-4.csv")
 1. What is the association between sleep and depressive symptoms at the within-individual level versus between-individual level?
 1. Does within-person change in anxiety predict within-person change in depression (and vice versa).
 1. Do our measures show measurement invariance across time?
+That is, are our scores able to meaningfully compared on the same metric across time?
 
 # Pre-Model Computation
 
@@ -62,6 +63,7 @@ mydata_long <- mydata_long |>
     depression_personMeanCentered = depression - depression_personMean,
     anxiety_personMean = mean(anxiety, na.rm = TRUE),
     anxiety_personMeanCentered = anxiety - anxiety_personMean,
+    
     # Compute interaction terms
     sexEffectCodeXses = sexEffectCode * ses,
     sexEffectCodeXsleep = sexEffectCode * sleep,
@@ -72,11 +74,12 @@ mydata_long <- mydata_long |>
   ) |>
   ungroup()
 
+# Convert data from long to wide (widen data by timepoint)
 mydata_wide <- mydata_long |>
   select(-age) |>
   tidyr::pivot_wider(
-    names_from  = timepoint,
-    values_from = c(
+    names_from  = timepoint, # widen by timepoint
+    values_from = c( # widen time-varying variables
       ses, ses_personMeanCentered, sleep, sleep_personMeanCentered, depression,
       depression_personMeanCentered, anxiety, anxiety_personMeanCentered, 
       sexEffectCodeXses, sexEffectCodeXsleep, sexEffectCodeXdepression, sexEffectCodeXanxiety,
@@ -239,9 +242,9 @@ quadraticGCM_syntax <- '
 quadraticGCM_fit <- lavaan::sem(
   quadraticGCM_syntax,
   data = mydata_wide,
-  missing = "ML",
-  estimator = "MLR",
-  meanstructure = TRUE)
+  missing = "ML", # FIML
+  estimator = "MLR", # Huber-White robust standard errors (for heteroscedasticity and nonnormally distributed residuals)
+  meanstructure = TRUE) # estimate means/intercepts
 ```
 
 ### Model Summary
@@ -327,9 +330,9 @@ latentBasisGCM_syntax <- '
 latentBasisGCM_fit <- lavaan::sem(
   latentBasisGCM_syntax,
   data = mydata_wide,
-  missing = "ML",
-  estimator = "MLR",
-  meanstructure = TRUE)
+  missing = "ML", # FIML
+  estimator = "MLR", # Huber-White robust standard errors (for heteroscedasticity and nonnormally distributed residuals)
+  meanstructure = TRUE) # estimate means/intercepts
 ```
 
 A model with negative variances is uninterpretable.
@@ -339,10 +342,10 @@ We can constrain the variances to be nonnegative using the `bounds = "pos.var"` 
 latentBasisGCM_fit <- lavaan::sem(
   latentBasisGCM_syntax,
   data = mydata_wide,
-  missing = "ML",
-  estimator = "MLR",
-  meanstructure = TRUE,
-  bounds = "pos.var")
+  missing = "ML", # FIML
+  estimator = "MLR", # Huber-White robust standard errors (for heteroscedasticity and nonnormally distributed residuals)
+  meanstructure = TRUE, # estimate means/intercepts
+  bounds = "pos.var") # constrain observed and latent variances to be nonnegative
 ```
 
 ### Model Summary
@@ -452,7 +455,7 @@ bivariateLCSM_fit <- lcsm::fit_bi_lcsm(
   coupling = list(
     delta_lag_xy = TRUE,
     xi_lag_yx = TRUE),
-  fixed.x = FALSE
+  fixed.x = FALSE # estimate means, variances, and covariances of the observed variables (to include predictors as part of FIML)
   )
 ```
 
@@ -553,10 +556,10 @@ clpm_syntax <- '
 clpm_fit <- lavaan::sem(
   clpm_syntax,
   data = mydata_wide,
-  missing = "ML",
-  estimator = "MLR",
-  meanstructure = TRUE,
-  fixed.x = FALSE)
+  missing = "ML", # FIML
+  estimator = "MLR", # Huber-White robust standard errors (for heteroscedasticity and nonnormally distributed residuals)
+  meanstructure = TRUE, # estimate means/intercepts
+  fixed.x = FALSE) # estimate means, variances, and covariances of the observed variables (to include predictors as part of FIML)
 ```
 
 ## Model Summary
@@ -720,10 +723,10 @@ riclpm_syntax <- '
 riclpm_fit <- lavaan::sem(
   riclpm_syntax,
   data = mydata_wide,
-  missing = "ML",
-  estimator = "MLR",
-  fixed.x = FALSE,
-  bounds = "standard"
+  missing = "ML", # FIML
+  estimator = "MLR", # Huber-White robust standard errors (for heteroscedasticity and nonnormally distributed residuals)
+  fixed.x = FALSE, # estimate means, variances, and covariances of the observed variables (to include predictors as part of FIML)
+  bounds = "standard" # constrains observed variances, latent variances, and factor loadings to be within computed lower and upper bounds
 )
 ```
 
@@ -795,7 +798,7 @@ multilevelSEM_fit <- lavaan::sem(
   multilevelSEM_syntax,
   data = mydata_long,
   cluster = "ID",
-  missing = "ML",
+  missing = "ML", # FIML
   estimator = "MLR")
 ```
 
@@ -988,11 +991,10 @@ configuralInvariance_syntax <- '
 configuralInvariance_fit <- cfa(
   configuralInvariance_syntax,
   data = longitudinalMI1,
-  missing = "ML",
-  estimator = "MLR",
-  meanstructure = TRUE,
-  #std.lv = TRUE,
-  fixed.x = FALSE)
+  missing = "ML", # FIML
+  estimator = "MLR", # Huber-White robust standard errors (for heteroscedasticity and nonnormally distributed residuals)
+  meanstructure = TRUE, # estimate means/intercepts
+  fixed.x = FALSE) # estimate means, variances, and covariances of the observed variables (to include predictors as part of FIML)
 ```
 
 ### Model Summary
@@ -1199,11 +1201,10 @@ configuralInvarianceCorrelatedResiduals_syntax <- '
 configuralInvarianceCorrelatedResiduals_fit <- cfa(
   configuralInvarianceCorrelatedResiduals_syntax,
   data = longitudinalMI1,
-  missing = "ML",
-  estimator = "MLR",
-  meanstructure = TRUE,
-  #std.lv = TRUE,
-  fixed.x = FALSE)
+  missing = "ML", # FIML
+  estimator = "MLR", # Huber-White robust standard errors (for heteroscedasticity and nonnormally distributed residuals)
+  meanstructure = TRUE, # estimate means/intercepts
+  fixed.x = FALSE) # estimate means, variances, and covariances of the observed variables (to include predictors as part of FIML)
 ```
 
 ### Model Summary
@@ -1421,11 +1422,10 @@ metricInvariance_syntax <- '
 metricInvariance_fit <- cfa(
   metricInvariance_syntax,
   data = longitudinalMI1,
-  missing = "ML",
-  estimator = "MLR",
-  meanstructure = TRUE,
-  #std.lv = TRUE,
-  fixed.x = FALSE)
+  missing = "ML", # FIML
+  estimator = "MLR", # Huber-White robust standard errors (for heteroscedasticity and nonnormally distributed residuals)
+  meanstructure = TRUE, # estimate means/intercepts
+  fixed.x = FALSE) # estimate means, variances, and covariances of the observed variables (to include predictors as part of FIML)
 ```
 
 ### Model Summary
@@ -1639,11 +1639,10 @@ scalarInvariance_syntax <- '
 scalarInvariance_fit <- cfa(
   scalarInvariance_syntax,
   data = longitudinalMI1,
-  missing = "ML",
-  estimator = "MLR",
-  meanstructure = TRUE,
-  #std.lv = TRUE,
-  fixed.x = FALSE)
+  missing = "ML", # FIML
+  estimator = "MLR", # Huber-White robust standard errors (for heteroscedasticity and nonnormally distributed residuals)
+  meanstructure = TRUE, # estimate means/intercepts
+  fixed.x = FALSE) # estimate means, variances, and covariances of the observed variables (to include predictors as part of FIML)
 ```
 
 ### Model Summary
@@ -1858,11 +1857,10 @@ residualInvariance_syntax <- '
 residualInvariance_fit <- cfa(
   residualInvariance_syntax,
   data = longitudinalMI1,
-  missing = "ML",
-  estimator = "MLR",
-  meanstructure = TRUE,
-  #std.lv = TRUE,
-  fixed.x = FALSE)
+  missing = "ML", # FIML
+  estimator = "MLR", # Huber-White robust standard errors (for heteroscedasticity and nonnormally distributed residuals)
+  meanstructure = TRUE, # estimate means/intercepts
+  fixed.x = FALSE) # estimate means, variances, and covariances of the observed variables (to include predictors as part of FIML)
 ```
 
 ### Model Summary
