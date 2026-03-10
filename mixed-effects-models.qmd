@@ -189,7 +189,7 @@ ggplot(
   theme_classic()
 ```
 
-# Polynomial (Quadratic) Growth Curve Model
+# Polynomial (Quadratic) Growth Curve Model {#sec-quadratic}
 
 ## Fit the Model
 
@@ -502,7 +502,7 @@ ggplot(
   theme_classic()
 ```
 
-# Compare Models
+# Compare Models {#sec-compareModels}
 
 ```{r}
 anova(
@@ -532,7 +532,7 @@ mydata_long <- mydata_long |>
   group_by(ID) |>
   mutate(
     sleep_personMean = mean(sleep, na.rm = TRUE),
-    sleep_personMeanCentered= sleep - sleep_personMean
+    sleep_personMeanCentered = sleep - sleep_personMean
   ) |>
   ungroup()
 ```
@@ -541,8 +541,26 @@ mydata_long <- mydata_long |>
 
 In disaggregating within- and between-person effects, this model fits:
 
-1. random intercepts and random linear and quadratic slopes for subjects,
+1. random intercepts and random linear slopes for subjects,
 1. `sex` and `sleep_personMean` as time-invariant fixed-effect predictors of the intercepts and slopes, and
+1. `sleep_personMeanCentered` as a time-varying fixed-effect predictor of depression.
+
+```{r}
+withinBetweenPersonSleepModel_basic <- lmerTest::lmer(
+  depression ~ sleep_personMean + sexFactor +              # time-invariant predictors of the intercepts
+    sleep_personMeanCentered + ageCentered +               # time-varying predictors
+    sleep_personMean:ageCentered + sexFactor:ageCentered + # time-invariant predictors of the slopes
+    (1 + ageCentered | ID),
+  data = mydata_long,
+  na.action = na.exclude)
+```
+
+However, based on our modeling in @sec-quadratic and our model comparison in @sec-compareModels, we determined that a quadratic model fit significantly better than a linear model, so we can extend the model to a quadratic model.
+
+In disaggregating within- and between-person effects, this model fits:
+
+1. random intercepts and random linear and quadratic slopes for subjects,
+1. `sex` and `sleep_personMean` (and their interaction) as time-invariant fixed-effect predictors of the intercepts and slopes, and
 1. `sleep_personMeanCentered` as a time-varying fixed-effect predictor of depression, with effects allowed to vary over age and by sex, including two‐ and three‐way interactions with age and sex.
 
 The `*` symbol (unlike the `:` symbol) estimates all lower-order main effects and interactions, to simplify the syntax.
@@ -553,7 +571,7 @@ withinBetweenPersonSleepModel <- lmerTest::lmer(
     sexFactor*sleep_personMean*ageCenteredSquared + 
     sexFactor*sleep_personMeanCentered*ageCentered + 
     sexFactor*sleep_personMeanCentered*ageCenteredSquared + 
-    (1 + ageCentered + ageCenteredSquared | ID),
+    (1 + ageCentered | ID), # model fails to converge with a random effect for ageCenteredSquared
   data = mydata_long,
   na.action = na.exclude)
 ```
