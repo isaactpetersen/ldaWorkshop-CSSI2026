@@ -351,21 +351,36 @@ num_true_cores <- parallelly::availableCores(logical = FALSE) - 1
 
 In estimating generalized additive growth models of depression symptoms, this model includes:
 
+1. random intercepts and random linear and quadratic slopes for subjects,
 1. sex‐specific smooth functions of age, `sex` and `sleep` as fixed effects with their interaction, and
 1. sex‐specific smooth interactions between age and sleep, along with subject‐specific smooth deviations over age.
 
 ```{r}
-gamGCM <- mgcv::gam(
+gamGCM <- mgcv::gamm(
   depression ~ sexFactor + sleep + sexFactor:sleep +
     
     # sex-specific trajectories
     s(ageCentered, by = sexFactor, k = 4) +
     
     # sex-specific effects of sleep on trajectories
-    ti(ageCentered, sleep, by = sexFactor, k = 4) +
+    ti(ageCentered, sleep, by = sexFactor, k = 4),
     
     # random effects
-    s(ageCentered, ID, bs = "re"),
+    random = list(ID = ~ 1 + ageCentered),
+  data = mydata_long,
+  nthreads = num_cores)
+
+gamGCM_standardized <- mgcv::gamm(
+  scale(depression) ~ sexFactor + scale(sleep) + sexFactor:scale(sleep) +
+    
+    # sex-specific trajectories
+    s(scale(ageCentered), by = sexFactor, k = 4) +
+    
+    # sex-specific effects of sleep on trajectories
+    ti(scale(ageCentered), scale(sleep), by = sexFactor, k = 4),
+    
+    # random effects
+    random = list(ID = ~ 1 + scale(ageCentered)),
   data = mydata_long,
   nthreads = num_cores)
 ```
@@ -373,12 +388,9 @@ gamGCM <- mgcv::gam(
 ## Model Summary
 
 ```{r}
-summary(gamGCM)
+gamGCM
 
-print(effectsize::standardize_parameters(
-  gamGCM,
-  method = "refit"),
-  digits = 2)
+gamGCM_standardized
 
 performance::r2(gamGCM)
 ```
