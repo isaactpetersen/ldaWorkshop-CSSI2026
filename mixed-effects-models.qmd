@@ -333,6 +333,8 @@ ggplot(
 
 # Generalized Additive Mixed Model
 
+Generalized additive mixed models (GAMMs) can be estimated using the `mgcv::gamm()` and `gamm4::gamm4()` functions.
+
 ## Fit the Model
 
 ```{r}
