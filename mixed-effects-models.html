@@ -816,6 +816,7 @@ sexFactor [male] × sleep                        |       0.02 | [-0.04,  0.08]
 </div>
 </section></section></section><section id="generalized-additive-mixed-model" class="level1" data-number="6"><h1 data-number="6">
 <span class="header-section-number">6</span> Generalized Additive Mixed Model</h1>
+<p>Generalized additive mixed models (GAMMs) can be estimated using the <code><a href="https://rdrr.io/pkg/mgcv/man/gamm.html">mgcv::gamm()</a></code> and <code>gamm4::gamm4()</code> functions.</p>
 <section id="fit-the-model-2" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="fit-the-model-2">
 <span class="header-section-number">6.1</span> Fit the Model</h2>
 <div class="cell">
@@ -2289,381 +2290,383 @@ ageCenteredSquared × sleep personMeanCentered                      |      -0.12
 <span id="cb49-359"><a href="#cb49-359" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb49-360"><a href="#cb49-360" aria-hidden="true" tabindex="-1"></a><span class="fu"># Generalized Additive Mixed Model</span></span>
 <span id="cb49-361"><a href="#cb49-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-362"><a href="#cb49-362" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fit the Model</span></span>
+<span id="cb49-362"><a href="#cb49-362" aria-hidden="true" tabindex="-1"></a>Generalized additive mixed models (GAMMs) can be estimated using the <span class="in">`mgcv::gamm()`</span> and <span class="in">`gamm4::gamm4()`</span> functions.</span>
 <span id="cb49-363"><a href="#cb49-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-366"><a href="#cb49-366" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-367"><a href="#cb49-367" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb49-368"><a href="#cb49-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-369"><a href="#cb49-369" aria-hidden="true" tabindex="-1"></a>num_cores <span class="ot">&lt;-</span> parallelly<span class="sc">::</span><span class="fu">availableCores</span>()</span>
-<span id="cb49-370"><a href="#cb49-370" aria-hidden="true" tabindex="-1"></a>num_true_cores <span class="ot">&lt;-</span> parallelly<span class="sc">::</span><span class="fu">availableCores</span>(<span class="at">logical =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb49-371"><a href="#cb49-371" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-372"><a href="#cb49-372" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-375"><a href="#cb49-375" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-376"><a href="#cb49-376" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb49-377"><a href="#cb49-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-378"><a href="#cb49-378" aria-hidden="true" tabindex="-1"></a>num_cores <span class="ot">&lt;-</span> parallelly<span class="sc">::</span><span class="fu">availableCores</span>() <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb49-379"><a href="#cb49-379" aria-hidden="true" tabindex="-1"></a>num_true_cores <span class="ot">&lt;-</span> parallelly<span class="sc">::</span><span class="fu">availableCores</span>(<span class="at">logical =</span> <span class="cn">FALSE</span>) <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb49-380"><a href="#cb49-380" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-381"><a href="#cb49-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-382"><a href="#cb49-382" aria-hidden="true" tabindex="-1"></a>In estimating generalized additive growth models of depression symptoms, this model includes:</span>
+<span id="cb49-364"><a href="#cb49-364" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fit the Model</span></span>
+<span id="cb49-365"><a href="#cb49-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-368"><a href="#cb49-368" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-369"><a href="#cb49-369" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb49-370"><a href="#cb49-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-371"><a href="#cb49-371" aria-hidden="true" tabindex="-1"></a>num_cores <span class="ot">&lt;-</span> parallelly<span class="sc">::</span><span class="fu">availableCores</span>()</span>
+<span id="cb49-372"><a href="#cb49-372" aria-hidden="true" tabindex="-1"></a>num_true_cores <span class="ot">&lt;-</span> parallelly<span class="sc">::</span><span class="fu">availableCores</span>(<span class="at">logical =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb49-373"><a href="#cb49-373" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-374"><a href="#cb49-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-377"><a href="#cb49-377" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-378"><a href="#cb49-378" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb49-379"><a href="#cb49-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-380"><a href="#cb49-380" aria-hidden="true" tabindex="-1"></a>num_cores <span class="ot">&lt;-</span> parallelly<span class="sc">::</span><span class="fu">availableCores</span>() <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb49-381"><a href="#cb49-381" aria-hidden="true" tabindex="-1"></a>num_true_cores <span class="ot">&lt;-</span> parallelly<span class="sc">::</span><span class="fu">availableCores</span>(<span class="at">logical =</span> <span class="cn">FALSE</span>) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb49-382"><a href="#cb49-382" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-383"><a href="#cb49-383" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-384"><a href="#cb49-384" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>random intercepts and random linear and quadratic slopes for subjects,</span>
-<span id="cb49-385"><a href="#cb49-385" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>sex‐specific smooth functions of age, <span class="in">`sex`</span> and <span class="in">`sleep`</span> as fixed effects with their interaction, and</span>
-<span id="cb49-386"><a href="#cb49-386" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>sex‐specific smooth interactions between age and sleep, along with subject‐specific smooth deviations over age.</span>
-<span id="cb49-387"><a href="#cb49-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-390"><a href="#cb49-390" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-391"><a href="#cb49-391" aria-hidden="true" tabindex="-1"></a>gamGCM <span class="ot">&lt;-</span> mgcv<span class="sc">::</span><span class="fu">gamm</span>(</span>
-<span id="cb49-392"><a href="#cb49-392" aria-hidden="true" tabindex="-1"></a>  depression <span class="sc">~</span> sexFactor <span class="sc">+</span> sleep <span class="sc">+</span> sexFactor<span class="sc">:</span>sleep <span class="sc">+</span></span>
-<span id="cb49-393"><a href="#cb49-393" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb49-394"><a href="#cb49-394" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sex-specific trajectories</span></span>
-<span id="cb49-395"><a href="#cb49-395" aria-hidden="true" tabindex="-1"></a>    <span class="fu">s</span>(ageCentered, <span class="at">by =</span> sexFactor, <span class="at">k =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb49-396"><a href="#cb49-396" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb49-397"><a href="#cb49-397" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sex-specific effects of sleep on trajectories</span></span>
-<span id="cb49-398"><a href="#cb49-398" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ti</span>(ageCentered, sleep, <span class="at">by =</span> sexFactor, <span class="at">k =</span> <span class="dv">4</span>),</span>
-<span id="cb49-399"><a href="#cb49-399" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb49-400"><a href="#cb49-400" aria-hidden="true" tabindex="-1"></a>    <span class="co"># random effects</span></span>
-<span id="cb49-401"><a href="#cb49-401" aria-hidden="true" tabindex="-1"></a>    <span class="at">random =</span> <span class="fu">list</span>(<span class="at">ID =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ageCentered),</span>
-<span id="cb49-402"><a href="#cb49-402" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata_long,</span>
-<span id="cb49-403"><a href="#cb49-403" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> num_cores)</span>
-<span id="cb49-404"><a href="#cb49-404" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-405"><a href="#cb49-405" aria-hidden="true" tabindex="-1"></a>gamGCM_standardized <span class="ot">&lt;-</span> mgcv<span class="sc">::</span><span class="fu">gamm</span>(</span>
-<span id="cb49-406"><a href="#cb49-406" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>(depression) <span class="sc">~</span> sexFactor <span class="sc">+</span> <span class="fu">scale</span>(sleep) <span class="sc">+</span> sexFactor<span class="sc">:</span><span class="fu">scale</span>(sleep) <span class="sc">+</span></span>
-<span id="cb49-407"><a href="#cb49-407" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb49-408"><a href="#cb49-408" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sex-specific trajectories</span></span>
-<span id="cb49-409"><a href="#cb49-409" aria-hidden="true" tabindex="-1"></a>    <span class="fu">s</span>(<span class="fu">scale</span>(ageCentered), <span class="at">by =</span> sexFactor, <span class="at">k =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb49-410"><a href="#cb49-410" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb49-411"><a href="#cb49-411" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sex-specific effects of sleep on trajectories</span></span>
-<span id="cb49-412"><a href="#cb49-412" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ti</span>(<span class="fu">scale</span>(ageCentered), <span class="fu">scale</span>(sleep), <span class="at">by =</span> sexFactor, <span class="at">k =</span> <span class="dv">4</span>),</span>
-<span id="cb49-413"><a href="#cb49-413" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb49-414"><a href="#cb49-414" aria-hidden="true" tabindex="-1"></a>    <span class="co"># random effects</span></span>
-<span id="cb49-415"><a href="#cb49-415" aria-hidden="true" tabindex="-1"></a>    <span class="at">random =</span> <span class="fu">list</span>(<span class="at">ID =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fu">scale</span>(ageCentered)),</span>
-<span id="cb49-416"><a href="#cb49-416" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata_long,</span>
-<span id="cb49-417"><a href="#cb49-417" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> num_cores)</span>
-<span id="cb49-418"><a href="#cb49-418" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-419"><a href="#cb49-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-420"><a href="#cb49-420" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model Summary</span></span>
+<span id="cb49-384"><a href="#cb49-384" aria-hidden="true" tabindex="-1"></a>In estimating generalized additive growth models of depression symptoms, this model includes:</span>
+<span id="cb49-385"><a href="#cb49-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-386"><a href="#cb49-386" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>random intercepts and random linear and quadratic slopes for subjects,</span>
+<span id="cb49-387"><a href="#cb49-387" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>sex‐specific smooth functions of age, <span class="in">`sex`</span> and <span class="in">`sleep`</span> as fixed effects with their interaction, and</span>
+<span id="cb49-388"><a href="#cb49-388" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>sex‐specific smooth interactions between age and sleep, along with subject‐specific smooth deviations over age.</span>
+<span id="cb49-389"><a href="#cb49-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-392"><a href="#cb49-392" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-393"><a href="#cb49-393" aria-hidden="true" tabindex="-1"></a>gamGCM <span class="ot">&lt;-</span> mgcv<span class="sc">::</span><span class="fu">gamm</span>(</span>
+<span id="cb49-394"><a href="#cb49-394" aria-hidden="true" tabindex="-1"></a>  depression <span class="sc">~</span> sexFactor <span class="sc">+</span> sleep <span class="sc">+</span> sexFactor<span class="sc">:</span>sleep <span class="sc">+</span></span>
+<span id="cb49-395"><a href="#cb49-395" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb49-396"><a href="#cb49-396" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sex-specific trajectories</span></span>
+<span id="cb49-397"><a href="#cb49-397" aria-hidden="true" tabindex="-1"></a>    <span class="fu">s</span>(ageCentered, <span class="at">by =</span> sexFactor, <span class="at">k =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb49-398"><a href="#cb49-398" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb49-399"><a href="#cb49-399" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sex-specific effects of sleep on trajectories</span></span>
+<span id="cb49-400"><a href="#cb49-400" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ti</span>(ageCentered, sleep, <span class="at">by =</span> sexFactor, <span class="at">k =</span> <span class="dv">4</span>),</span>
+<span id="cb49-401"><a href="#cb49-401" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb49-402"><a href="#cb49-402" aria-hidden="true" tabindex="-1"></a>    <span class="co"># random effects</span></span>
+<span id="cb49-403"><a href="#cb49-403" aria-hidden="true" tabindex="-1"></a>    <span class="at">random =</span> <span class="fu">list</span>(<span class="at">ID =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ageCentered),</span>
+<span id="cb49-404"><a href="#cb49-404" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata_long,</span>
+<span id="cb49-405"><a href="#cb49-405" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> num_cores)</span>
+<span id="cb49-406"><a href="#cb49-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-407"><a href="#cb49-407" aria-hidden="true" tabindex="-1"></a>gamGCM_standardized <span class="ot">&lt;-</span> mgcv<span class="sc">::</span><span class="fu">gamm</span>(</span>
+<span id="cb49-408"><a href="#cb49-408" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>(depression) <span class="sc">~</span> sexFactor <span class="sc">+</span> <span class="fu">scale</span>(sleep) <span class="sc">+</span> sexFactor<span class="sc">:</span><span class="fu">scale</span>(sleep) <span class="sc">+</span></span>
+<span id="cb49-409"><a href="#cb49-409" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb49-410"><a href="#cb49-410" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sex-specific trajectories</span></span>
+<span id="cb49-411"><a href="#cb49-411" aria-hidden="true" tabindex="-1"></a>    <span class="fu">s</span>(<span class="fu">scale</span>(ageCentered), <span class="at">by =</span> sexFactor, <span class="at">k =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb49-412"><a href="#cb49-412" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb49-413"><a href="#cb49-413" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sex-specific effects of sleep on trajectories</span></span>
+<span id="cb49-414"><a href="#cb49-414" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ti</span>(<span class="fu">scale</span>(ageCentered), <span class="fu">scale</span>(sleep), <span class="at">by =</span> sexFactor, <span class="at">k =</span> <span class="dv">4</span>),</span>
+<span id="cb49-415"><a href="#cb49-415" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb49-416"><a href="#cb49-416" aria-hidden="true" tabindex="-1"></a>    <span class="co"># random effects</span></span>
+<span id="cb49-417"><a href="#cb49-417" aria-hidden="true" tabindex="-1"></a>    <span class="at">random =</span> <span class="fu">list</span>(<span class="at">ID =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fu">scale</span>(ageCentered)),</span>
+<span id="cb49-418"><a href="#cb49-418" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata_long,</span>
+<span id="cb49-419"><a href="#cb49-419" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> num_cores)</span>
+<span id="cb49-420"><a href="#cb49-420" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-421"><a href="#cb49-421" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-424"><a href="#cb49-424" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-425"><a href="#cb49-425" aria-hidden="true" tabindex="-1"></a>gamGCM</span>
-<span id="cb49-426"><a href="#cb49-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-427"><a href="#cb49-427" aria-hidden="true" tabindex="-1"></a>gamGCM_standardized</span>
+<span id="cb49-422"><a href="#cb49-422" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model Summary</span></span>
+<span id="cb49-423"><a href="#cb49-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-426"><a href="#cb49-426" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-427"><a href="#cb49-427" aria-hidden="true" tabindex="-1"></a>gamGCM</span>
 <span id="cb49-428"><a href="#cb49-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-429"><a href="#cb49-429" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">r2</span>(gamGCM)</span>
-<span id="cb49-430"><a href="#cb49-430" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-431"><a href="#cb49-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-432"><a href="#cb49-432" aria-hidden="true" tabindex="-1"></a><span class="fu">## Plots</span></span>
+<span id="cb49-429"><a href="#cb49-429" aria-hidden="true" tabindex="-1"></a>gamGCM_standardized</span>
+<span id="cb49-430"><a href="#cb49-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-431"><a href="#cb49-431" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">r2</span>(gamGCM)</span>
+<span id="cb49-432"><a href="#cb49-432" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-433"><a href="#cb49-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-434"><a href="#cb49-434" aria-hidden="true" tabindex="-1"></a><span class="fu">### Prototypical Growth Curve</span></span>
+<span id="cb49-434"><a href="#cb49-434" aria-hidden="true" tabindex="-1"></a><span class="fu">## Plots</span></span>
 <span id="cb49-435"><a href="#cb49-435" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-438"><a href="#cb49-438" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-439"><a href="#cb49-439" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex"</span></span>
-<span id="cb49-440"><a href="#cb49-440" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-441"><a href="#cb49-441" aria-hidden="true" tabindex="-1"></a>newData <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb49-442"><a href="#cb49-442" aria-hidden="true" tabindex="-1"></a>  <span class="at">sexFactor =</span> <span class="fu">c</span>(<span class="st">"female"</span>, <span class="st">"male"</span>),</span>
-<span id="cb49-443"><a href="#cb49-443" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">seq</span>(</span>
-<span id="cb49-444"><a href="#cb49-444" aria-hidden="true" tabindex="-1"></a>    <span class="at">from =</span> <span class="fu">min</span>(mydata_long<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb49-445"><a href="#cb49-445" aria-hidden="true" tabindex="-1"></a>    <span class="at">to =</span> <span class="fu">max</span>(mydata_long<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb49-446"><a href="#cb49-446" aria-hidden="true" tabindex="-1"></a>    <span class="at">length.out =</span> <span class="dv">10000</span></span>
-<span id="cb49-447"><a href="#cb49-447" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb49-448"><a href="#cb49-448" aria-hidden="true" tabindex="-1"></a>  <span class="at">sleep =</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb49-449"><a href="#cb49-449" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb49-450"><a href="#cb49-450" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-451"><a href="#cb49-451" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>ageCentered <span class="ot">&lt;-</span> newData<span class="sc">$</span>age <span class="sc">-</span> <span class="fu">min</span>(newData<span class="sc">$</span>age)</span>
-<span id="cb49-452"><a href="#cb49-452" aria-hidden="true" tabindex="-1"></a><span class="co">#newData$ageCenteredSquared &lt;- newData$ageCentered ^ 2</span></span>
-<span id="cb49-453"><a href="#cb49-453" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-454"><a href="#cb49-454" aria-hidden="true" tabindex="-1"></a><span class="co"># add a dummy id</span></span>
-<span id="cb49-455"><a href="#cb49-455" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>ID <span class="ot">&lt;-</span> mydata_long<span class="sc">$</span>ID[<span class="dv">1</span>]</span>
-<span id="cb49-456"><a href="#cb49-456" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-457"><a href="#cb49-457" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>modelImpliedDepression <span class="ot">&lt;-</span> <span class="fu">predict</span>( <span class="co"># predict.gam</span></span>
-<span id="cb49-458"><a href="#cb49-458" aria-hidden="true" tabindex="-1"></a>  gamGCM,</span>
-<span id="cb49-459"><a href="#cb49-459" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> newData,</span>
-<span id="cb49-460"><a href="#cb49-460" aria-hidden="true" tabindex="-1"></a>  <span class="co">#re.form = NA # include no random effects</span></span>
-<span id="cb49-461"><a href="#cb49-461" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb49-462"><a href="#cb49-462" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-463"><a href="#cb49-463" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
-<span id="cb49-464"><a href="#cb49-464" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> newData,</span>
-<span id="cb49-465"><a href="#cb49-465" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb49-466"><a href="#cb49-466" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> age,</span>
-<span id="cb49-467"><a href="#cb49-467" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> modelImpliedDepression,</span>
-<span id="cb49-468"><a href="#cb49-468" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> sexFactor)) <span class="sc">+</span></span>
-<span id="cb49-469"><a href="#cb49-469" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb49-470"><a href="#cb49-470" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb49-471"><a href="#cb49-471" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
-<span id="cb49-472"><a href="#cb49-472" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression Symptoms"</span>,</span>
-<span id="cb49-473"><a href="#cb49-473" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Sex"</span></span>
-<span id="cb49-474"><a href="#cb49-474" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb49-475"><a href="#cb49-475" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb49-476"><a href="#cb49-476" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-477"><a href="#cb49-477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-478"><a href="#cb49-478" aria-hidden="true" tabindex="-1"></a><span class="fu">### Individuals' Growth Curves</span></span>
+<span id="cb49-436"><a href="#cb49-436" aria-hidden="true" tabindex="-1"></a><span class="fu">### Prototypical Growth Curve</span></span>
+<span id="cb49-437"><a href="#cb49-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-440"><a href="#cb49-440" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-441"><a href="#cb49-441" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex"</span></span>
+<span id="cb49-442"><a href="#cb49-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-443"><a href="#cb49-443" aria-hidden="true" tabindex="-1"></a>newData <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb49-444"><a href="#cb49-444" aria-hidden="true" tabindex="-1"></a>  <span class="at">sexFactor =</span> <span class="fu">c</span>(<span class="st">"female"</span>, <span class="st">"male"</span>),</span>
+<span id="cb49-445"><a href="#cb49-445" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">seq</span>(</span>
+<span id="cb49-446"><a href="#cb49-446" aria-hidden="true" tabindex="-1"></a>    <span class="at">from =</span> <span class="fu">min</span>(mydata_long<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb49-447"><a href="#cb49-447" aria-hidden="true" tabindex="-1"></a>    <span class="at">to =</span> <span class="fu">max</span>(mydata_long<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb49-448"><a href="#cb49-448" aria-hidden="true" tabindex="-1"></a>    <span class="at">length.out =</span> <span class="dv">10000</span></span>
+<span id="cb49-449"><a href="#cb49-449" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb49-450"><a href="#cb49-450" aria-hidden="true" tabindex="-1"></a>  <span class="at">sleep =</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-451"><a href="#cb49-451" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-452"><a href="#cb49-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-453"><a href="#cb49-453" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>ageCentered <span class="ot">&lt;-</span> newData<span class="sc">$</span>age <span class="sc">-</span> <span class="fu">min</span>(newData<span class="sc">$</span>age)</span>
+<span id="cb49-454"><a href="#cb49-454" aria-hidden="true" tabindex="-1"></a><span class="co">#newData$ageCenteredSquared &lt;- newData$ageCentered ^ 2</span></span>
+<span id="cb49-455"><a href="#cb49-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-456"><a href="#cb49-456" aria-hidden="true" tabindex="-1"></a><span class="co"># add a dummy id</span></span>
+<span id="cb49-457"><a href="#cb49-457" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>ID <span class="ot">&lt;-</span> mydata_long<span class="sc">$</span>ID[<span class="dv">1</span>]</span>
+<span id="cb49-458"><a href="#cb49-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-459"><a href="#cb49-459" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>modelImpliedDepression <span class="ot">&lt;-</span> <span class="fu">predict</span>( <span class="co"># predict.gam</span></span>
+<span id="cb49-460"><a href="#cb49-460" aria-hidden="true" tabindex="-1"></a>  gamGCM,</span>
+<span id="cb49-461"><a href="#cb49-461" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> newData,</span>
+<span id="cb49-462"><a href="#cb49-462" aria-hidden="true" tabindex="-1"></a>  <span class="co">#re.form = NA # include no random effects</span></span>
+<span id="cb49-463"><a href="#cb49-463" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-464"><a href="#cb49-464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-465"><a href="#cb49-465" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb49-466"><a href="#cb49-466" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> newData,</span>
+<span id="cb49-467"><a href="#cb49-467" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb49-468"><a href="#cb49-468" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> age,</span>
+<span id="cb49-469"><a href="#cb49-469" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> modelImpliedDepression,</span>
+<span id="cb49-470"><a href="#cb49-470" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> sexFactor)) <span class="sc">+</span></span>
+<span id="cb49-471"><a href="#cb49-471" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb49-472"><a href="#cb49-472" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb49-473"><a href="#cb49-473" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
+<span id="cb49-474"><a href="#cb49-474" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression Symptoms"</span>,</span>
+<span id="cb49-475"><a href="#cb49-475" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Sex"</span></span>
+<span id="cb49-476"><a href="#cb49-476" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb49-477"><a href="#cb49-477" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb49-478"><a href="#cb49-478" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-479"><a href="#cb49-479" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-482"><a href="#cb49-482" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-483"><a href="#cb49-483" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms"</span></span>
-<span id="cb49-484"><a href="#cb49-484" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-485"><a href="#cb49-485" aria-hidden="true" tabindex="-1"></a>mydata_long<span class="sc">$</span>modelImpliedDepression <span class="ot">&lt;-</span> <span class="fu">predict</span>( <span class="co"># predict.gam</span></span>
-<span id="cb49-486"><a href="#cb49-486" aria-hidden="true" tabindex="-1"></a>  gamGCM,</span>
-<span id="cb49-487"><a href="#cb49-487" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> mydata_long,</span>
-<span id="cb49-488"><a href="#cb49-488" aria-hidden="true" tabindex="-1"></a>  <span class="co">#re.form = NULL # include all random effects</span></span>
-<span id="cb49-489"><a href="#cb49-489" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb49-490"><a href="#cb49-490" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-491"><a href="#cb49-491" aria-hidden="true" tabindex="-1"></a>gamMethod <span class="ot">&lt;-</span> <span class="cf">function</span>(formula, data, weights, ...) {</span>
-<span id="cb49-492"><a href="#cb49-492" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">nrow</span>(data) <span class="sc">&gt;=</span> <span class="dv">4</span>){ <span class="co"># gam smooth if 4+ timepoints</span></span>
-<span id="cb49-493"><a href="#cb49-493" aria-hidden="true" tabindex="-1"></a>    mgcv<span class="sc">::</span><span class="fu">gam</span>(y <span class="sc">~</span> <span class="fu">s</span>(x, <span class="at">bs =</span> <span class="st">"cs"</span>, <span class="at">k =</span> <span class="dv">3</span>), <span class="at">data =</span> data, ...)</span>
-<span id="cb49-494"><a href="#cb49-494" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(<span class="fu">nrow</span>(data) <span class="sc">==</span> <span class="dv">3</span>){  <span class="co"># quadratic smooth if 3 timepoints</span></span>
-<span id="cb49-495"><a href="#cb49-495" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lm</span>(y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> data, ...)</span>
-<span id="cb49-496"><a href="#cb49-496" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span>{ <span class="co"># linear if fewer than 3 timepoints</span></span>
-<span id="cb49-497"><a href="#cb49-497" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data, ...)</span>
-<span id="cb49-498"><a href="#cb49-498" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb49-499"><a href="#cb49-499" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb49-500"><a href="#cb49-500" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-501"><a href="#cb49-501" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
-<span id="cb49-502"><a href="#cb49-502" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata_long,</span>
-<span id="cb49-503"><a href="#cb49-503" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb49-504"><a href="#cb49-504" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> age,</span>
-<span id="cb49-505"><a href="#cb49-505" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> modelImpliedDepression,</span>
-<span id="cb49-506"><a href="#cb49-506" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> ID,</span>
-<span id="cb49-507"><a href="#cb49-507" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> sexFactor)) <span class="sc">+</span></span>
-<span id="cb49-508"><a href="#cb49-508" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
-<span id="cb49-509"><a href="#cb49-509" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> gamMethod,</span>
-<span id="cb49-510"><a href="#cb49-510" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb49-511"><a href="#cb49-511" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.5</span></span>
-<span id="cb49-512"><a href="#cb49-512" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb49-513"><a href="#cb49-513" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb49-514"><a href="#cb49-514" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
-<span id="cb49-515"><a href="#cb49-515" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression Symptoms"</span>,</span>
-<span id="cb49-516"><a href="#cb49-516" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Sex"</span></span>
-<span id="cb49-517"><a href="#cb49-517" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb49-518"><a href="#cb49-518" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb49-519"><a href="#cb49-519" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-520"><a href="#cb49-520" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-521"><a href="#cb49-521" aria-hidden="true" tabindex="-1"></a><span class="fu">### Individuals' Trajectories Overlaid with Prototypical Trajectory</span></span>
+<span id="cb49-480"><a href="#cb49-480" aria-hidden="true" tabindex="-1"></a><span class="fu">### Individuals' Growth Curves</span></span>
+<span id="cb49-481"><a href="#cb49-481" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-484"><a href="#cb49-484" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-485"><a href="#cb49-485" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms"</span></span>
+<span id="cb49-486"><a href="#cb49-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-487"><a href="#cb49-487" aria-hidden="true" tabindex="-1"></a>mydata_long<span class="sc">$</span>modelImpliedDepression <span class="ot">&lt;-</span> <span class="fu">predict</span>( <span class="co"># predict.gam</span></span>
+<span id="cb49-488"><a href="#cb49-488" aria-hidden="true" tabindex="-1"></a>  gamGCM,</span>
+<span id="cb49-489"><a href="#cb49-489" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> mydata_long,</span>
+<span id="cb49-490"><a href="#cb49-490" aria-hidden="true" tabindex="-1"></a>  <span class="co">#re.form = NULL # include all random effects</span></span>
+<span id="cb49-491"><a href="#cb49-491" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-492"><a href="#cb49-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-493"><a href="#cb49-493" aria-hidden="true" tabindex="-1"></a>gamMethod <span class="ot">&lt;-</span> <span class="cf">function</span>(formula, data, weights, ...) {</span>
+<span id="cb49-494"><a href="#cb49-494" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">nrow</span>(data) <span class="sc">&gt;=</span> <span class="dv">4</span>){ <span class="co"># gam smooth if 4+ timepoints</span></span>
+<span id="cb49-495"><a href="#cb49-495" aria-hidden="true" tabindex="-1"></a>    mgcv<span class="sc">::</span><span class="fu">gam</span>(y <span class="sc">~</span> <span class="fu">s</span>(x, <span class="at">bs =</span> <span class="st">"cs"</span>, <span class="at">k =</span> <span class="dv">3</span>), <span class="at">data =</span> data, ...)</span>
+<span id="cb49-496"><a href="#cb49-496" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(<span class="fu">nrow</span>(data) <span class="sc">==</span> <span class="dv">3</span>){  <span class="co"># quadratic smooth if 3 timepoints</span></span>
+<span id="cb49-497"><a href="#cb49-497" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lm</span>(y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> data, ...)</span>
+<span id="cb49-498"><a href="#cb49-498" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span>{ <span class="co"># linear if fewer than 3 timepoints</span></span>
+<span id="cb49-499"><a href="#cb49-499" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data, ...)</span>
+<span id="cb49-500"><a href="#cb49-500" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb49-501"><a href="#cb49-501" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-502"><a href="#cb49-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-503"><a href="#cb49-503" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb49-504"><a href="#cb49-504" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata_long,</span>
+<span id="cb49-505"><a href="#cb49-505" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb49-506"><a href="#cb49-506" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> age,</span>
+<span id="cb49-507"><a href="#cb49-507" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> modelImpliedDepression,</span>
+<span id="cb49-508"><a href="#cb49-508" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> ID,</span>
+<span id="cb49-509"><a href="#cb49-509" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> sexFactor)) <span class="sc">+</span></span>
+<span id="cb49-510"><a href="#cb49-510" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
+<span id="cb49-511"><a href="#cb49-511" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> gamMethod,</span>
+<span id="cb49-512"><a href="#cb49-512" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb49-513"><a href="#cb49-513" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.5</span></span>
+<span id="cb49-514"><a href="#cb49-514" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb49-515"><a href="#cb49-515" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb49-516"><a href="#cb49-516" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
+<span id="cb49-517"><a href="#cb49-517" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression Symptoms"</span>,</span>
+<span id="cb49-518"><a href="#cb49-518" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Sex"</span></span>
+<span id="cb49-519"><a href="#cb49-519" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb49-520"><a href="#cb49-520" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb49-521"><a href="#cb49-521" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-522"><a href="#cb49-522" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-525"><a href="#cb49-525" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-526"><a href="#cb49-526" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms Overlaid With Prototypical Growth Curves By Sex"</span></span>
-<span id="cb49-527"><a href="#cb49-527" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-528"><a href="#cb49-528" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
-<span id="cb49-529"><a href="#cb49-529" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata_long,</span>
-<span id="cb49-530"><a href="#cb49-530" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb49-531"><a href="#cb49-531" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> age,</span>
-<span id="cb49-532"><a href="#cb49-532" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> modelImpliedDepression,</span>
-<span id="cb49-533"><a href="#cb49-533" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> ID)) <span class="sc">+</span></span>
-<span id="cb49-534"><a href="#cb49-534" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
-<span id="cb49-535"><a href="#cb49-535" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> gamMethod,</span>
-<span id="cb49-536"><a href="#cb49-536" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb49-537"><a href="#cb49-537" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.5</span>,</span>
-<span id="cb49-538"><a href="#cb49-538" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"gray"</span>,</span>
-<span id="cb49-539"><a href="#cb49-539" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.30</span></span>
-<span id="cb49-540"><a href="#cb49-540" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb49-541"><a href="#cb49-541" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
-<span id="cb49-542"><a href="#cb49-542" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> newData,</span>
-<span id="cb49-543"><a href="#cb49-543" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb49-544"><a href="#cb49-544" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> age,</span>
-<span id="cb49-545"><a href="#cb49-545" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> modelImpliedDepression,</span>
-<span id="cb49-546"><a href="#cb49-546" aria-hidden="true" tabindex="-1"></a>      <span class="at">group =</span> sexFactor,</span>
-<span id="cb49-547"><a href="#cb49-547" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> sexFactor),</span>
-<span id="cb49-548"><a href="#cb49-548" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb49-549"><a href="#cb49-549" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb49-550"><a href="#cb49-550" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
-<span id="cb49-551"><a href="#cb49-551" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression Symptoms"</span>,</span>
-<span id="cb49-552"><a href="#cb49-552" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Sex"</span></span>
-<span id="cb49-553"><a href="#cb49-553" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb49-554"><a href="#cb49-554" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb49-555"><a href="#cb49-555" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-556"><a href="#cb49-556" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-557"><a href="#cb49-557" aria-hidden="true" tabindex="-1"></a><span class="fu"># Compare Models {#sec-compareModels}</span></span>
+<span id="cb49-523"><a href="#cb49-523" aria-hidden="true" tabindex="-1"></a><span class="fu">### Individuals' Trajectories Overlaid with Prototypical Trajectory</span></span>
+<span id="cb49-524"><a href="#cb49-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-527"><a href="#cb49-527" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-528"><a href="#cb49-528" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms Overlaid With Prototypical Growth Curves By Sex"</span></span>
+<span id="cb49-529"><a href="#cb49-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-530"><a href="#cb49-530" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb49-531"><a href="#cb49-531" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata_long,</span>
+<span id="cb49-532"><a href="#cb49-532" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb49-533"><a href="#cb49-533" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> age,</span>
+<span id="cb49-534"><a href="#cb49-534" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> modelImpliedDepression,</span>
+<span id="cb49-535"><a href="#cb49-535" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> ID)) <span class="sc">+</span></span>
+<span id="cb49-536"><a href="#cb49-536" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
+<span id="cb49-537"><a href="#cb49-537" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> gamMethod,</span>
+<span id="cb49-538"><a href="#cb49-538" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb49-539"><a href="#cb49-539" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.5</span>,</span>
+<span id="cb49-540"><a href="#cb49-540" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"gray"</span>,</span>
+<span id="cb49-541"><a href="#cb49-541" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.30</span></span>
+<span id="cb49-542"><a href="#cb49-542" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb49-543"><a href="#cb49-543" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb49-544"><a href="#cb49-544" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> newData,</span>
+<span id="cb49-545"><a href="#cb49-545" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb49-546"><a href="#cb49-546" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> age,</span>
+<span id="cb49-547"><a href="#cb49-547" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> modelImpliedDepression,</span>
+<span id="cb49-548"><a href="#cb49-548" aria-hidden="true" tabindex="-1"></a>      <span class="at">group =</span> sexFactor,</span>
+<span id="cb49-549"><a href="#cb49-549" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> sexFactor),</span>
+<span id="cb49-550"><a href="#cb49-550" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb49-551"><a href="#cb49-551" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb49-552"><a href="#cb49-552" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
+<span id="cb49-553"><a href="#cb49-553" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression Symptoms"</span>,</span>
+<span id="cb49-554"><a href="#cb49-554" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Sex"</span></span>
+<span id="cb49-555"><a href="#cb49-555" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb49-556"><a href="#cb49-556" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb49-557"><a href="#cb49-557" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-558"><a href="#cb49-558" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-561"><a href="#cb49-561" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-562"><a href="#cb49-562" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(</span>
-<span id="cb49-563"><a href="#cb49-563" aria-hidden="true" tabindex="-1"></a>  linearGCM,</span>
-<span id="cb49-564"><a href="#cb49-564" aria-hidden="true" tabindex="-1"></a>  quadraticGCM</span>
-<span id="cb49-565"><a href="#cb49-565" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb49-566"><a href="#cb49-566" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-567"><a href="#cb49-567" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(</span>
-<span id="cb49-568"><a href="#cb49-568" aria-hidden="true" tabindex="-1"></a>  linearGCM,</span>
-<span id="cb49-569"><a href="#cb49-569" aria-hidden="true" tabindex="-1"></a>  quadraticGCM,</span>
-<span id="cb49-570"><a href="#cb49-570" aria-hidden="true" tabindex="-1"></a>  gamGCM</span>
-<span id="cb49-571"><a href="#cb49-571" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb49-572"><a href="#cb49-572" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-573"><a href="#cb49-573" aria-hidden="true" tabindex="-1"></a>MuMIn<span class="sc">::</span><span class="fu">AICc</span>(</span>
-<span id="cb49-574"><a href="#cb49-574" aria-hidden="true" tabindex="-1"></a>  linearGCM,</span>
-<span id="cb49-575"><a href="#cb49-575" aria-hidden="true" tabindex="-1"></a>  quadraticGCM,</span>
-<span id="cb49-576"><a href="#cb49-576" aria-hidden="true" tabindex="-1"></a>  gamGCM</span>
-<span id="cb49-577"><a href="#cb49-577" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb49-578"><a href="#cb49-578" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-579"><a href="#cb49-579" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-580"><a href="#cb49-580" aria-hidden="true" tabindex="-1"></a><span class="fu"># Disaggregation of Within-Person and Between-Person Effects</span></span>
+<span id="cb49-559"><a href="#cb49-559" aria-hidden="true" tabindex="-1"></a><span class="fu"># Compare Models {#sec-compareModels}</span></span>
+<span id="cb49-560"><a href="#cb49-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-563"><a href="#cb49-563" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-564"><a href="#cb49-564" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(</span>
+<span id="cb49-565"><a href="#cb49-565" aria-hidden="true" tabindex="-1"></a>  linearGCM,</span>
+<span id="cb49-566"><a href="#cb49-566" aria-hidden="true" tabindex="-1"></a>  quadraticGCM</span>
+<span id="cb49-567"><a href="#cb49-567" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-568"><a href="#cb49-568" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-569"><a href="#cb49-569" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(</span>
+<span id="cb49-570"><a href="#cb49-570" aria-hidden="true" tabindex="-1"></a>  linearGCM,</span>
+<span id="cb49-571"><a href="#cb49-571" aria-hidden="true" tabindex="-1"></a>  quadraticGCM,</span>
+<span id="cb49-572"><a href="#cb49-572" aria-hidden="true" tabindex="-1"></a>  gamGCM</span>
+<span id="cb49-573"><a href="#cb49-573" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-574"><a href="#cb49-574" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-575"><a href="#cb49-575" aria-hidden="true" tabindex="-1"></a>MuMIn<span class="sc">::</span><span class="fu">AICc</span>(</span>
+<span id="cb49-576"><a href="#cb49-576" aria-hidden="true" tabindex="-1"></a>  linearGCM,</span>
+<span id="cb49-577"><a href="#cb49-577" aria-hidden="true" tabindex="-1"></a>  quadraticGCM,</span>
+<span id="cb49-578"><a href="#cb49-578" aria-hidden="true" tabindex="-1"></a>  gamGCM</span>
+<span id="cb49-579"><a href="#cb49-579" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-580"><a href="#cb49-580" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-581"><a href="#cb49-581" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-582"><a href="#cb49-582" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pre-Model Computations</span></span>
+<span id="cb49-582"><a href="#cb49-582" aria-hidden="true" tabindex="-1"></a><span class="fu"># Disaggregation of Within-Person and Between-Person Effects</span></span>
 <span id="cb49-583"><a href="#cb49-583" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-586"><a href="#cb49-586" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-587"><a href="#cb49-587" aria-hidden="true" tabindex="-1"></a>mydata_long <span class="ot">&lt;-</span> mydata_long <span class="sc">|&gt;</span></span>
-<span id="cb49-588"><a href="#cb49-588" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ID) <span class="sc">|&gt;</span></span>
-<span id="cb49-589"><a href="#cb49-589" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb49-590"><a href="#cb49-590" aria-hidden="true" tabindex="-1"></a>    <span class="at">sleep_personMean =</span> <span class="fu">mean</span>(sleep, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb49-591"><a href="#cb49-591" aria-hidden="true" tabindex="-1"></a>    <span class="at">sleep_personMeanCentered =</span> sleep <span class="sc">-</span> sleep_personMean</span>
-<span id="cb49-592"><a href="#cb49-592" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb49-593"><a href="#cb49-593" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb49-594"><a href="#cb49-594" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-595"><a href="#cb49-595" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-596"><a href="#cb49-596" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fit the Model</span></span>
+<span id="cb49-584"><a href="#cb49-584" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pre-Model Computations</span></span>
+<span id="cb49-585"><a href="#cb49-585" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-588"><a href="#cb49-588" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-589"><a href="#cb49-589" aria-hidden="true" tabindex="-1"></a>mydata_long <span class="ot">&lt;-</span> mydata_long <span class="sc">|&gt;</span></span>
+<span id="cb49-590"><a href="#cb49-590" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ID) <span class="sc">|&gt;</span></span>
+<span id="cb49-591"><a href="#cb49-591" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb49-592"><a href="#cb49-592" aria-hidden="true" tabindex="-1"></a>    <span class="at">sleep_personMean =</span> <span class="fu">mean</span>(sleep, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb49-593"><a href="#cb49-593" aria-hidden="true" tabindex="-1"></a>    <span class="at">sleep_personMeanCentered =</span> sleep <span class="sc">-</span> sleep_personMean</span>
+<span id="cb49-594"><a href="#cb49-594" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb49-595"><a href="#cb49-595" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb49-596"><a href="#cb49-596" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-597"><a href="#cb49-597" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-598"><a href="#cb49-598" aria-hidden="true" tabindex="-1"></a>In disaggregating within- and between-person effects, this model fits:</span>
+<span id="cb49-598"><a href="#cb49-598" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fit the Model</span></span>
 <span id="cb49-599"><a href="#cb49-599" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-600"><a href="#cb49-600" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>random intercepts and random linear slopes for subjects,</span>
-<span id="cb49-601"><a href="#cb49-601" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`sex`</span> and <span class="in">`sleep_personMean`</span> as time-invariant fixed-effect predictors of the intercepts and slopes, and</span>
-<span id="cb49-602"><a href="#cb49-602" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`sleep_personMeanCentered`</span> as a time-varying fixed-effect predictor of depression.</span>
-<span id="cb49-603"><a href="#cb49-603" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-606"><a href="#cb49-606" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-607"><a href="#cb49-607" aria-hidden="true" tabindex="-1"></a>withinBetweenPersonSleepModel_basic <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(</span>
-<span id="cb49-608"><a href="#cb49-608" aria-hidden="true" tabindex="-1"></a>  depression <span class="sc">~</span> sleep_personMean <span class="sc">+</span> sexFactor <span class="sc">+</span>              <span class="co"># time-invariant predictors of the intercepts</span></span>
-<span id="cb49-609"><a href="#cb49-609" aria-hidden="true" tabindex="-1"></a>    sleep_personMeanCentered <span class="sc">+</span> ageCentered <span class="sc">+</span>               <span class="co"># time-varying predictors</span></span>
-<span id="cb49-610"><a href="#cb49-610" aria-hidden="true" tabindex="-1"></a>    sleep_personMean<span class="sc">:</span>ageCentered <span class="sc">+</span> sexFactor<span class="sc">:</span>ageCentered <span class="sc">+</span> <span class="co"># time-invariant predictors of the slopes</span></span>
-<span id="cb49-611"><a href="#cb49-611" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> ageCentered <span class="sc">|</span> ID),</span>
-<span id="cb49-612"><a href="#cb49-612" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata_long,</span>
-<span id="cb49-613"><a href="#cb49-613" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude)</span>
-<span id="cb49-614"><a href="#cb49-614" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-615"><a href="#cb49-615" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-616"><a href="#cb49-616" aria-hidden="true" tabindex="-1"></a>However, based on our modeling in @sec-quadratic and our model comparison in @sec-compareModels, we determined that a quadratic model fit significantly better than a linear model, so we can extend the model to a quadratic model.</span>
+<span id="cb49-600"><a href="#cb49-600" aria-hidden="true" tabindex="-1"></a>In disaggregating within- and between-person effects, this model fits:</span>
+<span id="cb49-601"><a href="#cb49-601" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-602"><a href="#cb49-602" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>random intercepts and random linear slopes for subjects,</span>
+<span id="cb49-603"><a href="#cb49-603" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`sex`</span> and <span class="in">`sleep_personMean`</span> as time-invariant fixed-effect predictors of the intercepts and slopes, and</span>
+<span id="cb49-604"><a href="#cb49-604" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`sleep_personMeanCentered`</span> as a time-varying fixed-effect predictor of depression.</span>
+<span id="cb49-605"><a href="#cb49-605" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-608"><a href="#cb49-608" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-609"><a href="#cb49-609" aria-hidden="true" tabindex="-1"></a>withinBetweenPersonSleepModel_basic <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(</span>
+<span id="cb49-610"><a href="#cb49-610" aria-hidden="true" tabindex="-1"></a>  depression <span class="sc">~</span> sleep_personMean <span class="sc">+</span> sexFactor <span class="sc">+</span>              <span class="co"># time-invariant predictors of the intercepts</span></span>
+<span id="cb49-611"><a href="#cb49-611" aria-hidden="true" tabindex="-1"></a>    sleep_personMeanCentered <span class="sc">+</span> ageCentered <span class="sc">+</span>               <span class="co"># time-varying predictors</span></span>
+<span id="cb49-612"><a href="#cb49-612" aria-hidden="true" tabindex="-1"></a>    sleep_personMean<span class="sc">:</span>ageCentered <span class="sc">+</span> sexFactor<span class="sc">:</span>ageCentered <span class="sc">+</span> <span class="co"># time-invariant predictors of the slopes</span></span>
+<span id="cb49-613"><a href="#cb49-613" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> ageCentered <span class="sc">|</span> ID),</span>
+<span id="cb49-614"><a href="#cb49-614" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata_long,</span>
+<span id="cb49-615"><a href="#cb49-615" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb49-616"><a href="#cb49-616" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-617"><a href="#cb49-617" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-618"><a href="#cb49-618" aria-hidden="true" tabindex="-1"></a>In disaggregating within- and between-person effects, this model fits:</span>
+<span id="cb49-618"><a href="#cb49-618" aria-hidden="true" tabindex="-1"></a>However, based on our modeling in @sec-quadratic and our model comparison in @sec-compareModels, we determined that a quadratic model fit significantly better than a linear model, so we can extend the model to a quadratic model.</span>
 <span id="cb49-619"><a href="#cb49-619" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-620"><a href="#cb49-620" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>random intercepts and random linear and quadratic slopes for subjects,</span>
-<span id="cb49-621"><a href="#cb49-621" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`sex`</span> and <span class="in">`sleep_personMean`</span> (and their interaction) as time-invariant fixed-effect predictors of the intercepts and slopes, and</span>
-<span id="cb49-622"><a href="#cb49-622" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`sleep_personMeanCentered`</span> as a time-varying fixed-effect predictor of depression, with effects allowed to vary over age and by sex, including two‐ and three‐way interactions with age and sex.</span>
-<span id="cb49-623"><a href="#cb49-623" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-624"><a href="#cb49-624" aria-hidden="true" tabindex="-1"></a>The <span class="in">`*`</span> symbol (unlike the <span class="in">`:`</span> symbol) estimates all lower-order main effects and interactions, to simplify the syntax.</span>
+<span id="cb49-620"><a href="#cb49-620" aria-hidden="true" tabindex="-1"></a>In disaggregating within- and between-person effects, this model fits:</span>
+<span id="cb49-621"><a href="#cb49-621" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-622"><a href="#cb49-622" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>random intercepts and random linear and quadratic slopes for subjects,</span>
+<span id="cb49-623"><a href="#cb49-623" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`sex`</span> and <span class="in">`sleep_personMean`</span> (and their interaction) as time-invariant fixed-effect predictors of the intercepts and slopes, and</span>
+<span id="cb49-624"><a href="#cb49-624" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`sleep_personMeanCentered`</span> as a time-varying fixed-effect predictor of depression, with effects allowed to vary over age and by sex, including two‐ and three‐way interactions with age and sex.</span>
 <span id="cb49-625"><a href="#cb49-625" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-628"><a href="#cb49-628" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-629"><a href="#cb49-629" aria-hidden="true" tabindex="-1"></a>withinBetweenPersonSleepModel <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(</span>
-<span id="cb49-630"><a href="#cb49-630" aria-hidden="true" tabindex="-1"></a>  depression <span class="sc">~</span> sexFactor<span class="sc">*</span>sleep_personMean<span class="sc">*</span>ageCentered <span class="sc">+</span> </span>
-<span id="cb49-631"><a href="#cb49-631" aria-hidden="true" tabindex="-1"></a>    sexFactor<span class="sc">*</span>sleep_personMean<span class="sc">*</span>ageCenteredSquared <span class="sc">+</span> </span>
-<span id="cb49-632"><a href="#cb49-632" aria-hidden="true" tabindex="-1"></a>    sexFactor<span class="sc">*</span>sleep_personMeanCentered<span class="sc">*</span>ageCentered <span class="sc">+</span> </span>
-<span id="cb49-633"><a href="#cb49-633" aria-hidden="true" tabindex="-1"></a>    sexFactor<span class="sc">*</span>sleep_personMeanCentered<span class="sc">*</span>ageCenteredSquared <span class="sc">+</span> </span>
-<span id="cb49-634"><a href="#cb49-634" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> ageCentered <span class="sc">|</span> ID), <span class="co"># model fails to converge with a random effect for ageCenteredSquared</span></span>
-<span id="cb49-635"><a href="#cb49-635" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata_long,</span>
-<span id="cb49-636"><a href="#cb49-636" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude)</span>
-<span id="cb49-637"><a href="#cb49-637" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-638"><a href="#cb49-638" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-639"><a href="#cb49-639" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model Summary</span></span>
+<span id="cb49-626"><a href="#cb49-626" aria-hidden="true" tabindex="-1"></a>The <span class="in">`*`</span> symbol (unlike the <span class="in">`:`</span> symbol) estimates all lower-order main effects and interactions, to simplify the syntax.</span>
+<span id="cb49-627"><a href="#cb49-627" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-630"><a href="#cb49-630" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-631"><a href="#cb49-631" aria-hidden="true" tabindex="-1"></a>withinBetweenPersonSleepModel <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(</span>
+<span id="cb49-632"><a href="#cb49-632" aria-hidden="true" tabindex="-1"></a>  depression <span class="sc">~</span> sexFactor<span class="sc">*</span>sleep_personMean<span class="sc">*</span>ageCentered <span class="sc">+</span> </span>
+<span id="cb49-633"><a href="#cb49-633" aria-hidden="true" tabindex="-1"></a>    sexFactor<span class="sc">*</span>sleep_personMean<span class="sc">*</span>ageCenteredSquared <span class="sc">+</span> </span>
+<span id="cb49-634"><a href="#cb49-634" aria-hidden="true" tabindex="-1"></a>    sexFactor<span class="sc">*</span>sleep_personMeanCentered<span class="sc">*</span>ageCentered <span class="sc">+</span> </span>
+<span id="cb49-635"><a href="#cb49-635" aria-hidden="true" tabindex="-1"></a>    sexFactor<span class="sc">*</span>sleep_personMeanCentered<span class="sc">*</span>ageCenteredSquared <span class="sc">+</span> </span>
+<span id="cb49-636"><a href="#cb49-636" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> ageCentered <span class="sc">|</span> ID), <span class="co"># model fails to converge with a random effect for ageCenteredSquared</span></span>
+<span id="cb49-637"><a href="#cb49-637" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata_long,</span>
+<span id="cb49-638"><a href="#cb49-638" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb49-639"><a href="#cb49-639" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-640"><a href="#cb49-640" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-643"><a href="#cb49-643" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-644"><a href="#cb49-644" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(withinBetweenPersonSleepModel)</span>
-<span id="cb49-645"><a href="#cb49-645" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-646"><a href="#cb49-646" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(effectsize<span class="sc">::</span><span class="fu">standardize_parameters</span>(</span>
-<span id="cb49-647"><a href="#cb49-647" aria-hidden="true" tabindex="-1"></a>  withinBetweenPersonSleepModel,</span>
-<span id="cb49-648"><a href="#cb49-648" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"refit"</span>),</span>
-<span id="cb49-649"><a href="#cb49-649" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">2</span>)</span>
-<span id="cb49-650"><a href="#cb49-650" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-651"><a href="#cb49-651" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">r2</span>(withinBetweenPersonSleepModel)</span>
-<span id="cb49-652"><a href="#cb49-652" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-653"><a href="#cb49-653" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-654"><a href="#cb49-654" aria-hidden="true" tabindex="-1"></a><span class="fu">## Plots</span></span>
+<span id="cb49-641"><a href="#cb49-641" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model Summary</span></span>
+<span id="cb49-642"><a href="#cb49-642" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-645"><a href="#cb49-645" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-646"><a href="#cb49-646" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(withinBetweenPersonSleepModel)</span>
+<span id="cb49-647"><a href="#cb49-647" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-648"><a href="#cb49-648" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(effectsize<span class="sc">::</span><span class="fu">standardize_parameters</span>(</span>
+<span id="cb49-649"><a href="#cb49-649" aria-hidden="true" tabindex="-1"></a>  withinBetweenPersonSleepModel,</span>
+<span id="cb49-650"><a href="#cb49-650" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"refit"</span>),</span>
+<span id="cb49-651"><a href="#cb49-651" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb49-652"><a href="#cb49-652" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-653"><a href="#cb49-653" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">r2</span>(withinBetweenPersonSleepModel)</span>
+<span id="cb49-654"><a href="#cb49-654" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-655"><a href="#cb49-655" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-656"><a href="#cb49-656" aria-hidden="true" tabindex="-1"></a><span class="fu">### Between-Person Effect of Sleep</span></span>
+<span id="cb49-656"><a href="#cb49-656" aria-hidden="true" tabindex="-1"></a><span class="fu">## Plots</span></span>
 <span id="cb49-657"><a href="#cb49-657" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-660"><a href="#cb49-660" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-661"><a href="#cb49-661" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Between-Person Association Between Sleep and Depression"</span></span>
-<span id="cb49-662"><a href="#cb49-662" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-663"><a href="#cb49-663" aria-hidden="true" tabindex="-1"></a>newData <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb49-664"><a href="#cb49-664" aria-hidden="true" tabindex="-1"></a>  <span class="at">sexFactor =</span> <span class="fu">c</span>(<span class="st">"female"</span>, <span class="st">"male"</span>),</span>
-<span id="cb49-665"><a href="#cb49-665" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">seq</span>(</span>
-<span id="cb49-666"><a href="#cb49-666" aria-hidden="true" tabindex="-1"></a>    <span class="at">from =</span> <span class="fu">min</span>(mydata_long<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb49-667"><a href="#cb49-667" aria-hidden="true" tabindex="-1"></a>    <span class="at">to =</span> <span class="fu">max</span>(mydata_long<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb49-668"><a href="#cb49-668" aria-hidden="true" tabindex="-1"></a>    <span class="at">length.out =</span> <span class="dv">10000</span></span>
-<span id="cb49-669"><a href="#cb49-669" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb49-670"><a href="#cb49-670" aria-hidden="true" tabindex="-1"></a>  <span class="at">sleepFactor =</span> <span class="fu">c</span>(<span class="st">"low sleep"</span>, <span class="st">"high sleep"</span>)</span>
-<span id="cb49-671"><a href="#cb49-671" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb49-672"><a href="#cb49-672" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-673"><a href="#cb49-673" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>ageCentered <span class="ot">&lt;-</span> newData<span class="sc">$</span>age <span class="sc">-</span> <span class="fu">min</span>(newData<span class="sc">$</span>age)</span>
-<span id="cb49-674"><a href="#cb49-674" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>ageCenteredSquared <span class="ot">&lt;-</span> newData<span class="sc">$</span>ageCentered <span class="sc">^</span> <span class="dv">2</span></span>
-<span id="cb49-675"><a href="#cb49-675" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-676"><a href="#cb49-676" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMean <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb49-677"><a href="#cb49-677" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"low sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb49-678"><a href="#cb49-678" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-679"><a href="#cb49-679" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"low sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-658"><a href="#cb49-658" aria-hidden="true" tabindex="-1"></a><span class="fu">### Between-Person Effect of Sleep</span></span>
+<span id="cb49-659"><a href="#cb49-659" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-662"><a href="#cb49-662" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-663"><a href="#cb49-663" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Between-Person Association Between Sleep and Depression"</span></span>
+<span id="cb49-664"><a href="#cb49-664" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-665"><a href="#cb49-665" aria-hidden="true" tabindex="-1"></a>newData <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb49-666"><a href="#cb49-666" aria-hidden="true" tabindex="-1"></a>  <span class="at">sexFactor =</span> <span class="fu">c</span>(<span class="st">"female"</span>, <span class="st">"male"</span>),</span>
+<span id="cb49-667"><a href="#cb49-667" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">seq</span>(</span>
+<span id="cb49-668"><a href="#cb49-668" aria-hidden="true" tabindex="-1"></a>    <span class="at">from =</span> <span class="fu">min</span>(mydata_long<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb49-669"><a href="#cb49-669" aria-hidden="true" tabindex="-1"></a>    <span class="at">to =</span> <span class="fu">max</span>(mydata_long<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb49-670"><a href="#cb49-670" aria-hidden="true" tabindex="-1"></a>    <span class="at">length.out =</span> <span class="dv">10000</span></span>
+<span id="cb49-671"><a href="#cb49-671" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb49-672"><a href="#cb49-672" aria-hidden="true" tabindex="-1"></a>  <span class="at">sleepFactor =</span> <span class="fu">c</span>(<span class="st">"low sleep"</span>, <span class="st">"high sleep"</span>)</span>
+<span id="cb49-673"><a href="#cb49-673" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-674"><a href="#cb49-674" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-675"><a href="#cb49-675" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>ageCentered <span class="ot">&lt;-</span> newData<span class="sc">$</span>age <span class="sc">-</span> <span class="fu">min</span>(newData<span class="sc">$</span>age)</span>
+<span id="cb49-676"><a href="#cb49-676" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>ageCenteredSquared <span class="ot">&lt;-</span> newData<span class="sc">$</span>ageCentered <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb49-677"><a href="#cb49-677" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-678"><a href="#cb49-678" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMean <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb49-679"><a href="#cb49-679" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"low sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb49-680"><a href="#cb49-680" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-681"><a href="#cb49-681" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"high sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-681"><a href="#cb49-681" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"low sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb49-682"><a href="#cb49-682" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-683"><a href="#cb49-683" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"high sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-683"><a href="#cb49-683" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"high sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb49-684"><a href="#cb49-684" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-685"><a href="#cb49-685" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMeanCentered <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb49-685"><a href="#cb49-685" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"high sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMean[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb49-686"><a href="#cb49-686" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-687"><a href="#cb49-687" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>modelImpliedDepression <span class="ot">&lt;-</span> <span class="fu">predict</span>( <span class="co"># predict.merMod</span></span>
-<span id="cb49-688"><a href="#cb49-688" aria-hidden="true" tabindex="-1"></a>  withinBetweenPersonSleepModel,</span>
-<span id="cb49-689"><a href="#cb49-689" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> newData,</span>
-<span id="cb49-690"><a href="#cb49-690" aria-hidden="true" tabindex="-1"></a>  <span class="at">re.form =</span> <span class="cn">NA</span> <span class="co"># include no random effects</span></span>
-<span id="cb49-691"><a href="#cb49-691" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb49-692"><a href="#cb49-692" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-693"><a href="#cb49-693" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
-<span id="cb49-694"><a href="#cb49-694" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> newData,</span>
-<span id="cb49-695"><a href="#cb49-695" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb49-696"><a href="#cb49-696" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> age,</span>
-<span id="cb49-697"><a href="#cb49-697" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> modelImpliedDepression,</span>
-<span id="cb49-698"><a href="#cb49-698" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> sexFactor,</span>
-<span id="cb49-699"><a href="#cb49-699" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> sleepFactor)) <span class="sc">+</span></span>
-<span id="cb49-700"><a href="#cb49-700" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb49-701"><a href="#cb49-701" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb49-702"><a href="#cb49-702" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
-<span id="cb49-703"><a href="#cb49-703" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression Symptoms"</span>,</span>
-<span id="cb49-704"><a href="#cb49-704" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Sex"</span>,</span>
-<span id="cb49-705"><a href="#cb49-705" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="st">"Sleep"</span></span>
-<span id="cb49-706"><a href="#cb49-706" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb49-707"><a href="#cb49-707" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb49-708"><a href="#cb49-708" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb49-709"><a href="#cb49-709" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-710"><a href="#cb49-710" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-711"><a href="#cb49-711" aria-hidden="true" tabindex="-1"></a><span class="fu">### Within-Person Effect of Sleep</span></span>
+<span id="cb49-687"><a href="#cb49-687" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMeanCentered <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb49-688"><a href="#cb49-688" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-689"><a href="#cb49-689" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>modelImpliedDepression <span class="ot">&lt;-</span> <span class="fu">predict</span>( <span class="co"># predict.merMod</span></span>
+<span id="cb49-690"><a href="#cb49-690" aria-hidden="true" tabindex="-1"></a>  withinBetweenPersonSleepModel,</span>
+<span id="cb49-691"><a href="#cb49-691" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> newData,</span>
+<span id="cb49-692"><a href="#cb49-692" aria-hidden="true" tabindex="-1"></a>  <span class="at">re.form =</span> <span class="cn">NA</span> <span class="co"># include no random effects</span></span>
+<span id="cb49-693"><a href="#cb49-693" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-694"><a href="#cb49-694" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-695"><a href="#cb49-695" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb49-696"><a href="#cb49-696" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> newData,</span>
+<span id="cb49-697"><a href="#cb49-697" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb49-698"><a href="#cb49-698" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> age,</span>
+<span id="cb49-699"><a href="#cb49-699" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> modelImpliedDepression,</span>
+<span id="cb49-700"><a href="#cb49-700" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> sexFactor,</span>
+<span id="cb49-701"><a href="#cb49-701" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> sleepFactor)) <span class="sc">+</span></span>
+<span id="cb49-702"><a href="#cb49-702" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb49-703"><a href="#cb49-703" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb49-704"><a href="#cb49-704" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
+<span id="cb49-705"><a href="#cb49-705" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression Symptoms"</span>,</span>
+<span id="cb49-706"><a href="#cb49-706" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Sex"</span>,</span>
+<span id="cb49-707"><a href="#cb49-707" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="st">"Sleep"</span></span>
+<span id="cb49-708"><a href="#cb49-708" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb49-709"><a href="#cb49-709" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-710"><a href="#cb49-710" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb49-711"><a href="#cb49-711" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-712"><a href="#cb49-712" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-715"><a href="#cb49-715" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-716"><a href="#cb49-716" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Within-Person Association Between Sleep and Depression"</span></span>
-<span id="cb49-717"><a href="#cb49-717" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-718"><a href="#cb49-718" aria-hidden="true" tabindex="-1"></a>newData <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb49-719"><a href="#cb49-719" aria-hidden="true" tabindex="-1"></a>  <span class="at">sexFactor =</span> <span class="fu">c</span>(<span class="st">"female"</span>, <span class="st">"male"</span>),</span>
-<span id="cb49-720"><a href="#cb49-720" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">seq</span>(</span>
-<span id="cb49-721"><a href="#cb49-721" aria-hidden="true" tabindex="-1"></a>    <span class="at">from =</span> <span class="fu">min</span>(mydata_long<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb49-722"><a href="#cb49-722" aria-hidden="true" tabindex="-1"></a>    <span class="at">to =</span> <span class="fu">max</span>(mydata_long<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb49-723"><a href="#cb49-723" aria-hidden="true" tabindex="-1"></a>    <span class="at">length.out =</span> <span class="dv">10000</span></span>
-<span id="cb49-724"><a href="#cb49-724" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb49-725"><a href="#cb49-725" aria-hidden="true" tabindex="-1"></a>  <span class="at">sleepFactor =</span> <span class="fu">c</span>(<span class="st">"low sleep"</span>, <span class="st">"high sleep"</span>)</span>
-<span id="cb49-726"><a href="#cb49-726" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb49-727"><a href="#cb49-727" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-728"><a href="#cb49-728" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>ageCentered <span class="ot">&lt;-</span> newData<span class="sc">$</span>age <span class="sc">-</span> <span class="fu">min</span>(newData<span class="sc">$</span>age)</span>
-<span id="cb49-729"><a href="#cb49-729" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>ageCenteredSquared <span class="ot">&lt;-</span> newData<span class="sc">$</span>ageCentered <span class="sc">^</span> <span class="dv">2</span></span>
-<span id="cb49-730"><a href="#cb49-730" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-731"><a href="#cb49-731" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMean <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-713"><a href="#cb49-713" aria-hidden="true" tabindex="-1"></a><span class="fu">### Within-Person Effect of Sleep</span></span>
+<span id="cb49-714"><a href="#cb49-714" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-717"><a href="#cb49-717" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-718"><a href="#cb49-718" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Within-Person Association Between Sleep and Depression"</span></span>
+<span id="cb49-719"><a href="#cb49-719" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-720"><a href="#cb49-720" aria-hidden="true" tabindex="-1"></a>newData <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb49-721"><a href="#cb49-721" aria-hidden="true" tabindex="-1"></a>  <span class="at">sexFactor =</span> <span class="fu">c</span>(<span class="st">"female"</span>, <span class="st">"male"</span>),</span>
+<span id="cb49-722"><a href="#cb49-722" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">seq</span>(</span>
+<span id="cb49-723"><a href="#cb49-723" aria-hidden="true" tabindex="-1"></a>    <span class="at">from =</span> <span class="fu">min</span>(mydata_long<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb49-724"><a href="#cb49-724" aria-hidden="true" tabindex="-1"></a>    <span class="at">to =</span> <span class="fu">max</span>(mydata_long<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb49-725"><a href="#cb49-725" aria-hidden="true" tabindex="-1"></a>    <span class="at">length.out =</span> <span class="dv">10000</span></span>
+<span id="cb49-726"><a href="#cb49-726" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb49-727"><a href="#cb49-727" aria-hidden="true" tabindex="-1"></a>  <span class="at">sleepFactor =</span> <span class="fu">c</span>(<span class="st">"low sleep"</span>, <span class="st">"high sleep"</span>)</span>
+<span id="cb49-728"><a href="#cb49-728" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-729"><a href="#cb49-729" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-730"><a href="#cb49-730" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>ageCentered <span class="ot">&lt;-</span> newData<span class="sc">$</span>age <span class="sc">-</span> <span class="fu">min</span>(newData<span class="sc">$</span>age)</span>
+<span id="cb49-731"><a href="#cb49-731" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>ageCenteredSquared <span class="ot">&lt;-</span> newData<span class="sc">$</span>ageCentered <span class="sc">^</span> <span class="dv">2</span></span>
 <span id="cb49-732"><a href="#cb49-732" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-733"><a href="#cb49-733" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMeanCentered <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb49-734"><a href="#cb49-734" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"low sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb49-735"><a href="#cb49-735" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-736"><a href="#cb49-736" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"low sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-733"><a href="#cb49-733" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMean <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-734"><a href="#cb49-734" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-735"><a href="#cb49-735" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMeanCentered <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb49-736"><a href="#cb49-736" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"low sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb49-737"><a href="#cb49-737" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-738"><a href="#cb49-738" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"high sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-738"><a href="#cb49-738" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"low sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb49-739"><a href="#cb49-739" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-740"><a href="#cb49-740" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"high sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-740"><a href="#cb49-740" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"high sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"female"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb49-741"><a href="#cb49-741" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-742"><a href="#cb49-742" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>modelImpliedDepression <span class="ot">&lt;-</span> <span class="fu">predict</span>( <span class="co"># predict.merMod</span></span>
-<span id="cb49-743"><a href="#cb49-743" aria-hidden="true" tabindex="-1"></a>  withinBetweenPersonSleepModel,</span>
-<span id="cb49-744"><a href="#cb49-744" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> newData,</span>
-<span id="cb49-745"><a href="#cb49-745" aria-hidden="true" tabindex="-1"></a>  <span class="at">re.form =</span> <span class="cn">NA</span> <span class="co"># include no random effects</span></span>
-<span id="cb49-746"><a href="#cb49-746" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb49-747"><a href="#cb49-747" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-748"><a href="#cb49-748" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
-<span id="cb49-749"><a href="#cb49-749" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> newData,</span>
-<span id="cb49-750"><a href="#cb49-750" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb49-751"><a href="#cb49-751" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> age,</span>
-<span id="cb49-752"><a href="#cb49-752" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> modelImpliedDepression,</span>
-<span id="cb49-753"><a href="#cb49-753" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> sexFactor,</span>
-<span id="cb49-754"><a href="#cb49-754" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> sleepFactor)) <span class="sc">+</span></span>
-<span id="cb49-755"><a href="#cb49-755" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb49-756"><a href="#cb49-756" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb49-757"><a href="#cb49-757" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
-<span id="cb49-758"><a href="#cb49-758" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression Symptoms"</span>,</span>
-<span id="cb49-759"><a href="#cb49-759" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Sex"</span>,</span>
-<span id="cb49-760"><a href="#cb49-760" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="st">"Sleep"</span></span>
-<span id="cb49-761"><a href="#cb49-761" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb49-762"><a href="#cb49-762" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb49-763"><a href="#cb49-763" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb49-764"><a href="#cb49-764" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-742"><a href="#cb49-742" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(newData<span class="sc">$</span>sleepFactor <span class="sc">==</span> <span class="st">"high sleep"</span> <span class="sc">&amp;</span> newData<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">sd</span>(mydata_long<span class="sc">$</span>sleep_personMeanCentered[<span class="fu">which</span>(mydata_long<span class="sc">$</span>sexFactor <span class="sc">==</span> <span class="st">"male"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-743"><a href="#cb49-743" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-744"><a href="#cb49-744" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>modelImpliedDepression <span class="ot">&lt;-</span> <span class="fu">predict</span>( <span class="co"># predict.merMod</span></span>
+<span id="cb49-745"><a href="#cb49-745" aria-hidden="true" tabindex="-1"></a>  withinBetweenPersonSleepModel,</span>
+<span id="cb49-746"><a href="#cb49-746" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> newData,</span>
+<span id="cb49-747"><a href="#cb49-747" aria-hidden="true" tabindex="-1"></a>  <span class="at">re.form =</span> <span class="cn">NA</span> <span class="co"># include no random effects</span></span>
+<span id="cb49-748"><a href="#cb49-748" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-749"><a href="#cb49-749" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-750"><a href="#cb49-750" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb49-751"><a href="#cb49-751" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> newData,</span>
+<span id="cb49-752"><a href="#cb49-752" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb49-753"><a href="#cb49-753" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> age,</span>
+<span id="cb49-754"><a href="#cb49-754" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> modelImpliedDepression,</span>
+<span id="cb49-755"><a href="#cb49-755" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> sexFactor,</span>
+<span id="cb49-756"><a href="#cb49-756" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> sleepFactor)) <span class="sc">+</span></span>
+<span id="cb49-757"><a href="#cb49-757" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb49-758"><a href="#cb49-758" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb49-759"><a href="#cb49-759" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
+<span id="cb49-760"><a href="#cb49-760" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression Symptoms"</span>,</span>
+<span id="cb49-761"><a href="#cb49-761" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Sex"</span>,</span>
+<span id="cb49-762"><a href="#cb49-762" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="st">"Sleep"</span></span>
+<span id="cb49-763"><a href="#cb49-763" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb49-764"><a href="#cb49-764" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-765"><a href="#cb49-765" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb49-766"><a href="#cb49-766" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
