@@ -383,14 +383,14 @@ Number of obs: 931, groups:  ID, 250
 
 Fixed effects:
                                  Estimate Std. Error        df t value Pr(&gt;|t|)
-(Intercept)                      17.52934    1.36182 532.76805  12.872  &lt; 2e-16
-sexFactormale                    -1.88370    2.02693 535.62207  -0.929   0.3531
-ageCentered                       1.79858    0.71361 476.29718   2.520   0.0120
-sleep                            -0.86981    0.16355 505.61680  -5.318 1.57e-07
-sexFactormale:ageCentered        -2.52264    1.08549 493.04238  -2.324   0.0205
-ageCentered:sleep                -0.10633    0.08654 466.35616  -1.229   0.2198
-sexFactormale:sleep              -0.04683    0.24585 508.01056  -0.191   0.8490
-sexFactormale:ageCentered:sleep   0.10563    0.13247 482.46640   0.797   0.4256
+(Intercept)                      17.52934    1.36182 532.76794  12.872  &lt; 2e-16
+sexFactormale                    -1.88370    2.02693 535.62198  -0.929   0.3531
+ageCentered                       1.79858    0.71361 476.29723   2.520   0.0120
+sleep                            -0.86981    0.16355 505.61673  -5.318 1.57e-07
+sexFactormale:ageCentered        -2.52264    1.08549 493.04237  -2.324   0.0205
+ageCentered:sleep                -0.10633    0.08654 466.35621  -1.229   0.2198
+sexFactormale:sleep              -0.04683    0.24585 508.01049  -0.191   0.8490
+sexFactormale:ageCentered:sleep   0.10563    0.13247 482.46639   0.797   0.4256
                                    
 (Intercept)                     ***
 sexFactormale                      
@@ -598,7 +598,7 @@ REML criterion at convergence: 4610.8
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--2.9269 -0.3434 -0.0346  0.3236  3.5930 
+-2.9270 -0.3434 -0.0345  0.3236  3.5930 
 
 Random effects:
  Groups   Name               Variance Std.Dev. Corr        
@@ -610,31 +610,31 @@ Number of obs: 931, groups:  ID, 250
 
 Fixed effects:
                                         Estimate Std. Error        df t value
-(Intercept)                             16.83942    1.33047 360.41918  12.657
-sexFactormale                           -0.65168    1.96691 362.65892  -0.331
-ageCentered                              1.27362    1.73906 345.10314   0.732
-ageCenteredSquared                       0.16205    0.58001 331.62850   0.279
-sleep                                   -0.71434    0.15915 333.71268  -4.489
-sexFactormale:ageCentered               -6.78153    2.58414 371.68835  -2.624
-sexFactormale:ageCenteredSquared         1.49799    0.87518 354.07705   1.712
-ageCentered:sleep                       -0.26802    0.21350 345.20080  -1.255
-ageCenteredSquared:sleep                 0.05735    0.07151 332.60042   0.802
-sexFactormale:sleep                     -0.20067    0.23813 334.89475  -0.843
-sexFactormale:ageCentered:sleep          0.63660    0.31909 370.76408   1.995
-sexFactormale:ageCenteredSquared:sleep  -0.18427    0.10835 356.25239  -1.701
+(Intercept)                             16.83932    1.33047 360.39366  12.657
+sexFactormale                           -0.65158    1.96692 362.64996  -0.331
+ageCentered                              1.27353    1.73906 345.05669   0.732
+ageCenteredSquared                       0.16210    0.58001 331.60758   0.279
+sleep                                   -0.71433    0.15915 333.68910  -4.488
+sexFactormale:ageCentered               -6.78147    2.58413 371.67247  -2.624
+sexFactormale:ageCenteredSquared         1.49794    0.87517 354.07355   1.712
+ageCentered:sleep                       -0.26801    0.21350 345.15436  -1.255
+ageCenteredSquared:sleep                 0.05735    0.07151 332.58038   0.802
+sexFactormale:sleep                     -0.20068    0.23813 334.88663  -0.843
+sexFactormale:ageCentered:sleep          0.63660    0.31909 370.74844   1.995
+sexFactormale:ageCenteredSquared:sleep  -0.18426    0.10835 356.24918  -1.701
                                        Pr(&gt;|t|)    
 (Intercept)                             &lt; 2e-16 ***
-sexFactormale                           0.74060    
-ageCentered                             0.46445    
-ageCenteredSquared                      0.78012    
+sexFactormale                           0.74063    
+ageCentered                             0.46448    
+ageCenteredSquared                      0.78005    
 sleep                                  9.89e-06 ***
 sexFactormale:ageCentered               0.00904 ** 
-sexFactormale:ageCenteredSquared        0.08784 .  
-ageCentered:sleep                       0.21019    
-ageCenteredSquared:sleep                0.42313    
-sexFactormale:sleep                     0.40002    
+sexFactormale:ageCenteredSquared        0.08785 .  
+ageCentered:sleep                       0.21021    
+ageCenteredSquared:sleep                0.42318    
+sexFactormale:sleep                     0.39999    
 sexFactormale:ageCentered:sleep         0.04677 *  
-sexFactormale:ageCenteredSquared:sleep  0.08989 .  
+sexFactormale:ageCenteredSquared:sleep  0.08990 .  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -662,10 +662,7 @@ agCntrd:slp
 agCntrdSqr:              
 sxFctrml:sl              
 sxFctrml:C: -0.574       
-sxFctrm:CS:  0.363 -0.917
-optimizer (nloptwrap) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.0021797 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.</code></pre>
+sxFctrm:CS:  0.363 -0.917</code></pre>
 </div>
 <details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu">effectsize</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/parameters/reference/standardize_parameters.html">standardize_parameters</a></span><span class="op">(</span></span>
 <span>  <span class="va">quadraticGCM</span>,</span>
@@ -905,12 +902,12 @@ StdDev: 3.985657 3.985657
  Formula: ~Xr.1 - 1 | g.1 %in% g.0 %in% g
  Structure: pdTens
            Xr.11    Xr.12    Xr.13    Xr.14    Xr.15    Xr.16    Xr.17    Xr.18
-StdDev: 44618.83 21980.19 16659.22 41523.98 41392.15 14714.95 14338.73 3306.106
+StdDev: 44604.43 21972.46 16652.88 41510.94 41379.18 14710.28 14334.24 3304.849
 
  Formula: ~Xr.2 - 1 | g.2 %in% g.1 %in% g.0 %in% g
  Structure: pdTens
            Xr.21    Xr.22    Xr.23    Xr.24    Xr.25    Xr.26    Xr.27    Xr.28
-StdDev: 55490.18 55490.18 55490.18 11012.31 4.804365 11012.31 1.664289 11012.31
+StdDev: 55475.48 55475.48 55475.48 11009.39 4.804365 11009.39 1.664289 11009.39
 
  Formula: ~1 + ageCentered | ID %in% g.2 %in% g.1 %in% g.0 %in% g
  Structure: General positive-definite, Log-Cholesky parametrization
@@ -954,49 +951,49 @@ Linear mixed-effects model fit by maximum likelihood
                                            X(Intercept) 
                                              0.30652577 
                                          XsexFactormale 
-                                            -0.69948925 
+                                            -0.69948920 
                                           Xscale(sleep) 
-                                            -0.16808561 
+                                            -0.16808559 
                             XsexFactormale:scale(sleep) 
-                                             0.02695381 
+                                             0.02695387 
               Xs(scale(ageCentered)):sexFactorfemaleFx1 
-                                             0.15806708 
+                                             0.15806706 
                 Xs(scale(ageCentered)):sexFactormaleFx1 
-                                            -0.11829512 
+                                            -0.11829515 
 Xti(scale(ageCentered),scale(sleep)):sexFactorfemaleFx1 
-                                             0.11504791 
+                                             0.11504790 
   Xti(scale(ageCentered),scale(sleep)):sexFactormaleFx1 
-                                             0.01753180 
+                                             0.01753140 
 
 Random effects:
  Formula: ~Xr - 1 | g
  Structure: pdIdnot
               Xr1       Xr2
-StdDev: 0.5918887 0.5918887
+StdDev: 0.5918959 0.5918959
 
  Formula: ~Xr.0 - 1 | g.0 %in% g
  Structure: pdIdnot
             Xr.01     Xr.02
-StdDev: 0.6029715 0.6029715
+StdDev: 0.6029761 0.6029761
 
  Formula: ~Xr.1 - 1 | g.1 %in% g.0 %in% g
  Structure: pdTens
-           Xr.11    Xr.12    Xr.13    Xr.14    Xr.15    Xr.16    Xr.17    Xr.18
-StdDev: 10014.16 4167.731 2462.413 9718.988 9706.694 3397.839 3362.515 488.6785
+           Xr.11    Xr.12    Xr.13    Xr.14    Xr.15    Xr.16    Xr.17   Xr.18
+StdDev: 13612.01 5681.435 3378.422 13203.13 13186.09 4616.762 4567.819 670.465
 
  Formula: ~Xr.2 - 1 | g.2 %in% g.1 %in% g.0 %in% g
  Structure: pdTens
            Xr.21    Xr.22    Xr.23    Xr.24     Xr.25    Xr.26     Xr.27
-StdDev: 15279.14 15279.14 15279.14 3032.222 0.7268107 3032.222 0.2517759
+StdDev: 19994.77 19994.77 19994.77 3968.064 0.7268381 3968.064 0.2517854
            Xr.28
-StdDev: 3032.222
+StdDev: 3968.064
 
  Formula: ~1 + scale(ageCentered) | ID %in% g.2 %in% g.1 %in% g.0 %in% g
  Structure: General positive-definite, Log-Cholesky parametrization
                    StdDev    Corr  
-(Intercept)        0.8144423 (Intr)
-scale(ageCentered) 0.2663372 0.798 
-Residual           0.2259592       
+(Intercept)        0.8144425 (Intr)
+scale(ageCentered) 0.2663373 0.798 
+Residual           0.2259591       
 
 Number of Observations: 931
 Number of Groups: 
@@ -1293,23 +1290,23 @@ sexFactormale:sleep_personMean:ageCenteredSquared          -0.30129    0.10778
 sexFactormale:ageCentered:sleep_personMeanCentered         -0.47191    0.77720
 sexFactormale:ageCenteredSquared:sleep_personMeanCentered   0.25192    0.25677
                                                                  df t value
-(Intercept)                                               261.31526   8.398
-sexFactormale                                             261.53048  -1.159
-sleep_personMean                                          261.37873  -4.546
-ageCentered                                               667.32798   3.089
-ageCenteredSquared                                        447.12110  -1.240
+(Intercept)                                               261.31521   8.398
+sexFactormale                                             261.53042  -1.159
+sleep_personMean                                          261.37867  -4.546
+ageCentered                                               667.32517   3.089
+ageCenteredSquared                                        447.11807  -1.240
 sleep_personMeanCentered                                  616.86197  -3.899
-sexFactormale:sleep_personMean                            261.42255   0.620
-sexFactormale:ageCentered                                 668.34418  -3.085
-sleep_personMean:ageCentered                              667.55202  -3.543
-sexFactormale:ageCenteredSquared                          453.87104   2.789
-sleep_personMean:ageCenteredSquared                       446.91031   2.346
+sexFactormale:sleep_personMean                            261.42250   0.620
+sexFactormale:ageCentered                                 668.34355  -3.085
+sleep_personMean:ageCentered                              667.54922  -3.543
+sexFactormale:ageCenteredSquared                          453.87005   2.789
+sleep_personMean:ageCenteredSquared                       446.90730   2.346
 sexFactormale:sleep_personMeanCentered                    619.99241   0.069
 ageCentered:sleep_personMeanCentered                      625.42997   1.974
 ageCenteredSquared:sleep_personMeanCentered               644.97219  -2.196
-sexFactormale:sleep_personMean:ageCentered                668.20437   2.571
-sexFactormale:sleep_personMean:ageCenteredSquared         453.82812  -2.796
-sexFactormale:ageCentered:sleep_personMeanCentered        641.12293  -0.607
+sexFactormale:sleep_personMean:ageCentered                668.20374   2.571
+sexFactormale:sleep_personMean:ageCenteredSquared         453.82714  -2.796
+sexFactormale:ageCentered:sleep_personMeanCentered        641.12294  -0.607
 sexFactormale:ageCenteredSquared:sleep_personMeanCentered 657.31531   0.981
                                                           Pr(&gt;|t|)    
 (Intercept)                                               2.92e-15 ***
