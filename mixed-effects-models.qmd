@@ -230,7 +230,7 @@ ggplot(
 
 In estimating polynomial (in this case, quadratic) growth curves of depression symptoms, this model fits:
 
-1. random intercepts and random linear and quadratic slopes for subjects,
+1. random intercepts and random linear slopes and fixed quadratic slopes for subjects,
 1. `sex` as a time-invariant fixed-effect predictor of the intercepts and slopes, and
 1. `sleep` as a time-varying fixed-effect predictor of depression, with effects allowed to vary over age and by sex, including two‐ and three‐way interactions with age and sex.
 
@@ -240,7 +240,7 @@ quadraticGCM <- lmerTest::lmer(
     sexFactor:ageCentered + sexFactor:ageCenteredSquared + sleep + 
     sleep:ageCentered + sleep:ageCenteredSquared + sexFactor:sleep + 
     sexFactor:sleep:ageCentered + sexFactor:sleep:ageCenteredSquared + 
-    (1 + ageCentered + ageCenteredSquared | ID),
+    (1 + ageCentered | ID), # model failed to converge with random quadratic slopes (ageCenteredSquared)
   data = mydata_long,
   na.action = na.exclude)
 ```
