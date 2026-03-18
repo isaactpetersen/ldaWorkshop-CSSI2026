@@ -83,39 +83,52 @@ performance::r2(linearGCM)
 
 ## Plots
 
-### Prototypical Growth Curve
-
 ```{r}
-#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex"
-
 newData <- expand.grid(
   sexFactor = c("female", "male"),
   age = c(
     min(mydata_long$age, na.rm = TRUE),
-    max(mydata_long$age, na.rm = TRUE))
+    max(mydata_long$age, na.rm = TRUE)),
+  sleepFactor = c("low sleep", "average sleep", "high sleep")
 )
 
 newData$ageCentered <- newData$age - min(newData$age)
 
 newData$sleep <- NA
-newData$sleep[which(newData$sexFactor == "female" & newData$age == 14)] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE)
-newData$sleep[which(newData$sexFactor == "male" & newData$age == 14)] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE)
-newData$sleep[which(newData$sexFactor == "female" & newData$age == 17)] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE)
-newData$sleep[which(newData$sexFactor == "male" & newData$age == 17)] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age == 14 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age == 14 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age == 17 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age == 17 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE)
+
+newData$sleep[which(newData$sexFactor == "female" & newData$age == 14 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age == 14 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age == 17 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age == 17 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE)
+
+newData$sleep[which(newData$sexFactor == "female" & newData$age == 14 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age == 14 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age == 17 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age == 17 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE)
 
 newData$modelImpliedDepression <- predict( # predict.merMod
   linearGCM,
   newdata = newData,
   re.form = NA # include no random effects
 )
+```
+
+### Prototypical Growth Curve By Sex
+
+```{r}
+#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex"
 
 ggplot(
-  data = newData,
+  data = newData |> filter(sleepFactor == "average sleep"),
   mapping = aes(
     x = age,
     y = modelImpliedDepression,
     color = sexFactor)) +
-  geom_line() +
+  geom_line() + # fit lines to the model-implied points
   labs(
     x = "Age (years)",
     y = "Depression Symptoms",
@@ -142,7 +155,7 @@ ggplot(
     y = modelImpliedDepression,
     group = ID,
     color = sexFactor)) +
-  geom_smooth(
+  geom_smooth( # fit smooth to each participant's points
     method = "lm",
     se = FALSE,
     linewidth = 0.5
@@ -155,7 +168,7 @@ ggplot(
   theme_classic()
 ```
 
-### Individuals' Trajectories Overlaid with Prototypical Trajectory
+### Individuals' Trajectories Overlaid with Prototypical Trajectory By Sex
 
 ```{r}
 #| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms Overlaid With Prototypical Growth Curves By Sex"
@@ -166,15 +179,15 @@ ggplot(
     x = age,
     y = modelImpliedDepression,
     group = ID)) +
-  geom_smooth(
+  geom_smooth( # fit smooth to each participant's points
     method = "lm",
     se = FALSE,
     linewidth = 0.5,
     color = "gray",
     alpha = 0.30
   ) +
-  geom_line(
-    data = newData,
+  geom_line( # fit lines to the model-implied points
+    data = newData |> filter(sleepFactor == "average sleep"),
     mapping = aes(
       x = age,
       y = modelImpliedDepression,
@@ -185,6 +198,28 @@ ggplot(
     x = "Age (years)",
     y = "Depression Symptoms",
     color = "Sex"
+  ) +
+  theme_classic()
+```
+
+### Prototypical Trajectory By Sex and Sleep
+
+```{r}
+#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex and Sleep"
+
+ggplot(
+  data = newData |> filter(sleepFactor != "average sleep"),
+  mapping = aes(
+    x = age,
+    y = modelImpliedDepression,
+    color = sexFactor,
+    linetype = sleepFactor)) +
+  geom_line() + # fit lines to the model-implied points
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex",
+    linetype = "Sleep"
   ) +
   theme_classic()
 ```
@@ -225,37 +260,66 @@ performance::r2(quadraticGCM)
 
 ## Plots
 
-### Prototypical Growth Curve
-
 ```{r}
-#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex"
-
 newData <- expand.grid(
   sexFactor = c("female", "male"),
-  age = seq(
-    from = min(mydata_long$age, na.rm = TRUE),
-    to = max(mydata_long$age, na.rm = TRUE),
-    length.out = 10000
-  ),
-  sleep = mean(mydata_long$sleep, na.rm = TRUE)
+  age = 14:17,
+  sleepFactor = c("low sleep", "average sleep", "high sleep")
 )
 
 newData$ageCentered <- newData$age - min(newData$age)
 newData$ageCenteredSquared <- newData$ageCentered ^ 2
+
+newData$sleep <- NA
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 14 & newData$age < 15 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 14 & newData$age < 15 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 15 & newData$age < 16 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 15)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 15 & newData$age < 16 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 15)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 16 & newData$age < 17 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 16)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 16 & newData$age < 17 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 16)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 17 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 17 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE)
+
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 14 & newData$age < 15 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 14 & newData$age < 15 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 15 & newData$age < 16 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 15)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 15)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 15 & newData$age < 16 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 15)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 15)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 16 & newData$age < 17 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 16)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 16)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 16 & newData$age < 17 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 16)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 16)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 17 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 17 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE)
+
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 14 & newData$age < 15 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 14 & newData$age < 15 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 15 & newData$age < 16 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 15)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 15)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 15 & newData$age < 16 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 15)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 15)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 16 & newData$age < 17 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 16)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 16)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 16 & newData$age < 17 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 16)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 16)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 17 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 17 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE)
 
 newData$modelImpliedDepression <- predict( # predict.merMod
   quadraticGCM,
   newdata = newData,
   re.form = NA # include no random effects
 )
+```
+
+### Prototypical Growth Curve By Sex
+
+```{r}
+#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex"
 
 ggplot(
-  data = newData,
+  data = newData |> filter(sleepFactor == "average sleep"),
   mapping = aes(
     x = age,
     y = modelImpliedDepression,
     color = sexFactor)) +
-  geom_line() +
+  geom_smooth( # fit quadratic smooth to the model-implied points; use geom_line() to fit a non-smooth line
+    method = "lm",
+    formula = y ~ x + I(x^2),
+    se = FALSE) +
   labs(
     x = "Age (years)",
     y = "Depression Symptoms",
@@ -282,7 +346,7 @@ ggplot(
     y = modelImpliedDepression,
     group = ID,
     color = sexFactor)) +
-  geom_smooth(
+  geom_smooth( # fit quadratic smooth to each participant's points
     method = "lm",
     formula = y ~ x + I(x^2),
     se = FALSE,
@@ -296,7 +360,7 @@ ggplot(
   theme_classic()
 ```
 
-### Individuals' Trajectories Overlaid with Prototypical Trajectory
+### Individuals' Trajectories Overlaid with Prototypical Trajectory By Sex
 
 ```{r}
 #| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms Overlaid With Prototypical Growth Curves By Sex"
@@ -307,7 +371,7 @@ ggplot(
     x = age,
     y = modelImpliedDepression,
     group = ID)) +
-  geom_smooth(
+  geom_smooth( # fit quadratic smooth to each participant's points
     method = "lm",
     formula = y ~ x + I(x^2),
     se = FALSE,
@@ -315,18 +379,51 @@ ggplot(
     color = "gray",
     alpha = 0.30
   ) +
-  geom_line(
-    data = newData,
+  geom_smooth( # fit quadratic smooth to the model-implied points; use geom_line() to fit a non-smooth line
+    data = newData |> filter(sleepFactor == "average sleep"),
     mapping = aes(
       x = age,
       y = modelImpliedDepression,
       group = sexFactor,
       color = sexFactor),
+    method = "lm",
+    formula = y ~ x + I(x^2),
+    se = FALSE,
     linewidth = 2) +
   labs(
     x = "Age (years)",
     y = "Depression Symptoms",
     color = "Sex"
+  ) +
+  theme_classic()
+```
+
+### Prototypical Trajectory By Sex and Sleep
+
+```{r}
+#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex and Sleep"
+
+ggplot(
+  data = newData |> filter(sleepFactor != "average sleep"),
+  mapping = aes(
+    x = age,
+    y = modelImpliedDepression,
+    color = sexFactor,
+    linetype = sleepFactor)) +
+  geom_smooth( # fit quadratic smooth to the model-implied points; use geom_line() to fit a non-smooth line
+    method = "lm",
+    formula = y ~ x + I(x^2),
+    se = FALSE) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex",
+    linetype = "Sleep"
+  ) +
+  guides(
+    linetype = guide_legend(
+      override.aes = list(color = "black")
+    )
   ) +
   theme_classic()
 ```
@@ -399,11 +496,7 @@ performance::r2(gamGCM)
 
 ## Plots
 
-### Prototypical Growth Curve
-
 ```{r}
-#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex"
-
 newData <- expand.grid(
   sexFactor = c("female", "male"),
   age = seq(
@@ -411,28 +504,64 @@ newData <- expand.grid(
     to = max(mydata_long$age, na.rm = TRUE),
     length.out = 10000
   ),
-  sleep = mean(mydata_long$sleep, na.rm = TRUE)
+  sleepFactor = c("low sleep", "average sleep", "high sleep")
 )
 
 newData$ageCentered <- newData$age - min(newData$age)
-#newData$ageCenteredSquared <- newData$ageCentered ^ 2
+
+newData$sleep <- NA
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 14 & newData$age < 15 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 14 & newData$age < 15 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 15 & newData$age < 16 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 15)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 15 & newData$age < 16 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 15)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 16 & newData$age < 17 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 16)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 16 & newData$age < 17 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 16)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 17 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 17 & newData$sleepFactor == "average sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE)
+
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 14 & newData$age < 15 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 14 & newData$age < 15 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 15 & newData$age < 16 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 15)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 15)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 15 & newData$age < 16 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 15)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 15)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 16 & newData$age < 17 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 16)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 16)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 16 & newData$age < 17 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 16)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 16)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 17 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 17 & newData$sleepFactor == "low sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE) - sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE)
+
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 14 & newData$age < 15 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 14 & newData$age < 15 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 14)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 15 & newData$age < 16 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 15)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 15)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 15 & newData$age < 16 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 15)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 15)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 16 & newData$age < 17 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 16)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 16)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 16 & newData$age < 17 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 16)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 16)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "female" & newData$age >= 17 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "female" & mydata_long$age == 17)], na.rm = TRUE)
+newData$sleep[which(newData$sexFactor == "male" & newData$age >= 17 & newData$sleepFactor == "high sleep")] <- mean(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE) + sd(mydata_long$sleep[which(mydata_long$sexFactor == "male" & mydata_long$age == 17)], na.rm = TRUE)
 
 # add a dummy id
 newData$ID <- mydata_long$ID[1]
 
 newData$modelImpliedDepression <- predict( # predict.gam
   gamGCM,
-  newdata = newData,
-  #re.form = NA # include no random effects
+  newdata = newData
 )
+```
+
+### Prototypical Growth Curve By Sex
+
+```{r}
+#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex"
 
 ggplot(
-  data = newData,
+  data = newData |> filter(sleepFactor == "average sleep"),
   mapping = aes(
     x = age,
     y = modelImpliedDepression,
     color = sexFactor)) +
-  geom_line() +
+  geom_smooth( # fit GAM smooth to the model-implied points; use geom_line() to fit a non-smooth line
+    method = "gam",
+    se = FALSE,
+    linewidth = 0.5
+  ) +
   labs(
     x = "Age (years)",
     y = "Depression Symptoms",
@@ -448,8 +577,7 @@ ggplot(
 
 mydata_long$modelImpliedDepression <- predict( # predict.gam
   gamGCM,
-  newdata = mydata_long,
-  #re.form = NULL # include all random effects
+  newdata = mydata_long
 )
 
 gamMethod <- function(formula, data, weights, ...) {
@@ -469,7 +597,7 @@ ggplot(
     y = modelImpliedDepression,
     group = ID,
     color = sexFactor)) +
-  geom_smooth(
+  geom_smooth( # fit GAM smooth to each participant's points
     method = gamMethod,
     se = FALSE,
     linewidth = 0.5
@@ -482,7 +610,7 @@ ggplot(
   theme_classic()
 ```
 
-### Individuals' Trajectories Overlaid with Prototypical Trajectory
+### Individuals' Trajectories Overlaid with Prototypical Trajectory By Sex
 
 ```{r}
 #| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms Overlaid With Prototypical Growth Curves By Sex"
@@ -493,25 +621,55 @@ ggplot(
     x = age,
     y = modelImpliedDepression,
     group = ID)) +
-  geom_smooth(
+  geom_smooth( # fit GAM smooth to each participant's points
     method = gamMethod,
     se = FALSE,
     linewidth = 0.5,
     color = "gray",
     alpha = 0.30
   ) +
-  geom_line(
-    data = newData,
+  geom_smooth( # fit GAM smooth to the model-implied points; use geom_line() to fit a non-smooth line
+    data = newData |> filter(sleepFactor == "average sleep"),
     mapping = aes(
       x = age,
       y = modelImpliedDepression,
       group = sexFactor,
       color = sexFactor),
+    method = "gam",
     linewidth = 2) +
   labs(
     x = "Age (years)",
     y = "Depression Symptoms",
     color = "Sex"
+  ) +
+  theme_classic()
+```
+
+### Prototypical Trajectory By Sex and Sleep
+
+```{r}
+#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex and Sleep"
+
+ggplot(
+  data = newData |> filter(sleepFactor != "average sleep"),
+  mapping = aes(
+    x = age,
+    y = modelImpliedDepression,
+    color = sexFactor,
+    linetype = sleepFactor)) +
+  geom_smooth( # fit GAM smooth to the model-implied points; use geom_line() to fit a non-smooth line
+    method = "gam",
+    se = FALSE) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex",
+    linetype = "Sleep"
+  ) +
+  guides(
+    linetype = guide_legend(
+      override.aes = list(color = "black")
+    )
   ) +
   theme_classic()
 ```
