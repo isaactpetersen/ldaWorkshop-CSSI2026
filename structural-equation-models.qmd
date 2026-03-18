@@ -430,7 +430,9 @@ bivariateLCSM_syntax <- lcsm::specify_bi_lcsm(
     phi = TRUE), # phi = autoregression of change scores
   coupling = list(
     delta_lag_xy = TRUE,
-    delta_lag_yx = TRUE),
+    delta_lag_yx = TRUE,
+    xi_lag_xy = TRUE,
+    xi_lag_yx = TRUE),
   change_letter_x = "g",
   change_letter_y = "j")
 
@@ -454,6 +456,8 @@ bivariateLCSM_fit <- lcsm::fit_bi_lcsm(
     phi = TRUE), # phi = autoregression of change scores
   coupling = list(
     delta_lag_xy = TRUE,
+    delta_lag_yx = TRUE,
+    xi_lag_xy = TRUE,
     xi_lag_yx = TRUE),
   fixed.x = FALSE # estimate means, variances, and covariances of the observed variables (to include predictors as part of FIML)
   )
