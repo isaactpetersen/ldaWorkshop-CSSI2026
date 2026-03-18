@@ -731,7 +731,7 @@ However, based on our modeling in @sec-quadratic and our model comparison in @se
 
 In disaggregating within- and between-person effects, this model fits:
 
-1. random intercepts and random linear and quadratic slopes for subjects,
+1. random intercepts and random linear slopes and fixed quadratic slopes for subjects,
 1. `sex` and `sleep_personMean` (and their interaction) as time-invariant fixed-effect predictors of the intercepts and slopes, and
 1. `sleep_personMeanCentered` as a time-varying fixed-effect predictor of depression, with effects allowed to vary over age and by sex, including two‐ and three‐way interactions with age and sex.
 
@@ -812,7 +812,6 @@ ggplot(
     color = "Sex",
     linetype = "Sleep"
   ) +
-  
   theme_classic()
 ```
 
@@ -865,6 +864,5 @@ ggplot(
     color = "Sex",
     linetype = "Sleep"
   ) +
-  
   theme_classic()
 ```
