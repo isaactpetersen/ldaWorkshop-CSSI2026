@@ -429,10 +429,10 @@ bivariateLCSM_syntax <- lcsm::specify_bi_lcsm(
     beta = TRUE, # beta = proportional change factor (latent true score predicting its change score)
     phi = TRUE), # phi = autoregression of change scores
   coupling = list(
-    delta_lag_xy = TRUE,
-    delta_lag_yx = TRUE,
-    xi_lag_xy = TRUE,
-    xi_lag_yx = TRUE),
+    delta_lag_xy = TRUE, # level of x predicting change of y
+    delta_lag_yx = TRUE, # level of y predicting change of x
+    xi_lag_xy = TRUE,    # change of x predicting change of y
+    xi_lag_yx = TRUE),   # change of y predicting change of x
   change_letter_x = "g",
   change_letter_y = "j")
 
@@ -455,10 +455,10 @@ bivariateLCSM_fit <- lcsm::fit_bi_lcsm(
     beta = TRUE, # beta = proportional change factor (latent true score predicting its change score)
     phi = TRUE), # phi = autoregression of change scores
   coupling = list(
-    delta_lag_xy = TRUE,
-    delta_lag_yx = TRUE,
-    xi_lag_xy = TRUE,
-    xi_lag_yx = TRUE),
+    delta_lag_xy = TRUE, # level of x predicting change of y
+    delta_lag_yx = TRUE, # level of y predicting change of x
+    xi_lag_xy = TRUE,    # change of x predicting change of y
+    xi_lag_yx = TRUE),   # change of y predicting change of x
   fixed.x = FALSE # estimate means, variances, and covariances of the observed variables (to include predictors as part of FIML)
   )
 ```
