@@ -169,7 +169,7 @@ mi_mice$loggedEvents
 On convergence, the streams of the trace plots should intermingle and be free of any trend (at the later iterations).
 Convergence is diagnosed when the variance between different sequences is no larger than the variance within each individual sequence.
 
-https://stefvanbuuren.name/fimd/sec-algoptions.html (archived at https://perma.cc/4S54-465R)
+<https://stefvanbuuren.name/fimd/sec-algoptions.html> (archived at <https://perma.cc/4S54-465R>)
 
 ```{r}
 plot(mi_mice)
