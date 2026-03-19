@@ -20,7 +20,6 @@ library("lavaan")
 library("lavaan.mi")
 library("psych")
 library("parallelly")
-library("furrr")
 library("tidyverse")
 ```
 
