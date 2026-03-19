@@ -529,8 +529,6 @@ To plot model-implied trajectories, see this resource:
 <https://thechangelab.stanford.edu/tutorials/growth-modeling/latent-change-score-modeling-lavaan/> (archived at <https://perma.cc/A2KZ-QPD9>)
 
 ```{r}
-mydata_wide
-
 modelPredictedValues_wide <- as.data.frame(lavPredict(bivariateLCSM_fit, type = "yhat"))
 
 modelPredictedValues_wide$ID <- mydata_wide$ID
