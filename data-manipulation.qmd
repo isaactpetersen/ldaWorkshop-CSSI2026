@@ -35,7 +35,7 @@ The data are in long form—each participant (identified by `ID`) has multiple r
 exampleData_long
 ```
 
-# Transform Data From Long to Wide
+# Transform Data From Long to Wide {#sec-longToWide}
 
 To transform the data from long to wide, we can use the following syntax:
 
@@ -54,7 +54,7 @@ Now the data are in wide form—each participant (identified by `ID`) has one ro
 exampleData_wide
 ```
 
-# Transform Data From Wide to Long
+# Transform Data From Wide to Long {#sec-wideToLong}
 
 ```{r}
 exampleData_long2 <- exampleData_wide |>
@@ -72,7 +72,7 @@ Now the data are back in wide form—each participant (identified by `ID`) has m
 exampleData_long2
 ```
 
-# Example of Exploding Number of Columns When Transforming From Long to Wide
+# Example of Exploding Number of Columns When Transforming From Long to Wide {#sec-explodingColumns}
 
 Transforming from long to wide tends to work best when participants have the same values on the time variable (e.g., age).
 When participants all have different values on the time variable, the number of columns can explode when the data are transformed from long to wide form.

@@ -28,7 +28,7 @@ The data for this example were [simulated](simulate-data.qmd):
 mydata_long <- read.csv("./data/mydata_long.csv")
 ```
 
-# Research Questions
+# Research Questions {#sec-researchQuestions}
 
 1. What is the form of adolescents' depressive symptom trajectories across ages 14 to 17?
 1. Do the trajectories differ between boys and girls?
@@ -36,7 +36,7 @@ mydata_long <- read.csv("./data/mydata_long.csv")
 1. Does the association between sleep and depressive symptoms differ between boys and girls?
 1. What is the association between sleep and depressive symptoms at the within-individual level versus between-individual level?
 
-# Pre-Model Computation
+# Pre-Model Computation {#sec-premodelComputation}
 
 It can be helpful to center the age/time variable so that the intercept in a growth curve model has meaning.
 For instance, we can subtract the youngest participant age to set the intercepts to be the earliest age in the sample.
@@ -49,7 +49,7 @@ mydata_long$ageCentered <- mydata_long$age - min(mydata_long$age, na.rm = TRUE) 
 mydata_long$ageCenteredSquared <- mydata_long$ageCentered ^ 2
 ```
 
-# Linear Growth Curve Model
+# Linear Growth Curve Model {#sec-linearGCM}
 
 ## Fit the Model
 
@@ -428,7 +428,7 @@ ggplot(
   theme_classic()
 ```
 
-# Generalized Additive Mixed Model
+# Generalized Additive Mixed Model {#sec-gamm}
 
 Generalized additive mixed models (GAMMs) can be estimated using the `mgcv::gamm()` and `gamm4::gamm4()` functions.
 
@@ -695,7 +695,7 @@ MuMIn::AICc(
 )
 ```
 
-# Disaggregation of Within-Person and Between-Person Effects
+# Disaggregation of Within-Person and Between-Person Effects {#sec-disaggregatingWithinBetween}
 
 ## Pre-Model Computations
 

@@ -35,7 +35,7 @@ mydata_long_summary <- mydata_long |>
   )
 ```
 
-# Plot Observed Growth Curves
+# Plot Observed Growth Curves {#sec-plotObservedGrowthCurves}
 
 ## Observed Growth Curves
 
