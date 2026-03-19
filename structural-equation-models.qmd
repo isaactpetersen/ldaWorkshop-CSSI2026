@@ -196,6 +196,272 @@ To create an interactive path diagram, you can use the following syntax:
 lavaangui::plot_lavaan(linearGCM_fit)
 ```
 
+#### Model-Implied Trajectories
+
+```{r}
+linearGCM_fs <- as.data.frame(lavaan::lavPredict(linearGCM_fit))
+linearGCM_caseidx <- lavaan::lavInspect(linearGCM_fit, "case.idx")
+linearGCM_fs$ID <- mydata_wide$ID[linearGCM_caseidx]
+
+factorScores_linear <- left_join(
+  mydata_wide,
+  linearGCM_fs,
+  by = "ID")
+
+get_params <- function(fit) {
+  pe <- parameterEstimates(fit)
+  
+  get <- function(lhs, rhs, op = NULL) {
+    if (is.null(op)) {
+      # automatically detect the operator
+      # priority: =~, ~1, ~
+      sub <- pe[pe$lhs == lhs & pe$rhs == rhs, ]
+      if (nrow(sub) == 0) stop(paste("Parameter not found:", lhs, rhs))
+      out <- sub$est[1]
+    } else {
+      sub <- pe[pe$lhs == lhs & pe$rhs == rhs & pe$op == op, ]
+      if (nrow(sub) == 0) stop(paste("Parameter not found:", lhs, op, rhs))
+      out <- sub$est[1]
+    }
+    return(out)
+  }
+  
+  list(pe = pe, get = get)
+}
+
+linearGCM_params <- get_params(linearGCM_fit)
+
+long_linear <- factorScores_linear |>
+  pivot_longer(
+    cols = matches("depression_|sleep_personMeanCentered_"),
+    names_to = c(".value", "time"),
+    names_pattern = "(.*)_(\\d)"
+  ) |>
+  mutate(
+    time = as.numeric(time),
+    time_num = time - 1,
+    age = recode_values(time, 1 ~ 14, 2 ~ 15, 3 ~ 16, 4 ~ 17)
+  )
+
+# Compute individuals' model-implied trajectories
+long_linear <- long_linear |>
+  mutate(
+    beta_sleep = case_when(
+      time_num == 0 ~ linearGCM_params$get("depression_1", "sleep_personMeanCentered_1"),
+      time_num == 1 ~ linearGCM_params$get("depression_2", "sleep_personMeanCentered_2"),
+      time_num == 2 ~ linearGCM_params$get("depression_3", "sleep_personMeanCentered_3"),
+      time_num == 3 ~ linearGCM_params$get("depression_4", "sleep_personMeanCentered_4")
+    ),
+    
+    beta_int = case_when(
+      time_num == 0 ~ linearGCM_params$get("depression_1", "sexEffectCodeXsleep_personMeanCentered_1"),
+      time_num == 1 ~ linearGCM_params$get("depression_2", "sexEffectCodeXsleep_personMeanCentered_2"),
+      time_num == 2 ~ linearGCM_params$get("depression_3", "sexEffectCodeXsleep_personMeanCentered_3"),
+      time_num == 3 ~ linearGCM_params$get("depression_4", "sexEffectCodeXsleep_personMeanCentered_4")
+    ),
+    
+    yhat =
+      intercept +
+      slope * time_num +
+      beta_sleep * sleep_personMeanCentered +
+      beta_int * sexEffectCode * sleep_personMeanCentered
+  )
+
+sleep_stats <- mydata_long |>
+  group_by(sexFactor, age) |>
+  summarize(
+    mean_sleep = mean(sleep, na.rm = TRUE),
+    sd_sleep = sd(sleep, na.rm = TRUE),
+    .groups = "drop"
+  ) %>% 
+  mutate(
+    time = recode_values(age, 14 ~ 1, 15 ~ 2, 16 ~ 3, 17 ~ 4),
+    time_num = time - 1
+  )
+
+newData <- expand.grid(
+  sexFactor = c("female", "male"),
+  time_num = 0:3,
+  sleepFactor = c("low sleep", "average sleep", "high sleep")
+) |>
+  left_join(sleep_stats, by = c("sexFactor", "time_num")) |>
+  mutate(
+    sleep = case_when(
+      sleepFactor == "average sleep" ~ mean_sleep,
+      sleepFactor == "low sleep" ~ mean_sleep - sd_sleep,
+      sleepFactor == "high sleep" ~ mean_sleep + sd_sleep
+    ),
+    sexEffectCode = ifelse(sexFactor == "male", 1, -1)
+  )
+
+# Compute prototypical trajectories
+grand_mean_sleep <- mean(mydata_wide$sleep_personMean, na.rm = TRUE)
+
+newData <- newData |>
+  mutate(
+    sleep_personMeanCentered = sleep - grand_mean_sleep
+  )
+
+newData <- newData |>
+  mutate(
+    intercept_hat =
+    linearGCM_params$get("intercept", "", "~1") +
+    linearGCM_params$get("intercept", "sexEffectCode", "~") * sexEffectCode +
+    linearGCM_params$get("intercept", "sleep_personMean", "~") * sleep +
+    linearGCM_params$get("intercept", "sexEffectCodeXsleep_personMean", "~") * sexEffectCode * sleep,
+    
+  slope_hat =
+    linearGCM_params$get("slope", "", "~1") +
+    linearGCM_params$get("slope", "sexEffectCode", "~") * sexEffectCode +
+    linearGCM_params$get("slope", "sleep_personMean", "~") * sleep +
+    linearGCM_params$get("slope", "sexEffectCodeXsleep_personMean", "~") * sexEffectCode * sleep
+  )
+
+newData <- newData |>
+  mutate(
+    beta_sleep = case_when(
+      time_num == 0 ~ linearGCM_params$get("depression_1", "sleep_personMeanCentered_1"),
+      time_num == 1 ~ linearGCM_params$get("depression_2", "sleep_personMeanCentered_2"),
+      time_num == 2 ~ linearGCM_params$get("depression_3", "sleep_personMeanCentered_3"),
+      time_num == 3 ~ linearGCM_params$get("depression_4", "sleep_personMeanCentered_4")
+    ),
+    
+    beta_int = case_when(
+      time_num == 0 ~ linearGCM_params$get("depression_1", "sexEffectCodeXsleep_personMeanCentered_1"),
+      time_num == 1 ~ linearGCM_params$get("depression_2", "sexEffectCodeXsleep_personMeanCentered_2"),
+      time_num == 2 ~ linearGCM_params$get("depression_3", "sexEffectCodeXsleep_personMeanCentered_3"),
+      time_num == 3 ~ linearGCM_params$get("depression_4", "sexEffectCodeXsleep_personMeanCentered_4")
+    ),
+    
+    yhat =
+      intercept_hat +
+      slope_hat * time_num +
+      beta_sleep * sleep_personMeanCentered +
+      beta_int * sexEffectCode * sleep_personMeanCentered
+  )
+```
+
+##### Prototypical Growth Curve By Sex
+
+```{r}
+#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex"
+
+ggplot(
+  data = newData |> filter(sleepFactor == "average sleep"),
+  mapping = aes(
+    x = age,
+    y = yhat,
+    color = sexFactor)
+) +
+  geom_smooth( # fit a smoothed line to the model-implied points; use geom_line() to fit a non-smooth line
+    method = "lm",
+    se = FALSE
+  ) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
+##### Individuals' Growth Curves
+
+```{r}
+#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms"
+
+ggplot(
+  data = long_linear,
+  mapping = aes(
+    x = age,
+    y = yhat,
+    group = ID,
+    color = sexFactor)
+) +
+  geom_smooth( # fit a smoothed line to each participant's points; use geom_line() to fit a non-smooth line
+    method = "lm",
+    se = FALSE,
+    linewidth = 0.5
+  ) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
+##### Individuals' Trajectories Overlaid with Prototypical Trajectory By Sex
+
+```{r}
+#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms Overlaid With Prototypical Growth Curves By Sex"
+
+ggplot(
+  data = long_linear,
+  mapping = aes(
+    x = age,
+    y = yhat,
+    group = ID
+  )
+) +
+  geom_smooth( # fit a smoothed line to each participant's points; use geom_line() to fit a non-smooth line
+    method = "lm",
+    se = FALSE,
+    linewidth = 0.5,
+    color = "gray",
+    alpha = 0.30
+  ) +
+  geom_smooth( # fit a smoothed line to the model-implied points; use geom_line() to fit a non-smooth line
+    data = newData |> filter(sleepFactor == "average sleep"),
+    mapping = aes(
+      x = age,
+      y = yhat,
+      group = sexFactor,
+      color = sexFactor
+      ),
+    method = "lm",
+    se = FALSE,
+    linewidth = 2
+  ) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
+##### Prototypical Trajectory By Sex and Sleep
+
+```{r}
+#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex and Sleep"
+
+ggplot(
+  data = newData |> filter(sleepFactor != "average sleep"),
+  mapping = aes(
+    x = age,
+    y = yhat,
+    color = sexFactor,
+    linetype = sleepFactor)
+) +
+  geom_smooth( # fit a smoothed line to the model-implied points; use geom_line() to fit a non-smooth line
+    method = "lm",
+    se = FALSE
+  ) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex",
+    linetype = "Sleep"
+  ) +
+  guides(
+    linetype = guide_legend(
+      override.aes = list(color = "black")
+    )
+  ) +
+  theme_classic()
+```
+
 ## Quadratic Growth Curve Model {#sec-quadraticGCM}
 
 ### Model Syntax
@@ -291,6 +557,244 @@ To create an interactive path diagram, you can use the following syntax:
 #| eval: false
 
 lavaangui::plot_lavaan(quadraticGCM_fit)
+```
+
+#### Model-Implied Trajectories
+
+```{r}
+# Factor scores (latent growth factors) for each individual
+quadraticGCM_fs <- as.data.frame(lavaan::lavPredict(quadraticGCM_fit))
+quadraticGCM_caseidx <- lavaan::lavInspect(quadraticGCM_fit, "case.idx")
+quadraticGCM_fs$ID <- mydata_wide$ID[quadraticGCM_caseidx]
+
+factorScores_quad <- left_join(
+  mydata_wide,
+  quadraticGCM_fs,
+  by = "ID"
+)
+
+# Function to extract parameter estimates
+quad_params <- get_params(quadraticGCM_fit)
+
+# Compute individuals' model-implied trajectories
+long_quad <- factorScores_quad |>
+  pivot_longer(
+    cols = matches("depression_|sleep_personMeanCentered_"),
+    names_to = c(".value", "time"),
+    names_pattern = "(.*)_(\\d)"
+  ) |>
+  mutate(
+    time = as.numeric(time),
+    time_num = time - 1,
+    age = recode_values(time, 1 ~ 14, 2 ~ 15, 3 ~ 16, 4 ~ 17)
+  ) |>
+  mutate(
+    beta_sleep = case_when(
+      time_num == 0 ~ quad_params$get("depression_1", "sleep_personMeanCentered_1"),
+      time_num == 1 ~ quad_params$get("depression_2", "sleep_personMeanCentered_2"),
+      time_num == 2 ~ quad_params$get("depression_3", "sleep_personMeanCentered_3"),
+      time_num == 3 ~ quad_params$get("depression_4", "sleep_personMeanCentered_4")
+    ),
+    
+    beta_int = case_when(
+      time_num == 0 ~ quad_params$get("depression_1", "sexEffectCodeXsleep_personMeanCentered_1"),
+      time_num == 1 ~ quad_params$get("depression_2", "sexEffectCodeXsleep_personMeanCentered_2"),
+      time_num == 2 ~ quad_params$get("depression_3", "sexEffectCodeXsleep_personMeanCentered_3"),
+      time_num == 3 ~ quad_params$get("depression_4", "sexEffectCodeXsleep_personMeanCentered_4")
+    ),
+    
+    yhat =
+      intercept +
+      linear * time_num +
+      quadratic * time_num^2 +
+      beta_sleep * sleep_personMeanCentered +
+      beta_int * sexEffectCode * sleep_personMeanCentered
+  )
+
+# Compute prototypical trajectories
+grand_mean_sleep <- mean(mydata_wide$sleep_personMean, na.rm = TRUE)
+
+newData_quad <- expand.grid(
+  sexFactor = c("female", "male"),
+  time_num = 0:3,
+  sleepFactor = c("low sleep", "average sleep", "high sleep")
+) |>
+  left_join(sleep_stats, by = c("sexFactor", "time_num")) |>
+  mutate(
+    sleep = case_when(
+      sleepFactor == "average sleep" ~ mean_sleep,
+      sleepFactor == "low sleep" ~ mean_sleep - sd_sleep,
+      sleepFactor == "high sleep" ~ mean_sleep + sd_sleep
+    ),
+    sexEffectCode = ifelse(sexFactor == "male", 1, -1),
+    sleep_personMeanCentered = sleep - grand_mean_sleep
+  ) |>
+  mutate(
+    intercept_hat =
+      quad_params$get("intercept", "", "~1") +
+      quad_params$get("intercept", "sexEffectCode", "~") * sexEffectCode +
+      quad_params$get("intercept", "sleep_personMean", "~") * sleep +
+      quad_params$get("intercept", "sexEffectCodeXsleep_personMean", "~") * sexEffectCode * sleep,
+    
+    linear_hat =
+      quad_params$get("linear", "", "~1") +
+      quad_params$get("linear", "sexEffectCode", "~") * sexEffectCode +
+      quad_params$get("linear", "sleep_personMean", "~") * sleep +
+      quad_params$get("linear", "sexEffectCodeXsleep_personMean", "~") * sexEffectCode * sleep,
+    
+    quadratic_hat =
+      quad_params$get("quadratic", "", "~1") +
+      quad_params$get("quadratic", "sexEffectCode", "~") * sexEffectCode +
+      quad_params$get("quadratic", "sleep_personMean", "~") * sleep +
+      quad_params$get("quadratic", "sexEffectCodeXsleep_personMean", "~") * sexEffectCode * sleep
+  ) |>
+  mutate(
+    beta_sleep = case_when(
+      time_num == 0 ~ quad_params$get("depression_1", "sleep_personMeanCentered_1"),
+      time_num == 1 ~ quad_params$get("depression_2", "sleep_personMeanCentered_2"),
+      time_num == 2 ~ quad_params$get("depression_3", "sleep_personMeanCentered_3"),
+      time_num == 3 ~ quad_params$get("depression_4", "sleep_personMeanCentered_4")
+    ),
+    beta_int = case_when(
+      time_num == 0 ~ quad_params$get("depression_1", "sexEffectCodeXsleep_personMeanCentered_1"),
+      time_num == 1 ~ quad_params$get("depression_2", "sexEffectCodeXsleep_personMeanCentered_2"),
+      time_num == 2 ~ quad_params$get("depression_3", "sexEffectCodeXsleep_personMeanCentered_3"),
+      time_num == 3 ~ quad_params$get("depression_4", "sexEffectCodeXsleep_personMeanCentered_4")
+    ),
+    yhat =
+      intercept_hat +
+      linear_hat * time_num +
+      quadratic_hat * time_num^2 +
+      beta_sleep * sleep_personMeanCentered +
+      beta_int * sexEffectCode * sleep_personMeanCentered,
+    age = time_num + 14
+  )
+```
+
+##### Prototypical Growth Curve By Sex
+
+```{r}
+#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex"
+
+ggplot(
+  data = newData_quad |> filter(sleepFactor == "average sleep"),
+  mapping = aes(
+    x = age,
+    y = yhat,
+    color = sexFactor)
+) +
+  geom_smooth( # fit a smoothed line to the model-implied points; use geom_line() to fit a non-smooth line
+    method = "lm",
+    formula = y ~ x + I(x^2),
+    se = FALSE
+  ) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
+##### Individuals' Growth Curves
+
+```{r}
+#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms"
+
+ggplot(
+  data = long_quad,
+  mapping = aes(
+    x = age,
+    y = yhat,
+    group = ID,
+    color = sexFactor)
+) +
+  geom_smooth( # fit a smoothed line to each participant's points; use geom_line() to fit a non-smooth line
+    method = "lm",
+    formula = y ~ x + I(x^2),
+    se = FALSE,
+    linewidth = 0.5
+  ) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
+##### Individuals' Trajectories Overlaid with Prototypical Trajectory By Sex
+
+```{r}
+#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms Overlaid With Prototypical Growth Curves By Sex"
+
+ggplot(
+  data = long_quad,
+  mapping = aes(
+    x = age,
+    y = yhat,
+    group = ID
+  )
+) +
+  geom_smooth( # fit a smoothed line to each participant's points; use geom_line() to fit a non-smooth line
+    method = "lm",
+    formula = y ~ x + I(x^2),
+    se = FALSE,
+    linewidth = 0.5,
+    color = "gray",
+    alpha = 0.30
+  ) +
+  geom_smooth( # fit a smoothed line to the model-implied points; use geom_line() to fit a non-smooth line
+    data = newData_quad |> filter(sleepFactor == "average sleep"),
+    mapping = aes(
+      x = age,
+      y = yhat,
+      group = sexFactor,
+      color = sexFactor
+      ),
+    method = "lm",
+    formula = y ~ x + I(x^2),
+    se = FALSE,
+    linewidth = 2
+  ) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
+##### Prototypical Trajectory By Sex and Sleep
+
+```{r}
+#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex and Sleep"
+
+ggplot(
+  data = newData_quad |> filter(sleepFactor != "average sleep"),
+  mapping = aes(
+    x = age,
+    y = yhat,
+    color = sexFactor,
+    linetype = sleepFactor)
+) +
+  geom_smooth( # fit a smoothed line to the model-implied points; use geom_line() to fit a non-smooth line
+    method = "lm",
+    formula = y ~ x + I(x^2),
+    se = FALSE
+  ) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex",
+    linetype = "Sleep"
+  ) +
+  guides(
+    linetype = guide_legend(
+      override.aes = list(color = "black")
+    )
+  ) +
+  theme_classic()
 ```
 
 ## Latent Basis Growth Curve Model {#sec-latentBasisGCM}
@@ -393,6 +897,219 @@ To create an interactive path diagram, you can use the following syntax:
 #| eval: false
 
 lavaangui::plot_lavaan(latentBasisGCM_fit)
+```
+
+#### Model-Implied Trajectories
+
+```{r}
+# Factor scores for each individual
+latentBasisGCM_fs <- as.data.frame(lavaan::lavPredict(latentBasisGCM_fit))
+latentBasisGCM_caseidx <- lavaan::lavInspect(latentBasisGCM_fit, "case.idx")
+latentBasisGCM_fs$ID <- mydata_wide$ID[latentBasisGCM_caseidx]
+
+factorScores_lb <- left_join(mydata_wide, latentBasisGCM_fs, by = "ID")
+
+# Function to get parameters (reuse your get_params function)
+lb_params <- get_params(latentBasisGCM_fit)
+
+# Get estimated factor loadings
+lambda2 <- lb_params$get("slope", "depression_2", "=~") # estimated loading 'a'
+lambda3 <- lb_params$get("slope", "depression_3", "=~") # estimated loading 'b'
+lambda_vec <- c(0, lambda2, lambda3, 1)
+
+# Compute individuals' model-implied trajectories
+long_lb <- factorScores_lb |>
+  pivot_longer(
+    cols = matches("depression_|sleep_personMeanCentered_"),
+    names_to = c(".value", "time"),
+    names_pattern = "(.*)_(\\d)"
+  ) |>
+  mutate(
+    time = as.numeric(time),
+    time_num = time - 1,
+    age = recode_values(time, 1 ~ 14, 2 ~ 15, 3 ~ 16, 4 ~ 17),
+    lambda = lambda_vec[time] # latent basis loading for each time
+  ) |>
+  mutate(
+    beta_sleep = case_when(
+      time_num == 0 ~ lb_params$get("depression_1", "sleep_personMeanCentered_1"),
+      time_num == 1 ~ lb_params$get("depression_2", "sleep_personMeanCentered_2"),
+      time_num == 2 ~ lb_params$get("depression_3", "sleep_personMeanCentered_3"),
+      time_num == 3 ~ lb_params$get("depression_4", "sleep_personMeanCentered_4")
+    ),
+    beta_int = case_when(
+      time_num == 0 ~ lb_params$get("depression_1", "sexEffectCodeXsleep_personMeanCentered_1"),
+      time_num == 1 ~ lb_params$get("depression_2", "sexEffectCodeXsleep_personMeanCentered_2"),
+      time_num == 2 ~ lb_params$get("depression_3", "sexEffectCodeXsleep_personMeanCentered_3"),
+      time_num == 3 ~ lb_params$get("depression_4", "sexEffectCodeXsleep_personMeanCentered_4")
+    ),
+    yhat =
+      intercept +
+      slope * lambda +
+      beta_sleep * sleep_personMeanCentered +
+      beta_int * sexEffectCode * sleep_personMeanCentered
+  )
+
+# Compute prototypical trajectories
+grand_mean_sleep <- mean(mydata_wide$sleep_personMean, na.rm = TRUE)
+
+newData_lb <- expand.grid(
+  sexFactor = c("female", "male"),
+  time_num = 0:3,
+  sleepFactor = c("low sleep", "average sleep", "high sleep")
+) |>
+  left_join(sleep_stats, by = c("sexFactor", "time_num")) |>
+  mutate(
+    sleep = case_when(
+      sleepFactor == "average sleep" ~ mean_sleep,
+      sleepFactor == "low sleep" ~ mean_sleep - sd_sleep,
+      sleepFactor == "high sleep" ~ mean_sleep + sd_sleep
+    ),
+    sexEffectCode = ifelse(sexFactor == "male", 1, -1),
+    sleep_personMeanCentered = sleep - grand_mean_sleep,
+    lambda = lambda_vec[time_num + 1] # latent basis loading for each time
+  ) |>
+  mutate(
+    intercept_hat =
+      lb_params$get("intercept", "", "~1") +
+      lb_params$get("intercept", "sexEffectCode", "~") * sexEffectCode +
+      lb_params$get("intercept", "sleep_personMean", "~") * sleep +
+      lb_params$get("intercept", "sexEffectCodeXsleep_personMean", "~") * sexEffectCode * sleep,
+    slope_hat =
+      lb_params$get("slope", "", "~1") +
+      lb_params$get("slope", "sexEffectCode", "~") * sexEffectCode +
+      lb_params$get("slope", "sleep_personMean", "~") * sleep +
+      lb_params$get("slope", "sexEffectCodeXsleep_personMean", "~") * sexEffectCode * sleep
+  ) |>
+  mutate(
+    beta_sleep = case_when(
+      time_num == 0 ~ lb_params$get("depression_1", "sleep_personMeanCentered_1"),
+      time_num == 1 ~ lb_params$get("depression_2", "sleep_personMeanCentered_2"),
+      time_num == 2 ~ lb_params$get("depression_3", "sleep_personMeanCentered_3"),
+      time_num == 3 ~ lb_params$get("depression_4", "sleep_personMeanCentered_4")
+    ),
+    beta_int = case_when(
+      time_num == 0 ~ lb_params$get("depression_1", "sexEffectCodeXsleep_personMeanCentered_1"),
+      time_num == 1 ~ lb_params$get("depression_2", "sexEffectCodeXsleep_personMeanCentered_2"),
+      time_num == 2 ~ lb_params$get("depression_3", "sexEffectCodeXsleep_personMeanCentered_3"),
+      time_num == 3 ~ lb_params$get("depression_4", "sexEffectCodeXsleep_personMeanCentered_4")
+    ),
+    yhat =
+      intercept_hat +
+      slope_hat * lambda +
+      beta_sleep * sleep_personMeanCentered +
+      beta_int * sexEffectCode * sleep_personMeanCentered,
+    age = time_num + 14
+  )
+```
+
+##### Prototypical Growth Curve By Sex
+
+```{r}
+#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex"
+
+ggplot(
+  data = newData_lb |> filter(sleepFactor == "average sleep"),
+  mapping = aes(
+    x = age,
+    y = yhat,
+    color = sexFactor)
+) +
+  geom_line() +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
+##### Individuals' Growth Curves
+
+```{r}
+#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms"
+
+ggplot(
+  data = long_lb,
+  mapping = aes(
+    x = age,
+    y = yhat,
+    group = ID,
+    color = sexFactor)
+) +
+  geom_line(
+    alpha = 0.5
+  ) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
+##### Individuals' Trajectories Overlaid with Prototypical Trajectory By Sex
+
+```{r}
+#| fig-cap: "Individuals' Model-Implied Growth Curves of Depression Symptoms Overlaid With Prototypical Growth Curves By Sex"
+
+ggplot(
+  data = long_lb,
+  mapping = aes(
+    x = age,
+    y = yhat,
+    group = ID
+  )
+) +
+  geom_line( # individuals' trajectories
+    linewidth = 0.5,
+    color = "gray",
+    alpha = 0.30
+  ) +
+  geom_line( # prototypical trajectories
+    data = newData_lb |> filter(sleepFactor == "average sleep"),
+    mapping = aes(
+      x = age,
+      y = yhat,
+      group = sexFactor,
+      color = sexFactor
+      ),
+    linewidth = 2
+  ) +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex"
+  ) +
+  theme_classic()
+```
+
+##### Prototypical Trajectory By Sex and Sleep
+
+```{r}
+#| fig-cap: "Prototypical Model-Implied Growth Curves of Depression Symptoms By Sex and Sleep"
+
+ggplot(
+  data = newData_lb |> filter(sleepFactor != "average sleep"),
+  mapping = aes(
+    x = age,
+    y = yhat,
+    color = sexFactor,
+    linetype = sleepFactor)
+) +
+  geom_line() +
+  labs(
+    x = "Age (years)",
+    y = "Depression Symptoms",
+    color = "Sex",
+    linetype = "Sleep"
+  ) +
+  guides(
+    linetype = guide_legend(
+      override.aes = list(color = "black")
+    )
+  ) +
+  theme_classic()
 ```
 
 # Compare Models {#sec-compareModels}
@@ -542,6 +1259,7 @@ modelPredictedValues_long <- modelPredictedValues_wide |>
   ) |>
   mutate(
     time = as.integer(time),
+    age = recode_values(time, 1 ~ 14, 2 ~ 15, 3 ~ 16, 4 ~ 17),
     construct = recode_values(construct, "x" ~ "depression", "y" ~ "anxiety")) |>
   pivot_wider(
     names_from = construct,
@@ -555,14 +1273,14 @@ modelPredictedValues_long <- modelPredictedValues_wide |>
 ggplot(
   data = modelPredictedValues_long,
   mapping = aes(
-    x = time,
+    x = age,
     y = depression,
     group = ID)) +
   geom_line(
     alpha = 0.25
   ) +
   labs(
-    x = "Timepoint",
+    x = "Age (years)",
     y = "Depression Symptoms"
   ) +
   theme_classic()
@@ -581,7 +1299,7 @@ ggplot(
     alpha = 0.25
   ) +
   labs(
-    x = "Timepoint",
+    x = "Age (years)",
     y = "Anxiety Symptoms"
   ) +
   theme_classic()
