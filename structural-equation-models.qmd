@@ -8,6 +8,12 @@ Petersen, I. T. (2025). *Principles of psychological assessment: With applied ex
 
 # Preamble
 
+```{r}
+#| include: false
+
+options(scipen = 999) # suppress scientific notation
+```
+
 ## Load Libraries
 
 ```{r}
