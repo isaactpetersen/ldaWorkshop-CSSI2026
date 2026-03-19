@@ -42,7 +42,8 @@ longitudinalMI4 <- read.csv("./data/Bliese-Ployhart-2002-indicators-4.csv")
 1. Does how much sleep the adolescent receives predict their depressive symptoms over time?
 1. Does the association between sleep and depressive symptoms differ between boys and girls?
 1. What is the association between sleep and depressive symptoms at the within-individual level versus between-individual level?
-1. Does within-person change in anxiety predict within-person change in depression (and vice versa)?
+1. Does level of anxiety predict later within-person change in depression (and vice versa)?
+1. Does within-person change in anxiety predict later within-person change in depression (and vice versa)?
 1. Do our measures show measurement invariance across time?
 That is, are our scores able to meaningfully compared on the same metric across time?
 
