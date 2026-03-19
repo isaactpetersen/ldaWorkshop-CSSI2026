@@ -209,9 +209,9 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
   <li><a href="#simulate-data" id="toc-simulate-data" class="nav-link" data-scroll-target="#simulate-data"><span class="header-section-number">1.2</span> Simulate Data</a></li>
   </ul>
 </li>
-  <li><a href="#transform-data-from-long-to-wide" id="toc-transform-data-from-long-to-wide" class="nav-link" data-scroll-target="#transform-data-from-long-to-wide"><span class="header-section-number">2</span> Transform Data From Long to Wide</a></li>
-  <li><a href="#transform-data-from-wide-to-long" id="toc-transform-data-from-wide-to-long" class="nav-link" data-scroll-target="#transform-data-from-wide-to-long"><span class="header-section-number">3</span> Transform Data From Wide to Long</a></li>
-  <li><a href="#example-of-exploding-number-of-columns-when-transforming-from-long-to-wide" id="toc-example-of-exploding-number-of-columns-when-transforming-from-long-to-wide" class="nav-link" data-scroll-target="#example-of-exploding-number-of-columns-when-transforming-from-long-to-wide"><span class="header-section-number">4</span> Example of Exploding Number of Columns When Transforming From Long to Wide</a></li>
+  <li><a href="#sec-longToWide" id="toc-sec-longToWide" class="nav-link" data-scroll-target="#sec-longToWide"><span class="header-section-number">2</span> Transform Data From Long to Wide</a></li>
+  <li><a href="#sec-wideToLong" id="toc-sec-wideToLong" class="nav-link" data-scroll-target="#sec-wideToLong"><span class="header-section-number">3</span> Transform Data From Wide to Long</a></li>
+  <li><a href="#sec-explodingColumns" id="toc-sec-explodingColumns" class="nav-link" data-scroll-target="#sec-explodingColumns"><span class="header-section-number">4</span> Example of Exploding Number of Columns When Transforming From Long to Wide</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/edit/main/data-manipulation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/blob/main/data-manipulation.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -267,7 +267,7 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-</section></section><section id="transform-data-from-long-to-wide" class="level1" data-number="2"><h1 data-number="2">
+</section></section><section id="sec-longToWide" class="level1" data-number="2"><h1 data-number="2">
 <span class="header-section-number">2</span> Transform Data From Long to Wide</h1>
 <p>To transform the data from long to wide, we can use the following syntax:</p>
 <div class="cell">
@@ -290,7 +290,7 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-</section><section id="transform-data-from-wide-to-long" class="level1" data-number="3"><h1 data-number="3">
+</section><section id="sec-wideToLong" class="level1" data-number="3"><h1 data-number="3">
 <span class="header-section-number">3</span> Transform Data From Wide to Long</h1>
 <div class="cell">
 <details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">exampleData_long2</span> <span class="op">&lt;-</span> <span class="va">exampleData_wide</span> <span class="op">|&gt;</span></span>
@@ -313,7 +313,7 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-</section><section id="example-of-exploding-number-of-columns-when-transforming-from-long-to-wide" class="level1" data-number="4"><h1 data-number="4">
+</section><section id="sec-explodingColumns" class="level1" data-number="4"><h1 data-number="4">
 <span class="header-section-number">4</span> Example of Exploding Number of Columns When Transforming From Long to Wide</h1>
 <p>Transforming from long to wide tends to work best when participants have the same values on the time variable (e.g., age). When participants all have different values on the time variable, the number of columns can explode when the data are transformed from long to wide form. For example, consider the following data:</p>
 <div class="cell">
@@ -880,7 +880,7 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 <span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>exampleData_long</span>
 <span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="fu"># Transform Data From Long to Wide</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="fu"># Transform Data From Long to Wide {#sec-longToWide}</span></span>
 <span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>To transform the data from long to wide, we can use the following syntax:</span>
 <span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a></span>
@@ -899,7 +899,7 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 <span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>exampleData_wide</span>
 <span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a><span class="fu"># Transform Data From Wide to Long</span></span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a><span class="fu"># Transform Data From Wide to Long {#sec-wideToLong}</span></span>
 <span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a>exampleData_long2 <span class="ot">&lt;-</span> exampleData_wide <span class="sc">|&gt;</span></span>
@@ -917,7 +917,7 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 <span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a>exampleData_long2</span>
 <span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a><span class="fu"># Example of Exploding Number of Columns When Transforming From Long to Wide</span></span>
+<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a><span class="fu"># Example of Exploding Number of Columns When Transforming From Long to Wide {#sec-explodingColumns}</span></span>
 <span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a>Transforming from long to wide tends to work best when participants have the same values on the time variable (e.g., age).</span>
 <span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a>When participants all have different values on the time variable, the number of columns can explode when the data are transformed from long to wide form.</span>
