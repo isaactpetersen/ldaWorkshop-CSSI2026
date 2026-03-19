@@ -522,9 +522,72 @@ lcsm::plot_lcsm(
   lcsm_colours = TRUE)
 ```
 
+### Model-Implied Trajectories
+
 To plot model-implied trajectories, see this resource:
 
 <https://thechangelab.stanford.edu/tutorials/growth-modeling/latent-change-score-modeling-lavaan/> (archived at <https://perma.cc/A2KZ-QPD9>)
+
+```{r}
+mydata_wide
+
+modelPredictedValues_wide <- as.data.frame(lavPredict(bivariateLCSM_fit, type = "yhat"))
+
+modelPredictedValues_wide$ID <- mydata_wide$ID
+
+modelPredictedValues_long <- modelPredictedValues_wide |>
+  pivot_longer(
+    cols = -ID,
+    names_to = c("construct", "time"),
+    names_pattern = "([xy])(\\d)",
+    values_to = "score"
+  ) |>
+  mutate(
+    time = as.integer(time),
+    construct = recode(construct, x = "depression", y = "anxiety")) |>
+  pivot_wider(
+    names_from = construct,
+    values_from = score
+  )
+```
+
+```{r}
+#| fig-cap: "Model-Implied Trajectories of Depression Symptoms"
+
+ggplot(
+  data = modelPredictedValues_long,
+  mapping = aes(
+    x = time,
+    y = depression,
+    group = ID)) +
+  geom_line(
+    alpha = 0.25
+  ) +
+  labs(
+    x = "Timepoint",
+    y = "Depression Symptoms"
+  ) +
+  theme_classic()
+```
+
+```{r}
+#| fig-cap: "Model-Implied Trajectories of Anxiety Symptoms"
+
+ggplot(
+  data = modelPredictedValues_long,
+  mapping = aes(
+    x = time,
+    y = anxiety,
+    group = ID)) +
+  geom_line(
+    alpha = 0.25
+  ) +
+  labs(
+    x = "Timepoint",
+    y = "Anxiety Symptoms"
+  ) +
+  theme_classic()
+```
 
 # Cross-Lagged Panel Model {#sec-clpm}
 
