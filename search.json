@@ -284,7 +284,7 @@
     "href": "structural-equation-models.html#path-diagram-5",
     "title": "Structural Equation Models",
     "section": "\n8.5 Path Diagram",
-    "text": "8.5 Path Diagram\n\nCodelavaanPlot::lavaanPlot(\n  riclpm2_fit,\n  coefs = TRUE,\n  #covs = TRUE,\n  stand = TRUE)\n\n\n\n\n\nTo create an interactive path diagram, you can use the following syntax:\n\nCodelavaangui::plot_lavaan(riclpm_fit)"
+    "text": "8.5 Path Diagram\n\nCodelavaanPlot::lavaanPlot(\n  riclpm2_fit,\n  coefs = TRUE,\n  #covs = TRUE,\n  stand = TRUE)\n\n\n\n\n\nTo create an interactive path diagram, you can use the following syntax:\n\nCodelavaangui::plot_lavaan(riclpm2_fit)"
   },
   {
     "objectID": "structural-equation-models.html#model-syntax-6",
