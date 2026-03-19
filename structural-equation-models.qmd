@@ -542,7 +542,7 @@ modelPredictedValues_long <- modelPredictedValues_wide |>
   ) |>
   mutate(
     time = as.integer(time),
-    construct = recode(construct, x = "depression", y = "anxiety")) |>
+    construct = recode_values(construct, "x" ~ "depression", "y" ~ "anxiety")) |>
   pivot_wider(
     names_from = construct,
     values_from = score
