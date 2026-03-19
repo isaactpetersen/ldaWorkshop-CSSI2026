@@ -7,6 +7,12 @@ format:
 
 # Preamble
 
+```{r}
+#| include: false
+
+options(scipen = 999) # suppress scientific notation
+```
+
 ## Load Libraries
 
 ```{r}
