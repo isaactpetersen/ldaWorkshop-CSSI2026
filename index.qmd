@@ -20,12 +20,12 @@ Steps:
 1. Install [`R`](https://cran.r-project.org)
 1. Install [`RStudio`](https://posit.co/download/rstudio-desktop/)
 1. Open `RStudio` and run the following code to install the necessary `R` packages:
-```r
-install.packages(c(
-  "petersenlab","tidyverse","ggforce","psych","lme4","lmerTest","mgcv",
-  "easystats","parallelly","MuMIn","lavaan","lavaan.mi","semTools","lcsm",
-  "lavaanPlot","lavaangui","mice","miceadds","micemd","broom.mixed","furrr"))
-```
+  ```r
+  install.packages(c(
+    "petersenlab","tidyverse","ggforce","psych","lme4","lmerTest","mgcv","MASS",
+    "easystats","parallelly","MuMIn","lavaan","lavaan.mi","semTools","lcsm",
+    "lavaanPlot","lavaangui","mice","miceadds","micemd","broom.mixed","furrr"))
+  ```
 1. Download the [GitHub repository for the workshop](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026)—either by cloning the repository or by downloading the `.zip` file of the repository.
-If you have GitHub Desktop, you can clone [the repository](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026) by going to [the repository](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026), clicking the green "Code" button, and then "Open With GitHub Desktop"; then follow the steps in GitHub Desktop to clone the repository.
-If you do not have GitHub Desktop, you can download the files in the repository by going to [the repository](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026), clicking the green "Code" button, and then "Download ZIP"; once the `.zip` file finishes downloading, unzip the downloaded `.zip` file onto your computer.
+  - If you have [GitHub Desktop](https://desktop.github.com/download/), you can clone [the repository](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026) by going to [the repository](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026), clicking the green "Code" button, and then "Open With GitHub Desktop"; then follow the steps in [GitHub Desktop](https://desktop.github.com/download/) to clone the repository.
+  - If you do not have [GitHub Desktop](https://desktop.github.com/download/), you can download the files in the repository by going to [the repository](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026), clicking the green "Code" button, and then "Download ZIP"; once the `.zip` file finishes downloading, unzip the downloaded `.zip` file onto your computer.
