@@ -883,7 +883,7 @@ To create an interactive path diagram, you can use the following syntax:
 ```{r}
 #| eval: false
 
-lavaangui::plot_lavaan(riclpm_fit)
+lavaangui::plot_lavaan(riclpm2_fit)
 ```
 
 # Multilevel SEM {#sec-multilevelSEM}
