@@ -30,3 +30,9 @@ Steps:
 1. Download the [GitHub repository for the workshop](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026)—either by cloning the repository or by downloading the `.zip` file of the repository.
     - If you have [GitHub Desktop](https://desktop.github.com/download/), you can clone [the repository](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026) by going to [the repository](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026), clicking the green "Code" button, and then "Open With GitHub Desktop"; then follow the steps in [GitHub Desktop](https://desktop.github.com/download/) to clone the repository.
     - If you do not have [GitHub Desktop](https://desktop.github.com/download/), you can download the files in the repository by going to [the repository](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026), clicking the green "Code" button, and then "Download ZIP"; once the `.zip` file finishes downloading, unzip the downloaded `.zip` file onto your computer.
+1. Open the following repository files in `RStudio`:
+    - `data-manipulation.qmd`
+    - `data-visualization.qmd`
+    - `mixed-effects-models.qmd`
+    - `structural-equation-models.qmd`
+    - `missing-data.qmd`
