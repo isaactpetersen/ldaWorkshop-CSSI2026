@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>2026 CSSI Workshop on Longitudinal Data Analysis</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -69,15 +72,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-b754b9fd3853d7e56faef54c29c5d52b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8ea10ca945d150d6d0725b19b9a8ba39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dd4f7627ceff8d17ee2888f000633634.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -268,6 +270,14 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 <ul>
 <li>If you have <a href="https://desktop.github.com/download/">GitHub Desktop</a>, you can clone <a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026">the repository</a> by going to <a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026">the repository</a>, clicking the green “Code” button, and then “Open With GitHub Desktop”; then follow the steps in <a href="https://desktop.github.com/download/">GitHub Desktop</a> to clone the repository.</li>
 <li>If you do not have <a href="https://desktop.github.com/download/">GitHub Desktop</a>, you can download the files in the repository by going to <a href="https://github.com/isaactpetersen/ldaWorkshop-CSSI2026">the repository</a>, clicking the green “Code” button, and then “Download ZIP”; once the <code>.zip</code> file finishes downloading, unzip the downloaded <code>.zip</code> file onto your computer.</li>
+</ul></li>
+<li><p>Open the following repository files in <code>RStudio</code>:</p>
+<ul>
+<li><code>data-manipulation.qmd</code></li>
+<li><code>data-visualization.qmd</code></li>
+<li><code>mixed-effects-models.qmd</code></li>
+<li><code>structural-equation-models.qmd</code></li>
+<li><code>missing-data.qmd</code></li>
 </ul></li>
 </ol>
 
@@ -789,7 +799,13 @@ gtag('config', 'G-EG2ZSZZ7EP', { 'anonymize_ip': true});
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="in">```</span></span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Download the <span class="co">[</span><span class="ot">GitHub repository for the workshop</span><span class="co">](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026)</span>—either by cloning the repository or by downloading the <span class="in">`.zip`</span> file of the repository.</span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>If you have <span class="co">[</span><span class="ot">GitHub Desktop</span><span class="co">](https://desktop.github.com/download/)</span>, you can clone <span class="co">[</span><span class="ot">the repository</span><span class="co">](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026)</span> by going to <span class="co">[</span><span class="ot">the repository</span><span class="co">](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026)</span>, clicking the green "Code" button, and then "Open With GitHub Desktop"; then follow the steps in <span class="co">[</span><span class="ot">GitHub Desktop</span><span class="co">](https://desktop.github.com/download/)</span> to clone the repository.</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>If you do not have <span class="co">[</span><span class="ot">GitHub Desktop</span><span class="co">](https://desktop.github.com/download/)</span>, you can download the files in the repository by going to <span class="co">[</span><span class="ot">the repository</span><span class="co">](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026)</span>, clicking the green "Code" button, and then "Download ZIP"; once the <span class="in">`.zip`</span> file finishes downloading, unzip the downloaded <span class="in">`.zip`</span> file onto your computer.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>If you do not have <span class="co">[</span><span class="ot">GitHub Desktop</span><span class="co">](https://desktop.github.com/download/)</span>, you can download the files in the repository by going to <span class="co">[</span><span class="ot">the repository</span><span class="co">](https://github.com/isaactpetersen/ldaWorkshop-CSSI2026)</span>, clicking the green "Code" button, and then "Download ZIP"; once the <span class="in">`.zip`</span> file finishes downloading, unzip the downloaded <span class="in">`.zip`</span> file onto your computer.</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Open the following repository files in <span class="in">`RStudio`</span>:</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`data-manipulation.qmd`</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`data-visualization.qmd`</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`mixed-effects-models.qmd`</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`structural-equation-models.qmd`</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`missing-data.qmd`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
