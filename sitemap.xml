@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/missing-data.html</loc>
-    <lastmod>2026-04-01T13:47:33.019Z</lastmod>
-  </url>
-  <url>
-    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/simulate-data.html</loc>
-    <lastmod>2026-04-01T13:47:33.019Z</lastmod>
-  </url>
-  <url>
-    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/data-visualization.html</loc>
-    <lastmod>2026-04-01T13:47:33.005Z</lastmod>
-  </url>
-  <url>
-    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/answers.html</loc>
-    <lastmod>2026-04-01T13:47:33.005Z</lastmod>
-  </url>
-  <url>
-    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/data-manipulation.html</loc>
-    <lastmod>2026-04-01T13:47:33.005Z</lastmod>
-  </url>
-  <url>
-    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/structural-equation-models.html</loc>
-    <lastmod>2026-04-01T13:47:33.019Z</lastmod>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/mixed-effects-models.html</loc>
+    <lastmod>2026-05-02T14:50:11.362Z</lastmod>
   </url>
   <url>
     <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/about.html</loc>
-    <lastmod>2026-04-01T13:47:33.005Z</lastmod>
+    <lastmod>2026-05-02T14:50:11.349Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/data-visualization.html</loc>
+    <lastmod>2026-05-02T14:50:11.349Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/data-manipulation.html</loc>
+    <lastmod>2026-05-02T14:50:11.349Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/missing-data.html</loc>
+    <lastmod>2026-05-02T14:50:11.362Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/answers.html</loc>
+    <lastmod>2026-05-02T14:50:11.349Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/structural-equation-models.html</loc>
+    <lastmod>2026-05-02T14:50:11.362Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/simulate-data.html</loc>
+    <lastmod>2026-05-02T14:50:11.362Z</lastmod>
   </url>
   <url>
     <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/index.html</loc>
-    <lastmod>2026-04-01T13:47:33.019Z</lastmod>
-  </url>
-  <url>
-    <loc>https://isaactpetersen.github.io/ldaWorkshop-CSSI2026/mixed-effects-models.html</loc>
-    <lastmod>2026-04-01T13:47:33.019Z</lastmod>
+    <lastmod>2026-05-02T14:50:11.362Z</lastmod>
   </url>
 </urlset>
